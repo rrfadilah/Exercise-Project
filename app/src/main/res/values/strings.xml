@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Exercise-Project</string>
     <string name="text_started"><![CDATA[Konsultasi dengan dokter jadi lebih mudah & fleksibel]]></string>
+    <string name="header">Masuk dan mulai berkonsultasi</string>
+    <string name="email">Email Address</string>
+    <string name="pass">Password</string>
+    <string name="forgot_pass">Forgot My Password</string>
+    <string name="create_new">Create New Account</string>
+    <string name="sign_in_tb">Sign In</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
