@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Exercise-Project</string>
+    <string name="forgot_my_password"> <u>Forgot My Password</u> </string>
+    <string name="create_new_account"> <u>Create New Account</u> </string>
 </resources>
