@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_onboard"
-    tools:context=".OnBoardActivity">
+    tools:context=".activity.OnBoardActivity">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView2"
@@ -59,7 +59,7 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:backgroundTint="#0BCAD4"
+        app:backgroundTint="@color/cyan_500"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_sign_in"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,8 +1,9 @@
-package id.anantyan.exerciseproject
+package id.anantyan.exerciseproject.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import id.anantyan.exerciseproject.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

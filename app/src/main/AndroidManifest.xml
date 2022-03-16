@@ -10,15 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExerciseProject">
         <activity
-            android:name=".OnBoardActivity"
+            android:name=".activity.BaseFragmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SignInActivity"
             android:exported="false"
             android:theme="@style/Theme.ExerciseProject.NoActionBar" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".activity.OnBoardActivity"
             android:exported="false"
             android:theme="@style/Theme.ExerciseProject.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.SplashActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ExerciseProject.NoActionBar" />
+        <activity
+            android:name=".activity.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.ExerciseProject.Main">
             <intent-filter>
