@@ -3,11 +3,24 @@ package id.anantyan.exerciseproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import id.anantyan.exerciseproject.databinding.ActivityOnBoardBinding
+import id.anantyan.exerciseproject.utils.viewbinding.viewBinding
 
 class OnBoardActivity : AppCompatActivity() {
+
+    private val binding: ActivityOnBoardBinding by viewBinding()
+    private val onBinding: () -> Unit = {
+        binding.btnSignIn.setOnClickListener {
+
+        }
+        binding.btnSignUp.setOnClickListener {
+
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_on_board)
+        onBinding
         Log.d("CREATE", "onCreate")
     }
 
