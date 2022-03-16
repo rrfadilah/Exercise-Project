@@ -13,4 +13,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="GeneralButton" parent="Widget.AppCompat.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textFontWeight" tools:targetApi="p">600</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:background">@drawable/shape_rounded_cyan</item>
+    </style>
 </resources>
