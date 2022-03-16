@@ -18,9 +18,11 @@
 
     <TextView
         android:id="@+id/tv_masuk_dan_daftar"
-        android:layout_width="153dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:layout_marginRight="167dp"
+        android:layout_marginLeft="40dp"
         android:textSize="20sp"
         android:textFontWeight="600"
         android:text="Masuk dan Mulai Konsultasi"
