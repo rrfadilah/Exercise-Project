@@ -4,7 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/SIB Binar/Chapter 3/app/src/main/res/drawable/icon_mydoctor.xml" value="0.1" />
+        <entry key="..\:/SIB Binar/Chapter 3/app/src/main/res/drawable/shape_rounded_cyan.xml" value="0.1" />
+        <entry key="..\:/SIB Binar/Chapter 3/app/src/main/res/drawable/shape_rounded_white.xml" value="0.1" />
+        <entry key="..\:/SIB Binar/Chapter 3/app/src/main/res/drawable/splash_screen.xml" value="0.1" />
         <entry key="..\:/SIB Binar/Chapter 3/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/SIB Binar/Chapter 3/app/src/main/res/layout/activity_on_boarding.xml" value="0.14666666666666667" />
+        <entry key="..\:/SIB Binar/Chapter 3/app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
       </map>
     </option>
   </component>
