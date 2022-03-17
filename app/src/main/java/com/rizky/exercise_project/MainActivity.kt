@@ -1,15 +1,27 @@
 package com.rizky.exercise_project
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
+import com.rizky.exercise_project.databinding.ActivityMainBinding
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         Log.d("Lifecycle", "Lifecycle OnCreate")
+
+//        val tvtitle = findViewById<TextView>(R.id.tvTitle)
+        binding.tvTitle.setOnClickListener {
+            val intent = Intent(this, OnBoardingActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onStart() {
