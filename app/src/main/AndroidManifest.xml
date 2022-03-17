@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExerciseProject">
         <activity
+            android:name=".galleryfragment.GalleryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".samplefragment.PicturesActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="false" />
         <activity
