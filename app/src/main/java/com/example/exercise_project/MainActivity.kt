@@ -5,20 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import com.example.exercise_project.galleryfragment.GalleryActivity
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //intent btn_check to activity_sign
-        val btncheck = findViewById<Button>(R.id.btn_check)
-        btncheck.setOnClickListener {
-            val intent = Intent(this, SignActivity::class.java)
+        thread {
+            Thread.sleep(5000)
+            val intent = Intent(this, OnBoardingActivity::class.java)
             startActivity(intent)
         }
-
-
 
         Log.d("Lifecycle", "Lifecycle onCreate")
 

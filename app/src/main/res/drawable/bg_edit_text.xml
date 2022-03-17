@@ -4,8 +4,4 @@
     <item  android:drawable="@drawable/shape_outline_blue" android:state_focused="true" />
     <item  android:drawable="@drawable/shape_outline_grey" android:state_focused="false" />
 
-
-
-
-
 </selector>
