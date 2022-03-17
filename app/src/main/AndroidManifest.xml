@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExerciseProject">
         <activity
-            android:name=".RegisterFormActivity"
+            android:name=".galleryfragment.GalleryActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,12 +19,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OnBoardingActivity"
+            android:name=".samplefragment.PicturesActivity"
             android:exported="false">
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".RegisterFormActivity"
             android:exported="false"></activity>
+        <activity
+            android:name=".OnBoardingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
