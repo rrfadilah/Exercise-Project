@@ -46,4 +46,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="Theme.ExerciseProject.AppBarOverlay" parent="ThemeOverlay.AppCompat.DayNight.ActionBar" />
+    <style name="Theme.ExerciseProject.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

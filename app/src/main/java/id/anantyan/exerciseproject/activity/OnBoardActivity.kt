@@ -11,7 +11,15 @@ import id.anantyan.exerciseproject.utils.viewbinding.viewBinding
 class OnBoardActivity : AppCompatActivity() {
 
     private val binding: ActivityOnBoardBinding by viewBinding()
-    private val onBinding: () -> Unit = {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_on_board)
+        onBinding()
+        Log.d("CREATE", "onCreate")
+    }
+
+    private fun onBinding() {
         binding.btnSignIn.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
@@ -22,13 +30,6 @@ class OnBoardActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_on_board)
-        onBinding()
-        Log.d("CREATE", "onCreate")
     }
 
     override fun onStart() {
