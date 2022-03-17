@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.databinding.ActivityOnBoardBinding
 import id.anantyan.exerciseproject.utils.viewbinding.viewBinding
 
@@ -17,12 +18,15 @@ class OnBoardActivity : AppCompatActivity() {
             finish()
         }
         binding.btnSignUp.setOnClickListener {
-
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_on_board)
         onBinding()
         Log.d("CREATE", "onCreate")
     }
