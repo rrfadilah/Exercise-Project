@@ -34,16 +34,12 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnGetStarted"
+        style="@style/GeneralButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/shape_rounded_cyan"
         android:text="Get Started"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textFontWeight="600"
-        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btnSignIn"
         app:layout_constraintLeft_toLeftOf="parent"
