@@ -27,6 +27,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="80dp"
+            android:fontFamily="@font/nunito_semibold"
             android:text="@string/txt_masuk_dan_mulai_berkonsultasi"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -40,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
+            android:fontFamily="@font/nunito_regular"
             android:text="@string/txt_input_layout_email_address"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +67,8 @@
                 android:id="@+id/txt_input_layout_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"/>
+                android:fontFamily="@font/nunito_regular"
+                android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,6 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="24dp"
+            android:fontFamily="@font/nunito_regular"
             android:text="@string/txt_input_layout_password"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +104,7 @@
                 android:id="@+id/txt_input_layout_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_regular"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,6 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito_regular"
             android:text="@string/txt_forgot_my_password"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -121,6 +127,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="40dp"
+            android:fontFamily="@font/nunito_semibold"
             android:text="@string/txt_btn_sign_in"
             android:textAllCaps="false"
             android:textColor="@color/white"
@@ -137,6 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="64dp"
+            android:fontFamily="@font/nunito_regular"
             android:text="@string/txt_create_new_account"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -49,4 +49,11 @@
 
     <style name="Theme.ExerciseProject.AppBarOverlay" parent="ThemeOverlay.AppCompat.DayNight.ActionBar" />
     <style name="Theme.ExerciseProject.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.ExerciseProject.BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView"/>
+
+    <style name="Theme.ExerciseProject.ToolbarTextStyle">
+        <item name="android:fontFamily">@font/nunito_semibold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>

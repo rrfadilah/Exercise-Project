@@ -1,11 +1,11 @@
-package id.anantyan.exerciseproject.activity.basefragment
+package id.anantyan.exerciseproject.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class BaseFragmentViewPagerAdapter(
+class MainViewPagerAdapter(
     fm: FragmentManager,
     lifeCycle: Lifecycle,
     private val listFragment: List<Fragment>

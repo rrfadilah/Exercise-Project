@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.databinding.ActivitySignUpBinding
 import id.anantyan.exerciseproject.model.DataDummy
+import id.anantyan.exerciseproject.utils.Constant
 import id.anantyan.exerciseproject.utils.Constant.PASSING_TO_SIGN_UP
 import id.anantyan.exerciseproject.utils.Validation.emailValid
 import id.anantyan.exerciseproject.utils.Validation.generalValid
@@ -32,11 +33,6 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun onBinding() {
-        if (onCheckIntent()) {
-            item = intent.getParcelableExtra(PASSING_TO_SIGN_UP)
-            binding.txtInputLayoutEmail.setText("${item?.email}")
-            binding.txtInputLayoutPassword.setText("${item?.password}")
-        }
         binding.btnContinue.setOnClickListener {
             onValidation(this)
         }

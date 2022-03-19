@@ -10,8 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExerciseProject">
         <activity
-            android:name=".activity.basefragment.BaseFragmentActivity"
-            android:exported="false" />
+            android:name=".activity.BaseFragmentActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ExerciseProject.NoActionBar"/>
         <activity
             android:name=".activity.SignUpActivity"
             android:exported="false"

@@ -4,17 +4,31 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/drawable/bg_text_input_layout.xml" value="0.236" />
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/drawable/dot_selector.xml" value="0.238" />
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/drawable/dot_unselected.xml" value="0.238" />
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.238" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/drawable/rectangle.xml" value="0.236" />
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/drawable/selected_dot.xml" value="0.238" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/drawable/splash_layer.xml" value="0.236" />
-        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/activity_base_fragment.xml" value="0.2358974358974359" />
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/font-v26/semi_bold.xml" value="0.3177083333333333" />
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/font-v26/typographic.xml" value="0.3177083333333333" />
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/font/semi_bold.xml" value="0.3177083333333333" />
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/font/typographic.xml" value="0.3177083333333333" />
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/activity_base_fragment.xml" value="0.2875" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/activity_main.xml" value="0.2875" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/activity_on_board.xml" value="0.2875" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/activity_sign_up.xml" value="0.2875" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/activity_splash.xml" value="0.2734375" />
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/fragment_doctor.xml" value="0.2875" />
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/fragment_hospital.xml" value="0.2875" />
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/fragment_messages.xml" value="0.2875" />
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/fragment_on_board.xml" value="0.2875" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/fragment_picture.xml" value="0.2358974358974359" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/fragment_video.xml" value="0.2358974358974359" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/toolbar.xml" value="0.2875" />
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/toolbar_collapse.xml" value="0.2875" />
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.2875" />
       </map>
     </option>
   </component>
