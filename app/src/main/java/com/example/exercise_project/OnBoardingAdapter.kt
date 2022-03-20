@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 
-class OnBoardingAdapter (var list: List<Int>, var ctx: Context) : PagerAdapter() {
+class OnBoardingAdapter(var list: List<Int>, var ctx: Context) : PagerAdapter() {
 
     private lateinit var ImgList: List<Int>
     lateinit var layoutInflater: LayoutInflater

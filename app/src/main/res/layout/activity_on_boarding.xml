@@ -9,13 +9,13 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_on_boarding"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <com.afollestad.viewpagerdots.DotsIndicator
         android:id="@+id/dots"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
         android:id="@+id/ivLogo"
@@ -44,13 +44,13 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnGetStarted"
+        style="@style/GeneralButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/shape_rounded_cyan"
         android:text="Get Started"
-        style="@style/GeneralButton"
         android:textFontWeight="600"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -20,12 +20,12 @@
         android:id="@+id/tv_masuk_dan_daftar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
         android:layout_marginTop="40dp"
         android:layout_marginRight="167dp"
-        android:layout_marginLeft="40dp"
-        android:textSize="20sp"
-        android:textFontWeight="600"
         android:text="Masuk dan Mulai Konsultasi"
+        android:textFontWeight="600"
+        android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="@+id/ivLogo"
         app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
 
@@ -34,38 +34,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:textSize="16sp"
         android:text="Email Address"
         android:textColor="#7D8797"
+        android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="@+id/ivLogo"
         app:layout_constraintTop_toBottomOf="@+id/tv_masuk_dan_daftar" />
 
     <EditText
         android:id="@+id/et_email"
+        style="@style/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/editText"
         android:layout_marginTop="6dp"
         app:layout_constraintLeft_toLeftOf="@id/tv_masuk_dan_daftar"
         app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+
     <TextView
         android:id="@+id/tv_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:textSize="16sp"
         android:text="Password"
         android:textColor="#7D8797"
+        android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="@+id/ivLogo"
         app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
     <EditText
         android:id="@+id/et_password"
+        style="@style/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/editText"
-        android:inputType="textPassword"
         android:layout_marginTop="6dp"
+        android:inputType="textPassword"
         app:layout_constraintLeft_toLeftOf="@id/tv_masuk_dan_daftar"
         app:layout_constraintTop_toBottomOf="@+id/tv_password" />
 
@@ -73,21 +74,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="true"
         android:text="@string/forgot_my_password"
         android:textColor="#7D8797"
         android:textSize="12sp"
-        android:clickable="true"
         app:layout_constraintLeft_toLeftOf="@+id/ivLogo"
-        app:layout_constraintTop_toBottomOf="@+id/et_password"
-        android:focusable="true" />
+        app:layout_constraintTop_toBottomOf="@+id/et_password" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_sign_in"
+        style="@style/CustomButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="66dp"
         android:text="Sign In"
-        style="@style/CustomButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_password" />
@@ -97,14 +98,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:clickable="true"
+        android:focusable="true"
         android:text="@string/create_new_account"
         android:textColor="#7D8797"
         android:textSize="16sp"
-        android:clickable="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_sign_in"
-        android:focusable="true" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_sign_in" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

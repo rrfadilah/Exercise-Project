@@ -17,15 +17,15 @@ class SignActivity : AppCompatActivity() {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
-        //get string mail and password from intent
+
         val mail = intent.getStringExtra("email")
         val password = intent.getStringExtra("password")
 
-        //get edit text mail and password
+
         val edtmail = findViewById<EditText>(R.id.et_email)
         val edtpassword = findViewById<EditText>(R.id.et_password)
 
-        //set string mail and password to edit text
+
         edtmail.setText(mail)
         edtpassword.setText(password)
 

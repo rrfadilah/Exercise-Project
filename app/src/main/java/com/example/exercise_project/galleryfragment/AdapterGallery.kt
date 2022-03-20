@@ -6,7 +6,8 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 
 class AdapterGallery(
     fragmentManager: FragmentManager,
-    val listFragment: List<Fragment>) :
+    val listFragment: List<Fragment>
+) :
     FragmentStatePagerAdapter(fragmentManager) {
     override fun getCount(): Int {
         return listFragment.size

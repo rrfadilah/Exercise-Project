@@ -25,8 +25,14 @@ class OnBoardingActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        var imgs = listOf<Int>(R.drawable.bgonboarding,R.drawable.bgonboarding2,R.drawable.bgonboarding3,R.drawable.bgonboarding4,R.drawable.bgonboarding5)
-        val adapter = OnBoardingAdapter(imgs,this)
+        var imgs = listOf<Int>(
+            R.drawable.bgonboarding,
+            R.drawable.bgonboarding2,
+            R.drawable.bgonboarding3,
+            R.drawable.bgonboarding4,
+            R.drawable.bgonboarding5
+        )
+        val adapter = OnBoardingAdapter(imgs, this)
         val dots: DotsIndicator = findViewById(R.id.dots)
         var viewPager = findViewById<ViewPager>(R.id.vp_on_boarding)
         viewPager.adapter = adapter
