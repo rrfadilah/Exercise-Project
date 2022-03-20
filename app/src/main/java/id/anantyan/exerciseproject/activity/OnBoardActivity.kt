@@ -9,7 +9,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.adapter.OnBoardAdapter
 import id.anantyan.exerciseproject.databinding.ActivityOnBoardBinding
-import id.anantyan.exerciseproject.utils.viewbinding.viewBinding
+import id.anantyan.utils.viewbinding.viewBinding
 
 class OnBoardActivity : AppCompatActivity() {
 

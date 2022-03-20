@@ -1,12 +1,8 @@
 package id.anantyan.exerciseproject.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import android.widget.Toast
-import androidx.core.view.get
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.navigation.NavigationBarView
-import com.google.android.material.navigation.NavigationView
 import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.adapter.MainViewPagerAdapter
 import id.anantyan.exerciseproject.databinding.ActivityBaseFragmentBinding
@@ -14,12 +10,12 @@ import id.anantyan.exerciseproject.fragment.DoctorFragment
 import id.anantyan.exerciseproject.fragment.HospitalFragment
 import id.anantyan.exerciseproject.fragment.MessagesFragment
 import id.anantyan.exerciseproject.model.DataDummy
-import id.anantyan.exerciseproject.utils.Constant
-import id.anantyan.exerciseproject.utils.Constant.PASSING_TO_BASE_FRAGMENT
-import id.anantyan.exerciseproject.utils.viewbinding.viewBinding
+import id.anantyan.utils.Constant.PASSING_TO_BASE_FRAGMENT
+import id.anantyan.utils.viewbinding.viewBinding
 
 class BaseFragmentActivity : AppCompatActivity() {
 
+    private lateinit var sectionViewPager: MainViewPagerAdapter
     private val binding: ActivityBaseFragmentBinding by viewBinding()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +33,7 @@ class BaseFragmentActivity : AppCompatActivity() {
             MessagesFragment(),
             HospitalFragment()
         )
-        val sectionViewPager = MainViewPagerAdapter(
+        sectionViewPager = MainViewPagerAdapter(
             supportFragmentManager,
             lifecycle,
             itemFragment
@@ -56,7 +52,7 @@ class BaseFragmentActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (binding.viewPager.currentItem > 0) {
+        if (binding.viewPager.currentItem > 0 && binding.viewPager.currentItem <= sectionViewPager.itemCount - 1) {
             onSetViewPager(0)
             onSetBottomNavigation(R.id.navigation_doctor)
         } else {
@@ -65,7 +61,7 @@ class BaseFragmentActivity : AppCompatActivity() {
     }
 
     private val onNavigationListener = NavigationBarView.OnItemSelectedListener {
-        return@OnItemSelectedListener when(it.itemId) {
+        return@OnItemSelectedListener when (it.itemId) {
             R.id.navigation_doctor -> {
                 onSetViewPager(0)
                 true

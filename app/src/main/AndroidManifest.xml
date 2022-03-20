@@ -12,7 +12,7 @@
         <activity
             android:name=".activity.BaseFragmentActivity"
             android:exported="false"
-            android:theme="@style/Theme.ExerciseProject.NoActionBar"/>
+            android:theme="@style/Theme.ExerciseProject.NoActionBar" />
         <activity
             android:name=".activity.SignUpActivity"
             android:exported="false"

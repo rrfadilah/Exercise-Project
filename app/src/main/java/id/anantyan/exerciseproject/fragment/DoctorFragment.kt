@@ -11,13 +11,14 @@ import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.activity.BaseFragmentActivity
 import id.anantyan.exerciseproject.databinding.FragmentDoctorBinding
 import id.anantyan.exerciseproject.model.DataDummy
-import id.anantyan.exerciseproject.utils.Constant.PASSING_TO_DOCTOR_FRAGMENT
-import id.anantyan.exerciseproject.utils.viewbinding.viewBinding
+import id.anantyan.utils.Constant.PASSING_TO_DOCTOR_FRAGMENT
+import id.anantyan.utils.viewbinding.viewBinding
 
 class DoctorFragment : Fragment() {
 
     private val viewModel: SharedViewModel by activityViewModels()
     private val binding: FragmentDoctorBinding by viewBinding()
+    private val context = (activity as BaseFragmentActivity)
 
     companion object {
         @JvmStatic
@@ -52,8 +53,8 @@ class DoctorFragment : Fragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        (activity as BaseFragmentActivity).supportActionBar?.setTitle(R.string.txt_title)
+    override fun onStart() {
+        super.onStart()
+        context.supportActionBar?.title = getString(R.string.txt_title)
     }
 }

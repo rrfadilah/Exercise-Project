@@ -7,15 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.databinding.ActivitySignUpBinding
 import id.anantyan.exerciseproject.model.DataDummy
-import id.anantyan.exerciseproject.utils.Constant
-import id.anantyan.exerciseproject.utils.Constant.PASSING_TO_SIGN_UP
-import id.anantyan.exerciseproject.utils.Validation.emailValid
-import id.anantyan.exerciseproject.utils.Validation.generalValid
-import id.anantyan.exerciseproject.utils.Validation.passwordValid
-import id.anantyan.exerciseproject.utils.validator.Validator
-import id.anantyan.exerciseproject.utils.validator.constant.Mode
-import id.anantyan.exerciseproject.utils.validator.validator
-import id.anantyan.exerciseproject.utils.viewbinding.viewBinding
+import id.anantyan.utils.Constant.PASSING_TO_SIGN_UP
+import id.anantyan.utils.Validation.emailValid
+import id.anantyan.utils.Validation.generalValid
+import id.anantyan.utils.Validation.passwordValid
+import id.anantyan.utils.validator.Validator
+import id.anantyan.utils.validator.constant.Mode
+import id.anantyan.utils.validator.validator
+import id.anantyan.utils.viewbinding.viewBinding
 
 class SignUpActivity : AppCompatActivity() {
 

@@ -7,7 +7,9 @@ import id.anantyan.exerciseproject.model.DataDummy
 
 class SharedViewModel : ViewModel() {
     private val _item: MutableLiveData<DataDummy> = MutableLiveData()
+
     val item: LiveData<DataDummy> = _item
+
     fun setItem(item: DataDummy) {
         _item.value = item
     }
