@@ -1,15 +1,26 @@
 package com.rizky.exercise_project
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import com.rizky.exercise_project.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        Log.d("Lifecycle", "Lirecycle OnCreate")
+        Log.d("Lifecycle", "Lifecycle OnCreate")
+
+        Handler().postDelayed({
+            val intent = Intent(this@MainActivity, OnBoardingActivity::class.java)
+            startActivity(intent)
+        }, 5000)
+
     }
 
     override fun onStart() {
