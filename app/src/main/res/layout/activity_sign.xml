@@ -64,6 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/editText"
+        android:inputType="textPassword"
         android:layout_marginTop="6dp"
         app:layout_constraintLeft_toLeftOf="@id/tv_masuk_dan_daftar"
         app:layout_constraintTop_toBottomOf="@+id/tv_password" />
