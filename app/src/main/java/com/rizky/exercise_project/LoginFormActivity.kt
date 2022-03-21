@@ -24,8 +24,8 @@ class LoginFormActivity : AppCompatActivity() {
         binding.btnRegister.setOnClickListener {
             val intentRegister = Intent(this@LoginFormActivity, RegisterFormActivity::class.java)
 
-            intentRegister.putExtra("formEmail", "$email")
-            intentRegister.putExtra("formPassword", "$password")
+            intentRegister.putExtra(RegisterFormActivity.INTENT_EMAIL, "$email")
+            intentRegister.putExtra(RegisterFormActivity.INTENT_PASSWORD, "$password")
             startActivity(intentRegister)
         }
     }
