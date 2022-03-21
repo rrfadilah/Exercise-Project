@@ -3,24 +3,30 @@ package com.rizky.exercise_project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import com.rizky.exercise_project.databinding.ActivityLoginFormBinding
 
 class LoginFormActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityLoginFormBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login_form)
+        binding = ActivityLoginFormBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        var register: Button = findViewById(R.id.btnSignIn)
-        var emailAddress: EditText = findViewById(R.id.formEmail)
+        val email = binding.formEmail.text
+        val password = binding.formPassword.text
 
-        register.setOnClickListener {
-            val intenRegister = Intent(this@LoginFormActivity, LoginFormActivity::class.java)
-            val bundle = Bundle()
 
-            bundle.putString("key", "value")
-            intenRegister.putExtra("key", "value")
-            startActivity(intenRegister)
+        binding.btnRegister.setOnClickListener {
+            val intentRegister = Intent(this@LoginFormActivity, RegisterFormActivity::class.java)
+
+            intentRegister.putExtra("formEmail", "$email")
+            intentRegister.putExtra("formPassword", "$password")
+            startActivity(intentRegister)
         }
     }
 }
