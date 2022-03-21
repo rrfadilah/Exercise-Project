@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         // delay for specified time
         Handler().postDelayed({
-            val intent = Intent(this, OnBoardingActivity::class.java)
+            val intent = Intent(this, ScreenSlidePagerActivity::class.java)
             startActivity(intent)
             finish()
         }, 3000)
