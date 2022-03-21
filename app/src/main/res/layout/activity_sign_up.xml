@@ -112,13 +112,14 @@
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSignIn"
+        android:id="@+id/btnContinue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="40dp"
         android:text="Continue"
         style="@style/GeneralButton"
+        android:onClick="ClickContinue"
         app:layout_constraintTop_toBottomOf="@id/etPassword2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />

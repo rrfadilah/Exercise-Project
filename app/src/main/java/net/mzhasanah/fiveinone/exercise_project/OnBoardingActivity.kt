@@ -5,11 +5,30 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import net.mzhasanah.fiveinone.exercise_project.databinding.ActivityGalleryBinding
+import net.mzhasanah.fiveinone.exercise_project.databinding.ActivityOnBoardingBinding
+import net.mzhasanah.fiveinone.exercise_project.galleryfragment.AdapterGallery
+import net.mzhasanah.fiveinone.exercise_project.galleryfragment.GalleryFragment
 
 class OnBoardingActivity : AppCompatActivity() {
+    lateinit var binding: ActivityOnBoardingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_on_boarding)
+        binding = ActivityOnBoardingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val listGallery = listOf<Fragment>(
+            FirstFragment(),
+            SecondFragment(),
+            ThirdFragment(),
+            FourthFragment()
+        )
+
+        val adapter = AdapterGallery(supportFragmentManager, listGallery)
+        binding.vpOnboarding.adapter = adapter
+
         Log.d("Lifecycle", "Lifecycle OnCreate")
     }
 

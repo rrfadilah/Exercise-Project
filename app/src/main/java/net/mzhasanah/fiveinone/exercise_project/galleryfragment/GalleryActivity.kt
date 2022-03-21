@@ -11,9 +11,10 @@ class GalleryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGalleryBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_gallery)
+        setContentView(binding.root)
 
         val listGallery = listOf<Fragment>(
+            GalleryFragment(),
             GalleryFragment(),
             GalleryFragment(),
             GalleryFragment()
