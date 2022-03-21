@@ -13,6 +13,11 @@ class OnBoardingActivity : AppCompatActivity() {
         Log.d("Lifecycle", "Lifecycle OnCreate")
     }
 
+    fun ClickGetStarted(V: View?) {
+        startActivity(Intent(this, SignUpActivity::class.java))
+        finish()
+    }
+
     fun ClickSignIn(V: View?) {
         startActivity(Intent(this, SignInActivity::class.java))
         finish()
