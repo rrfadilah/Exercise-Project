@@ -45,7 +45,6 @@
         android:layout_marginTop="290dp"
         style="@style/GeneralButton"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/bg_button_1"
         android:fontFamily="@font/nunitosemibold"
         android:text="Get Started"
         android:textAllCaps="false"

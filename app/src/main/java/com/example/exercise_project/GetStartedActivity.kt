@@ -1,13 +1,13 @@
 package com.example.exercise_project
 
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.exercise_project.R
 
 class GetStartedActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.sign_in_layout)
+        setContentView(R.layout.get_started_layout)
 
     }
 }

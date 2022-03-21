@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.exercise_project" >
+    package="com.example.exercise_project">
 
     <application
         android:allowBackup="true"
@@ -8,22 +8,41 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ExerciseProject" >
+        android:theme="@style/Theme.ExerciseProject">
         <activity
-            android:name=".samplefragment.PicturesActivity"
+            android:name=".MainHome.ActivityForFragment"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SignInUp.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".galleryfragment.GalleryActivity"
-            android:exported="true" >
+            android:name=".SignInUp.SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Splash.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".onBoardingFragment.onBoardingActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".samplefragment.PicturesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".galleryfragment.GalleryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GetStartedActivity"
+            android:exported="false"></activity>
     </application>
 
 </manifest>
