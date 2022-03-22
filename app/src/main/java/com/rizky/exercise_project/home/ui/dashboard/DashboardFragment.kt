@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.rizky.exercise_project.Constant
 import com.rizky.exercise_project.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
@@ -40,10 +41,10 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+//        val textView: TextView = binding.textDashboard
+//        dashboardViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
 
         Log.d("Lifecycle", "Lifecycle DashboardFragment onCreateView")
         return root
@@ -52,11 +53,14 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("Lifecycle", "Lifecycle DashboardFragment onViewCreated")
+
+        val data = arguments?.getString(Constant.Intent.KEY)
+        binding.textDashboard.text = "Dashboard akan mencetak ::: $data"
     }
 
     override fun onStart() {
         super.onStart()
-        Log.d("Lifecycle", "Lifecycle DashboardFragment onViewCreated")
+        Log.d("Lifecycle", "Lifecycle DashboardFragment onStart")
     }
 
     override fun onResume() {

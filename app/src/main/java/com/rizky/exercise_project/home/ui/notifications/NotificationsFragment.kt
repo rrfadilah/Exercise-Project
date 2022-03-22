@@ -55,7 +55,7 @@ class NotificationsFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        Log.d("Lifecycle", "Lifecycle NotificationsFragment onViewCreated")
+        Log.d("Lifecycle", "Lifecycle NotificationsFragment onStart")
     }
 
     override fun onResume() {

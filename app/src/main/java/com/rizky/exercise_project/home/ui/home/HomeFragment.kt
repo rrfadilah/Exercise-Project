@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.rizky.exercise_project.Constant
 import com.rizky.exercise_project.R
 import com.rizky.exercise_project.databinding.FragmentHomeBinding
 
@@ -48,7 +49,9 @@ class HomeFragment : Fragment() {
         }
 
         textView.setOnClickListener {
-            it.findNavController().navigate(R.id.action_navigation_home_to_navigation_dashboard)
+            val bundle = Bundle()
+            bundle.putString(Constant.Intent.KEY, "Value disini akan tercetak di halaman dashboard")
+            it.findNavController().navigate(R.id.action_navigation_home_to_navigation_dashboard, bundle)
         }
         Log.d("Lifecycle", "Lifecycle HomeFragment onCreateView")
         return root
@@ -61,7 +64,7 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        Log.d("Lifecycle", "Lifecycle HomeFragment onViewCreated")
+        Log.d("Lifecycle", "Lifecycle HomeFragment onStart")
     }
 
     override fun onResume() {
