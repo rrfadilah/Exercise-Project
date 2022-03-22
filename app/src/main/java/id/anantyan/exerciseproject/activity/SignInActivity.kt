@@ -3,12 +3,12 @@ package id.anantyan.exerciseproject.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.databinding.ActivitySignInBinding
-import id.anantyan.exerciseproject.model.DataDummy
-import id.anantyan.utils.Constant.PASSING_TO_BASE_FRAGMENT
-import id.anantyan.utils.Constant.PASSING_TO_SIGN_UP
+import id.anantyan.exerciseproject.model.Users
+import id.anantyan.utils.Constant.PASSING_TO_SIGN_UP_ACTIVITY
 import id.anantyan.utils.Validation.emailValid
 import id.anantyan.utils.Validation.passwordValid
 import id.anantyan.utils.validator.Validator
@@ -33,7 +33,7 @@ class SignInActivity : AppCompatActivity() {
     private fun onBinding() {
         binding.txtLayoutSignUp.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
-            intent.putExtra(PASSING_TO_SIGN_UP, true)
+            intent.putExtra(PASSING_TO_SIGN_UP_ACTIVITY, true)
             startActivity(intent)
         }
         binding.btnSignIn.setOnClickListener {
@@ -54,14 +54,14 @@ class SignInActivity : AppCompatActivity() {
 
     private val onSignIn = object : Validator.OnValidateListener {
         override fun onValidateSuccess(values: List<String>) {
-            val item = DataDummy(
+            val item = Users(
                 email = binding.txtInputLayoutEmail.text.toString(),
                 password = binding.txtInputLayoutPassword.text.toString()
             )
             val intent = Intent(this@SignInActivity, BaseFragmentActivity::class.java)
-            intent.putExtra(PASSING_TO_BASE_FRAGMENT, item)
             startActivity(intent)
             finish()
+            Toast.makeText(this@SignInActivity, item.toString(), Toast.LENGTH_SHORT).show()
         }
 
         override fun onValidateFailed(errors: List<String>) {}

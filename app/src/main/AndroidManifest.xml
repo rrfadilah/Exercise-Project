@@ -8,27 +8,25 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ExerciseProject">
+        android:theme="@style/Theme.ExerciseProject.NoActionBar">
+        <activity
+            android:name=".activity.MessagesDetailActivity"
+            android:exported="false"/>
         <activity
             android:name=".activity.BaseFragmentActivity"
-            android:exported="false"
-            android:theme="@style/Theme.ExerciseProject.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name=".activity.SignUpActivity"
-            android:exported="false"
-            android:theme="@style/Theme.ExerciseProject.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name=".activity.SignInActivity"
-            android:exported="false"
-            android:theme="@style/Theme.ExerciseProject.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name=".activity.OnBoardActivity"
-            android:exported="false"
-            android:theme="@style/Theme.ExerciseProject.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name=".activity.SplashActivity"
-            android:exported="false"
-            android:theme="@style/Theme.ExerciseProject.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
             android:exported="true"

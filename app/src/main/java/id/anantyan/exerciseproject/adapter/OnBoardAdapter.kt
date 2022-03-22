@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import id.anantyan.exerciseproject.databinding.ListItemOnBoardBinding
 
 class OnBoardAdapter(
-    item: List<Int>
-) : ListAdapter<Int, RecyclerView.ViewHolder>(Utils.diffCallback) {
+    val item: List<Int>
+) : ListAdapter<Int, RecyclerView.ViewHolder>(DiffUtilOnBoard.diffCallback) {
 
     inner class ViewHolder(private val binding: ListItemOnBoardBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -40,7 +40,7 @@ class OnBoardAdapter(
     }
 }
 
-object Utils {
+object DiffUtilOnBoard {
     val diffCallback = object : DiffUtil.ItemCallback<Int>() {
         override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean {
             return oldItem == newItem

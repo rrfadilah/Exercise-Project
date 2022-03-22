@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.databinding.ActivitySignUpBinding
-import id.anantyan.exerciseproject.model.DataDummy
-import id.anantyan.utils.Constant.PASSING_TO_SIGN_UP
+import id.anantyan.exerciseproject.model.Users
+import id.anantyan.utils.Constant.PASSING_TO_SIGN_UP_ACTIVITY
 import id.anantyan.utils.Validation.emailValid
 import id.anantyan.utils.Validation.generalValid
 import id.anantyan.utils.Validation.passwordValid
@@ -19,7 +19,7 @@ import id.anantyan.utils.viewbinding.viewBinding
 class SignUpActivity : AppCompatActivity() {
 
     private val binding: ActivitySignUpBinding by viewBinding()
-    private var item: DataDummy? = null
+    private var item: Users? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun onCheckIntent(): Boolean {
-        return intent.hasExtra(PASSING_TO_SIGN_UP)
+        return intent.hasExtra(PASSING_TO_SIGN_UP_ACTIVITY)
     }
 
     private fun onValidation(context: Context) {

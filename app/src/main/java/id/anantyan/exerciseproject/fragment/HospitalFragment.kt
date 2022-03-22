@@ -13,7 +13,6 @@ import id.anantyan.utils.viewbinding.viewBinding
 class HospitalFragment : Fragment() {
 
     private val binding: FragmentHospitalBinding by viewBinding()
-    private val context = (activity as BaseFragmentActivity)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,8 +22,8 @@ class HospitalFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_hospital, container, false)
     }
 
-    override fun onStart() {
-        super.onStart()
-        context.supportActionBar?.title = "Hospital"
+    override fun onResume() {
+        super.onResume()
+        (activity as BaseFragmentActivity).supportActionBar?.title = "Hospital"
     }
 }

@@ -1,6 +1,8 @@
 package id.anantyan.exerciseproject.activity
 
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.navigation.NavigationBarView
 import id.anantyan.exerciseproject.R
@@ -9,13 +11,15 @@ import id.anantyan.exerciseproject.databinding.ActivityBaseFragmentBinding
 import id.anantyan.exerciseproject.fragment.DoctorFragment
 import id.anantyan.exerciseproject.fragment.HospitalFragment
 import id.anantyan.exerciseproject.fragment.MessagesFragment
-import id.anantyan.exerciseproject.model.DataDummy
-import id.anantyan.utils.Constant.PASSING_TO_BASE_FRAGMENT
+import id.anantyan.exerciseproject.fragment.SharedViewModel
+import id.anantyan.exerciseproject.model.Messages
+import id.anantyan.utils.Constant.PASSING_TO_MESSAGES_ACTIVITY
 import id.anantyan.utils.viewbinding.viewBinding
 
 class BaseFragmentActivity : AppCompatActivity() {
 
     private lateinit var sectionViewPager: MainViewPagerAdapter
+    private val viewModel: SharedViewModel by viewModels()
     private val binding: ActivityBaseFragmentBinding by viewBinding()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,9 +31,8 @@ class BaseFragmentActivity : AppCompatActivity() {
     }
 
     private fun onBinding() {
-        val item = intent.extras?.getParcelable<DataDummy>(PASSING_TO_BASE_FRAGMENT)
         val itemFragment = listOf(
-            DoctorFragment.newInstance(item),
+            DoctorFragment(),
             MessagesFragment(),
             HospitalFragment()
         )
@@ -75,6 +78,15 @@ class BaseFragmentActivity : AppCompatActivity() {
                 true
             }
             else -> false
+        }
+    }
+
+    val onResultActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == RESULT_OK) {
+            val items = it.data?.getParcelableExtra<Messages>(PASSING_TO_MESSAGES_ACTIVITY)
+            items?.let { it1 ->
+                viewModel.setMessages(it1)
+            }
         }
     }
 }
