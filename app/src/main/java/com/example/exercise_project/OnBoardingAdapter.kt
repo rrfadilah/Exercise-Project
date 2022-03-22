@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 
-class OnBoardingAdapter(var list: List<Int>, var ctx: Context) : PagerAdapter() {
+class OnBoardingAdapter(private var list: List<Int>, private var ctx: Context) : PagerAdapter() {
 
-    private lateinit var ImgList: List<Int>
-    lateinit var layoutInflater: LayoutInflater
+    private lateinit var imgs: List<Int>
+    private lateinit var layoutInflater: LayoutInflater
     lateinit var context: Context
     override fun getCount(): Int {
         return list.size
@@ -18,13 +18,13 @@ class OnBoardingAdapter(var list: List<Int>, var ctx: Context) : PagerAdapter() 
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view.equals(`object`)
+        return view == `object`
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
 
         layoutInflater = LayoutInflater.from(ctx)
-        var view = layoutInflater.inflate(R.layout.on_boarding_image_item, container, false)
+        val view = layoutInflater.inflate(R.layout.on_boarding_image_item, container, false)
         val img = view.findViewById<ImageView>(R.id.simpleimg)
         img.setImageResource(list[position])
         container.addView(view, 0)

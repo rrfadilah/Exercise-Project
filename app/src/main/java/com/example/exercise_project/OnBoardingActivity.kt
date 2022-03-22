@@ -2,11 +2,12 @@ package com.example.exercise_project
 
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
+import com.example.exercise_project.home.HomeActivity
 
 class OnBoardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +18,7 @@ class OnBoardingActivity : AppCompatActivity() {
         val btnSIgnIn = findViewById<Button>(R.id.btnSignIn)
 
         btnSIgnUp.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
         btnSIgnIn.setOnClickListener {
@@ -25,7 +26,7 @@ class OnBoardingActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        var imgs = listOf<Int>(
+        val imgs = listOf(
             R.drawable.bgonboarding,
             R.drawable.bgonboarding2,
             R.drawable.bgonboarding3,
@@ -34,7 +35,7 @@ class OnBoardingActivity : AppCompatActivity() {
         )
         val adapter = OnBoardingAdapter(imgs, this)
         val dots: DotsIndicator = findViewById(R.id.dots)
-        var viewPager = findViewById<ViewPager>(R.id.vp_on_boarding)
+        val viewPager = findViewById<ViewPager>(R.id.vp_on_boarding)
         viewPager.adapter = adapter
         dots.attachViewPager(viewPager)
         dots.setDotTint(Color.WHITE)
