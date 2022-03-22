@@ -2,12 +2,11 @@ package id.anantyan.exerciseproject.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.anantyan.exerciseproject.R
@@ -17,7 +16,6 @@ import id.anantyan.exerciseproject.adapter.MessagesAdapter
 import id.anantyan.exerciseproject.databinding.FragmentMessagesBinding
 import id.anantyan.exerciseproject.model.Messages
 import id.anantyan.utils.Constant.PASSING_TO_MESSAGES_ACTIVITY
-import id.anantyan.utils.DividerItemDecorationUtil
 import id.anantyan.utils.dividerVertical
 import id.anantyan.utils.viewbinding.viewBinding
 
@@ -32,12 +30,15 @@ class MessagesFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        Log.d("MESSAGES", "onCreate")
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        Log.d("MESSAGES", "onCreateView")
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_messages, container, false)
     }
@@ -48,11 +49,13 @@ class MessagesFragment : Fragment() {
         onAdapter()
         onGetData()
         onViewModel()
+        Log.d("MESSAGES", "onViewCreated")
     }
 
     override fun onResume() {
         super.onResume()
         (activity as BaseFragmentActivity).supportActionBar?.title = "Messages"
+        Log.d("MESSAGES", "onResume")
     }
 
     private fun onViewModel() {
@@ -133,12 +136,6 @@ class MessagesFragment : Fragment() {
         )
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.setMessages(null)
-        viewModel.setListMessages(list)
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_action_bar, menu)
@@ -152,5 +149,42 @@ class MessagesFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        Log.d("MESSAGES", "onViewStateRestore")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("MESSAGES", "onStart")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("MESSAGES", "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("MESSAGES", "onStop")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d("MESSAGES", "onSaveInstanceState")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("MESSAGES", "onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.setMessages(null)
+        viewModel.setListMessages(list)
+        Log.d("MESSAGES", "onCreated")
     }
 }
