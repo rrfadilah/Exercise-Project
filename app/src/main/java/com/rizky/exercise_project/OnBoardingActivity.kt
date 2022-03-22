@@ -1,15 +1,32 @@
 package com.rizky.exercise_project
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.rizky.exercise_project.databinding.ActivityOnBoardingBinding
+import com.rizky.exercise_project.home.HomeActivity
 import com.rizky.exercise_project.model.Biodata
 import com.rizky.exercise_project.model.UserInfo
 
 class OnBoardingActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityOnBoardingBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_on_boarding)
+        binding = ActivityOnBoardingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.btnGetStarted.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnSignIn.setOnClickListener {
+            val intent = Intent(this, SignInActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     fun intentExplicit() {
