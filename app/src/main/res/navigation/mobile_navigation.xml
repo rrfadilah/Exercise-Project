@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.rizky.exercise_project.home.ui.home.HomeFragment"
+        android:name="com.mutawalli.exercise_project.home.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -17,13 +17,13 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.rizky.exercise_project.home.ui.dashboard.DashboardFragment"
+        android:name="com.mutawalli.exercise_project.home.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.rizky.exercise_project.home.ui.notifications.NotificationsFragment"
+        android:name="com.mutawalli.exercise_project.home.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

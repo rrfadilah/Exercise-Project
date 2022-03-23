@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/fragmentPictures"
-        android:name="com.rizky.exercise_project.samplefragment.PicturesFragment"
+        android:name="com.mutawalli.exercise_project.samplefragment.PicturesFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/flBottom"
