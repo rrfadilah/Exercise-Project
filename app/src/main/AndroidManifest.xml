@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExerciseProject">
         <activity
+            android:name=".home.HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".ScreenSlidePagerActivity"
             android:exported="false" />
         <activity
