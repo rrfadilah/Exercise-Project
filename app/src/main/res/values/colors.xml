@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="navbarSelected">#0BCAD4</color>
     <color name="navbarUnselected">#DADADA</color>
+    <color name="bg_linear_horizontal">#E6FBFC</color>
+    <color name="bg_messages">#112340</color>
 </resources>

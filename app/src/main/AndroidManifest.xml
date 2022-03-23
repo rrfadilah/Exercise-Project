@@ -10,8 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExerciseProject">
         <activity
-            android:name=".MainHome.ActivityForFragment"
-            android:exported="false" />
+            android:name=".Home.ActivityForHome"
+            android:exported="false">
+        </activity>
         <activity
             android:name=".SignInUp.SignUpActivity"
             android:exported="false" />
@@ -29,8 +30,7 @@
         </activity>
         <activity
             android:name=".onBoardingFragment.onBoardingActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".samplefragment.PicturesActivity"
             android:exported="false" />
@@ -42,7 +42,7 @@
             android:exported="false" />
         <activity
             android:name=".GetStartedActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -31,6 +31,12 @@
         <item name="android:fontFamily">@font/nunitoregular</item>
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#999999</item>
+        <item name="colorControlActivated">#F8B459</item>
+
+    </style>
+
 
 
 </resources>

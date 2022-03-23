@@ -1,12 +1,14 @@
-package com.example.exercise_project.MainHome
+package com.example.exercise_project.Home.Doctor
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.exercise_project.Home.TaskList
 import com.example.exercise_project.R
 import com.example.exercise_project.databinding.FragmentDoctorBinding
+
 
 class FragmentDoctor : Fragment() {
     lateinit var binding: FragmentDoctorBinding
@@ -16,6 +18,16 @@ class FragmentDoctor : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDoctorBinding.inflate(layoutInflater)
+
+        val adapter = AdapterDoctor(TaskList.listDoctor)
+        binding.rvListDoctor.adapter = adapter
+
+        val adapterRated = AdapterDoctorSecond(TaskList.listRatedDoctor)
+        binding.rvListRatedDoctor.adapter = adapterRated
+
+        val adapterGoodNews = AdapterDoctorThird(TaskList.listGoodNews)
+        binding.rvGoodNews.adapter = adapterGoodNews
+
         return binding.root
     }
 }

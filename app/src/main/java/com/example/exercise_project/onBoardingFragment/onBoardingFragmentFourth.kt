@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
 import com.example.exercise_project.GetStartedActivity
+import com.example.exercise_project.Home.ActivityForHome
 import com.example.exercise_project.MainActivity
-import com.example.exercise_project.MainHome.ActivityForFragment
 import com.example.exercise_project.R
 import com.example.exercise_project.SignInUp.SignInActivity
 import com.example.exercise_project.SignInUp.SignUpActivity
@@ -34,7 +34,7 @@ class onBoardingFragmentFourth : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding!!.btnOnboardStart.setOnClickListener{
-                val intent = Intent(activity, SignUpActivity::class.java)
+                val intent = Intent(activity, ActivityForHome::class.java)
                 startActivity(intent)
         }
         binding!!.btnOnboardSignin.setOnClickListener{

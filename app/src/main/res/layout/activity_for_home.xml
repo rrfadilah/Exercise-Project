@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainHome.ActivityForFragment">
+    tools:context=".Home.ActivityForHome">
 
     <FrameLayout
         android:id="@+id/flFragment"
@@ -25,10 +25,11 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:layout_height="80dp"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_menu"/>
-
+        app:menu="@menu/bottom_menu"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
