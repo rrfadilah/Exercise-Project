@@ -4,19 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginHorizontal="16dp"
     tools:context=".menu.ui.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <ImageView
+        android:id="@+id/iv_main_user"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/img_main_user"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_main_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:text="Shayna Melinda"
+        android:textColor="#112340"
+        android:textFontWeight="600"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toRightOf="@id/iv_main_user"
+        app:layout_constraintTop_toTopOf="@id/iv_main_user" />
+
+    <TextView
+        android:id="@+id/tv_main_job"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:text="Product Designer"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@id/iv_main_user"
+        app:layout_constraintTop_toBottomOf="@id/tv_main_username" />
+
+    <TextView
+        android:id="@+id/tv_konsul_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Mau konsultasi dengan siapa hari ini?"
+        android:textColor="#112340"
+        android:textFontWeight="600"
+        android:textSize="21sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_main_user" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_konsul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:scrollbars="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_konsul_title"
+        tools:listitem="@layout/list_item_konsultasi"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
