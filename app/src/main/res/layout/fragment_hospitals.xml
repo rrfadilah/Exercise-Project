@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_hospital"
+    tools:context=".hospitals.HospitalsFragment">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_bghospital"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bg_hospital"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_hospital"
+        style="@style/GeneralText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Nearby Hospitals"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        style="@style/GeneralText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="3 tersedia"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_hospital"
+        app:layout_constraintRight_toRightOf="@id/tv_hospital"
+        app:layout_constraintTop_toBottomOf="@id/tv_hospital" />
+
+    <ImageView
+        android:id="@+id/iv_bgrounded"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@drawable/shape_rounded_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_bghospital" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_hospitals"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="@id/iv_bgrounded"
+        app:layout_constraintLeft_toLeftOf="@id/iv_bgrounded"
+        app:layout_constraintRight_toRightOf="@id/iv_bgrounded"
+        app:layout_constraintTop_toTopOf="@id/iv_bgrounded"
+        tools:listitem="@layout/list_item_hospitals" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
