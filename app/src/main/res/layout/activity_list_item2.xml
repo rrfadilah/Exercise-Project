@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ListItem2Activity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_list_2_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="30dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        >
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/iv_list_2_1"
+            />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_list_nama_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alexa Rachel"
+        app:layout_constraintTop_toTopOf="@+id/cv_list_2_1"
+        app:layout_constraintLeft_toRightOf="@+id/cv_list_2_1"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="20dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_list_status_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dentist"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_list_2_1"
+        app:layout_constraintLeft_toRightOf="@+id/cv_list_2_1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="6dp"
+        />
+
+    <RatingBar
+        android:id="@+id/ratebar_list_2"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:numStars="5"
+        android:stepSize=".5"
+        app:layout_constraintTop_toTopOf="@id/cv_list_2_1"
+        app:layout_constraintBottom_toBottomOf="@id/cv_list_2_1"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
