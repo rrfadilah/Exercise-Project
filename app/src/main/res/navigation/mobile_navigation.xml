@@ -3,27 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_doctor">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.exercise_project.home.ui.home.HomeFragment"
+        android:id="@+id/navigation_doctor"
+        android:name="com.example.exercise_project.home.ui.doctor.DoctorFragment"
         android:label="@string/title_doctor"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_doctor">
         <action
-            android:id="@+id/action_navigation_home_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard" />
+            android:id="@+id/action_navigation_doctor_to_navigation_messages"
+            app:destination="@id/navigation_messages" />
+        <action
+            android:id="@+id/action_navigation_doctor_to_navigation_hospital"
+            app:destination="@id/navigation_hospital" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.exercise_project.home.ui.dashboard.DashboardFragment"
+        android:id="@+id/navigation_messages"
+        android:name="com.example.exercise_project.home.ui.messages.MessagesFragment"
         android:label="@string/title_messages"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_messages">
+        <action
+            android:id="@+id/action_navigation_messages_to_navigation_hospital"
+            app:destination="@id/navigation_hospital" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.exercise_project.home.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_hospital"
+        android:name="com.example.exercise_project.home.ui.hospital.HospitalFragment"
         android:label="@string/title_hospital"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_hospital" />
 </navigation>

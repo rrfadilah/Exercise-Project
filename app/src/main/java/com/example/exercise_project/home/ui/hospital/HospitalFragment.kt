@@ -1,4 +1,4 @@
-package com.example.exercise_project.home.ui.notifications
+package com.example.exercise_project.home.ui.hospital
 
 import android.os.Bundle
 import android.util.Log
@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.exercise_project.databinding.FragmentNotificationsBinding
+import com.example.exercise_project.databinding.FragmentHospitalBinding
 
-class NotificationsFragment : Fragment() {
+class HospitalFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentHospitalBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -24,9 +24,9 @@ class NotificationsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+            ViewModelProvider(this).get(HospitalViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentHospitalBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
@@ -35,9 +35,10 @@ class NotificationsFragment : Fragment() {
         }
         return root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("Lifecycle", "Lifecycle NotificationsFragment onViewCreated")
+        Log.d("Lifecycle", "Lifecycle HospitalFragment onViewCreated")
     }
 
     override fun onDestroyView() {

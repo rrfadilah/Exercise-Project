@@ -1,4 +1,4 @@
-package com.example.exercise_project.home.ui.home
+package com.example.exercise_project.home.ui.doctor
 
 import android.content.Context
 import android.os.Bundle
@@ -12,11 +12,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.exercise_project.Constant
 import com.example.exercise_project.R
-import com.example.exercise_project.databinding.FragmentHomeBinding
+import com.example.exercise_project.databinding.FragmentDoctorBinding
 
-class HomeFragment : Fragment() {
+class DoctorFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentDoctorBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -24,12 +24,12 @@ class HomeFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        Log.d("Lifecycle", "Lifecycle HomeFragment onAttach")
+        Log.d("Lifecycle", "Lifecycle DoctorFragment onAttach")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("Lifecycle", "Lifecycle HomeFragment onCreate")
+        Log.d("Lifecycle", "Lifecycle DoctorFragment onCreate")
     }
 
     override fun onCreateView(
@@ -38,9 +38,9 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+            ViewModelProvider(this).get(DoctorViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentDoctorBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textHome
@@ -50,14 +50,16 @@ class HomeFragment : Fragment() {
         textView.setOnClickListener {
             val bundle = Bundle()
             bundle.putString(Constant.Intent.KEY, "Value disini akan tercetak di halaman dashboard")
-            it.findNavController().navigate(R.id.action_navigation_home_to_navigation_dashboard, bundle)
+            it.findNavController()
+                .navigate(R.id.action_navigation_doctor_to_navigation_messages, bundle)
         }
-        Log.d("Lifecycle", "Lifecycle HomeFragment onCreateView")
+        Log.d("Lifecycle", "Lifecycle DoctorFragment onCreateView")
         return root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("Lifecycle", "Lifecycle HomeFragment onViewCreated")
+        Log.d("Lifecycle", "Lifecycle DoctorFragment onViewCreated")
     }
 
     override fun onDestroyView() {
