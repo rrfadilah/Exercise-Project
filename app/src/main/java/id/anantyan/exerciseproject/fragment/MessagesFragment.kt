@@ -52,12 +52,6 @@ class MessagesFragment : Fragment() {
         Log.d("MESSAGES", "onViewCreated")
     }
 
-    override fun onResume() {
-        super.onResume()
-        (activity as BaseFragmentActivity).supportActionBar?.title = "Messages"
-        Log.d("MESSAGES", "onResume")
-    }
-
     private fun onViewModel() {
         viewModel.listMessages.observe(viewLifecycleOwner) {
             list.clear()
@@ -75,6 +69,12 @@ class MessagesFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as BaseFragmentActivity).supportActionBar?.title = "Messages"
+        Log.d("MESSAGES", "onResume")
     }
 
     private fun onAdapter() {
@@ -178,13 +178,13 @@ class MessagesFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        viewModel.setMessages(null)
+        viewModel.setListMessages(list)
         Log.d("MESSAGES", "onDestroyView")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel.setMessages(null)
-        viewModel.setListMessages(list)
         Log.d("MESSAGES", "onCreated")
     }
 }

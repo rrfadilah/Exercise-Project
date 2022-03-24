@@ -16,14 +16,14 @@ class SharedViewModel : ViewModel() {
     val listMessages: LiveData<List<Messages>> = _listMessages
 
     fun setItem(item: Users?) {
-        _item.value = item
+        _item.postValue(item)
     }
 
     fun setMessages(messages: Messages?) {
-        _messages.value = messages
+        _messages.postValue(messages)
     }
 
     fun setListMessages(listMessages: List<Messages>) {
-        _listMessages.value = listMessages
+        _listMessages.postValue(listMessages)
     }
 }
