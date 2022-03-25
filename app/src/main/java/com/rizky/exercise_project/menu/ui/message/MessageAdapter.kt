@@ -16,7 +16,7 @@ class MessageAdapter(private val list: List<MessageModel>) : RecyclerView.Adapte
         // for any view that will be set as you render a row
         val imageAvatar = itemView.findViewById<ImageView>(R.id.iv_img)
         val textName = itemView.findViewById<TextView>(R.id.tv_name)
-        val textDesc = itemView.findViewById<TextView>(R.id.tv_last_message)
+        val textMessage = itemView.findViewById<TextView>(R.id.tv_last_message)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,7 +38,7 @@ class MessageAdapter(private val list: List<MessageModel>) : RecyclerView.Adapte
             .circleCrop()
             .into(holder.imageAvatar)
         holder.textName.text = message.name
-        holder.textDesc.text = message.desc
+        holder.textMessage.text = message.messsage
 
     override fun getItemCount(): Int {
         return list.count()
