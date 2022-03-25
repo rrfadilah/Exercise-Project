@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.rizky.exercise_project.menu.databinding.FragmentHomeBinding
+import com.rizky.exercise_project.adapter.DoctorAdapter
+import com.rizky.exercise_project.data.DummyDoctor
+import com.rizky.exercise_project.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
@@ -28,10 +29,14 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+//        val textView: TextView = binding.textHome
+//        homeViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
+
+        val adapter_doctor = DoctorAdapter(DummyDoctor.Data_Doctor)
+        binding.rvDoctor.adapter = adapter_doctor
+
         return root
     }
 
