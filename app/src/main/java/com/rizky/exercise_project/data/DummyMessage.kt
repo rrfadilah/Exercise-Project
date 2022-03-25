@@ -1,7 +1,7 @@
 package com.rizky.exercise_project.data
 
 import com.rizky.exercise_project.R
-import com.rizky.exercise_project.menu.ui.message.model.MessageModel
+import com.rizky.exercise_project.model.MessageModel
 
 object DummyMessage {
         val messages: List<MessageModel> = listOf(
@@ -11,14 +11,14 @@ object DummyMessage {
                 desc = "Oh tentu saja tidak karena jeruk it..."
             ),
             MessageModel(
-                avatar = R.drawable.img_user_1,
+                avatar = R.drawable.img_user_2,
                 name = "John McParker Steve",
                 desc = "Oke menurut pak dokter bagaimana unt..."
             ),
             MessageModel(
-                avatar = R.drawable.img_user_1,
-                name = "Rizky Fadilah",
-                desc = "Hallo gais semuanya disini"
+                avatar = R.drawable.img_user_3,
+                name = "John McParker Steve",
+                desc = "Oke menurut pak dokter bagaimana unt..."
             ),
         )
 }

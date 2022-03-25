@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.menu.ui.message
+package com.rizky.exercise_project.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.rizky.exercise_project.R
+import com.rizky.exercise_project.model.MessageModel
 
 class MessageAdapter(private val list: List<MessageModel>) : RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
     // Provide a direct reference to each of the views within a data item
@@ -34,7 +35,7 @@ class MessageAdapter(private val list: List<MessageModel>) : RecyclerView.Adapte
         // Set item views based on your views and data model
         holder.imageAvatar.setImageResource(message.avatar)
         holder.textName.text = message.name
-        holder.textMessage.text = message.name
+        holder.textMessage.text = message.desc
 
     }
 

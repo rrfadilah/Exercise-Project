@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.rizky.exercise_project.adapter.MessageAdapter
 import com.rizky.exercise_project.data.DummyMessage
 import com.rizky.exercise_project.databinding.FragmentMessageBinding
 
@@ -36,8 +37,8 @@ class MessageFragment : Fragment() {
         _binding = FragmentMessageBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        val adapter_message = MessageAdapter(DummyMessage.messages)
-//        binding.rvMessage.adapter = adapter_message
+        val adapter_message = MessageAdapter(DummyMessage.messages)
+        binding.rvMessage.adapter = adapter_message
 
         return root
 

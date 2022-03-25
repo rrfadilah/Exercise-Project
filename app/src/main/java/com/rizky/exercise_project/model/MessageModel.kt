@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.menu.ui.message.model
+package com.rizky.exercise_project.model
 
 data class MessageModel(
     val avatar: Int,
