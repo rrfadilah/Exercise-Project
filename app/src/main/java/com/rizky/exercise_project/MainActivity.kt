@@ -32,9 +32,9 @@ class MainActivity : AppCompatActivity() {
             ),
         )
 
-        val recyclerView: RecyclerView = findViewById(R.id.rv_message)
+        //val recyclerView: RecyclerView = findViewById(R.id.rv_message)
 
         val adapter = MessageAdapter(messages)
-        recyclerView.adapter = adapter
+        //recyclerView.adapter = adapter
     }
 }

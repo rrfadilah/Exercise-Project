@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.rizky.exercise_project.menu.databinding.FragmentDashboardBinding
+import com.rizky.exercise_project.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
 

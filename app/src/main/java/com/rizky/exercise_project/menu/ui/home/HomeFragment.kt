@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.rizky.exercise_project.menu.databinding.FragmentHomeBinding
+import androidx.recyclerview.widget.RecyclerView
+import com.rizky.exercise_project.R
+import com.rizky.exercise_project.databinding.FragmentHomeBinding
+import com.rizky.exercise_project.konsultasi.KonsultasiModel
 
 class HomeFragment : Fragment() {
 
@@ -25,13 +28,20 @@ class HomeFragment : Fragment() {
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
+        val konsultasi: List<KonsultasiModel> = listOf(
+            KonsultasiModel(
+                ic_konsultasi = "https://svgshare.com/i/fak.svg",
+                txt_konsultasi = "Halo 1"
+            ),
+            KonsultasiModel(
+                ic_konsultasi = "https://svgshare.com/i/fak.svg",
+                txt_konsultasi = "Halo 2"
+            )
+        )
+
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
     }
 

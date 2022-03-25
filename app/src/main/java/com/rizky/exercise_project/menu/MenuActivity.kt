@@ -7,7 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.rizky.exercise_project.menu.databinding.ActivityMenuBinding
+import com.rizky.exercise_project.R
+import com.rizky.exercise_project.databinding.ActivityMenuBinding
 
 class MenuActivity : AppCompatActivity() {
 

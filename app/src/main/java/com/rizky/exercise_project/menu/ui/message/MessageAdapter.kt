@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.rizky.exercise_project.R
 
 class MessageAdapter(private val list: List<MessageModel>) : RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
@@ -39,6 +40,8 @@ class MessageAdapter(private val list: List<MessageModel>) : RecyclerView.Adapte
             .into(holder.imageAvatar)
         holder.textName.text = message.name
         holder.textDesc.text = message.desc
+
+    }
 
     override fun getItemCount(): Int {
         return list.count()
