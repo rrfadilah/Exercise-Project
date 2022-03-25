@@ -6,6 +6,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.size.ViewSizeResolver
+import coil.transform.CircleCropTransformation
+import coil.transform.RoundedCornersTransformation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.rizky.exercise_project.R
@@ -23,10 +27,16 @@ class HospitalAdapter(private val listMyDatas: ArrayList<MyData>)  :
 
     override fun onBindViewHolder(holder: CardViewViewHolder, position: Int) {
         val myData = listMyDatas[position]
-        Glide.with(holder.itemView.context)
+        /*Glide.with(holder.itemView.context)
             .load(myData.image)
             .apply(RequestOptions().override(350, 550))
-            .into(holder.imgPhoto)
+            .into(holder.imgPhoto)*/
+        holder.imgPhoto.load(myData.image) {
+            crossfade(true)
+            placeholder(R.drawable.ic_baseline_image_24)
+            transformations(RoundedCornersTransformation(11f))
+            size(ViewSizeResolver(holder.imgPhoto))
+        }
         holder.tvTitle.text = myData.title
         holder.tvAddress.text = myData.address
     }
