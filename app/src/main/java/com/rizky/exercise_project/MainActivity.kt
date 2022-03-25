@@ -2,6 +2,7 @@ package com.rizky.exercise_project
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.rizky.exercise_project.Doctor.DoctorFragment
 import com.rizky.exercise_project.databinding.ActivityMainBinding
 import com.rizky.exercise_project.hospitals.HospitalsFragment
@@ -23,12 +24,7 @@ class MainActivity : AppCompatActivity() {
         setCurrentFragment(fragmentDoctor)
 
         binding.bottomNavigationView.setOnClickListener{
-            when(it.itemId){
-                R.id.navbar_Doctor -> setCurrentFragment(fragmentDoctor)
-                R.id.navbar_Messages -> setCurrentFragment(fragmentMessages)
-                R.id.navbar_Hospital -> setCurrentFragment(fragmentHospitals)
-            }
-            true
+            when(it.itemId)
         }
     }
 
