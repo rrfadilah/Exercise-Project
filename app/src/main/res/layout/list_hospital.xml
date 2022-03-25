@@ -8,7 +8,7 @@
     android:padding="16dp">
 
     <ImageView
-        android:id="@+id/ivImage"
+        android:id="@+id/ivHosImage"
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:src="@drawable/sample"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvName"
+        android:id="@+id/tvHosName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -24,12 +24,12 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@id/ivImage"
+        app:layout_constraintLeft_toRightOf="@id/ivHosImage"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Nama Rumah Sakit" />
 
     <TextView
-        android:id="@+id/tvDescription"
+        android:id="@+id/tvHosDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -39,8 +39,8 @@
         android:maxLines="1"
         android:textSize="14sp"
         android:textStyle="normal"
-        app:layout_constraintLeft_toRightOf="@id/ivImage"
-        app:layout_constraintTop_toBottomOf="@id/tvName"
+        app:layout_constraintLeft_toRightOf="@id/ivHosImage"
+        app:layout_constraintTop_toBottomOf="@id/tvHosName"
         tools:text="Alamat" />
 
 
