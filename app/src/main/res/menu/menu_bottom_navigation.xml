@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_doctor"
+        android:icon="@drawable/ic_face_unlock_24px"
+        android:title="Doctor" />
+
+    <item
+        android:id="@+id/navigation_messages"
+        android:icon="@drawable/ic_textsms_24px"
+        android:title="Messages" />
+
+    <item
+        android:id="@+id/navigation_hospital"
+        android:icon="@drawable/ic_map_24px"
+        android:title="Hospital" />
+</menu>

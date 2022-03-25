@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/navigation_doctor">
+
+    <fragment
+        android:id="@+id/navigation_doctor"
+        android:name="com.rizky.exercise_project.ui.doctor.DoctorFragment"
+        android:label="Doctor"
+        tools:layout="@layout/fragment_doctor" />
+    <fragment
+        android:id="@+id/navigation_messages"
+        android:name="com.rizky.exercise_project.ui.messages.MessagesFragment"
+        android:label="Messages"
+        tools:layout="@layout/fragment_messages" />
+    <fragment
+        android:id="@+id/navigation_hospital"
+        android:name="com.rizky.exercise_project.ui.hospital.HospitalFragment"
+        android:label="Hospital"
+        tools:layout="@layout/fragment_hospital" />
+</navigation>
