@@ -38,10 +38,8 @@ class HospitalAdapter(private val listMyDatas: ArrayList<MyData>)  :
         return listMyDatas.size
     }
 
-
     inner class CardViewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var imgPhoto: ImageView =
-            itemView.findViewById(R.id.ivCardHospital)
+        var imgPhoto: ImageView = itemView.findViewById(R.id.ivCardHospital)
         var tvTitle: TextView = itemView.findViewById(R.id.tvTitleCardHospital)
         var tvAddress: TextView = itemView.findViewById(R.id.tvAddressCardHospital)
     }

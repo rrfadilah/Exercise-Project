@@ -42,7 +42,7 @@ class MessagesFragment : Fragment() {
     private val listpesan = ArrayList<MessageModel>()
 
     fun getListMyDataMessages(): ArrayList<MessageModel> {
-        val datagambar = resources.getIntArray(R.array.data_gambar)
+        val datagambar = resources.getStringArray(R.array.data_image_pesan)
         val datanama = resources.getStringArray(R.array.data_nama)
         val datapesan = resources.getStringArray(R.array.data_pesan)
 
@@ -60,7 +60,7 @@ class MessagesFragment : Fragment() {
 
     private fun showRecyclerCardView() {
         rv_mydatapesan.layoutManager = LinearLayoutManager(context)
-        val cardViewMyDataAdapter = MessagesAdapter (listpesan)
+        val cardViewMyDataAdapter = MessagesAdapter(listpesan)
         rv_mydatapesan.adapter = cardViewMyDataAdapter
     }
 }

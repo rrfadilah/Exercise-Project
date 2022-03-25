@@ -29,6 +29,11 @@
         <item>Jln. Surya Sejahtera 25</item>
         <item>Jln. Surya Sejahtera 26</item>
     </string-array>
+    <string-array name="data_image_pesan">
+        <item>https://i.ibb.co/zJHYGBP/binarlogo.jpg</item>
+        <item>https://i.ibb.co/zJHYGBP/binarlogo.jpg</item>
+        <item>https://i.ibb.co/zJHYGBP/binarlogo.jpg</item>
+    </string-array>
     <string-array name="data_nama">
         <item>Alexander Jannie</item>
         <item>Nairobi Putri Hayza</item>
