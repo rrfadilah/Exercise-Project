@@ -1,3 +1,32 @@
 <resources>
-    <string name="app_name">Exercise Project</string>
+    <string name="app_name">Exercise-Project</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hospital_nearby">${list.size} tersedia</string>
+    <string-array name="data_image">
+        <item>https://asset.kompas.com/crops/mOKFrYHlSTM6SEt4aD9PIXZnJE0=/0x5:593x400/750x500/data/photo/2020/03/16/5e6ee88f78835.jpg</item>
+        <item>https://www.uii.ac.id/wp-content/uploads/2020/03/desain-rumah-sakit-uii.jpg</item>
+        <item>https://dinkes.sumselprov.go.id/wp-content/uploads/2019/08/rs-se-sumsel2019-e1625558584981.jpg</item>
+        <item>https://cdn.popmama.com/content-images/post/20191031/mitrakeluargacom-cover-5e70b99ab35661b503ba797c7aaed2ac_600xauto.jpg</item>
+        <item>https://images.bisnis-cdn.com/posts/2020/08/13/1278787/rs-pelabuhan-jakarta.jpg</item>
+        <item>https://1.bp.blogspot.com/-RXIngnf22nE/Vv9Odlnz8RI/AAAAAAAAAdM/GiUWtXP1JxcnGLECFPxRRjrIUhD0oo34Q/s1600/bangunan%2Bkesehatan.png</item>
+        <item>https://cdn.popmama.com/content-images/post/20191031/garnesiacom-58102bb8300aa914572c846aa65717b4_600xauto.jpg</item>
+    </string-array>
+    <string-array name="data_title">
+        <item>Rumah Sakit Citra Bunga Merdeka</item>
+        <item>Rumah Sakit Anak Happy Family and Kids</item>
+        <item>Rumah Sakit Jiwa Tingkat Paling Atas</item>
+        <item>Rumah Sakit Jiwa Tingkat Paling Bawah</item>
+        <item>Rumah Sakit Jiwa Tingkat Paling Kanan</item>
+        <item>Rumah Sakit Jiwa Tingkat Paling Kiri</item>
+        <item>Rumah Sakit Jiwa Tingkat Paling Tengah</item>
+    </string-array>
+    <string-array name="data_address">
+        <item>Jln. Surya Sejahtera 20</item>
+        <item>Jln. Surya Sejahtera 21</item>
+        <item>Jln. Surya Sejahtera 22</item>
+        <item>Jln. Surya Sejahtera 23</item>
+        <item>Jln. Surya Sejahtera 24</item>
+        <item>Jln. Surya Sejahtera 25</item>
+        <item>Jln. Surya Sejahtera 26</item>
+    </string-array>
 </resources>
