@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.rizky.exercise_project.R
+import com.rizky.exercise_project.adapter.DoctorAdapter
+import com.rizky.exercise_project.data.DummyDoctor
 import com.rizky.exercise_project.databinding.FragmentHomeBinding
 import com.rizky.exercise_project.konsultasi.KonsultasiModel
 
@@ -41,6 +43,9 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        val adapter_doctor = DoctorAdapter(DummyDoctor.Data_Doctor)
+        binding.rvDoctor.adapter = adapter_doctor
 
         return root
     }

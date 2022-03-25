@@ -39,7 +39,7 @@ class MessageAdapter(private val list: List<MessageModel>) : RecyclerView.Adapte
             .circleCrop()
             .into(holder.imageAvatar)
         holder.textName.text = message.name
-        holder.textMessage.text = message.messsage
+        holder.textMessage.text = message.name
 
     }
 
