@@ -29,4 +29,14 @@
         <item>Jln. Surya Sejahtera 25</item>
         <item>Jln. Surya Sejahtera 26</item>
     </string-array>
+    <string-array name="data_nama">
+        <item>Alexander Jannie</item>
+        <item>Nairobi Putri Hayza</item>
+        <item>John McParker Steve</item>
+    </string-array>
+    <string-array name="data_pesan">
+        <item>Baik ibu, terima kasih banyak atas waktu yang diberikan</item>
+        <item>Oh tentu saja tidak karena jeruk itu mengandung vitamin c</item>
+        <item>Oke menurut pak dokter bagaimana caranya untuk menurunkan berat badan</item>
+    </string-array>
 </resources>

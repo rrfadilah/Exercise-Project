@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="data_gambar">
+        <item>@drawable/alexander</item>
+        <item>@drawable/nairobi</item>
+        <item>@drawable/john</item>
+    </integer-array>
+</resources>
