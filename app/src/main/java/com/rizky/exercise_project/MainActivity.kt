@@ -25,8 +25,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setOnClickListener {
             when(it.itemId){
-
+                R.id.navbar_Doctor -> setCurrentFragment(fragmentDoctor)
+                R.id.navbar_Messages -> setCurrentFragment(fragmentMessages)
+                R.id.navbar_Hospital -> setCurrentFragment(fragmentHospitals)
             }
+            true
         }
     }
 

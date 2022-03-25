@@ -16,5 +16,6 @@ class MessageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMessageBinding.inflate(layoutInflater)
+        return binding.root
     }
 }
