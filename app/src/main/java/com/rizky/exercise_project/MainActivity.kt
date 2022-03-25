@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_for_home)
+        setContentView(R.layout.activity_main)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         setCurrentFragment(fragmentDoctor)
 
-        binding.bottomNavigationView.setOnItemSelectedListener {
+        binding.bottomNavigationView.setOnClickListener{
             when(it.itemId){
                 R.id.navbar_Doctor -> setCurrentFragment(fragmentDoctor)
                 R.id.navbar_Messages -> setCurrentFragment(fragmentMessages)
