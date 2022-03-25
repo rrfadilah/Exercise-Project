@@ -1,5 +1,9 @@
 package com.rizky.exercise_project
 
+import com.rizky.exercise_project.Doctor.ModelDoctor
+import com.rizky.exercise_project.Doctor.ModelDoctorSecond
+import com.rizky.exercise_project.Doctor.ModelDoctorThird
+
 object TaskList {
     val listDoctor = listOf<ModelDoctor>(
         ModelDoctor(image1 = R.drawable.icon_dokter_umum, text1 = "dokter umum"),
@@ -21,17 +25,5 @@ object TaskList {
         ModelDoctorThird(image1 = R.drawable.goodnews1, text1 = "Is it safe to stay at home during coronavirus?", text2 = "Today"),
         ModelDoctorThird(image1 = R.drawable.goodnews2, text1 = "Consume yellow citrus helps you healthier", text2 = "Yesterday"),
         ModelDoctorThird(image1 = R.drawable.goodnews3, text1 = "Learn how to make a proper orange juice at home", text2 = "2 days ago"),
-    )
-
-    val listDoctorAnak = listOf<ModelMessages>(
-        ModelMessages(image1 = R.drawable.image_doctor1, text1 = "Alexander Jannie", text2 = "Baik ibu, terima kasih banyak atas wakt..."),
-        ModelMessages(image1 = R.drawable.image_doctor1, text1 = "John McParker Steve", text2 = "Oke menurut pak dokter bagaimana unt..."),
-        ModelMessages(image1 = R.drawable.image_doctor1, text1 = "Nairobi Putri Hayza", text2 = "oh tentu saja tidak karena jeruk it...")
-    )
-
-    val listHospitals = listOf<ModelHospital>(
-        ModelHospital(image1 = R.drawable.goodnews1, text1 = "Is it safe to stay at home during coronavirus?", text2 = "Today"),
-        ModelHospital(image1 = R.drawable.goodnews2, text1 = "Consume yellow citrus helps you healthier", text2 = "Yesterday"),
-        ModelHospital(image1 = R.drawable.goodnews3, text1 = "Learn how to make a proper orange juice at home", text2 = "2 days ago"),
     )
 }

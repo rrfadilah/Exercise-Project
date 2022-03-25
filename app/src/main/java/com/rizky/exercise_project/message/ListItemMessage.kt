@@ -1,4 +1,4 @@
-package com.rizky.exercise_project
+package com.rizky.exercise_project.message
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.rizky.exercise_project.R
 import com.rizky.exercise_project.placeholder.PlaceholderContent
 
 /**
