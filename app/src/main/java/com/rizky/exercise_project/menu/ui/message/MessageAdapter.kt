@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.rizky.exercise_project.R
 
 class MessageAdapter(private val list: List<MessageModel>) : RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
@@ -33,11 +32,7 @@ class MessageAdapter(private val list: List<MessageModel>) : RecyclerView.Adapte
         // Get the data model based on position
         val message: MessageModel = list[position]
         // Set item views based on your views and data model
-        Glide.with(holder.itemView.context)
-            // .load("https://i.ibb.co/zJHYGBP/binarlogo.jpg")
-            .load(message.avatar)
-            .circleCrop()
-            .into(holder.imageAvatar)
+        holder.imageAvatar.setImageResource(message.avatar)
         holder.textName.text = message.name
         holder.textMessage.text = message.name
 

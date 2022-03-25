@@ -9,6 +9,7 @@ import com.rizky.exercise_project.menu.ui.hospital.HospitalAdapter
 import com.rizky.exercise_project.menu.ui.hospital.HospitalModel
 import com.rizky.exercise_project.menu.ui.message.MessageAdapter
 import com.rizky.exercise_project.menu.ui.message.MessageModel
+import com.rizky.exercise_project.menu.ui.message.data.dummy.messages
 
 class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
@@ -42,27 +43,9 @@ class MainActivity : AppCompatActivity() {
         val adapHospital = HospitalAdapter(hospital)
         rvHospital.adapter = adapHospital
 
-
-        val messages: List<MessageModel> = listOf(
-            MessageModel(
-                avatar = "https://i.ibb.co/zJHYGBP/binarlogo.jpg",
-                name = "Rizky Fadilah",
-                desc = "Hallo gais semuanya disini",
-                time = "12.06",
-                badges = "100"
-            ),
-            MessageModel(
-                avatar = "https://www.its.ac.id/wp-content/uploads/2021/10/kampus-merdeka.png",
-                name = "Abdul Hafiz",
-                desc = "Mau isi aapa disini boleh aja ya teman teman semuanya",
-                time = "15.06",
-                badges = "5"
-            ),
-        )
-
         //val recyclerView: RecyclerView = findViewById(R.id.rv_message)
 
-        val adapter = MessageAdapter(messages)
-        //recyclerView.adapter = adapter
+//        val adapter = MessageAdapter(messages)
+//        recyclerView.adapter = adapter
     }
 }

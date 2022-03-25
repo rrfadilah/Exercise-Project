@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.rizky.exercise_project.menu.ui.dashboard.DashboardFragment"
+        android:id="@+id/navigation_message"
+        android:name="com.rizky.exercise_project.menu.ui.message.MessageFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_message" />
 
     <fragment
         android:id="@+id/navigation_notifications"
