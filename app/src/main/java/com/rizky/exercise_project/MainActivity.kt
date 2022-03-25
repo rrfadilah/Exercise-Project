@@ -23,8 +23,10 @@ class MainActivity : AppCompatActivity() {
 
         setCurrentFragment(fragmentDoctor)
 
-        binding.bottomNavigationView.setOnClickListener{
-            when(it.itemId)
+        binding.bottomNavigationView.setOnClickListener {
+            when(it.itemId){
+
+            }
         }
     }
 
