@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rizky.exercise_project.R
 import com.rizky.exercise_project.adapter.DoctorAdapter
 import com.rizky.exercise_project.data.DummyDoctor
+import com.rizky.exercise_project.data.DummyKonsul
 import com.rizky.exercise_project.databinding.FragmentHomeBinding
+import com.rizky.exercise_project.konsultasi.KonsultasiAdapter
 import com.rizky.exercise_project.konsultasi.KonsultasiModel
 
 class HomeFragment : Fragment() {
@@ -30,19 +32,11 @@ class HomeFragment : Fragment() {
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        val konsultasi: List<KonsultasiModel> = listOf(
-            KonsultasiModel(
-                ic_konsultasi = "https://svgshare.com/i/fak.svg",
-                txt_konsultasi = "Halo 1"
-            ),
-            KonsultasiModel(
-                ic_konsultasi = "https://svgshare.com/i/fak.svg",
-                txt_konsultasi = "Halo 2"
-            )
-        )
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        val adapterKonsul = KonsultasiAdapter(DummyKonsul.dataKonsul)
+        binding.rvKonsul.adapter = adapterKonsul
 
         val adapter_doctor = DoctorAdapter(DummyDoctor.Data_Doctor)
         binding.rvDoctor.adapter = adapter_doctor
