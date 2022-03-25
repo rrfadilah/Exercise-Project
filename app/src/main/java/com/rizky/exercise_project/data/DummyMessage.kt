@@ -1,10 +1,9 @@
-package com.rizky.exercise_project.menu.ui.message.data
+package com.rizky.exercise_project.data
 
 import com.rizky.exercise_project.R
 import com.rizky.exercise_project.menu.ui.message.model.MessageModel
 
-object dummy {
-        // untuk keperluan datanya
+object DummyMessage {
         val messages: List<MessageModel> = listOf(
             MessageModel(
                 avatar = R.drawable.img_user_1,

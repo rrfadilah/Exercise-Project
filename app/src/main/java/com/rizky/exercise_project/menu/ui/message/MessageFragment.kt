@@ -5,12 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
-import com.rizky.exercise_project.R
-import com.rizky.exercise_project.databinding.FragmentHomeBinding
+import com.rizky.exercise_project.data.DummyMessage
 import com.rizky.exercise_project.databinding.FragmentMessageBinding
-import com.rizky.exercise_project.menu.ui.home.HomeViewModel
-import com.rizky.exercise_project.menu.ui.message.data.dummy
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,8 +36,8 @@ class MessageFragment : Fragment() {
         _binding = FragmentMessageBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        val adapter_doctor = MessageAdapter(dummy.messages)
-//        binding.rvMessage.adapter = adapter
+//        val adapter_message = MessageAdapter(DummyMessage.messages)
+//        binding.rvMessage.adapter = adapter_message
 
         return root
 

@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.rizky.exercise_project.R
 
 class HospitalAdapter(private val list: List<HospitalModel>) :
@@ -30,11 +29,7 @@ class HospitalAdapter(private val list: List<HospitalModel>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Get the data model based on position
         val hospital: HospitalModel = list[position]
-        Glide.with(holder.itemView.context)
-//            .load("https://i.ibb.co/zJHYGBP/binarlogo.jpg")
-            .load(hospital.avatar)
-            .circleCrop()
-            .into(holder.imageAvatar)
+        holder.imageAvatar.setImageResource(hospital.avatar)
         holder.textName.text = hospital.name
         holder.textDesc.text = hospital.desc
 
