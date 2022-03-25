@@ -18,15 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host_main) as NavHostFragment
-        val appBar = AppBarConfiguration(
-            setOf(
-                R.id.navigation_doctor,
-                R.id.navigation_messages,
-                R.id.navigation_hospital
-            )
-        )
 
-        binding.toolbar.setupWithNavController(navHost.navController, appBar)
         binding.bottomNavigationView.setupWithNavController(navHost.navController)
     }
 }
