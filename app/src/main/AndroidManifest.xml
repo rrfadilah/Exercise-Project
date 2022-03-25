@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExerciseProject.NoActionBar">
         <activity
-            android:name=".ListItem2Activity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
