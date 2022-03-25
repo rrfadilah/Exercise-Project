@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         setCurrentFragment(fragmentDoctor)
 
-        binding.bottomNavigationView.setOnClickListener {
+        binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.navbar_Doctor -> setCurrentFragment(fragmentDoctor)
                 R.id.navbar_Messages -> setCurrentFragment(fragmentMessages)
