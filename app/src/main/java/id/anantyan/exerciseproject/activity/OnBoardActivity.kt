@@ -9,16 +9,16 @@ import com.google.android.material.tabs.TabLayoutMediator
 import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.adapter.OnBoardAdapter
 import id.anantyan.exerciseproject.databinding.ActivityOnBoardBinding
-import id.anantyan.utils.viewbinding.viewBinding
 
 class OnBoardActivity : AppCompatActivity() {
 
     private lateinit var adapter: OnBoardAdapter
-    private val binding: ActivityOnBoardBinding by viewBinding()
+    private lateinit var binding: ActivityOnBoardBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_on_board)
+        binding = ActivityOnBoardBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         onBinding()
     }
 

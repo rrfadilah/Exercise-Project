@@ -7,15 +7,15 @@ import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.databinding.ActivityMessagesDetailBinding
 import id.anantyan.exerciseproject.model.Messages
 import id.anantyan.utils.Constant.PASSING_TO_MESSAGES_ACTIVITY
-import id.anantyan.utils.viewbinding.viewBinding
 
 class MessagesDetailActivity : AppCompatActivity() {
 
-    private val binding: ActivityMessagesDetailBinding by viewBinding()
+    private lateinit var binding: ActivityMessagesDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_messages_detail)
+        binding = ActivityMessagesDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setSupportActionBar(binding.include.toolbar)
         supportActionBar?.title = "Set Data"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

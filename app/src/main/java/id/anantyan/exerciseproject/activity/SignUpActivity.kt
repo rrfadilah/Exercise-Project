@@ -14,16 +14,16 @@ import id.anantyan.utils.Validation.passwordValid
 import id.anantyan.utils.validator.Validator
 import id.anantyan.utils.validator.constant.Mode
 import id.anantyan.utils.validator.validator
-import id.anantyan.utils.viewbinding.viewBinding
 
 class SignUpActivity : AppCompatActivity() {
 
-    private val binding: ActivitySignUpBinding by viewBinding()
+    private lateinit var binding: ActivitySignUpBinding
     private var item: Users? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setSupportActionBar(binding.include.toolbar)
         supportActionBar?.setTitle(R.string.page_sign_up)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

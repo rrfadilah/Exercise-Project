@@ -2,7 +2,6 @@ package id.anantyan.exerciseproject.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -17,20 +16,19 @@ import id.anantyan.exerciseproject.databinding.FragmentMessagesBinding
 import id.anantyan.exerciseproject.model.Messages
 import id.anantyan.utils.Constant.PASSING_TO_MESSAGES_ACTIVITY
 import id.anantyan.utils.dividerVertical
-import id.anantyan.utils.viewbinding.viewBinding
 
 class MessagesFragment : Fragment() {
 
     private var list: MutableList<Messages> = mutableListOf()
     private var position: Int? = null
+    private var _binding: FragmentMessagesBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: SharedViewModel by activityViewModels()
-    private val binding: FragmentMessagesBinding by viewBinding()
     private val adapter: MessagesAdapter by lazy { MessagesAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        Log.d("MESSAGES", "onCreate")
     }
 
     override fun onCreateView(
@@ -38,9 +36,8 @@ class MessagesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.d("MESSAGES", "onCreateView")
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_messages, container, false)
+        _binding = FragmentMessagesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,7 +46,6 @@ class MessagesFragment : Fragment() {
         onAdapter()
         onGetData()
         onViewModel()
-        Log.d("MESSAGES", "onViewCreated")
     }
 
     private fun onViewModel() {
@@ -74,7 +70,6 @@ class MessagesFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         (activity as BaseFragmentActivity).supportActionBar?.title = "Messages"
-        Log.d("MESSAGES", "onResume")
     }
 
     private fun onAdapter() {
@@ -151,40 +146,10 @@ class MessagesFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        Log.d("MESSAGES", "onViewStateRestore")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("MESSAGES", "onStart")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("MESSAGES", "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("MESSAGES", "onStop")
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.d("MESSAGES", "onSaveInstanceState")
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         viewModel.setMessages(null)
         viewModel.setListMessages(list)
-        Log.d("MESSAGES", "onDestroyView")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("MESSAGES", "onCreated")
+        _binding = null
     }
 }

@@ -14,17 +14,17 @@ import id.anantyan.exerciseproject.fragment.MessagesFragment
 import id.anantyan.exerciseproject.fragment.SharedViewModel
 import id.anantyan.exerciseproject.model.Messages
 import id.anantyan.utils.Constant.PASSING_TO_MESSAGES_ACTIVITY
-import id.anantyan.utils.viewbinding.viewBinding
 
 class BaseFragmentActivity : AppCompatActivity() {
 
     private lateinit var sectionViewPager: MainViewPagerAdapter
+    private lateinit var binding: ActivityBaseFragmentBinding
     private val viewModel: SharedViewModel by viewModels()
-    private val binding: ActivityBaseFragmentBinding by viewBinding()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_base_fragment)
+        binding = ActivityBaseFragmentBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setSupportActionBar(binding.include.toolbar)
         supportActionBar?.setTitle(R.string.txt_title)
         onBinding()

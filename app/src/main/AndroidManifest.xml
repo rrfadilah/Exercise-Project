@@ -11,7 +11,7 @@
         android:theme="@style/Theme.ExerciseProject.NoActionBar">
         <activity
             android:name=".activity.MessagesDetailActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".activity.BaseFragmentActivity"
             android:exported="false" />

@@ -14,19 +14,15 @@ import id.anantyan.utils.Validation.passwordValid
 import id.anantyan.utils.validator.Validator
 import id.anantyan.utils.validator.constant.Mode
 import id.anantyan.utils.validator.validator
-import id.anantyan.utils.viewbinding.viewBinding
 
 class SignInActivity : AppCompatActivity() {
 
-    private val binding: ActivitySignInBinding by viewBinding()
+    private lateinit var binding: ActivitySignInBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_in)
-    }
-
-    override fun onStart() {
-        super.onStart()
+        binding = ActivitySignInBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         onBinding()
     }
 
