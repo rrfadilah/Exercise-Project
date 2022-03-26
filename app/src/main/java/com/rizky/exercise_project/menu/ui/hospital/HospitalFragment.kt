@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.rizky.exercise_project.databinding.FragmentHomeBinding
+import androidx.lifecycle.ViewModelProvider
+import com.rizky.exercise_project.data.DummyHospital
+import com.rizky.exercise_project.databinding.FragmentHospitalBinding
 
 class HospitalFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentHospitalBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -20,9 +22,14 @@ class HospitalFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val hospitalViewModel =
+            ViewModelProvider(this).get(HospitalViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentHospitalBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        val adapterHospital = HospitalAdapter(DummyHospital.dataHospital)
+        binding.rvHospital.adapter = adapterHospital
 
         return root
     }

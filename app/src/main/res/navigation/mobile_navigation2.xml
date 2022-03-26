@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_message" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.rizky.exercise_project.menu.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:id="@+id/navigation_hospital"
+        android:name="com.rizky.exercise_project.menu.ui.hospital.HospitalFragment"
+        android:label="@string/title_hospital"
         tools:layout="@layout/fragment_hospital" />
 </navigation>
