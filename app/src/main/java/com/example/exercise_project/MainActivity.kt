@@ -1,14 +1,23 @@
 package com.example.exercise_project
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_in)
+        setContentView(R.layout.activity_main)
+
+        Handler().postDelayed(Runnable {
+            val intent = Intent(this, OnBoardingActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, 5000)
 
         Log.d("Lifecycle", "Lifecycle OnCreate")
     }
