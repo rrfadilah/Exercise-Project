@@ -3,8 +3,11 @@ package id.anantyan.exerciseproject.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.databinding.ActivitySignInBinding
 import id.anantyan.exerciseproject.model.Users
@@ -35,6 +38,9 @@ class SignInActivity : AppCompatActivity() {
         binding.btnSignIn.setOnClickListener {
             onValidation(this, onSignIn)
         }
+        binding.textView5.setOnClickListener {
+            onToast(this, "Forgot password!")
+        }
     }
 
     private fun onValidation(context: Context, obj: Validator.OnValidateListener) {
@@ -60,7 +66,19 @@ class SignInActivity : AppCompatActivity() {
             Toast.makeText(this@SignInActivity, item.toString(), Toast.LENGTH_SHORT).show()
         }
 
-        override fun onValidateFailed(errors: List<String>) {}
+        override fun onValidateFailed(errors: List<String>) {
+            onSnackbar(binding.root, errors[0])
+        }
+    }
+
+    private fun onToast(context: Context, message: String) {
+        val toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
+        toast.setGravity(Gravity.CENTER, 0, 0)
+        toast.show()
+    }
+
+    private fun onSnackbar(viewContext: View, message: String) {
+        Snackbar.make(viewContext, message, Snackbar.LENGTH_LONG).show()
     }
 }
 

@@ -28,6 +28,7 @@ object Validation {
                 +notNull(R.string.txt_not_null)
                 +notEmpty(R.string.txt_not_empty)
                 +minimumLength(8, R.string.txt_not_min_length)
+                +withPassword(PasswordRule.PasswordRegex.ALPHA_MIXED_CASE, R.string.txt_not_lowercase_and_uppercase)
             }
         }
     }
