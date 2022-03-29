@@ -40,8 +40,8 @@ class SignActivity : AppCompatActivity() {
                 openPage()
             }
         }
-        val btncreatenewaccount = findViewById<TextView>(R.id.tv_create_new_account)
-        btncreatenewaccount.setOnClickListener {
+        val btnCreateNewAccount = findViewById<TextView>(R.id.tv_create_new_account)
+        btnCreateNewAccount.setOnClickListener {
             Toast.makeText(this, "Tombol create new account di pencet", Toast.LENGTH_SHORT).show()
         }
         val btnForgotPassword = findViewById<TextView>(R.id.tv_forgot_password)
@@ -50,7 +50,7 @@ class SignActivity : AppCompatActivity() {
         }
     }
 
-    fun openPage() {
+    private fun openPage() {
 
         Toast.makeText(this, "Membuka halaman Sign In", Toast.LENGTH_LONG).show()
         val snackbar = Snackbar.make(
@@ -60,5 +60,10 @@ class SignActivity : AppCompatActivity() {
         )
         snackbar.show()
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Toast.makeText(this, "Tombol back di pencet", Toast.LENGTH_SHORT).show()
     }
 }
