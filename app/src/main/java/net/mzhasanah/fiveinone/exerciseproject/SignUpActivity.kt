@@ -1,13 +1,11 @@
-package net.mzhasanah.fiveinone.exercise_project
+package net.mzhasanah.fiveinone.exerciseproject
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import net.mzhasanah.fiveinone.exercise_project.galleryfragment.AdapterGallery
-import net.mzhasanah.fiveinone.exercise_project.galleryfragment.GalleryActivity
-import net.mzhasanah.fiveinone.exercise_project.galleryfragment.GalleryFragment
+import net.mzhasanah.fiveinone.exerciseproject.galleryfragment.GalleryActivity
 
 class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

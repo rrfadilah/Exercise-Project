@@ -1,4 +1,4 @@
-package net.mzhasanah.fiveinone.exercise_project
+package net.mzhasanah.fiveinone.exerciseproject
 
 import android.content.Intent
 import android.os.Bundle

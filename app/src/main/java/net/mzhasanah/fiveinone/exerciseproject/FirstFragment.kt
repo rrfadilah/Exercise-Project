@@ -1,4 +1,4 @@
-package net.mzhasanah.fiveinone.exercise_project
+package net.mzhasanah.fiveinone.exerciseproject
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

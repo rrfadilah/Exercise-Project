@@ -1,8 +1,8 @@
-package net.mzhasanah.fiveinone.exercise_project.samplefragment
+package net.mzhasanah.fiveinone.exerciseproject.samplefragment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import net.mzhasanah.fiveinone.exercise_project.R
+import net.mzhasanah.fiveinone.exerciseproject.R
 
 class PicturesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

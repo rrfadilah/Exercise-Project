@@ -1,10 +1,10 @@
-package net.mzhasanah.fiveinone.exercise_project
+package net.mzhasanah.fiveinone.exerciseproject.galleryfragment
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 
-class AdapterOnBoarding(
+class AdapterGallery(
     fragmentManager: FragmentManager,
     val listfragment: List<Fragment>
     ) :

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.mzhasanah.fiveinone.exercise_project">
+    package="net.mzhasanah.fiveinone.exerciseproject">
 
     <application
         android:allowBackup="true"
@@ -10,25 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExerciseProject.NoActionBar">
         <activity
-            android:name=".SignUpActivity"
+            android:name="net.mzhasanah.fiveinone.exerciseproject.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".galleryfragment.GalleryActivity"
+            android:name="net.mzhasanah.fiveinone.exerciseproject.galleryfragment.GalleryActivity"
             android:exported="false" />
         <activity
-            android:name=".samplefragment.PicturesActivity"
+            android:name="net.mzhasanah.fiveinone.exerciseproject.samplefragment.PicturesActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name="net.mzhasanah.fiveinone.exerciseproject.SplashActivity"
             android:exported="false" />
         <activity
-            android:name=".OnBoardingActivity"
+            android:name="net.mzhasanah.fiveinone.exerciseproject.OnBoardingActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInActivity"
+            android:name="net.mzhasanah.fiveinone.exerciseproject.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="net.mzhasanah.fiveinone.exerciseproject.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package net.mzhasanah.fiveinone.exercise_project
+package net.mzhasanah.fiveinone.exerciseproject
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,10 +6,8 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import net.mzhasanah.fiveinone.exercise_project.databinding.ActivityGalleryBinding
-import net.mzhasanah.fiveinone.exercise_project.databinding.ActivityOnBoardingBinding
-import net.mzhasanah.fiveinone.exercise_project.galleryfragment.AdapterGallery
-import net.mzhasanah.fiveinone.exercise_project.galleryfragment.GalleryFragment
+import net.mzhasanah.fiveinone.exerciseproject.databinding.ActivityOnBoardingBinding
+import net.mzhasanah.fiveinone.exerciseproject.galleryfragment.AdapterGallery
 
 class OnBoardingActivity : AppCompatActivity() {
     lateinit var binding: ActivityOnBoardingBinding

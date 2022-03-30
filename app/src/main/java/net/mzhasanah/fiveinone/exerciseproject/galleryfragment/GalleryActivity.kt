@@ -1,10 +1,9 @@
-package net.mzhasanah.fiveinone.exercise_project.galleryfragment
+package net.mzhasanah.fiveinone.exerciseproject.galleryfragment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import net.mzhasanah.fiveinone.exercise_project.R
-import net.mzhasanah.fiveinone.exercise_project.databinding.ActivityGalleryBinding
+import net.mzhasanah.fiveinone.exerciseproject.databinding.ActivityGalleryBinding
 
 class GalleryActivity : AppCompatActivity() {
     lateinit var binding: ActivityGalleryBinding
