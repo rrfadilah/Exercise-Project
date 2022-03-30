@@ -1,9 +1,11 @@
 package com.example.exercise_project
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 
@@ -48,6 +50,45 @@ class SignActivity : AppCompatActivity() {
         btnForgotPassword.setOnClickListener {
             Toast.makeText(this, "Tombol forgot password di pencet", Toast.LENGTH_SHORT).show()
         }
+
+        val dialog1 = AlertDialog.Builder(this)
+        dialog1.setTitle("judul dialog")
+        dialog1.setMessage("isi pesan dialog")
+        dialog1.setCancelable(true)
+        dialog1.show()
+
+        val dialogAction = AlertDialog.Builder(this)
+        dialogAction.setTitle("judul dialog")
+        dialogAction.setMessage("konfirmasi keluar?")
+        //menggunakan object DialogInterface.OnClickListener
+        dialogAction.setPositiveButton("ya", object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                dialog?.dismiss()
+            }
+        })
+        //menggunakan lambda
+        dialogAction.setNegativeButton("tidak") { dialog, which ->
+            dialog?.dismiss()
+        }
+        dialogAction.setNeutralButton("netral") { dialog, which ->
+            dialog?.dismiss()
+        }
+        dialogAction.show()
+        dialogCustomLayout()
+        dialogWithFragment()
+    }
+
+    fun dialogCustomLayout() {
+        val view = layoutInflater.inflate(R.layout.dialog_custom, null, false)
+        val dialog = AlertDialog.Builder(this)
+        dialog.setView(view)
+        dialog.setCancelable(true)
+        dialog.show()
+    }
+
+    fun dialogWithFragment() {
+        val dialog = CustomDialogFragment()
+        dialog.show(supportFragmentManager, null)
     }
 
     private fun openPage() {
@@ -59,11 +100,24 @@ class SignActivity : AppCompatActivity() {
             Snackbar.LENGTH_LONG
         )
         snackbar.show()
-
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
         Toast.makeText(this, "Tombol back di pencet", Toast.LENGTH_SHORT).show()
+    }
+
+    fun dialogEmailPassword() {
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle("judul dialog")
+        dialog.setMessage("isi pesan dialog")
+        dialog.setCancelable(true)
+        dialog.setPositiveButton("ya") { dialog, which ->
+            dialog?.dismiss()
+        }
+        dialog.setNegativeButton("tidak") { dialog, which ->
+            dialog?.dismiss()
+        }
+        dialog.show()
     }
 }
