@@ -15,8 +15,8 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val email = intent.extras?.getString(SignInActivity.EMAIL)
-        val pass = intent.extras?.getString(SignInActivity.PASS)
+        val email = intent.extras?.getString(Data.EMAIL)
+        val pass = intent.extras?.getString(Data.PASS)
 
         binding.etEmailSignUp.setText(email)
         binding.etPassSignUp.setText(pass)
