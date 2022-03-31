@@ -31,11 +31,8 @@ class KonsultasiAdapter(private val list: List<KonsultasiModel>) : RecyclerView.
     override fun onBindViewHolder(holder: KonsultasiAdapter.ViewHolder, position: Int) {
         val konsul: KonsultasiModel = list[position]
 
-        Glide.with(holder.itemView.context)
-            .load(konsul.ic_konsultasi)
-            .circleCrop()
-            .into(holder.ic_konsul)
 
+        holder.ic_konsul.setImageResource(konsul.ic_konsultasi)
         holder.txt_konsul.text = konsul.txt_konsultasi
     }
 

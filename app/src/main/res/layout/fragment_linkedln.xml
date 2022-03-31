@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".menu.ui.lingkedln.LinkedlnFragment">
+    tools:context=".menu.ui.linkedln.LinkedlnFragment">
 
     <TextView
         android:id="@+id/text_linkedln"

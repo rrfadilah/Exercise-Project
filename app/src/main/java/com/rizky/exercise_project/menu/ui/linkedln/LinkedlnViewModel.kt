@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.menu.ui.lingkedln
+package com.rizky.exercise_project.menu.ui.linkedln
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

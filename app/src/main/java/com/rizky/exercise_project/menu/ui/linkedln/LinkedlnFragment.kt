@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.menu.ui.lingkedln
+package com.rizky.exercise_project.menu.ui.linkedln
 
 import android.os.Bundle
 import android.view.LayoutInflater
