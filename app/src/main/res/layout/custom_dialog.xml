@@ -21,7 +21,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
-        android:text="Ini button ok"/>
+        android:text="OK"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

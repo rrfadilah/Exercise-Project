@@ -8,6 +8,7 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.rizkirafiif.exercise_project.model.Biodata
@@ -33,7 +34,7 @@ class SignIn : AppCompatActivity() {
         //intent.extras?.getParcelable<UserInfo>(Constant.Parcelize.KEY)
 
         openPage()
-        authToast()
+        //authToast()
 
         // dialog standar
         val dialog = AlertDialog.Builder(this)
@@ -50,7 +51,9 @@ class SignIn : AppCompatActivity() {
 
         //dialogCustom()
 
-        dialogFragment()
+        //dialogFragment()
+
+        authDialog()
 
     }
 
@@ -113,5 +116,56 @@ class SignIn : AppCompatActivity() {
     fun dialogFragment(){
         val dialog = CustomDialogFragment()
         dialog.show(supportFragmentManager, null)
+    }
+
+    // ---------------------------- // -------------------------------
+    // Mini challenge alert dialog
+    fun authDialog(){
+        val btnSignIn : Button = findViewById(R.id.btnSignIn)
+        val etEmail : EditText = findViewById(R.id.etEmail)
+        val etPassword : EditText = findViewById(R.id.etPassword)
+        btnSignIn.setOnClickListener() {
+            if (etEmail.text.toString().isEmpty() and etPassword.text.toString().isEmpty()){
+                val dialog = AlertDialog.Builder(this)
+                dialog.setTitle("Email")
+                dialog.setMessage("Tidak boleh kosong")
+                dialog.setCancelable(true)
+                dialog.show()
+                val dialog2 = AlertDialog.Builder(this)
+                dialog2.setTitle("Password")
+                dialog2.setMessage("Tidak boleh kosong")
+                dialog2.setCancelable(true)
+                dialog2.show()
+            }else if (etEmail.text.toString().isEmpty()){
+                val dialog = AlertDialog.Builder(this)
+                dialog.setTitle("Email")
+                dialog.setMessage("Tidak boleh kosong")
+                dialog.setCancelable(true)
+                dialog.show()
+            } else if (!etEmail.text.toString().contains("@")
+                and !etEmail.text.toString().contains(".")){
+                val view = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null, false)
+                val tvJudul : TextView = findViewById(R.id.tv_title)
+                tvJudul.text = "Email invalid"
+                val dialog = AlertDialog.Builder(this)
+                dialog.setView(view)
+                dialog.create().show()
+            } else if (etPassword.text.toString().isEmpty()){
+                val dialog = AlertDialog.Builder(this)
+                dialog.setTitle("Password")
+                dialog.setMessage("Tidak boleh kosong")
+                dialog.setCancelable(true)
+                dialog.show()
+            } else if(etPassword.text.toString().length < 9){
+                val view = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null, false)
+                val tvJudul : TextView = findViewById(R.id.tv_title)
+                tvJudul.text = "Password kurang dari 8 karakter"
+                val dialog = AlertDialog.Builder(this)
+                dialog.setView(view)
+                dialog.create().show()
+            } else {
+                Toast.makeText(this, getString(R.string.sukses_sign_in), Toast.LENGTH_LONG).show()
+            }
+        }
     }
 }
