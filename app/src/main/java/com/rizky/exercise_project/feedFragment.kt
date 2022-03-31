@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.exercise_project.R
 import com.rizky.exercise_project.placeholder.PlaceholderContent
 
 /**
