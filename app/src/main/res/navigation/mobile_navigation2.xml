@@ -22,4 +22,9 @@
         android:name="com.rizky.exercise_project.menu.ui.hospital.HospitalFragment"
         android:label="@string/title_hospital"
         tools:layout="@layout/fragment_hospital" />
+    <fragment
+        android:id="@+id/navigation_linkedln"
+        android:name="com.rizky.exercise_project.menu.ui.lingkedln.LinkedlnFragment"
+        android:label="fragment_linkedln"
+        tools:layout="@layout/fragment_linkedln" />
 </navigation>
