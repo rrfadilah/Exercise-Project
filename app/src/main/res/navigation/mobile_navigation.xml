@@ -27,4 +27,10 @@
         android:label="Notification"
         tools:layout="@layout/fragment_notifications" />
 
+    <fragment
+        android:id="@+id/navigation_message"
+        android:name="com.rizkirafiif.exercise_project.home.ui.messages.MessageFragment"
+        android:label="Messages"
+        tools:layout="@layout/fragment_message" />
+
 </navigation>

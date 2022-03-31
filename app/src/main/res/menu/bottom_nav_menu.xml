@@ -14,4 +14,9 @@
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/ic_menu_hospital"
         android:title="Hospital" />
+
+    <item
+        android:id="@+id/navigation_message"
+        android:icon="@drawable/ic_baseline_message_24"
+        android:title="Messages" />
 </menu>
