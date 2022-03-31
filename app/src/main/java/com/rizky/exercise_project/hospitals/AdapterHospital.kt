@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.rizky.exercise_project.R
+import com.example.exercise_project.R
 
 class AdapterHospital(private val listhospital: ArrayList<ModelHospital>) : RecyclerView.Adapter<AdapterHospital.ListViewHolder>() {
 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home_facebook">
+
+    <fragment
+        android:id="@+id/navigation_home_facebook"
+        android:name="com.rizky.exercise_project.Facebook.ui.home_facebook.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home_facebook" />
+
+    <fragment
+        android:id="@+id/navigation_group_facebook"
+        android:name="com.rizky.exercise_project.Facebook.ui.group_facebook.GroupFacebookFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_group_facebook" />
+
+    <fragment
+        android:id="@+id/navigation_notification_facebook"
+        android:name="com.rizky.exercise_project.Facebook.ui.notifications_facebook.NotificationsFacebookFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications_facebook" />
+    <fragment
+        android:id="@+id/liveFacebookFragment"
+        android:name="com.rizky.exercise_project.Facebook.ui.group_facebook.LiveFacebookFragment"
+        android:label="LiveFacebookFragment" />
+    <fragment
+        android:id="@+id/menuFacebookFragment"
+        android:name="com.rizky.exercise_project.Facebook.ui.group_facebook.MenuFacebookFragment"
+        android:label="MenuFacebookFragment" />
+    <fragment
+        android:id="@+id/personFacebookFragment2"
+        android:name="com.rizky.exercise_project.Facebook.ui.group_facebook.PersonFacebookFragment"
+        android:label="PersonFacebookFragment" />
+</navigation>
