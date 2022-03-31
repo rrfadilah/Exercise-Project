@@ -15,4 +15,14 @@
         android:id="@+id/navigation_hospital"
         android:icon="@drawable/ic_map_24px"
         android:title="Hospital" />
+
+    <item
+        android:id="@+id/navigation_twitter"
+        android:icon="@drawable/ic_map_24px"
+        android:title="Twitter" />
+
+    <item
+        android:id="@+id/navigation_linkedin"
+        android:icon="@drawable/ic_map_24px"
+        android:title="Linkedin" />
 </menu>
