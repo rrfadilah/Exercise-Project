@@ -6,7 +6,18 @@
         <entry key="..\:/SIB Binar/ExerciseProject/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/SIB Binar/Exercise_Project/app/src/main/res/layout/activity_sign_in.xml" value="0.1" />
         <entry key="..\:/SIB Binar/Exercise_Project/app/src/main/res/layout/dialog_custom.xml" value="0.16666666666666666" />
+        <entry key="..\:/SIB Binar/Exercise_Project/app/src/main/res/layout/dialog_custom_email_invalid.xml" value="0.1296875" />
         <entry key="..\:/SIB Binar/Exercise_Project/app/src/main/res/layout/dialog_custom_email_kosong.xml" value="0.1296875" />
+        <entry key="..\:/SIB Binar/Exercise_Project/app/src/main/res/layout/dialog_custom_emailpassword_kosong.xml" value="0.1" />
+        <entry key="..\:/SIB Binar/Exercise_Project/app/src/main/res/layout/dialog_custom_password_kosong.xml" value="0.1" />
+        <entry key="..\:/SIB Binar/Exercise_Project/app/src/main/res/layout/dialog_custom_password_kurang.xml" value="0.1" />
+        <entry key="..\:/SIB Binar/Exercise_Project/app/src/main/res/layout/dialog_custom_password_uplow.xml" value="0.1" />
+        <entry key="..\:/SIB Binar/Exercise_Project/app/src/main/res/layout/fragment_costum_dialog_email_invalid.xml" value="0.1" />
+        <entry key="..\:/SIB Binar/Exercise_Project/app/src/main/res/layout/fragment_costum_dialog_email_kosong.xml" value="0.1" />
+        <entry key="..\:/SIB Binar/Exercise_Project/app/src/main/res/layout/fragment_costum_dialog_email_password_kosong.xml" value="0.1" />
+        <entry key="..\:/SIB Binar/Exercise_Project/app/src/main/res/layout/fragment_costum_dialog_password_kosong.xml" value="0.1" />
+        <entry key="..\:/SIB Binar/Exercise_Project/app/src/main/res/layout/fragment_costum_dialog_password_kurang.xml" value="0.1" />
+        <entry key="..\:/SIB Binar/Exercise_Project/app/src/main/res/layout/fragment_costum_dialog_password_up_low.xml" value="0.1" />
         <entry key="..\:/SIB Binar/Exercise_Project/app/src/main/res/layout/fragment_custom_dialog.xml" value="0.16666666666666666" />
       </map>
     </option>

@@ -22,9 +22,10 @@ class SignInActivity : AppCompatActivity() {
             Toast.makeText(this, R.string.ForgotPassword, Toast.LENGTH_SHORT).show()
         }
 
-        dialogAction()
+//        dialogStandard()
+//        dialogAction()
 //        dialogCustomLayout()
-//        dialogWithFragment()
+        dialogWithFragment()
     }
 
     fun ClickCreateNewAccount(V: View?) {
@@ -41,49 +42,54 @@ class SignInActivity : AppCompatActivity() {
         Toast.makeText(this, "Membuka halaman Sign In", Toast.LENGTH_LONG).show()
     }
 
-//    fun dialogStandard(){
-//        val e_mail = intent.getStringExtra("email")
-//        val password = intent.getStringExtra("password")
-//        val isiEmail = findViewById<EditText>(R.id.etEmail)
-//        val isiPassword = findViewById<EditText>(R.id.etPassword)
-//
-//        isiEmail.setText(e_mail)
-//        isiPassword.setText(password)
-//
-//        val btnlogin = findViewById<TextView>(R.id.btnSignIn)
-//        btnlogin.setOnClickListener {
-//            val dialog = AlertDialog.Builder(this)
-//            if (!isiEmail.text.toString()
-//                    .matches(Regex("^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")) && !isiEmail.text.toString()
-//                    .isEmpty()
-//            ) {
-////           Toast.makeText(this, R.string.EmailInvalid, Toast.LENGTH_SHORT).show()
-//                dialog.setTitle("Email tidak valid")
-//                dialog.setMessage("Silakan isi email anda dengan benar")
-//                dialog.show()
-//            } else if (isiEmail.text.toString().isEmpty()) {
+    fun dialogStandard(){
+        val e_mail = intent.getStringExtra("email")
+        val password = intent.getStringExtra("password")
+        val isiEmail = findViewById<EditText>(R.id.etEmail)
+        val isiPassword = findViewById<EditText>(R.id.etPassword)
+
+        isiEmail.setText(e_mail)
+        isiPassword.setText(password)
+
+        val btnlogin = findViewById<TextView>(R.id.btnSignIn)
+        btnlogin.setOnClickListener {
+            val dialog = AlertDialog.Builder(this)
+            if(isiEmail.text.toString().isEmpty() && isiPassword.text.toString().isEmpty()){
+                dialog.setTitle("Email dan password kosong")
+                dialog.setMessage("Silakan isi email dan password anda")
+                dialog.show()
+            }
+            else if (!isiEmail.text.toString()
+                    .matches(Regex("^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")) && !isiEmail.text.toString()
+                    .isEmpty()
+            ) {
+//           Toast.makeText(this, R.string.EmailInvalid, Toast.LENGTH_SHORT).show()
+                dialog.setTitle("Email tidak valid")
+                dialog.setMessage("Silakan isi email anda dengan benar")
+                dialog.show()
+            } else if (isiEmail.text.toString().isEmpty()) {
 //                Toast.makeText(this, R.string.EmailKosong, Toast.LENGTH_SHORT).show()
-//                dialog.setTitle("Email tidak boleh kosong")
-//                dialog.setMessage("Silakan isi email anda")
-//                dialog.show()
-//            } else if (isiPassword.text.toString().isEmpty()) {
+                dialog.setTitle("Email tidak boleh kosong")
+                dialog.setMessage("Silakan isi email anda")
+                dialog.show()
+            } else if (isiPassword.text.toString().isEmpty()) {
 //                Toast.makeText(this, R.string.PasswordKosong, Toast.LENGTH_SHORT).show()
-//                dialog.setTitle("Password tidak boleh kosong")
-//                dialog.setMessage("Silakan isi password anda")
-//                dialog.show()
-//            } else if (isiPassword.text.toString().length < 8) {
+                dialog.setTitle("Password tidak boleh kosong")
+                dialog.setMessage("Silakan isi password anda")
+                dialog.show()
+            } else if (isiPassword.text.toString().length < 8) {
 //                Toast.makeText(this, R.string.PasswordKurang, Toast.LENGTH_SHORT).show()
-//                dialog.setTitle("Password lemah")
-//                dialog.setMessage("Silakan isi password anda minimal 8 karakter")
-//                dialog.show()
-//            } else if (!isiPassword.text.toString().matches(Regex("(?=.*[a-z])(?=.*[A-Z]).+"))) {
+                dialog.setTitle("Password lemah")
+                dialog.setMessage("Silakan isi password anda minimal 8 karakter")
+                dialog.show()
+            } else if (!isiPassword.text.toString().matches(Regex("(?=.*[a-z])(?=.*[A-Z]).+"))) {
 //                Toast.makeText(this, R.string.PasswordUpLow, Toast.LENGTH_SHORT).show()
-//                dialog.setTitle("Password lemah")
-//                dialog.setMessage("Silakan isi password anda dengan\nmengandung uppercase dan lowercase")
-//                dialog.show()
-//            }
-//        }
-//    }
+                dialog.setTitle("Password lemah")
+                dialog.setMessage("Silakan isi password anda dengan\nmengandung uppercase dan lowercase")
+                dialog.show()
+            }
+        }
+    }
 
     fun dialogAction(){
         val e_mail = intent.getStringExtra("email")
@@ -195,14 +201,87 @@ class SignInActivity : AppCompatActivity() {
     }
 
     fun dialogCustomLayout(){
-        val view = LayoutInflater.from(this).inflate(R.layout.dialog_custom, null, false)
-        val dialog = AlertDialog.Builder(this)
-        dialog.setView(view)
-        dialog.create().show()
+        val e_mail = intent.getStringExtra("email")
+        val password = intent.getStringExtra("password")
+        val isiEmail = findViewById<EditText>(R.id.etEmail)
+        val isiPassword = findViewById<EditText>(R.id.etPassword)
+
+        isiEmail.setText(e_mail)
+        isiPassword.setText(password)
+
+        val btnlogin = findViewById<TextView>(R.id.btnSignIn)
+        btnlogin.setOnClickListener {
+            if (isiEmail.text.toString().isEmpty() && isiPassword.text.toString().isEmpty()) {
+                val view = LayoutInflater.from(this).inflate(R.layout.dialog_custom_emailpassword_kosong, null, false)
+                val dialog = AlertDialog.Builder(this)
+                dialog.setView(view)
+                dialog.create().show()
+            } else if (!isiEmail.text.toString()
+                    .matches(Regex("^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")) && !isiEmail.text.toString()
+                    .isEmpty()
+            ) {
+                val view = LayoutInflater.from(this).inflate(R.layout.dialog_custom_email_invalid, null, false)
+                val dialog = AlertDialog.Builder(this)
+                dialog.setView(view)
+                dialog.create().show()
+            } else if (isiEmail.text.toString().isEmpty()) {
+                val view = LayoutInflater.from(this).inflate(R.layout.dialog_custom_email_kosong, null, false)
+                val dialog = AlertDialog.Builder(this)
+                dialog.setView(view)
+                dialog.create().show()
+            } else if (isiPassword.text.toString().isEmpty()) {
+                val view = LayoutInflater.from(this).inflate(R.layout.dialog_custom_password_kosong, null, false)
+                val dialog = AlertDialog.Builder(this)
+                dialog.setView(view)
+                dialog.create().show()
+            } else if (isiPassword.text.toString().length < 8) {
+                val view = LayoutInflater.from(this).inflate(R.layout.dialog_custom_password_kurang, null, false)
+                val dialog = AlertDialog.Builder(this)
+                dialog.setView(view)
+                dialog.create().show()
+            } else if (!isiPassword.text.toString().matches(Regex("(?=.*[a-z])(?=.*[A-Z]).+"))) {
+                val view = LayoutInflater.from(this).inflate(R.layout.dialog_custom_password_uplow, null, false)
+                val dialog = AlertDialog.Builder(this)
+                dialog.setView(view)
+                dialog.create().show()
+            }
+        }
     }
 
     fun dialogWithFragment(){
-        val dialog = CustomDialogFragment()
-        dialog.show(supportFragmentManager, null)
+        val e_mail = intent.getStringExtra("email")
+        val password = intent.getStringExtra("password")
+        val isiEmail = findViewById<EditText>(R.id.etEmail)
+        val isiPassword = findViewById<EditText>(R.id.etPassword)
+
+        isiEmail.setText(e_mail)
+        isiPassword.setText(password)
+
+        val btnlogin = findViewById<TextView>(R.id.btnSignIn)
+        btnlogin.setOnClickListener {
+            if(isiEmail.text.toString().isEmpty() && isiPassword.text.toString().isEmpty()){
+                val dialog = CostumDialogEmailPasswordKosongFragment()
+                dialog.show(supportFragmentManager, null)
+            }
+            else if (!isiEmail.text.toString()
+                    .matches(Regex("^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")) && !isiEmail.text.toString()
+                    .isEmpty()
+            ) {
+                val dialog = CostumDialogEmailInvalidFragment()
+                dialog.show(supportFragmentManager, null)
+            } else if (isiEmail.text.toString().isEmpty()) {
+                val dialog = CostumDialogEmailKosongFragment()
+                dialog.show(supportFragmentManager, null)
+            } else if (isiPassword.text.toString().isEmpty()) {
+                val dialog = CostumDialogPasswordKosongFragment()
+                dialog.show(supportFragmentManager, null)
+            } else if (isiPassword.text.toString().length < 8) {
+                val dialog = CostumDialogPasswordKurangFragment()
+                dialog.show(supportFragmentManager, null)
+            } else if (!isiPassword.text.toString().matches(Regex("(?=.*[a-z])(?=.*[A-Z]).+"))) {
+                val dialog = CostumDialogPasswordUpLowFragment()
+                dialog.show(supportFragmentManager, null)
+            }
+        }
     }
 }
