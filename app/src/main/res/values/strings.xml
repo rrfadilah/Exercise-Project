@@ -11,4 +11,6 @@
     <string name="title_menu_messages">Messages</string>
     <string name="title_menu_hospitals">Hospitals</string>
 
+    <string name="toast_text">Back with string.xml</string>
+
 </resources>
