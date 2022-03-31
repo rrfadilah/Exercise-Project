@@ -25,6 +25,6 @@
     <fragment
         android:id="@+id/navigation_linkedln"
         android:name="com.rizky.exercise_project.menu.ui.linkedln.LinkedlnFragment"
-        android:label="fragment_linkedln"
+        android:label="LinkedLn"
         tools:layout="@layout/fragment_linkedln" />
 </navigation>
