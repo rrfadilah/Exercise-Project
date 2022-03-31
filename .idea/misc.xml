@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/drawable/bg_dialog_example.xml" value="0.238" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/drawable/bg_text_input_layout.xml" value="0.236" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/drawable/dot_selector.xml" value="0.238" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/drawable/dot_unselected.xml" value="0.238" />
@@ -23,6 +24,7 @@
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/activity_sign_up.xml" value="0.2875" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/activity_splash.xml" value="0.2734375" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/dialog_example.xml" value="0.2875" />
+        <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/fragment_dialog_example.xml" value="0.2875" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/fragment_doctor.xml" value="0.2875" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/fragment_hospital.xml" value="0.2875" />
         <entry key="..\:/Documents/android-project/proyek-lain/#BinarAcademy/ExerciseProject/app/src/main/res/layout/fragment_messages.xml" value="0.25" />

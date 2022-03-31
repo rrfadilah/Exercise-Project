@@ -12,6 +12,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import id.anantyan.exerciseproject.databinding.ActivitySignInBinding
 import id.anantyan.exerciseproject.databinding.DialogExampleBinding
+import id.anantyan.exerciseproject.fragment.DialogExampleFragment
+import id.anantyan.exerciseproject.fragment.DialogExampleFragment.Companion.ARG_DIALOG_EXAMPLE
 import id.anantyan.exerciseproject.model.Users
 import id.anantyan.utils.Constant.PASSING_TO_SIGN_UP_ACTIVITY
 import id.anantyan.utils.Validation.emailValid
@@ -58,20 +60,14 @@ class SignInActivity : AppCompatActivity() {
 
     private val onSignIn = object : Validator.OnValidateListener {
         override fun onValidateSuccess(values: List<String>) {
-            onDialogCustom(
-                this@SignInActivity,
-                "Welcome SignIn",
-                "Apakah anda yakin ingin masuk?"
-            ) {
-                val item = Users(
-                    email = binding.txtInputLayoutEmail.text.toString(),
-                    password = binding.txtInputLayoutPassword.text.toString()
-                )
-                val intent = Intent(this@SignInActivity, BaseFragmentActivity::class.java)
-                startActivity(intent)
-                finish()
-                onToast(this@SignInActivity, item.toString())
-            }
+            val item = Users(
+                email = binding.txtInputLayoutEmail.text.toString(),
+                password = binding.txtInputLayoutPassword.text.toString()
+            )
+            val intent = Intent(this@SignInActivity, BaseFragmentActivity::class.java)
+            startActivity(intent)
+            finish()
+            onToast(this@SignInActivity, item.toString())
         }
 
         override fun onValidateFailed(errors: List<String>) {
@@ -79,6 +75,8 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Materi terkait toast & dialog*/
     private fun onToast(context: Context, message: String) {
         val toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
         toast.setGravity(Gravity.CENTER, 0, 0)
@@ -89,11 +87,13 @@ class SignInActivity : AppCompatActivity() {
         Snackbar.make(viewContext, message, Snackbar.LENGTH_LONG).show()
     }
 
-    private fun onDialog(context: Context, title: String, messages: String, listener: () -> Unit) {
+    /**
+     * Materi terkait dialog*/
+    private fun onDialog(context: Context, title: String, message: String, listener: () -> Unit) {
         val builder = MaterialAlertDialogBuilder(context)
         builder.setCancelable(false)
         builder.setTitle(title)
-        builder.setMessage(messages)
+        builder.setMessage(message)
         builder.setPositiveButton("Yes") { _, _ ->
             listener.invoke()
         }
@@ -119,6 +119,9 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    private fun onDialogFragment() {}
+    private fun onDialogFragment(title: String, message: String, listener: () -> Unit) {
+        val dialog = DialogExampleFragment()
+        dialog.show(supportFragmentManager, ARG_DIALOG_EXAMPLE)
+    }
 }
 
