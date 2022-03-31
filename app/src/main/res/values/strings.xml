@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Exercise-Project</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email_tidak_kosong">Email Tidak Boleh Kosong</string>
+    <string name="email_invalid">Email tidak valid</string>
+    <string name="password_tidak_kosong">Password tidak boleh kosong</string>
+    <string name="password_kurang">Password harus lebih dari 8 karakter</string>
+    <string name="buka_sign_in">Membuka halaman sign in</string>
+    <string name="sukses_sign_in">Sukses sign in</string>
+    <string name="versi_string_res">versi string resource</string>
 </resources>
