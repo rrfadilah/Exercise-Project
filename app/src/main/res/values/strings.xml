@@ -8,4 +8,5 @@
     <string name="buka_sign_in">Membuka halaman sign in</string>
     <string name="sukses_sign_in">Sukses sign in</string>
     <string name="versi_string_res">versi string resource</string>
+    <string name="label_messages">messages</string>
 </resources>

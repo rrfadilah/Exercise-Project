@@ -1,4 +1,4 @@
-package com.rizkirafiif.exercise_project.home.ui.messages
+package com.rizkirafiif.exercise_project.home.ui.hospital
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,15 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.rizkirafiif.exercise_project.R
 
-class MessageFragment : Fragment() {
-
-
+class HospitalFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message, container, false)
+        return inflater.inflate(R.layout.fragment_hospital, container, false)
     }
 
 }
