@@ -6,7 +6,7 @@
 
     <com.github.captain_miao.optroundcardview.OptRoundCardView
         android:layout_width="match_parent"
-        android:layout_height="330dp"
+        android:layout_height="350dp"
         app:optRoundCardCornerRadius="20dp"
         app:optRoundCardElevation="0dp">
 
@@ -23,14 +23,14 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/error" />
+                app:lottie_rawRes="@raw/warning" />
 
             <TextView
                 android:id="@+id/textView7"
-                android:layout_width="250dp"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunitobold"
-                android:text="Email Tidak Valid!"
+                android:text="Email Tidak Boleh Kosong!"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="18sp"
@@ -40,20 +40,20 @@
 
             <TextView
                 android:id="@+id/tvCustom"
-                android:layout_width="220dp"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:fontFamily="@font/nunitosemibold"
-                android:text="Pastikan anda memasukan email yang benar dan valid"
+                android:text="Pastikan anda mengisi email terlebih dahulu"
                 android:textAlignment="center"
                 android:textColor="#999999"
                 android:textSize="16sp"
-                android:layout_marginTop="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
             <Button
-                android:id="@+id/btnCustomLayout"
+                android:id="@+id/btnCustomLayoutEmail"
                 style="@style/GeneralButton"
                 android:layout_width="95dp"
                 android:layout_height="40dp"
@@ -68,7 +68,5 @@
 
 
     </com.github.captain_miao.optroundcardview.OptRoundCardView>
-
-
 
 </RelativeLayout>

@@ -1,11 +1,15 @@
 package com.example.exercise_project.SignInUp
 
+import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.exercise_project.R
@@ -21,58 +25,92 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btnSignIn2.setOnClickListener {
+            emailpassValidation()
+        }
+
         //toast&snackbar dengan kondisi
         binding.tvGoToSignUp.setOnClickListener {
-            emailValidation()
-            passValidation()
+
         }
     }
 
-    private fun emailValidation(): Boolean {
+    override fun onBackPressed() {
+        val dialogAction = AlertDialog.Builder(this)
+        dialogAction.setTitle("Warning!")
+        dialogAction.setMessage("Apakah anda yakin untuk kembali? Data yang anda masukan tidak akan tersimpan")
+        dialogAction.setPositiveButton("Ya"){ dialogYes, which ->
+            finish()
+        }
+        dialogAction.setNegativeButton("Tidak"){ dialogNo, which ->
+            dialogNo.dismiss()
+        }
+        dialogAction.setCancelable(false)
+        dialogAction.show()
+    }
+
+
+    private fun emailpassValidation(){
         val email = binding.etEmailSignIn.text.toString()
-
-        if (email.isEmpty()) {
-            val dialogEmail = AlertDialog.Builder(this)
-            dialogEmail.setTitle("email empty")
-            dialogEmail.setMessage("String")
-            dialogEmail.show()
-            return false
-        }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            val dialogValid = AlertDialog.Builder(this)
-            dialogValid.setTitle("email not valid")
-            dialogValid.setMessage("String")
-            dialogValid.show()
-            return false
-        }else{
-            return true
-        }
-    }
-
-    private fun passValidation(): Boolean {
         val pass = binding.etPassSignIn.text.toString()
 
-        if (pass.isEmpty()) {
-            val dialogEmail = AlertDialog.Builder(this)
-            dialogEmail.setTitle("pass empty")
-            dialogEmail.setMessage("String")
-            dialogEmail.show()
-            return false
+        if  (email.isEmpty() && pass.isEmpty()){
+            val dialogAction = AlertDialog.Builder(this)
+            dialogAction.setTitle("Email dan Password Tidak Boleh Kosong!")
+            dialogAction.setMessage("Pastikan anda mengisi email dan password terlebih dahulu untuk masuk ke dalam Home")
+            dialogAction.setPositiveButton("OK"){ dialogOK, which ->
+                dialogOK.dismiss()
+            }
+            dialogAction.setCancelable(true)
+            dialogAction.show()
+        }else if (email.isEmpty()) {
+            val view = layoutInflater.inflate(R.layout.custom_dialog_second, null)
+            val dialogLayoutFirst = Dialog(this)
+            dialogLayoutFirst.setContentView(view)
+            dialogLayoutFirst.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialogLayoutFirst.show()
+
+            view.findViewById<Button>(R.id.btnCustomLayoutEmail).setOnClickListener {
+                dialogLayoutFirst.dismiss()
+            }
+        }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            val view = layoutInflater.inflate(R.layout.custom_dialog, null)
+            val dialogLayoutSecond = Dialog(this)
+            dialogLayoutSecond.setContentView(view)
+            dialogLayoutSecond.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialogLayoutSecond.show()
+
+            view.findViewById<Button>(R.id.btnCustomLayout).setOnClickListener {
+                dialogLayoutSecond.dismiss()
+            }
+        }else if (pass.isEmpty()) {
+            val view = layoutInflater.inflate(R.layout.custom_dialog_third, null)
+            val dialogLayoutThird = Dialog(this)
+            dialogLayoutThird.setContentView(view)
+            dialogLayoutThird.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialogLayoutThird.show()
+
+            view.findViewById<Button>(R.id.btnCustomLayoutPass).setOnClickListener {
+                dialogLayoutThird.dismiss()
+            }
         }else if (pass.length < 8){
+            val dialogFragment = CustomDialogFragment()
+            dialogFragment.show(supportFragmentManager, null)
+        }else if (!pass.matches(".*[A-Z].*".toRegex())){
             val dialogValid = AlertDialog.Builder(this)
-            dialogValid.setTitle("min character")
-            dialogValid.setMessage("String")
+            dialogValid.setTitle("Password Harus Mengandung 1 Huruf Besar")
+            dialogValid.setMessage("Pastikan password anda harus mengandung setidaknya 1 huruf besar")
             dialogValid.show()
-            return false
-        }else if (!pass.matches(".[a-zA-Z].".toRegex())){
+        }else if (!pass.matches(".*[a-z].*".toRegex())){
             val dialogValid = AlertDialog.Builder(this)
-            dialogValid.setTitle("uppercase&lowercase")
-            dialogValid.setMessage("String")
+            dialogValid.setTitle("Password Harus Mengandung 1 Huruf Kesar")
+            dialogValid.setMessage("Pastikan password anda harus mengandung setidaknya 1 huruf kecil")
             dialogValid.show()
-            return false
         }else{
-            return true
+            return
         }
     }
+
 
     private fun openSignUpPage(){
         Toast.makeText(this, "Anda membuka halaman sign up", Toast.LENGTH_LONG).show()

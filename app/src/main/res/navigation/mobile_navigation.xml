@@ -9,7 +9,8 @@
         android:id="@+id/navbar_Doctor"
         android:name="com.example.exercise_project.Home.Doctor.FragmentDoctor"
         android:label="title doctor"
-        tools:layout="@layout/fragment_doctor" />
+        tools:layout="@layout/fragment_doctor" >
+    </fragment>
 
     <fragment
         android:id="@+id/navbar_Messages"
@@ -22,4 +23,5 @@
         android:name="com.example.exercise_project.Home.Hospitals.FragmentHospitals"
         android:label="title hospitals"
         tools:layout="@layout/fragment_hospitals" />
+
 </navigation>

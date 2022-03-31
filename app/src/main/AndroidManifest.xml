@@ -10,29 +10,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExerciseProject">
         <activity
+            android:name=".custom_dialog_second"
+            android:exported="false" />
+        <activity
             android:name=".Home.ActivityForHome"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".SignInUp.SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".SignInUp.SignInActivity"
-            android:exported="false">
-        </activity>
-        <activity
-            android:name=".Splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
+            android:name=".Splash.SplashActivity"
+            android:exported="false" />
+        <activity
             android:name=".onBoardingFragment.onBoardingActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".samplefragment.PicturesActivity"
             android:exported="false" />
