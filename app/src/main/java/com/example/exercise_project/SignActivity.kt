@@ -25,23 +25,45 @@ class SignActivity : AppCompatActivity() {
 
         openPage()
         val btnlogin = findViewById<TextView>(R.id.btn_sign_in)
+//        btnlogin.setOnClickListener {
+//            if (edtmail.text.toString().isEmpty()) {
+//                Toast.makeText(this, R.string.email_kosong, Toast.LENGTH_SHORT).show()
+//            } else if (edtpassword.text.toString().isEmpty()) {
+//                Toast.makeText(this, R.string.password_kosong, Toast.LENGTH_SHORT).show()
+//            } else if (edtpassword.text.toString().length < 8) {
+//                Toast.makeText(this, R.string.password_character, Toast.LENGTH_SHORT).show()
+//            } else if (!edtpassword.text.toString().matches(Regex("(?=.*[a-z])(?=.*[A-Z]).+"))) {
+//                Toast.makeText(this, R.string.password_lower_upper_case, Toast.LENGTH_SHORT).show()
+//            } else if (!edtmail.text.toString()
+//                    .matches(Regex("^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"))
+//            ) {
+//                Toast.makeText(this, R.string.email_salah, Toast.LENGTH_SHORT).show()
+//            } else {
+//                openPage()
+//            }
+//        }
+
         btnlogin.setOnClickListener {
-            if (edtmail.text.toString().isEmpty()) {
-                Toast.makeText(this, R.string.email_kosong, Toast.LENGTH_SHORT).show()
-            } else if (edtpassword.text.toString().isEmpty()) {
-                Toast.makeText(this, R.string.password_kosong, Toast.LENGTH_SHORT).show()
-            } else if (edtpassword.text.toString().length < 8) {
-                Toast.makeText(this, R.string.password_character, Toast.LENGTH_SHORT).show()
-            } else if (!edtpassword.text.toString().matches(Regex("(?=.*[a-z])(?=.*[A-Z]).+"))) {
-                Toast.makeText(this, R.string.password_lower_upper_case, Toast.LENGTH_SHORT).show()
-            } else if (!edtmail.text.toString()
-                    .matches(Regex("^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"))
+            if (edtmail.text.toString().isEmpty() || edtpassword.text.toString().isEmpty()) {
+                dialogEmailPasswordKosong()
+                dialogActionEmailPasswordKosong()
+                dialogEmailPasswordCustomLayoutKosong()
+                dialogEmailPasswordFragmentKosong()
+            } else if (!edtpassword.text.toString().matches(Regex("(?=.*[a-z])(?=.*[A-Z]).+")) || !edtmail.text.toString()
+                    .matches(Regex("^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")) || edtpassword.text.toString().length < 8
             ) {
-                Toast.makeText(this, R.string.email_salah, Toast.LENGTH_SHORT).show()
+                dialogEmailPasswordValidation()
+                dialogActionEmailPasswordValidation()
+                dialogEmailPasswordCustomLayoutValidation()
+                dialogEmailPasswordFragmentValidation()
+
             } else {
                 openPage()
             }
+
+
         }
+
         val btnCreateNewAccount = findViewById<TextView>(R.id.tv_create_new_account)
         btnCreateNewAccount.setOnClickListener {
             Toast.makeText(this, "Tombol create new account di pencet", Toast.LENGTH_SHORT).show()
@@ -73,12 +95,12 @@ class SignActivity : AppCompatActivity() {
         dialogAction.setNeutralButton("netral") { dialog, which ->
             dialog?.dismiss()
         }
-        dialogAction.show()
-        dialogCustomLayout()
-        dialogWithFragment()
+//        dialogAction.show()
+//        dialogCustomLayout()
+//        dialogWithFragment()
     }
 
-    fun dialogCustomLayout() {
+    private fun dialogCustomLayout() {
         val view = layoutInflater.inflate(R.layout.dialog_custom, null, false)
         val dialog = AlertDialog.Builder(this)
         dialog.setView(view)
@@ -86,7 +108,7 @@ class SignActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    fun dialogWithFragment() {
+    private fun dialogWithFragment() {
         val dialog = CustomDialogFragment()
         dialog.show(supportFragmentManager, null)
     }
@@ -107,10 +129,10 @@ class SignActivity : AppCompatActivity() {
         Toast.makeText(this, "Tombol back di pencet", Toast.LENGTH_SHORT).show()
     }
 
-    fun dialogEmailPassword() {
+    private fun dialogActionEmailPasswordValidation() {
         val dialog = AlertDialog.Builder(this)
-        dialog.setTitle("judul dialog")
-        dialog.setMessage("isi pesan dialog")
+        dialog.setTitle("email dan password tidak valid")
+        dialog.setMessage("Apakah anda yakin email dan password sudah benar?")
         dialog.setCancelable(true)
         dialog.setPositiveButton("ya") { dialog, which ->
             dialog?.dismiss()
@@ -118,6 +140,62 @@ class SignActivity : AppCompatActivity() {
         dialog.setNegativeButton("tidak") { dialog, which ->
             dialog?.dismiss()
         }
+        dialog.show()
+    }
+
+    private fun dialogEmailPasswordValidation() {
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle("email dan password tidak valid")
+        dialog.setMessage("email dan password tidak valid")
+        dialog.setCancelable(true)
+        dialog.show()
+    }
+
+    private fun dialogEmailPasswordFragmentValidation() {
+        val dialog = EmailDanPasswordValidation()
+        dialog.show(supportFragmentManager, null)
+    }
+
+    private fun dialogEmailPasswordCustomLayoutValidation() {
+        val view = layoutInflater.inflate(R.layout.dialog_email_password, null, false)
+        val dialog = AlertDialog.Builder(this)
+        dialog.setView(view)
+        dialog.setCancelable(true)
+        dialog.show()
+    }
+
+    private fun dialogEmailPasswordKosong() {
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle("email dan password kosong")
+        dialog.setMessage("email dan password kosong")
+        dialog.setCancelable(true)
+        dialog.show()
+    }
+
+    private fun dialogActionEmailPasswordKosong() {
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle("email dan password kosong")
+        dialog.setMessage("email dan password kosong, isi terlebih dahulu")
+        dialog.setCancelable(true)
+        dialog.setPositiveButton("oke") { dialog, which ->
+            dialog?.dismiss()
+        }
+        dialog.setNegativeButton("tidak") { dialog, which ->
+            dialog?.dismiss()
+        }
+        dialog.show()
+    }
+
+    fun dialogEmailPasswordFragmentKosong() {
+        val dialog = DialogEmailDanPasswordKosong()
+        dialog.show(supportFragmentManager, null)
+    }
+
+    fun dialogEmailPasswordCustomLayoutKosong() {
+        val view = layoutInflater.inflate(R.layout.dialog_email_password_kosong, null, false)
+        val dialog = AlertDialog.Builder(this)
+        dialog.setView(view)
+        dialog.setCancelable(true)
         dialog.show()
     }
 }
