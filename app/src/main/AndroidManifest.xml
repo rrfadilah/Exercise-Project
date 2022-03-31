@@ -15,10 +15,13 @@
             android:label="@string/title_activity_facebook" />
         <activity
             android:name=".MainActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".LinkedIn.LinkedInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
