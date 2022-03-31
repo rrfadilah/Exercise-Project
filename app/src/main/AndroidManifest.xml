@@ -10,9 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExerciseProject">
         <activity
+            android:name=".list_item_feed"
+            android:exported="false" />
+        <activity
             android:name=".menu.MenuActivity"
             android:exported="true"
-            android:label="@string/title_activity_menu" >
+            android:label="@string/title_activity_menu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +27,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"/>
+            android:exported="true" />
     </application>
 
 </manifest>
