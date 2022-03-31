@@ -20,9 +20,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Hospital"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true"/>
     </application>

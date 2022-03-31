@@ -27,4 +27,9 @@
         android:name="com.rizky.exercise_project.menu.ui.linkedln.LinkedlnFragment"
         android:label="LinkedLn"
         tools:layout="@layout/fragment_linkedln" />
+    <fragment
+        android:id="@+id/navigation_facebook"
+        android:name="com.rizky.exercise_project.menu.ui.facebook.FacebookFragment"
+        android:label="Facebook"
+        tools:layout="@layout/fragment_facebook" />
 </navigation>

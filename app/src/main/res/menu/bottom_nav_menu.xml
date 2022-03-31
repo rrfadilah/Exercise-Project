@@ -20,4 +20,9 @@
         android:id="@+id/navigation_linkedln"
         android:icon="@drawable/ic_linkedin"
         android:title="LinkedLn" />
+
+    <item
+        android:id="@+id/navigation_facebook"
+        android:icon="@drawable/ic_facebook"
+        android:title="Facebook"/>
 </menu>
