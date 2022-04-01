@@ -14,10 +14,10 @@ class LinkedInFeedAdapter(private val list: List<LinkedInFeedModel>) : RecyclerV
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val feed: LinkedInFeedModel = list[position]
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return list.count()
     }
 }
