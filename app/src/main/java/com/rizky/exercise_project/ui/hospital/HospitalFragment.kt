@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rizky.exercise_project.R
+import com.rizky.exercise_project.adapter.hospital.HospitalAdapter
 import com.rizky.exercise_project.databinding.FragmentHospitalBinding
+import com.rizky.exercise_project.model.hospital.MyData
 
 class HospitalFragment : Fragment() {
     private lateinit var rv_mydata: RecyclerView

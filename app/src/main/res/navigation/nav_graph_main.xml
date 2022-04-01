@@ -21,12 +21,12 @@
         android:label="Hospital"
         tools:layout="@layout/fragment_hospital" />
     <fragment
-        android:id="@+id/linkedinFragment"
+        android:id="@+id/navigation_linkedin"
         android:name="com.rizky.exercise_project.ui.linkedin.LinkedinFragment"
         android:label="fragment_linkedin"
         tools:layout="@layout/fragment_linkedin" />
     <fragment
-        android:id="@+id/twitterFragment"
+        android:id="@+id/navigation_twitter"
         android:name="com.rizky.exercise_project.ui.twitter.TwitterFragment"
         android:label="fragment_twitter"
         tools:layout="@layout/fragment_twitter" />

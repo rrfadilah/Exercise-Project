@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.adapter
+package com.rizky.exercise_project.adapter.doctor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,7 @@ import coil.size.ViewSizeResolver
 import coil.transform.RoundedCornersTransformation
 import com.rizky.exercise_project.R
 import com.rizky.exercise_project.databinding.ListItemDoctor3Binding
-import com.rizky.exercise_project.model.News
+import com.rizky.exercise_project.model.doctor.News
 
 class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var oldNews: MutableList<News> = mutableListOf()

@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rizky.exercise_project.R
+import com.rizky.exercise_project.adapter.messages.MessagesAdapter
 import com.rizky.exercise_project.databinding.FragmentMessagesBinding
+import com.rizky.exercise_project.model.messages.MessageModel
 
 class MessagesFragment : Fragment() {
     private lateinit var rv_mydatapesan: RecyclerView

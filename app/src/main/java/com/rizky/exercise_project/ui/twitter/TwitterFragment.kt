@@ -5,56 +5,73 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.rizky.exercise_project.R
+import com.rizky.exercise_project.databinding.FragmentTwitterBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [TwitterFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TwitterFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var rv_mytwitter: RecyclerView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentTwitterBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_twitter, container, false)
+        _binding = FragmentTwitterBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TwitterFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TwitterFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        rv_mytwitter = requireView().findViewById(R.id.rv_twitter)
+        rv_mytwitter.setHasFixedSize(true)
+        listtwitter.addAll(getListMyTwitter())
+        showRecyclerCardView()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private val listtwitter = ArrayList<TwitterModel>()
+
+    fun getListMyTwitter(): ArrayList<TwitterModel> {
+        val dataprofile = resources.getStringArray(R.array.data_image_twitter)
+        val datanamatwitter = resources.getStringArray(R.array.data_nama_twitter)
+        val datausername = resources.getStringArray(R.array.data_username_twitter)
+        val datatime = resources.getStringArray(R.array.data_time_twitter)
+        val datapesantwitter = resources.getStringArray(R.array.data_message_twitter)
+        val datagambartwitter = resources.getStringArray(R.array.data_gambar_twitter)
+        val datacomment = resources.getStringArray(R.array.data_comment_twitter)
+        val datalike = resources.getStringArray(R.array.data_like_twitter)
+        val dataretweet = resources.getStringArray(R.array.data_retweet_twitter)
+
+        val listTwitter = ArrayList<TwitterModel>()
+        for (position in datanamatwitter.indices) {
+            val myDataTwitter = TwitterModel(
+                dataprofile[position],
+                datanamatwitter[position],
+                datausername[position],
+                datatime[position],
+                datapesantwitter[position],
+                datagambartwitter[position],
+                datacomment[position],
+                dataretweet[position],
+                datalike[position]
+            )
+            listTwitter.add(myDataTwitter)
+        }
+        return listTwitter
+    }
+
+    private fun showRecyclerCardView() {
+        rv_mytwitter.layoutManager = LinearLayoutManager(context)
+        val cardViewMyDataAdapter = TwitterAdapter(listtwitter)
+        rv_mytwitter.adapter = cardViewMyDataAdapter
     }
 }

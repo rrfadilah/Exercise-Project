@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.model
+package com.rizky.exercise_project.model.doctor
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

@@ -13,13 +13,13 @@ import coil.size.ViewSizeResolver
 import coil.transform.CircleCropTransformation
 import com.rizky.exercise_project.MainActivity
 import com.rizky.exercise_project.R
-import com.rizky.exercise_project.adapter.CategoryAdapter
-import com.rizky.exercise_project.adapter.NewsAdapter
-import com.rizky.exercise_project.adapter.TopRateDoctorAdapter
+import com.rizky.exercise_project.adapter.doctor.CategoryAdapter
+import com.rizky.exercise_project.adapter.doctor.NewsAdapter
+import com.rizky.exercise_project.adapter.doctor.TopRateDoctorAdapter
 import com.rizky.exercise_project.databinding.FragmentDoctorBinding
-import com.rizky.exercise_project.model.Category
-import com.rizky.exercise_project.model.News
-import com.rizky.exercise_project.model.TopRateDoctor
+import com.rizky.exercise_project.model.doctor.Category
+import com.rizky.exercise_project.model.doctor.News
+import com.rizky.exercise_project.model.doctor.TopRateDoctor
 import com.rizky.exercise_project.utils.dividerVertical
 
 class DoctorFragment : Fragment() {
