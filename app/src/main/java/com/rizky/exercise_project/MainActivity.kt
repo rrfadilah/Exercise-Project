@@ -18,14 +18,12 @@ class MainActivity : AppCompatActivity() {
 
         val fragmentDoctor = DoctorFragment()
         val fragmentHospitals = HospitalsFragment()
-        val fragmentMessages = MessageFragment()
 
         setCurrentFragment(fragmentDoctor)
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.navbar_Doctor -> setCurrentFragment(fragmentDoctor)
-                R.id.navbar_Messages -> setCurrentFragment(fragmentMessages)
                 R.id.navbar_Hospital -> setCurrentFragment(fragmentHospitals)
             }
             true
