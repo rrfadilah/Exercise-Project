@@ -125,31 +125,31 @@
                 android:id="@+id/ivIconSuka"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginLeft="27dp"
+                android:layout_marginTop="-28dp"
                 android:src="@drawable/ic_like"
                 app:layout_constraintLeft_toLeftOf="@id/ivIconProfilDribble"
-                app:layout_constraintTop_toBottomOf="@id/ivBatas" />
+                app:layout_constraintTop_toBottomOf="@id/ivImageContent" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivIconComment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="45dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="-28dp"
                 android:src="@drawable/ic_commentar"
                 app:layout_constraintLeft_toRightOf="@id/ivIconSuka"
-                app:layout_constraintTop_toBottomOf="@id/ivBatas" />
+                app:layout_constraintTop_toBottomOf="@id/ivImageContent" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivIconSend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="200dp"
+                android:layout_marginTop="-28dp"
+                android:layout_marginStart="30dp"
                 android:src="@drawable/ic_massanger"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ivBatas" />
+                app:layout_constraintLeft_toRightOf="@id/ivIconComment"
+                app:layout_constraintTop_toBottomOf="@id/ivImageContent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

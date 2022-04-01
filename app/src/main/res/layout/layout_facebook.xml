@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#D3D3D3">
 
     <androidx.cardview.widget.CardView
@@ -11,29 +11,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/ivFotoProfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/foto_profil"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                android:layout_marginTop="5dp"
+                android:src="@drawable/foto_profil"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/etSearch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
                 android:background="@drawable/bg_search"
                 android:drawableLeft="@drawable/ic_search"
-                android:layout_marginTop="3dp"
-                android:layout_marginLeft="10dp"
                 android:hint="Search"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="8dp"
@@ -45,34 +47,34 @@
                 android:id="@+id/ivIcMessage"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginRight="5dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
                 android:src="@drawable/ic_message"
-                app:layout_constraintTop_toTopOf="@id/ivFotoProfil"
+                app:layout_constraintLeft_toRightOf="@id/etSearch"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/etSearch"/>
+                app:layout_constraintTop_toTopOf="@id/ivFotoProfil" />
 
             <TextView
                 android:id="@+id/tvLike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="35dp"
+                android:layout_marginTop="5dp"
                 android:text="Like"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/ivFotoProfil"
-                app:layout_constraintLeft_toLeftOf="@id/ivFotoProfil"/>
+                app:layout_constraintLeft_toLeftOf="@id/ivFotoProfil"
+                app:layout_constraintTop_toBottomOf="@id/ivFotoProfil" />
 
             <TextView
                 android:id="@+id/tvComment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="45dp"
+                android:layout_marginTop="5dp"
                 android:text="Comment"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/ivFotoProfil"
-                app:layout_constraintLeft_toRightOf="@id/tvLike"/>
+                app:layout_constraintLeft_toRightOf="@id/tvLike"
+                app:layout_constraintTop_toBottomOf="@id/ivFotoProfil" />
 
             <TextView
                 android:id="@+id/tvShare"
@@ -82,8 +84,8 @@
                 android:layout_marginRight="45dp"
                 android:text="Share"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/ivFotoProfil"
-                app:layout_constraintRight_toLeftOf="@id/tvSend"/>
+                app:layout_constraintRight_toLeftOf="@id/tvSend"
+                app:layout_constraintTop_toBottomOf="@id/ivFotoProfil" />
 
             <TextView
                 android:id="@+id/tvSend"
@@ -93,11 +95,11 @@
                 android:layout_marginRight="35dp"
                 android:text="Send"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/ivFotoProfil"
-                app:layout_constraintRight_toRightOf="@id/ivIcMessage"/>
+                app:layout_constraintRight_toRightOf="@id/ivIcMessage"
+                app:layout_constraintTop_toBottomOf="@id/ivFotoProfil" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-    
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvContent"
         android:layout_width="0dp"
@@ -109,6 +111,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cvTop"
-        tools:listitem="@layout/list_item_content"/>
+        tools:listitem="@layout/list_item_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
