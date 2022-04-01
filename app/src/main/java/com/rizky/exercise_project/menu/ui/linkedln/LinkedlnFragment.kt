@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.rizky.exercise_project.adapter.LinkedInFeedAdapter
+import com.rizky.exercise_project.adapter.LinkedInListAdapter
+import com.rizky.exercise_project.data.DummyLinkedlnFeed
+import com.rizky.exercise_project.data.DummyLinkedlnList
 import com.rizky.exercise_project.databinding.FragmentLinkedlnBinding
 
 class LinkedlnFragment : Fragment() {
@@ -25,10 +29,12 @@ class LinkedlnFragment : Fragment() {
         _binding = FragmentLinkedlnBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textLinkedln
-        linkedlnViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        val adapterLinkedInFeed = LinkedInFeedAdapter(DummyLinkedlnFeed.dataLingkedlnFeed)
+        binding.linkedInFeed.adapter = adapterLinkedInFeed
+
+        val adapterLinkedInPost = LinkedInListAdapter(DummyLinkedlnList.dataLingkedlnList)
+        binding.linkedInPost.adapter = adapterLinkedInPost
+
 
         return root
     }
