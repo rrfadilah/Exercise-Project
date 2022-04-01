@@ -10,4 +10,8 @@ class Collab {
     fun diriku() {
         println("diriku disini")
     }
+
+    fun dirimuDanDiriku() {
+
+    }
 }
