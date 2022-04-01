@@ -37,7 +37,6 @@ class TwitterAdapter (private val listMyTwitter: ArrayList<TwitterModel>) :
         holder.imggambar.load(myDataTwitter.picture){
             crossfade(true)
             placeholder(R.drawable.ic_baseline_image_24)
-            transformations(CircleCropTransformation())
             size(ViewSizeResolver(holder.imggambar))
         }
         holder.tvcomment.text = myDataTwitter.comment
