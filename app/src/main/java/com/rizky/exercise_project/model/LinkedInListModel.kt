@@ -1,7 +1,7 @@
 package com.rizky.exercise_project.model
 
 data class LinkedInListModel(
-    val avatar: String,
+    val avatar: Int,
     val nama: String,
     val statusAkun: String,
     val keterangan: String,

@@ -6,7 +6,7 @@ import com.rizky.exercise_project.model.LinkedInListModel
 object DummyLinkedlnList {
     val dataLingkedlnList: List<LinkedInListModel> = listOf(
         LinkedInListModel(
-            "",
+            R.drawable.dokter1,
             "LG B2B Indonesia",
             "Promoted",
             "Apakah Anda sedang mencari AC yang tidak boros listrik",
