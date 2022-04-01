@@ -45,14 +45,7 @@ class LinkedinAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 placeholder(R.drawable.ic_baseline_image_24)
                 size(ViewSizeResolver(binding.imgPost))
             }
-            binding.imgReaction.load(item.img_reaction?.let {
-                ResourcesCompat.getDrawable(itemView.resources,
-                    it, null)
-            }) {
-                crossfade(true)
-                placeholder(R.drawable.ic_baseline_image_24)
-                size(ViewSizeResolver(binding.imgReaction))
-            }
+            item.img_reaction?.let { binding.imgReaction.setImageResource(it) }
             binding.txtPersonLike.text = item.like_person?.let { itemView.resources.getString(it) }
             binding.txtNamePerson.text = item.name_person
             binding.txtMotto.text = item.motto
