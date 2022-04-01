@@ -8,9 +8,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".Facebook.ui.home_facebook.HomeFragment">
 
-        <TextView
+    <TextView
             android:id="@+id/title_facebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
