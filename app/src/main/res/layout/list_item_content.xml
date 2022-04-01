@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/ivIconProfilDribble"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_profil_dribble"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tvNameProfilDribble"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Dribble"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                app:layout_constraintLeft_toRightOf="@id/ivIconProfilDribble"
+                app:layout_constraintTop_toTopOf="@id/ivIconProfilDribble"/>
+
+            <TextView
+                android:id="@+id/tvJumlahFollowers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="271.894 followers"
+                app:layout_constraintTop_toBottomOf="@id/tvNameProfilDribble"
+                app:layout_constraintLeft_toLeftOf="@id/tvNameProfilDribble"/>
+
+            <TextView
+                android:id="@+id/tvWaktuPost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4d•"
+                app:layout_constraintTop_toBottomOf="@id/tvJumlahFollowers"
+                app:layout_constraintLeft_toLeftOf="@id/tvNameProfilDribble"/>
+
+            <ImageView
+                android:id="@+id/ivIconPublic"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/ic_public"
+                app:layout_constraintTop_toTopOf="@id/tvWaktuPost"
+                app:layout_constraintLeft_toRightOf="@id/tvWaktuPost"/>
+
+            <ImageView
+                android:id="@+id/ivIconLainnya"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_lainnya"
+                app:layout_constraintTop_toTopOf="@id/ivIconProfilDribble"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvTextContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/text_content"
+                android:textSize="12dp"
+                app:layout_constraintLeft_toLeftOf="@id/ivIconProfilDribble"
+                app:layout_constraintRight_toRightOf=""
+                app:layout_constraintTop_toBottomOf="@id/ivIconProfilDribble" />
+
+            <ImageView
+                android:id="@+id/ivImageContent"
+                android:layout_width="match_parent"
+                android:layout_height="365dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/content_link"
+                app:layout_constraintTop_toBottomOf="@id/tvTextContent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <ImageView
+                android:id="@+id/ivIconLike"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/icon_sip"
+                app:layout_constraintLeft_toLeftOf="@id/ivIconProfilDribble"
+                app:layout_constraintTop_toBottomOf="@id/ivImageContent"/>
+
+            <ImageView
+                android:id="@+id/ivIconLove"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/icon_love"
+                app:layout_constraintLeft_toLeftOf="@id/ivIconProfilDribble"
+                app:layout_constraintTop_toBottomOf="@id/ivImageContent"/>
+
+            <ImageView
+                android:id="@+id/ivIconInsight"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/icon_insight"
+                app:layout_constraintLeft_toLeftOf="@id/ivIconLove"
+                app:layout_constraintTop_toBottomOf="@id/ivImageContent"/>
+
+            <TextView
+                android:id="@+id/tvCountAppreciate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="966"
+                android:layout_marginLeft="3dp"
+                android:textSize="11sp"
+                app:layout_constraintLeft_toRightOf="@id/ivIconInsight"
+                app:layout_constraintTop_toTopOf="@id/ivIconLove"/>
+
+            <TextView
+                android:id="@+id/tvCountCommentShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="9 comments•47 shares"
+                android:textSize="11sp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ivIconLove"
+                />
+
+            <ImageView
+                android:id="@+id/ivBatas"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginHorizontal="15dp"
+                android:background="#D3D3D3"
+                app:layout_constraintTop_toBottomOf="@id/tvCountCommentShare"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivIconSuka"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="40dp"
+                android:src="@drawable/icon_suka"
+                app:layout_constraintTop_toBottomOf="@id/ivBatas"
+                app:layout_constraintLeft_toLeftOf="@id/ivIconProfilDribble"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSuka"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Like"
+                android:textSize="13dp"
+                app:layout_constraintTop_toBottomOf="@id/ivIconSuka"
+                app:layout_constraintLeft_toLeftOf="@id/ivIconSuka"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivIconComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="65dp"
+                android:src="@drawable/icon_komentar"
+                app:layout_constraintTop_toBottomOf="@id/ivBatas"
+                app:layout_constraintLeft_toRightOf="@id/ivIconSuka"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvKomentar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:text="Comment"
+                android:textSize="13dp"
+                app:layout_constraintTop_toTopOf="@id/tvSuka"
+                app:layout_constraintLeft_toRightOf="@id/tvSuka"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivIconSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="50dp"
+                android:src="@drawable/icon_kirim"
+                app:layout_constraintTop_toBottomOf="@id/ivBatas"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:text="Send"
+                android:textSize="13dp"
+                app:layout_constraintTop_toTopOf="@id/tvSuka"
+                app:layout_constraintRight_toRightOf="@id/ivIconSend"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivIconShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="65dp"
+                android:src="@drawable/icon_bagikan"
+                app:layout_constraintTop_toBottomOf="@id/ivBatas"
+                app:layout_constraintRight_toLeftOf="@id/ivIconSend"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:text="Share"
+                android:textSize="13dp"
+                app:layout_constraintTop_toTopOf="@id/tvSuka"
+                app:layout_constraintRight_toRightOf="@id/ivIconShare"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
