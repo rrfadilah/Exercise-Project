@@ -31,7 +31,7 @@
         android:name="com.rizky.exercise_project.Facebook.ui.group_facebook.MenuFacebookFragment"
         android:label="MenuFacebookFragment" />
     <fragment
-        android:id="@+id/personFacebookFragment2"
+        android:id="@+id/personFacebookFragment"
         android:name="com.rizky.exercise_project.Facebook.ui.group_facebook.PersonFacebookFragment"
         android:label="PersonFacebookFragment" />
 </navigation>
