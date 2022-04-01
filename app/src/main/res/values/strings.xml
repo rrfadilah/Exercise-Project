@@ -46,4 +46,40 @@
         <item>Oh tentu saja tidak karena jeruk itu mengandung vitamin c</item>
         <item>Oke menurut pak dokter bagaimana caranya untuk menurunkan berat badan</item>
     </string-array>
+    <string-array name="data_image_twitter">
+        <item>https://i.ibb.co/zJHYGBP/binarlogo.jpg</item>
+        <item>https://i.ibb.co/zJHYGBP/binarlogo.jpg</item>
+    </string-array>
+    <string-array name="data_nama_twitter">
+        <item>Marcellino Nursalim</item>
+        <item>Arya Reza</item>
+    </string-array>
+    <string-array name="data_username_twitter">
+        <item>. @MarcellinoN</item>
+        <item>. @AryaR</item>
+    </string-array>
+    <string-array name="data_time_twitter">
+        <item>12m</item>
+        <item>40m</item>
+    </string-array>
+    <string-array name="data_message_twitter">
+        <item>lagi pengen main bola</item>
+        <item>lagi di rumah sakit</item>
+    </string-array>
+    <string-array name="data_gambar_twitter">
+        <item>https://asset.kompas.com/crops/lu79Ra7o8H6op--UywfN3Lz-muc=/126x0:711x390/750x500/data/photo/2015/09/08/1530198sepak-bola780x390.jpg</item>
+        <item>https://asset.kompas.com/crops/mOKFrYHlSTM6SEt4aD9PIXZnJE0=/0x5:593x400/750x500/data/photo/2020/03/16/5e6ee88f78835.jpg</item>
+    </string-array>
+    <string-array name="data_comment_twitter">
+        <item>10</item>
+        <item>15</item>
+    </string-array>
+    <string-array name="data_retweet_twitter">
+        <item>20</item>
+        <item>50</item>
+    </string-array>
+    <string-array name="data_like_twitter">
+        <item>5</item>
+        <item>100</item>
+    </string-array>
 </resources>
