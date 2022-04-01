@@ -1,7 +1,10 @@
 package com.rizky.exercise_project
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.rizky.exercise_project.databinding.ActivitySignInBinding
@@ -32,8 +35,7 @@ class SignInActivity : AppCompatActivity() {
         // Untuk menerima intent parcelize
 //        intent.extras?.getParcelable<UserInfo>(Constant.Parcelize.KEY)
 
-
-        openPage()
+        dialogWithFragment()
     }
 
     fun openPage() {
@@ -42,5 +44,46 @@ class SignInActivity : AppCompatActivity() {
                 // aksi yang akan kita jalan kan ketika klik di action nya...
                 Toast.makeText(this, "Membuka halaman Sign In", Toast.LENGTH_LONG).show()
             }.show()
+    }
+
+    fun dialogStandard() {
+        // Dialog standard
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle("judul dialog")
+        dialog.setMessage("isi pesan dialog")
+        dialog.setCancelable(true)
+        dialog.show()
+    }
+
+    fun dialogAction() {
+        // dialog dengan action
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle("judul dialog")
+        dialog.setMessage("isi pesan dialog")
+        dialog.setPositiveButton("POsitif", object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                dialog?.dismiss()
+            }
+        })
+        dialog.setNegativeButton("Negatif") { dialog, which ->
+            dialog.dismiss()
+        }
+        dialog.setNeutralButton("Netral") { dialog, which ->
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    fun dialogCustomLayout() {
+        val view = LayoutInflater.from(this).inflate(R.layout.dialog_custom, null, false)
+        val dialog = AlertDialog.Builder(this)
+        dialog.setView(view)
+        dialog.create().show()
+    }
+
+    fun dialogWithFragment() {
+        val dialog = CustomDialogFragment()
+        dialog.show(supportFragmentManager, null)
     }
 }
