@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.ui.messages
+package com.rizky.exercise_project.adapter.messages
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +10,7 @@ import coil.load
 import coil.size.ViewSizeResolver
 import coil.transform.CircleCropTransformation
 import com.rizky.exercise_project.R
+import com.rizky.exercise_project.model.messages.MessageModel
 
 class MessagesAdapter(private val listMyDataMessages: ArrayList<MessageModel>)  :
     RecyclerView.Adapter<MessagesAdapter.CardViewViewHolder>() {

@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.adapter
+package com.rizky.exercise_project.adapter.doctor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,7 @@ import coil.size.ViewSizeResolver
 import coil.transform.CircleCropTransformation
 import com.rizky.exercise_project.R
 import com.rizky.exercise_project.databinding.ListItemDoctor1Binding
-import com.rizky.exercise_project.model.Category
+import com.rizky.exercise_project.model.doctor.Category
 
 class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var oldCategory: MutableList<Category> = mutableListOf()

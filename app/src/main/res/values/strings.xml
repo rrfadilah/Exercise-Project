@@ -2,6 +2,8 @@
     <string name="app_name">Exercise-Project</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hospital_nearby">${list.size} tersedia</string>
+    <string name="txt_reaction"><b>Arya Rezza</b> dan 4 reaksi mendukung</string>
+    <string name="txt_person_like"><b>Binar Academy</b> dan 10 lainnya menyukai &amp; mendukung</string>
     <string-array name="data_image">
         <item>https://asset.kompas.com/crops/mOKFrYHlSTM6SEt4aD9PIXZnJE0=/0x5:593x400/750x500/data/photo/2020/03/16/5e6ee88f78835.jpg</item>
         <item>https://www.uii.ac.id/wp-content/uploads/2020/03/desain-rumah-sakit-uii.jpg</item>

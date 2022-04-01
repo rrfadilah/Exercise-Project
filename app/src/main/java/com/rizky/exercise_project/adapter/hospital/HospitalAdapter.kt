@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.ui.hospital
+package com.rizky.exercise_project.adapter.hospital
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +10,7 @@ import coil.load
 import coil.size.ViewSizeResolver
 import coil.transform.RoundedCornersTransformation
 import com.rizky.exercise_project.R
+import com.rizky.exercise_project.model.hospital.MyData
 
 class HospitalAdapter(private val listMyDatas: ArrayList<MyData>)  :
     RecyclerView.Adapter<HospitalAdapter.CardViewViewHolder>() {

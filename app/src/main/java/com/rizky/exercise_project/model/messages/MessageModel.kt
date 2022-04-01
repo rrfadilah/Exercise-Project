@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.ui.messages
+package com.rizky.exercise_project.model.messages
 
 data class MessageModel(
     val gambar: String,
