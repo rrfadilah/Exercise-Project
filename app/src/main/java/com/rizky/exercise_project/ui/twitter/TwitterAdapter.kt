@@ -18,7 +18,7 @@ class TwitterAdapter (private val listMyTwitter: ArrayList<TwitterModel>) :
         viewType: Int
     ): CardViewViewHolder {
         val view: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_item_twitter, parent, false)
+            .inflate(R.layout.item_twitter, parent, false)
         return CardViewViewHolder(view)
     }
 
@@ -50,14 +50,25 @@ class TwitterAdapter (private val listMyTwitter: ArrayList<TwitterModel>) :
 
 
     inner class CardViewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var imgprofile: ImageView = itemView.findViewById(R.id.iv_profile_picture)
-        var tvnamatwit: TextView = itemView.findViewById(R.id.tv_name_twitter)
-        var tvusername: TextView = itemView.findViewById(R.id.tv_username)
-        var tvtime: TextView = itemView.findViewById(R.id.tv_time)
-        var tvpesantwit: TextView = itemView.findViewById(R.id.tv_message_twitter)
+        var imgprofile: ImageView = itemView.findViewById(R.id.iv_user_1)
+        var tvnamatwit: TextView = itemView.findViewById(R.id.tv_name_user_1)
+        var tvusername: TextView = itemView.findViewById(R.id.tv_username_user_1)
+        var tvtime: TextView = itemView.findViewById(R.id.tv_time_item_twitter)
+        var tvpesantwit: TextView = itemView.findViewById(R.id.tv_content_text_twitter)
         var imggambar : ImageView = itemView.findViewById(R.id.iv_gambar_twitter)
         var tvcomment : TextView = itemView.findViewById(R.id.tv_comment)
         var tvretweet : TextView = itemView.findViewById(R.id.tv_retweet)
         var tvlike : TextView = itemView.findViewById(R.id.tv_like)
     }
+//    inner class CardViewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+//        var imgprofile: ImageView = itemView.findViewById(R.id.iv_profile_picture)
+//        var tvnamatwit: TextView = itemView.findViewById(R.id.tv_name_twitter)
+//        var tvusername: TextView = itemView.findViewById(R.id.tv_username)
+//        var tvtime: TextView = itemView.findViewById(R.id.tv_time)
+//        var tvpesantwit: TextView = itemView.findViewById(R.id.tv_message_twitter)
+//        var imggambar : ImageView = itemView.findViewById(R.id.iv_gambar_twitter)
+//        var tvcomment : TextView = itemView.findViewById(R.id.tv_comment)
+//        var tvretweet : TextView = itemView.findViewById(R.id.tv_retweet)
+//        var tvlike : TextView = itemView.findViewById(R.id.tv_like)
+//    }
 }
