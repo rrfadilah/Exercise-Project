@@ -5,19 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/iv_profile_picture"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/img_user_1" />
+        tools:src="@drawable/ic_baseline_image_24" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <TextView
         android:id="@+id/tv_name_twitter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -29,45 +28,123 @@
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@id/iv_profile_picture"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/iv_profile_picture"
-        tools:text="Alexander Jannie" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="text view" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <TextView
         android:id="@+id/tv_username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="username"
+        android:text="text view"
+        android:layout_marginLeft="5dp"
         app:layout_constraintTop_toTopOf="@id/tv_name_twitter"
         app:layout_constraintLeft_toRightOf="@id/tv_name_twitter"
         app:layout_constraintBottom_toBottomOf="@id/tv_name_twitter"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="time"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintTop_toTopOf="@id/tv_name_twitter"
+        app:layout_constraintBottom_toBottomOf="@id/tv_name_twitter"
+        app:layout_constraintLeft_toRightOf="@id/tv_username"/>
+
+    <TextView
         android:id="@+id/tv_message_twitter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="#7D8797"
         android:textSize="12sp"
-        android:layout_marginRight="15dp"
+        android:layout_marginRight="10dp"
         app:layout_constraintLeft_toLeftOf="@id/tv_name_twitter"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_name_twitter"
-        tools:text="Baik ibu, terima kasih banyak atas wakt..." />
+        tools:text="text view" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/iv_gambar_twitter"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_icon_dokter_umum"
-        android:layout_marginRight="15dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_baseline_image_24"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintDimensionRatio="3:2"
         app:layout_constraintTop_toBottomOf="@id/tv_message_twitter"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/tv_name_twitter"/>
+        app:layout_constraintStart_toStartOf="@id/tv_message_twitter"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
+    <Button
+        android:id="@+id/btn_comment"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:drawableTop="@drawable/logo_comment"
+        app:layout_constraintTop_toBottomOf="@id/iv_gambar_twitter"
+        app:layout_constraintLeft_toLeftOf="@id/iv_gambar_twitter"/>
+    <TextView
+        android:id="@+id/tv_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="text"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toRightOf="@id/btn_comment"
+        app:layout_constraintTop_toBottomOf="@id/iv_gambar_twitter"/>
+    <Button
+        android:id="@+id/btn_retweet"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:drawableTop="@drawable/logo_retweet"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toRightOf="@id/tv_comment"
+        app:layout_constraintTop_toBottomOf="@id/iv_gambar_twitter"/>
+    <TextView
+        android:id="@+id/tv_retweet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="text"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintLeft_toRightOf="@id/btn_retweet"
+        app:layout_constraintTop_toBottomOf="@id/iv_gambar_twitter"/>
+    <Button
+        android:id="@+id/btn_like"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:drawableTop="@drawable/logo_like"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toRightOf="@id/tv_retweet"
+        app:layout_constraintTop_toBottomOf="@id/iv_gambar_twitter"/>
+    <TextView
+        android:id="@+id/tv_like"
+        android:text="text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintTop_toBottomOf="@id/iv_gambar_twitter"
+        app:layout_constraintLeft_toRightOf="@id/btn_like"/>
+    <Button
+        android:id="@+id/btn_share"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:drawableTop="@drawable/logo_share"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toRightOf="@id/tv_like"
+        app:layout_constraintTop_toBottomOf="@id/iv_gambar_twitter"/>
     <View
         android:id="@+id/v_separator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#EEEEEE"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_like"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
