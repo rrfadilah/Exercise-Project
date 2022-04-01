@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_hospital_fragment"
+    tools:context=".ui.hospitals.HospitalsFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_hospitals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/nunito_semi_bold"
+        android:text="Nearby Hospitals"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/nunito_semi_bold"
+        android:text="3 tersedia"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_hospitals"
+        app:layout_constraintRight_toRightOf="@id/tv_hospitals"
+        app:layout_constraintTop_toBottomOf="@id/tv_hospitals" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="210dp"
+        android:src="@drawable/shape_rounded_white_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_hospitals"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="15dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="@id/iv_bg"
+        app:layout_constraintLeft_toLeftOf="@id/iv_bg"
+        app:layout_constraintRight_toRightOf="@id/iv_bg"
+        app:layout_constraintTop_toTopOf="@id/iv_bg"
+        tools:listitem="@layout/list_item_hospitals" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

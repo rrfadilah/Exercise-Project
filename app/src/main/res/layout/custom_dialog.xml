@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/shape_rounded_red"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/bg"
+        app:layout_constraintBottom_toTopOf="@id/btn"
+        app:layout_constraintLeft_toLeftOf="@id/bg"
+        app:layout_constraintRight_toRightOf="@id/bg"
+        android:text="Password kurang dari 8 karakter"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/nunito_semi_bold"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        app:layout_constraintRight_toRightOf="@id/bg"
+        app:layout_constraintBottom_toBottomOf="@id/bg"
+        android:text="OK"
+        android:background="@drawable/shape_rounded_white"
+        android:textSize="12sp"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/nunito_semi_bold"
+        android:textColor="@color/black"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

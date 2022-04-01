@@ -3,26 +3,34 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/drawable-v24/shape_rounded_GreyStroke.xml" value="0.11" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/drawable-v24/shape_rounded_whiteGrey.xml" value="0.1295" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/drawable/bg_botton.xml" value="0.1" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/drawable/bg_edittext.xml" value="0.1295" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1295" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/drawable/shape_outline_blue.xml" value="0.1295" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/drawable/shape_outline_grey.xml" value="0.1295" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/drawable/shape_rounded_blue.xml" value="0.1" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/drawable/shape_rounded_cyan.xml" value="0.1295" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/drawable/shape_rounded_white.xml" value="0.1295" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/layout/activity_get_started.xml" value="0.176" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/layout/activity_image.xml" value="0.16486486486486487" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/layout/activity_main.xml" value="0.14722222222222223" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/layout/activity_on_boarding.xml" value="0.16486486486486487" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/layout/activity_sign_in.xml" value="0.176" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/layout/activity_sign_up.xml" value="0.16486486486486487" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/layout/fragment_image1.xml" value="0.16486486486486487" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/layout/fragment_image2.xml" value="0.1" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/layout/fragment_image3.xml" value="0.1" />
-        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/layout/fragment_image4.xml" value="0.1" />
+        <entry key="..\:/Binar/Project/Exercise-Project/app/src/main/res/layout/list_item_message.xml" value="0.16486486486486487" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/drawable-v24/shape_outline_grey.xml" value="0.1755" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/drawable-v24/shape_rounded_white_bg.xml" value="0.1" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/drawable/bg_edittext.xml" value="0.1755" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/drawable/shape_rounded_blue.xml" value="0.1755" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/drawable/shape_rounded_cyan.xml" value="0.1" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/drawable/shape_rounded_red.xml" value="0.1" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/drawable/shape_rounded_white.xml" value="0.138" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout-v28/activity_get_started.xml" value="0.25416666666666665" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/activity_get_started.xml" value="0.25416666666666665" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/activity_navigation.xml" value="0.1" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/activity_sign_in.xml" value="0.25416666666666665" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/activity_sign_up.xml" value="0.25416666666666665" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/custom_dialog.xml" value="0.16321070234113713" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/fragment_custom_dialog.xml" value="0.16486486486486487" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/fragment_doctor.xml" value="0.264" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/fragment_hospitals.xml" value="0.2037037037037037" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/fragment_messages.xml" value="0.22685185185185186" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/fragment_notifications.xml" value="0.25416666666666665" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/list_item_doctor_spesialist.xml" value="0.16321070234113713" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/list_item_hospitals.xml" value="0.25416666666666665" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/list_item_message.xml" value="0.25416666666666665" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/list_item_news.xml" value="0.25416666666666665" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/layout/list_item_top_doctor.xml" value="0.25416666666666665" />
+        <entry key="..\:/Binar/Project/MyDoctor/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

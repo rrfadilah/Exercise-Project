@@ -1,6 +1,12 @@
 <resources>
-    <string name="app_name">Exercise-Project</string>
-    <string name="konsultasi_">Konsultasi dengan\ndokter jadi lebih\nmudah &amp; fleksibel</string>
+    <string name="app_name">My Doctor</string>
+    <string name="getStartedText"><![CDATA[Konsultasi dengan\ndokter jadi lebih\nmudah & fleksibel]]></string>
+    <string name="forgot_my_password"><u>Forgot My Password</u></string>
+    <string name="create_new_account"><u>Create New Account</u></string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="title_doctor">Doctor</string>
+    <string name="title_messages">Messages</string>
+    <string name="title_hospitals">Hospitals</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
