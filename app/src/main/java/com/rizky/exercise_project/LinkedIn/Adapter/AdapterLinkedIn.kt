@@ -23,6 +23,9 @@ class AdapterLinkedIn(private val listFeedsHome: List<ModelLinkedIn>): RecyclerV
         holder.binding.tvDays.text = type.text3
         holder.binding.tvCaption.text = type.text4
         holder.binding.ivImgFeedsPost.setImageResource(type.image2)
+        holder.binding.tvLikes.text = type.text5
+        holder.binding.tvComments.text = type.text6
+        holder.binding.tvShares.text = type.text7
     }
 
     override fun getItemCount(): Int {

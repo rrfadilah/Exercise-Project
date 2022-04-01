@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".LinkedIn.LinkedInActivity"
-    android:background="#999999">
+    android:background="#E9E6DF">
 
     <View
         android:id="@+id/view"
@@ -18,33 +18,35 @@
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/riv_profile"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/bg_profile"
+        android:layout_marginTop="35dp"
         app:riv_corner_radius="50dp"
-        android:padding="10dp"
-        android:src="@drawable/ic_baseline_person_24"
+        android:src="@drawable/shiba"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_message"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:padding="5dp"
         android:layout_marginEnd="15dp"
-        android:src="@drawable/ic_baseline_message_24"
+        android:src="@drawable/message1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/riv_profile" />
+
 
     <EditText
         android:id="@+id/searchView"
         android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:hint="Search"
+        android:textSize="14sp"
+        android:paddingLeft="35dp"
         android:background="@drawable/bg_searchview"
         app:layout_constraintBottom_toBottomOf="@+id/riv_profile"
         app:layout_constraintEnd_toStartOf="@+id/iv_message"
@@ -52,12 +54,21 @@
         app:layout_constraintTop_toTopOf="@+id/riv_profile"
         app:queryHint="Search" />
 
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_baseline_search_24"
+        app:layout_constraintBottom_toBottomOf="@+id/searchView"
+        app:layout_constraintStart_toStartOf="@+id/searchView"
+        app:layout_constraintTop_toTopOf="@+id/searchView" />
+
     <FrameLayout
         android:id="@+id/flLinkedIn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/navigationbottomLinkedIn"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/navigationbottomLinkedIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -66,7 +77,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigationbottomLinkedIn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:itemIconTint="@color/navbar_color"
         app:itemTextColor="@color/navbar_color"
         app:labelVisibilityMode="labeled"

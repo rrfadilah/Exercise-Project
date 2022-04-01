@@ -30,44 +30,59 @@ object TaskList {
 
     val listFeeds = listOf<ModelLinkedIn>(
         ModelLinkedIn(
-            image1 = R.drawable.ic_dribbble,
-            text1 = "Drible",
+            image1 = R.drawable.fiverr,
+            text1 = "Fiverr",
             text2 = "321,725 followers",
-            text3 = "3d",
+            text3 = "1d",
             text4 = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
-            image2 = R.drawable.img_feeds_post
+            image2 = R.drawable.img_feed1,
+            text5 = "12,742",
+            text6 = "1,024 comments",
+            text7 = "625 shares"
         ),
         ModelLinkedIn(
-            image1 = R.drawable.ic_dribbble,
-            text1 = "Drible2",
-            text2 = "321,725 followers",
-            text3 = "3d",
+            image1 = R.drawable.lottie2,
+            text1 = "Lottie",
+            text2 = "786,122 followers",
+            text3 = "1d",
             text4 = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
-            image2 = R.drawable.img_feeds_post
+            image2 = R.drawable.img_feed6,
+            text5 = "24,346",
+            text6 = "547 comments",
+            text7 = "21 shares"
         ),
         ModelLinkedIn(
-            image1 = R.drawable.ic_dribbble,
-            text1 = "Drible3",
-            text2 = "321,725 followers",
-            text3 = "3d",
+            image1 = R.drawable.figma,
+            text1 = "Figma",
+            text2 = "987,468 followers",
+            text3 = "2d",
             text4 = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
-            image2 = R.drawable.img_feeds_post
+            image2 = R.drawable.img_feed3,
+            text5 = "5,879",
+            text6 = "6,341 comments",
+            text7 = "867 shares"
         ),
         ModelLinkedIn(
-            image1 = R.drawable.ic_dribbble,
-            text1 = "Drible4",
-            text2 = "321,725 followers",
-            text3 = "3d",
+            image1 = R.drawable.free3dicon,
+            text1 = "Free3dIcon",
+            text2 = "12,456 followers",
+            text3 = "2d",
             text4 = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
-            image2 = R.drawable.img_feeds_post
+            image2 = R.drawable.img_feed4,
+            text5 = "4,567",
+            text6 = "124 comments",
+            text7 = "21 shares"
         ),
         ModelLinkedIn(
-            image1 = R.drawable.ic_dribbble,
-            text1 = "Drible5",
-            text2 = "321,725 followers",
+            image1 = R.drawable.figma,
+            text1 = "Figma",
+            text2 = "856,325 followers",
             text3 = "3d",
             text4 = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
-            image2 = R.drawable.img_feeds_post
+            image2 = R.drawable.img_feed5,
+            text5 = "64,231",
+            text6 = "1,254 comments",
+            text7 = "984 shares"
         ),
     )
 
