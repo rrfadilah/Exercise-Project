@@ -25,6 +25,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+        // Inflate the layout for this fragment
         _binding = FragmentHomeFacebookBinding.inflate(inflater, container, false)
 
         val recyclerview = binding.rvReels
