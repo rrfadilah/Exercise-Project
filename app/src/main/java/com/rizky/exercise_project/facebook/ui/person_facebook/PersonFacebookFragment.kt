@@ -1,17 +1,15 @@
-package com.rizky.exercise_project.Facebook.ui.group_facebook
+package com.rizky.exercise_project.facebook.ui.person_facebook
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.rizky.exercise_project.databinding.FragmentMenuFacebookBinding
+import com.rizky.exercise_project.databinding.FragmentPersonFacebookBinding
 
-class MenuFacebookFragment : Fragment() {
+class PersonFacebookFragment : Fragment() {
 
-    private var _binding: FragmentMenuFacebookBinding? = null
+    private var _binding: FragmentPersonFacebookBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,10 +20,8 @@ class MenuFacebookFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(GroupFacebookViewModel::class.java)
 
-        _binding = FragmentMenuFacebookBinding.inflate(inflater, container, false)
+        _binding = FragmentPersonFacebookBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         return root

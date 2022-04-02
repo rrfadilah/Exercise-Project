@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.Facebook.ui.notifications_facebook
+package com.rizky.exercise_project.facebook.ui.notifications_facebook
 
 import android.os.Bundle
 import android.view.LayoutInflater

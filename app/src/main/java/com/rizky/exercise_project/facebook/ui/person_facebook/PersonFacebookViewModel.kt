@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.Facebook.ui.group_facebook
+package com.rizky.exercise_project.facebook.ui.group_facebook
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

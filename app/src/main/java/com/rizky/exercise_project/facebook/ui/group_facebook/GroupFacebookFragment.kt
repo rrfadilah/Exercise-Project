@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.Facebook.ui.group_facebook
+package com.rizky.exercise_project.facebook.ui.group_facebook
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.rizky.exercise_project.databinding.FragmentLiveFacebookBinding
+import com.rizky.exercise_project.databinding.FragmentGroupFacebookBinding
 
-class LiveFacebookFragment : Fragment() {
+class GroupFacebookFragment : Fragment() {
 
-    private var _binding: FragmentLiveFacebookBinding? = null
+    private var _binding: FragmentGroupFacebookBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,9 +25,13 @@ class LiveFacebookFragment : Fragment() {
         val dashboardViewModel =
             ViewModelProvider(this).get(GroupFacebookViewModel::class.java)
 
-        _binding = FragmentLiveFacebookBinding.inflate(inflater, container, false)
+        _binding = FragmentGroupFacebookBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        val textView: TextView = binding.textDashboard
+        dashboardViewModel.text.observe(viewLifecycleOwner) {
+            textView.text = it
+        }
         return root
     }
 

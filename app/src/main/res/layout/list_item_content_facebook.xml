@@ -44,7 +44,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tvNameProfilDribble" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/iv_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -60,13 +60,13 @@
                 android:text="Old is Gold..!!"
                 android:textSize="12dp"
                 app:layout_constraintLeft_toLeftOf="@id/ivIconProfilDribble"
-                app:layout_constraintRight_toRightOf=""
                 app:layout_constraintTop_toBottomOf="@id/ivIconProfilDribble" />
 
             <ImageView
+                android:scaleType="fitXY"
                 android:id="@+id/ivImageContent"
                 android:layout_width="match_parent"
-                android:layout_height="365dp"
+                android:layout_height="wrap_content"
                 android:src="@drawable/rectangle29"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvTextContent" />
@@ -79,7 +79,7 @@
                 android:layout_marginTop="15dp"
                 android:src="@drawable/like"
                 app:layout_constraintLeft_toLeftOf="@id/ivIconProfilDribble"
-                app:layout_constraintTop_toBottomOf="@id/ivImageContent" />
+                app:layout_constraintTop_toBottomOf="@id/ivIconSuka" />
 
             <ImageView
                 android:id="@+id/ivIconInsight"
@@ -89,7 +89,7 @@
                 android:layout_marginTop="14dp"
                 android:src="@drawable/heart"
                 app:layout_constraintLeft_toLeftOf="@id/ivIconLove"
-                app:layout_constraintTop_toBottomOf="@id/ivImageContent" />
+                app:layout_constraintTop_toBottomOf="@id/ivIconSuka" />
 
             <TextView
                 android:id="@+id/tvCountAppreciate"
@@ -112,7 +112,16 @@
                 app:layout_constraintTop_toTopOf="@id/ivIconLove" />
 
             <ImageView
-                android:id="@+id/ivBatas"
+                android:id="@+id/ivBatas1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginBottom="10dp"
+                android:background="#D3D3D3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/ivIconProfilDribble"/>
+            <ImageView
+                android:id="@+id/ivBatas2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="15dp"
@@ -121,12 +130,13 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvCountCommentShare" />
 
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivIconSuka"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="27dp"
-                android:layout_marginTop="-28dp"
+                android:layout_marginTop="20dp"
                 android:src="@drawable/ic_like"
                 app:layout_constraintLeft_toLeftOf="@id/ivIconProfilDribble"
                 app:layout_constraintTop_toBottomOf="@id/ivImageContent" />
@@ -136,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="-28dp"
+                android:layout_marginTop="20dp"
                 android:src="@drawable/ic_commentar"
                 app:layout_constraintLeft_toRightOf="@id/ivIconSuka"
                 app:layout_constraintTop_toBottomOf="@id/ivImageContent" />
@@ -145,7 +155,7 @@
                 android:id="@+id/ivIconSend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-28dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginStart="30dp"
                 android:src="@drawable/ic_massanger"
                 app:layout_constraintLeft_toRightOf="@id/ivIconComment"

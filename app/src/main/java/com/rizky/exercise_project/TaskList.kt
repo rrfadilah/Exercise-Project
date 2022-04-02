@@ -3,6 +3,7 @@ package com.rizky.exercise_project
 import com.rizky.exercise_project.Doctor.ModelDoctor
 import com.rizky.exercise_project.Doctor.ModelDoctorSecond
 import com.rizky.exercise_project.Doctor.ModelDoctorThird
+import com.rizky.exercise_project.facebook.ui.home_facebook.ReelsFacebookModel
 import com.rizky.exercise_project.LinkedIn.Model.ModelLinkedIn
 
 object TaskList {
@@ -26,6 +27,10 @@ object TaskList {
         ModelDoctorThird(image1 = R.drawable.ic_icon_butuh_dokter_umum_1, text1 = "Is it safe to stay at home during coronavirus?", text2 = "Today"),
         ModelDoctorThird(image1 = R.drawable.ic_icon_butuh_dokter_umum_1, text1 = "Consume yellow citrus helps you healthier", text2 = "Yesterday"),
         ModelDoctorThird(image1 = R.drawable.ic_icon_butuh_dokter_umum_1, text1 = "Learn how to make a proper orange juice at home", text2 = "2 days ago"),
+    )
+    val listReelsFacebook = listOf<ReelsFacebookModel>(
+        ReelsFacebookModel(image1 = R.drawable.rectangle483, image2 = R.drawable.profilephoto ),
+        ReelsFacebookModel(image1 = R.drawable.rectangle483, image2 = R.drawable.profilephoto)
     )
 
     val listFeeds = listOf<ModelLinkedIn>(

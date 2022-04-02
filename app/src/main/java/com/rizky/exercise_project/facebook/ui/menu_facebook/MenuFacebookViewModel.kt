@@ -1,10 +1,10 @@
-package com.rizky.exercise_project.Facebook.ui.group_facebook
+package com.rizky.exercise_project.facebook.ui.group_facebook
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class GroupFacebookViewModel : ViewModel() {
+class MenuFacebookViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is group_facebook Fragment"

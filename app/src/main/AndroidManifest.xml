@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExerciseProject">
         <activity
-            android:name=".Facebook.Facebook"
+            android:name=".facebook.Facebook"
             android:exported="true"
             android:label="@string/title_activity_facebook" >
             <intent-filter>

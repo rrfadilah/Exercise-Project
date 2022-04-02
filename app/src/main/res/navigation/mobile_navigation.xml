@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.rizky.exercise_project.Facebook.ui.home_facebook.HomeFragment"
+        android:name="com.rizky.exercise_project.facebook.ui.home_facebook.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home_facebook" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.rizky.exercise_project.Facebook.ui.group_facebook.GroupFacebookFragment"
+        android:name="com.rizky.exercise_project.facebook.ui.group_facebook.GroupFacebookFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_group_facebook" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.rizky.exercise_project.Facebook.ui.notifications_facebook.NotificationsFacebookFragment"
+        android:name="com.rizky.exercise_project.facebook.ui.notifications_facebook.NotificationsFacebookFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications_facebook" />
 </navigation>
