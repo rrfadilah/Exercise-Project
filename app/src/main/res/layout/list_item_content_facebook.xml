@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvContent"
@@ -18,7 +18,7 @@
                 android:id="@+id/ivIconProfilDribble"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/personimage"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -28,9 +28,9 @@
                 android:id="@+id/tvNameProfilDribble"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:text="Deven Mestry"
-                android:textSize="17dp"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toRightOf="@id/ivIconProfilDribble"
                 app:layout_constraintTop_toTopOf="@id/ivIconProfilDribble" />
@@ -58,15 +58,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Old is Gold..!!"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 app:layout_constraintLeft_toLeftOf="@id/ivIconProfilDribble"
                 app:layout_constraintTop_toBottomOf="@id/ivIconProfilDribble" />
 
             <ImageView
-                android:scaleType="fitXY"
                 android:id="@+id/ivImageContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:scaleType="fitXY"
                 android:src="@drawable/rectangle29"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvTextContent" />
@@ -75,7 +75,7 @@
                 android:id="@+id/ivIconLove"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/like"
                 app:layout_constraintLeft_toLeftOf="@id/ivIconProfilDribble"
@@ -85,7 +85,7 @@
                 android:id="@+id/ivIconInsight"
                 android:layout_width="17dp"
                 android:layout_height="17dp"
-                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
                 android:layout_marginTop="14dp"
                 android:src="@drawable/heart"
                 app:layout_constraintLeft_toLeftOf="@id/ivIconLove"
@@ -95,7 +95,7 @@
                 android:id="@+id/tvCountAppreciate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
+                android:layout_marginStart="3dp"
                 android:text="Liked by Sachin Kamble and 155 others "
                 android:textSize="11sp"
                 app:layout_constraintLeft_toRightOf="@id/ivIconInsight"
@@ -105,7 +105,7 @@
                 android:id="@+id/tvCountCommentShare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:text="9 comments•47 shares"
                 android:textSize="11sp"
                 app:layout_constraintRight_toRightOf="parent"
@@ -118,13 +118,14 @@
                 android:layout_marginHorizontal="5dp"
                 android:layout_marginBottom="10dp"
                 android:background="#D3D3D3"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/ivIconProfilDribble"/>
+                app:layout_constraintBottom_toTopOf="@+id/ivIconProfilDribble"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
             <ImageView
                 android:id="@+id/ivBatas2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginHorizontal="15dp"
+                android:layout_marginHorizontal="5dp"
                 android:layout_marginTop="15dp"
                 android:background="#D3D3D3"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -135,7 +136,7 @@
                 android:id="@+id/ivIconSuka"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="27dp"
+                android:layout_marginStart="27dp"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/ic_like"
                 app:layout_constraintLeft_toLeftOf="@id/ivIconProfilDribble"
@@ -145,7 +146,7 @@
                 android:id="@+id/ivIconComment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/ic_commentar"
                 app:layout_constraintLeft_toRightOf="@id/ivIconSuka"
@@ -155,8 +156,8 @@
                 android:id="@+id/ivIconSend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
                 android:src="@drawable/ic_massanger"
                 app:layout_constraintLeft_toRightOf="@id/ivIconComment"
                 app:layout_constraintTop_toBottomOf="@id/ivImageContent" />

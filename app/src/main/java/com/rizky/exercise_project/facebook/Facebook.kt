@@ -6,7 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.rizky.exercise_project.R
 import com.rizky.exercise_project.databinding.ActivityFacebookBinding
+import com.rizky.exercise_project.facebook.ui.group_facebook.GroupFacebookFragment
 import com.rizky.exercise_project.facebook.ui.home_facebook.HomeFragment
+import com.rizky.exercise_project.facebook.ui.live_facebook.LiveFacebookFragment
+import com.rizky.exercise_project.facebook.ui.notifications_facebook.NotificationsFacebookFragment
+import com.rizky.exercise_project.facebook.ui.person_facebook.PersonFacebookFragment
 
 
 class Facebook : AppCompatActivity() {
@@ -21,13 +25,15 @@ class Facebook : AppCompatActivity() {
         binding.navViewFacebook.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home_facebook -> setCurrentFragment(HomeFragment())
+                R.id.navigation_group_facebook -> setCurrentFragment(GroupFacebookFragment())
+                R.id.navigation_live_facebook -> setCurrentFragment(LiveFacebookFragment())
+                R.id.navigation_person_facebook -> setCurrentFragment(PersonFacebookFragment())
+                R.id.navigation_notification_facebook -> setCurrentFragment(NotificationsFacebookFragment())
+
             }
             true
-            //set elevation 0
-
         }
-
-
+        setCurrentFragment(HomeFragment())
     }
 
     private fun setCurrentFragment(fragment: Fragment) {

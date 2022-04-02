@@ -92,7 +92,7 @@ class HomeFragment : Fragment() {
                 "Deven Mestry",
                 "1 h .  Mumbai, Maharastra .",
                 "Old is Gold..!!",
-                "Liked by Sachin Kamble and 155 others",
+                "Liked by Sachin Kamble",
                 "9 comments•47 shares",
             )
         )
@@ -109,7 +109,7 @@ class HomeFragment : Fragment() {
                 "Deven Mestry",
                 "1 h .  Mumbai, Maharastra .",
                 "Old is Gold..!!",
-                "Liked by Sachin Kamble and 155 others",
+                "Liked by Sachin Kamble",
                 "9 comments•47 shares",
             )
         )
@@ -126,7 +126,7 @@ class HomeFragment : Fragment() {
                 "Deven Mestry",
                 "1 h .  Mumbai, Maharastra .",
                 "Old is Gold..!!",
-                "Liked by Sachin Kamble and 155 others",
+                "Liked by Sachin Kamble",
                 "9 comments•47 shares",
             )
         )
@@ -143,7 +143,7 @@ class HomeFragment : Fragment() {
                 "Deven Mestry",
                 "1 h .  Mumbai, Maharastra .",
                 "Old is Gold..!!",
-                "Liked by Sachin Kamble and 155 others",
+                "Liked by Sachin Kamble",
                 "9 comments•47 shares",
             )
         )
@@ -156,9 +156,9 @@ class HomeFragment : Fragment() {
         // Setting the Adapter with the recyclerview
         recyclerview2.adapter = adapter2
 
-        recyclerview2.layoutManager = LinearLayoutManager(context)
-
-
+        //set recyclerview2 to vertical
+        recyclerview2.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        recyclerview2.isNestedScrollingEnabled = false
 
         return binding.root
     }
