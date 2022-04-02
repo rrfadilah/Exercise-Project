@@ -45,15 +45,6 @@ class Facebook : AppCompatActivity() {
                     setCurrentFragment(fragmentNotificationFacebook)
                 }
             }
-//            when (it.itemId) {
-//                R.id.navigation_home_facebook -> setCurrentFragment(fragmentHomeFacebook)
-//                R.id.navigation_group_facebook -> setCurrentFragment(fragmentGroupFacebook)
-//                R.id.navigation_live_facebook -> setCurrentFragment(fragmentLiveFacebook)
-//                R.id.navigation_person_facebook -> setCurrentFragment(fragmentPersonFacebook)
-//                R.id.navigation_notification_facebook -> setCurrentFragment(fragmentNotificationFacebook)
-//
-//            }
-            true
         }
         setCurrentFragment(HomeFragment())
 
