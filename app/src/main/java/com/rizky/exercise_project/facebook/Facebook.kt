@@ -1,6 +1,5 @@
 package com.rizky.exercise_project.facebook
 
-import ReelsFacebookAdapter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -22,18 +21,42 @@ class Facebook : AppCompatActivity() {
         binding = ActivityFacebookBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.navViewFacebook.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.navigation_home_facebook -> setCurrentFragment(HomeFragment())
-                R.id.navigation_group_facebook -> setCurrentFragment(GroupFacebookFragment())
-                R.id.navigation_live_facebook -> setCurrentFragment(LiveFacebookFragment())
-                R.id.navigation_person_facebook -> setCurrentFragment(PersonFacebookFragment())
-                R.id.navigation_notification_facebook -> setCurrentFragment(NotificationsFacebookFragment())
+        val fragmentHomeFacebook = HomeFragment()
+        val fragmentGroupFacebook = GroupFacebookFragment()
+        val fragmentLiveFacebook = LiveFacebookFragment()
+        val fragmentPersonFacebook = PersonFacebookFragment()
+        val fragmentNotificationFacebook = NotificationsFacebookFragment()
 
+        binding.navViewFacebook.setOnItemReselectedListener {
+            when (it.itemId) {
+                R.id.navigation_home -> {
+                    setCurrentFragment(fragmentHomeFacebook)
+                }
+                R.id.navigation_group_facebook -> {
+                    setCurrentFragment(fragmentGroupFacebook)
+                }
+                R.id.navigation_live_facebook -> {
+                    setCurrentFragment(fragmentLiveFacebook)
+                }
+                R.id.navigation_person_facebook -> {
+                    setCurrentFragment(fragmentPersonFacebook)
+                }
+                R.id.navigation_notifications -> {
+                    setCurrentFragment(fragmentNotificationFacebook)
+                }
             }
+//            when (it.itemId) {
+//                R.id.navigation_home_facebook -> setCurrentFragment(fragmentHomeFacebook)
+//                R.id.navigation_group_facebook -> setCurrentFragment(fragmentGroupFacebook)
+//                R.id.navigation_live_facebook -> setCurrentFragment(fragmentLiveFacebook)
+//                R.id.navigation_person_facebook -> setCurrentFragment(fragmentPersonFacebook)
+//                R.id.navigation_notification_facebook -> setCurrentFragment(fragmentNotificationFacebook)
+//
+//            }
             true
         }
         setCurrentFragment(HomeFragment())
+
     }
 
     private fun setCurrentFragment(fragment: Fragment) {

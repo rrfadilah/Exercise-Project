@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_home_facebook"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_home_active"
         android:title="home" />
     <item
         android:id="@+id/navigation_group_facebook"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_group_icon"
         android:title="group" />
     <item
         android:id="@+id/navigation_person_facebook"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/ic_personal_icon"
         android:title="person" />
     <item
         android:id="@+id/navigation_live_facebook"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/ic_video_icon"
         android:title="live" />
     <item
         android:id="@+id/navigation_notification_facebook"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/ic_notification_icon"
         android:title="notifications" />
 </menu>

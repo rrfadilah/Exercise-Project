@@ -9,25 +9,45 @@
         android:id="@+id/navigation_home_facebook"
         android:name="com.rizky.exercise_project.facebook.ui.home_facebook.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home_facebook" />
+        tools:layout="@layout/fragment_home_facebook" >
+        <action
+            android:id="@+id/action_navigation_home_facebook_to_navigation_notification_facebook"
+            app:destination="@id/navigation_notification_facebook" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_group_facebook"
         android:name="com.rizky.exercise_project.facebook.ui.group_facebook.GroupFacebookFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_group_facebook" />
+        tools:layout="@layout/fragment_group_facebook" >
+        <action
+            android:id="@+id/action_navigation_group_facebook_to_navigation_home_facebook"
+            app:destination="@id/navigation_home_facebook" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notification_facebook"
         android:name="com.rizky.exercise_project.facebook.ui.notifications_facebook.NotificationsFacebookFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications_facebook" />
+        tools:layout="@layout/fragment_notifications_facebook" >
+        <action
+            android:id="@+id/action_navigation_notification_facebook_to_liveFacebookFragment"
+            app:destination="@id/liveFacebookFragment" />
+    </fragment>
     <fragment
         android:id="@+id/liveFacebookFragment"
         android:name="com.rizky.exercise_project.facebook.ui.group_facebook.LiveFacebookFragment"
-        android:label="LiveFacebookFragment" />
+        android:label="LiveFacebookFragment" >
+        <action
+            android:id="@+id/action_liveFacebookFragment_to_personFacebookFragment"
+            app:destination="@id/personFacebookFragment" />
+    </fragment>
     <fragment
         android:id="@+id/personFacebookFragment"
         android:name="com.rizky.exercise_project.facebook.ui.group_facebook.PersonFacebookFragment"
-        android:label="PersonFacebookFragment" />
+        android:label="PersonFacebookFragment" >
+        <action
+            android:id="@+id/action_personFacebookFragment_to_navigation_group_facebook"
+            app:destination="@id/navigation_group_facebook" />
+    </fragment>
 </navigation>
