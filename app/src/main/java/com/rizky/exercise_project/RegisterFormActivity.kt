@@ -1,9 +1,7 @@
 package com.rizky.exercise_project
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import com.rizky.exercise_project.databinding.ActivityRegisterFormBinding
 
 class RegisterFormActivity : AppCompatActivity() {
@@ -19,6 +17,8 @@ class RegisterFormActivity : AppCompatActivity() {
         binding = ActivityRegisterFormBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
 
         val bundle = intent.extras
         val loginEmail = bundle?.getString(INTENT_EMAIL)

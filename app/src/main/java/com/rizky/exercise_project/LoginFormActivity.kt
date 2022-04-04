@@ -4,21 +4,26 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.edit
 import com.google.android.material.snackbar.Snackbar
 import com.rizky.exercise_project.databinding.ActivityLoginFormBinding
 
 class LoginFormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginFormBinding
+    val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginFormBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+
 
         val email = binding.formEmail.text
         val password = binding.formPassword.text
@@ -35,6 +40,8 @@ class LoginFormActivity : AppCompatActivity() {
 
         binding.btnSignIn.setOnClickListener {
 
+            sharedPreferences()
+
             val passwordCombine = "^(?=.*[a-zA-Z]).{8,}$"
             val email: String = binding.formEmail.text.toString()
             val password: String = binding.formPassword.text.toString()
@@ -42,7 +49,8 @@ class LoginFormActivity : AppCompatActivity() {
             if (email.trim().isEmpty() && password.trim().isEmpty()) {
                 dialogActivity(
                     "Kolom Email & Password Kosong",
-                    "Kolom email dan kolom password adalah wajib. Mohon isi keduanya.")
+                    "Kolom email dan kolom password adalah wajib. Mohon isi keduanya."
+                )
             } else if (email.trim().isEmpty()) {
                 dialogActivity(
                     "Kolom Email Kosong",
@@ -51,12 +59,13 @@ class LoginFormActivity : AppCompatActivity() {
             } else if (!isValidEmail(email.trim())) {
                 dialogActivity(
                     "Email Salah",
-                "Mohon isikan email dengan benar")
+                    "Mohon isikan email dengan benar"
+                )
             } else if (password.trim().isEmpty()) {
-              dialogActivity(
-                  "Kolom Password Kosong",
-                  "Kolom password wajib diisi"
-              )
+                dialogActivity(
+                    "Kolom Password Kosong",
+                    "Kolom password wajib diisi"
+                )
             } else if (password.trim().length < 8) {
                 dialogCustomLayout()
             } else if (!password.trim().matches(Regex(passwordCombine))) {
@@ -64,6 +73,7 @@ class LoginFormActivity : AppCompatActivity() {
             } else {
                 dialogStandard("Login success", "Selamat. Login berhasil.")
             }
+
 
 //            if (email.trim().isEmpty()) {
 //                nullEmail()
@@ -78,6 +88,8 @@ class LoginFormActivity : AppCompatActivity() {
 //            } else {
 //                Toast.makeText(this, R.string.Done, Toast.LENGTH_SHORT).show()
 //            }
+
+
         }
 
         binding.forgotPassword.setOnClickListener {
@@ -88,6 +100,27 @@ class LoginFormActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         Toast.makeText(this, R.string.backPressed, Toast.LENGTH_SHORT).show()
+    }
+
+    /* Kumpulan Shared Preferences */
+    private fun sharedPreferences() {
+        // Shared Preferences untuk login
+        val prefEmail = binding.formEmail.text.toString()
+        val prefPassword = binding.formPassword.text.toString()
+        // untuk melakukan penyimpanan ke sharedpreferences hanya menggunakan kode berikut
+        pref.edit {
+            putString(Constant.Preferences.KEY.PREF_EMAIL, prefEmail)
+            putString(Constant.Preferences.KEY.PREF_PASSWORD, prefPassword)
+            apply()
+        }
+        // untuk mengambil data dari shared preferences menggunakan kode berikut
+        val preferencesEmail = pref.getString(Constant.Preferences.KEY.PREF_EMAIL, "")
+        val preferencesPassword = pref.getString(Constant.Preferences.KEY.PREF_PASSWORD, "")
+        Snackbar.make(
+            binding.root,
+            "Value yang tersimpan adalah berukut: Email $preferencesEmail dan password $preferencesPassword",
+            Snackbar.LENGTH_INDEFINITE
+        ).show()
     }
 
     /* Kumpulan Dialog */
@@ -139,32 +172,40 @@ class LoginFormActivity : AppCompatActivity() {
                     .show()
             }.show()
     }
+
     // Email kosong
     private fun nullEmail() {
         Toast.makeText(this, R.string.nullEmail, Toast.LENGTH_LONG).show()
     }
+
     // Invalid Email
     private fun invalidEmail() {
         Toast.makeText(this, R.string.invalidEmail, Toast.LENGTH_LONG).show()
     }
+
     private fun isValidEmail(target: CharSequence): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(target).matches()
     }
+
     // Password kosong
     private fun nullPassword() {
         Toast.makeText(this, R.string.nullPassword, Toast.LENGTH_LONG).show()
     }
+
     // Password kurang dari 8 karakter
     private fun lessPassword() {
         Toast.makeText(this, R.string.lessPassword, Toast.LENGTH_LONG).show()
     }
+
     private fun isValidPassword(target: CharSequence): Boolean {
         return false
     }
+
     // Password tidak ada UPPERCASE dan lowercase
     private fun passwordLowUppercase() {
         Toast.makeText(this, R.string.passwordLowUppercase, Toast.LENGTH_LONG).show()
     }
+
     // Snackbar untuk Forgot Password
     private fun forgotPassword() {
         Snackbar.make(binding.root, R.string.forgotPassword, Snackbar.LENGTH_SHORT).show()
