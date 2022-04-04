@@ -1,5 +1,22 @@
 <resources>
     <string name="app_name">Exercise-Project</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- Custom Toast -->
+    <string name="Done">Semua Terpenuhi</string>
+    <string name="nullEmail">Email masih kosong</string>
+    <string name="invalidEmail">Email invalid</string>
+    <string name="nullPassword">Password masih kosong</string>
+    <string name="lessPassword">Password kurang dari 8 karakter</string>
+    <string name="passwordLowUppercase">Password harus mengandung UPPERCASE dan lowercase</string>
+    <string name="backPressed">Ini muncul ketika kembali</string>
+    <string name="registerPressed">Ini muncul ketika tombol Register diklik</string>
+    <string name="forgotPassword">Kamu telah menekan Forgot Password</string>
+    <string name="custom_dialog_message">Password kamu kurang dari 8 karakter</string>
+    <string name="custom_fragment_message">Password kombinasi setidaknya harus berupa minimal 1 huruf besar dan 1 huruf kecil dan minimal 8 huruf. \nContoh: AbdulHafiz</string>
 </resources>

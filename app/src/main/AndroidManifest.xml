@@ -10,11 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExerciseProject">
         <activity
+            android:name=".menu.MenuActivity"
+            android:exported="false"
+            android:label="@string/title_activity_menu" />
+        <activity
             android:name=".LoginFormActivity"
             android:exported="false" />
         <activity
             android:name=".galleryfragment.GalleryActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".samplefragment.PicturesActivity"
             android:exported="false" />

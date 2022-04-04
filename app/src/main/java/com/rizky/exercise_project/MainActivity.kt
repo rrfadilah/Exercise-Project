@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         Handler().postDelayed({
             val intent = Intent(this@MainActivity, OnBoardingActivity::class.java)
             startActivity(intent)
-        }, 5000)
+        }, 2000)
 
     }
 
