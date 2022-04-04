@@ -4,8 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_onboarding"
     tools:context=".OnBoardingActivity">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vpImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <ImageView
         android:id="@+id/ivLogo"
@@ -25,20 +29,28 @@
         android:layout_marginTop="90dp"
         android:layout_marginRight="85dp"
         android:text="Konsultasi dengan\ndokter jadi lebih\nmudah dan fleksibel"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/black"
         android:textFontWeight="600"
         android:textSize="28sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivLogo" />
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vpBackground"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLabel" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnGetStarted"
+        style="@style/GeneralButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginBottom="16dp"
-        style="@style/GeneralButton"
         android:text="Get Started"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btnSignIn"
