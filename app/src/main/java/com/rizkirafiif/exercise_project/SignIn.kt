@@ -2,24 +2,34 @@ package com.rizkirafiif.exercise_project
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.provider.Settings.Global.putString
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.edit
+import com.google.android.material.snackbar.Snackbar
 import com.rizkirafiif.exercise_project.model.Biodata
 import com.rizkirafiif.exercise_project.model.UserInfo
 import com.rizkirafiif.exercise_project.samplefragment.PicturesActivity
+import com.rizky.exercise_project.R
+import com.rizky.exercise_project.databinding.ActivitySignInBinding
 import java.util.*
 
 class SignIn : AppCompatActivity() {
+    lateinit var binding: ActivitySignInBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_in)
+        binding = ActivitySignInBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Untuk menerima intent explicit
         //val valueFromAnotherActivity = intent.getStringExtra(Constant.Intent.EMAIL)
@@ -48,15 +58,61 @@ class SignIn : AppCompatActivity() {
 
         // dialog action
         //dialogAction()
-
         //dialogCustom()
-
         //dialogFragment()
-
         authDialog()
+
+        // shared preference
+        val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
+        val btnSignIn:Button = findViewById(R.id.btnSignIn)
+        btnSignIn.setOnClickListener{
+
+        }
+
 
     }
 
+//    ------------------------------------//------------------------------------------
+// contoh pengguanan sharedpreferences di dalam sign in
+    fun sharedPreferences(pref: SharedPreferences) {
+        val etEmail : EditText = findViewById(R.id.etEmail)
+        val etPassword : EditText = findViewById(R.id.etPassword)
+
+        // untuk melakukan penyimpanan ke sharedpreferences hanya mengguanakn code berikut ini
+        pref.edit{
+            putString(Constant.Preferences.KEY.EMAIL, etEmail.toString())
+            putString(Constant.Preferences.KEY.PASSWORD, etPassword.toString())
+            apply()
+        }
+
+        // untuk mengambil data dari shared preferences menggunakan code berikut ini
+        val prefEmail = pref.getString(Constant.Preferences.KEY.EMAIL, "")
+        val prefPassword = pref.getString(Constant.Preferences.KEY.PASSWORD, "")
+        Snackbar.make(
+            binding.root,
+            "Value yang tersimpan adalah berikut: Email: $prefEmail dan Password: $prefPassword",
+            Snackbar.LENGTH_INDEFINITE
+        ).show()
+    }
+
+    // contoh pengguanaan shared preferences untuk konfigurasi aplikasi
+    fun sharedPrefDarkMode(pref: SharedPreferences, darkMode: Boolean) {
+        pref.edit {
+            putBoolean(Constant.Preferences.KEY.DARK_MODE, darkMode)
+        }
+        pref.getBoolean(Constant.Preferences.KEY.DARK_MODE, false)
+    }
+
+
+    fun sharedPrefLanguage(pref: SharedPreferences, language: String) {
+        pref.edit {
+            putString(Constant.Preferences.KEY.APP_LANGUAGE, language)
+        }
+        pref.getString(Constant.Preferences.KEY.APP_LANGUAGE, "id")
+    }
+
+
+//    -------------------------------------//------------------------------------------
     fun openPage(){
         Toast.makeText(this, getString(R.string.buka_sign_in), Toast.LENGTH_LONG).show()
     }
