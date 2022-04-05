@@ -25,4 +25,14 @@ object Constant {
             const val APP_LANGUAGE = "APP_LANGUAGE"
         }
     }
+
+    object Register {
+        const val PREF_REGISTER = "Register"
+        object KEY {
+            const val FULLNAME = "FULLNAME"
+            const val EMAIL = "EMAIL"
+            const val PASSWORD = "PASSWORD"
+            const val PEKERJAAN = "PEKERJAAN"
+        }
+    }
 }

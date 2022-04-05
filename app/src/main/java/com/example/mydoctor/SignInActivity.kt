@@ -24,7 +24,7 @@ class SignInActivity : AppCompatActivity() {
 
         val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
         binding.btnSignIn.setOnClickListener {
-            sharedPreferences(pref)
+            signIn(pref)
         }
 //        signIn()
         signUp()
@@ -34,9 +34,8 @@ class SignInActivity : AppCompatActivity() {
         return Patterns.EMAIL_ADDRESS.matcher(target).matches()
     }
 
-    fun signIn() {
+    fun signIn(pref: SharedPreferences) {
 
-        binding.btnSignIn.setOnClickListener {
             val email = binding.inputEmail.text.toString()
             val password = binding.inputPassword.text.toString()
 //            val emailRegex = compile(
@@ -115,8 +114,20 @@ class SignInActivity : AppCompatActivity() {
                 )
                     .show()
             } else {
-                val intent = Intent(this, NavigationActivity::class.java)
-                startActivity(intent)
+                val prefEmail = pref.getString(Constant.Register.KEY.EMAIL, "")
+                val prefPassword = pref.getString(Constant.Register.KEY.PASSWORD, "")
+                if (email == prefEmail && password == prefPassword) {
+                    val intent = Intent(this, NavigationActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(
+                        binding.btnSignIn.context,
+                        "Email dan Password Salah",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+
             }
 
         }
@@ -127,7 +138,7 @@ class SignInActivity : AppCompatActivity() {
 //            val intent = Intent(this, NavigationActivity::class.java)
 //            startActivity(intent)
 //        }
-    }
+
 
     fun signUp() {
         val email = binding.inputEmail.text
