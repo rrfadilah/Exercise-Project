@@ -9,17 +9,26 @@ import com.google.android.material.tabs.TabLayoutMediator
 import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.adapter.OnBoardAdapter
 import id.anantyan.exerciseproject.databinding.ActivityOnBoardBinding
+import id.anantyan.utils.sharedPreferences.PreferenceHelper
+import id.anantyan.utils.sharedPreferences.PreferenceManager
 
 class OnBoardActivity : AppCompatActivity() {
 
     private lateinit var adapter: OnBoardAdapter
     private lateinit var binding: ActivityOnBoardBinding
+    private val preferences: PreferenceHelper by lazy { PreferenceManager(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOnBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        onBinding()
+        if (preferences.getEmail().isNullOrEmpty()) {
+            onBinding()
+        } else {
+            val intent = Intent(this, BaseFragmentActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun onBinding() {

@@ -2,6 +2,7 @@ package id.anantyan.utils
 
 import com.google.android.material.textfield.TextInputLayout
 import id.anantyan.utils.validator.Validation
+import id.anantyan.utils.validator.rules.common.equalTo
 import id.anantyan.utils.validator.rules.common.minimumLength
 import id.anantyan.utils.validator.rules.common.notEmpty
 import id.anantyan.utils.validator.rules.common.notNull

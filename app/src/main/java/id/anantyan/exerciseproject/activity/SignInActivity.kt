@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.databinding.ActivitySignInBinding
 import id.anantyan.exerciseproject.databinding.DialogExampleBinding
 import id.anantyan.exerciseproject.fragment.DialogExampleFragment
@@ -18,6 +19,8 @@ import id.anantyan.exerciseproject.model.Users
 import id.anantyan.utils.Constant.PASSING_TO_SIGN_UP_ACTIVITY
 import id.anantyan.utils.Validation.emailValid
 import id.anantyan.utils.Validation.passwordValid
+import id.anantyan.utils.sharedPreferences.PreferenceHelper
+import id.anantyan.utils.sharedPreferences.PreferenceManager
 import id.anantyan.utils.validator.Validator
 import id.anantyan.utils.validator.constant.Mode
 import id.anantyan.utils.validator.validator
@@ -25,6 +28,7 @@ import id.anantyan.utils.validator.validator
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
+    private val preferences: PreferenceHelper by lazy { PreferenceManager(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,19 +64,22 @@ class SignInActivity : AppCompatActivity() {
 
     private val onSignIn = object : Validator.OnValidateListener {
         override fun onValidateSuccess(values: List<String>) {
-            val item = Users(
-                email = binding.txtInputLayoutEmail.text.toString(),
-                password = binding.txtInputLayoutPassword.text.toString()
-            )
-            val intent = Intent(this@SignInActivity, BaseFragmentActivity::class.java)
-            startActivity(intent)
-            finish()
-            onToast(this@SignInActivity, item.toString())
+            when {
+                preferences.getEmail() != binding.txtInputLayoutEmail.text.toString() -> {
+                    onSnackbar(binding.root, getString(R.string.txt_not_found_email))
+                }
+                preferences.getPassword() != binding.txtInputLayoutPassword.text.toString() -> {
+                    onSnackbar(binding.root, getString(R.string.txt_not_found_password))
+                }
+                else -> {
+                    val intent = Intent(this@SignInActivity, BaseFragmentActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }
         }
 
-        override fun onValidateFailed(errors: List<String>) {
-            onSnackbar(binding.root, errors[0])
-        }
+        override fun onValidateFailed(errors: List<String>) {}
     }
 
     /**

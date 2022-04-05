@@ -1,41 +1,28 @@
-package id.anantyan.exerciseproject.adapter
+package id.anantyan.exerciseproject.adapter.messages
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import id.anantyan.exerciseproject.databinding.ListItemMessagesBinding
 import id.anantyan.exerciseproject.model.Messages
 
-class MessagesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MessagesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), MessagesHelper {
     private var oldMessages: MutableList<Messages> = mutableListOf()
-
-    val differ: (List<Messages>) -> Unit = {
-        val diffUtil = DiffUtilMessages(oldMessages, it)
-        val diffResult = DiffUtil.calculateDiff(diffUtil)
-        oldMessages.clear()
-        oldMessages.addAll(it)
-        diffResult.dispatchUpdatesTo(this)
-    }
-
-    private var onClick: ((Int, Messages) -> Unit)? = null
-    private var onLongClick: ((Int, Messages) -> Unit)? = null
-
-    fun setOnClick(listener: (Int, Messages) -> Unit) { onClick = listener }
-    fun setOnLongClick(listener: (Int, Messages) -> Unit) { onLongClick = listener }
+    private var _onClick : ((Int, Messages) -> Unit)? = null
+    private var _onLongClick : ((Int, Messages) -> Unit)? = null
 
     inner class ViewHolder(val binding: ListItemMessagesBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
             itemView.setOnClickListener {
-                onClick?.let {
+                _onClick?.let {
                     it(adapterPosition, oldMessages[adapterPosition])
                 }
             }
             itemView.setOnLongClickListener {
-                onLongClick?.let {
+                _onLongClick?.let {
                     it(adapterPosition, oldMessages[adapterPosition])
                 }
                 true
@@ -66,6 +53,26 @@ class MessagesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemCount(): Int {
         return oldMessages.size
     }
+
+    override fun init(): RecyclerView.Adapter<RecyclerView.ViewHolder> {
+        return this
+    }
+
+    override fun differ(listItem: List<Messages>) {
+        val diffUtil = DiffUtilMessages(oldMessages, listItem)
+        val diffResult = DiffUtil.calculateDiff(diffUtil)
+        oldMessages.clear()
+        oldMessages.addAll(listItem)
+        diffResult.dispatchUpdatesTo(this)
+    }
+
+    override fun onClick(listener: (Int, Messages) -> Unit) {
+        _onClick = listener
+    }
+
+    override fun onLongClick(listener: (Int, Messages) -> Unit) {
+        _onLongClick = listener
+    }
 }
 
 class DiffUtilMessages(
@@ -73,13 +80,9 @@ class DiffUtilMessages(
     private val newMessages: List<Messages>
 ) : DiffUtil.Callback() {
 
-    override fun getOldListSize(): Int {
-        return oldMessages.size
-    }
+    override fun getOldListSize() = oldMessages.size
 
-    override fun getNewListSize(): Int {
-        return newMessages.size
-    }
+    override fun getNewListSize() = newMessages.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return oldMessages[oldItemPosition].senderName == newMessages[newItemPosition].senderName

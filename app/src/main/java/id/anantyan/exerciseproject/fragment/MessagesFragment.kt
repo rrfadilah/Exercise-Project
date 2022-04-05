@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.activity.BaseFragmentActivity
 import id.anantyan.exerciseproject.activity.MessagesDetailActivity
-import id.anantyan.exerciseproject.adapter.MessagesAdapter
+import id.anantyan.exerciseproject.adapter.messages.MessagesAdapter
+import id.anantyan.exerciseproject.adapter.messages.MessagesHelper
 import id.anantyan.exerciseproject.databinding.FragmentMessagesBinding
 import id.anantyan.exerciseproject.model.Messages
 import id.anantyan.utils.Constant.PASSING_TO_MESSAGES_ACTIVITY
@@ -24,7 +25,7 @@ class MessagesFragment : Fragment() {
     private var _binding: FragmentMessagesBinding? = null
     private val binding get() = _binding!!
     private val viewModel: SharedViewModel by activityViewModels()
-    private val adapter: MessagesAdapter by lazy { MessagesAdapter() }
+    private val adapter: MessagesHelper by lazy { MessagesAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,13 +74,13 @@ class MessagesFragment : Fragment() {
     }
 
     private fun onAdapter() {
-        adapter.setOnClick { i, messages ->
+        adapter.onClick { i, messages ->
             position = i
             val intent = Intent((activity as BaseFragmentActivity), MessagesDetailActivity::class.java)
             intent.putExtra(PASSING_TO_MESSAGES_ACTIVITY, messages)
             (activity as BaseFragmentActivity).onResultActivity.launch(intent)
         }
-        adapter.setOnLongClick { i, messages ->
+        adapter.onLongClick { i, messages ->
             onDeleteData(i)
             Toast.makeText(
                 (activity as BaseFragmentActivity),
@@ -90,7 +91,7 @@ class MessagesFragment : Fragment() {
     }
 
     private fun onBinding() {
-        binding.rvItems.adapter = adapter
+        binding.rvItems.adapter = adapter.init()
         binding.rvItems.setHasFixedSize(true)
         binding.rvItems.layoutManager = LinearLayoutManager((activity as BaseFragmentActivity))
         binding.rvItems.itemAnimator = DefaultItemAnimator()
