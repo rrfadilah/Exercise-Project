@@ -135,6 +135,7 @@
     </ScrollView>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnContinue"
         style="@style/GeneralButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -19,4 +19,5 @@
     <string name="forgotPassword">Kamu telah menekan Forgot Password</string>
     <string name="custom_dialog_message">Password kamu kurang dari 8 karakter</string>
     <string name="custom_fragment_message">Password kombinasi setidaknya harus berupa minimal 1 huruf besar dan 1 huruf kecil dan minimal 8 huruf. \nContoh: AbdulHafiz</string>
+    <string name="title_activity_main_menu">MainMenuActivity</string>
 </resources>

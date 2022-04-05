@@ -4,26 +4,26 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.edit
 import com.google.android.material.snackbar.Snackbar
 import com.rizky.exercise_project.databinding.ActivityLoginFormBinding
+import com.rizky.exercise_project.facebook.HomeFragment
+import com.rizky.exercise_project.menu.MenuActivity
 
 class LoginFormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginFormBinding
-    val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginFormBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-
+        val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
 
         val email = binding.formEmail.text
         val password = binding.formPassword.text
@@ -40,9 +40,7 @@ class LoginFormActivity : AppCompatActivity() {
 
         binding.btnSignIn.setOnClickListener {
 
-            sharedPreferences()
-
-            val passwordCombine = "^(?=.*[a-zA-Z]).{8,}$"
+            val passwordCombine = "^(?=.*[a-z])(?=.*[A-Z]).{8,}$"
             val email: String = binding.formEmail.text.toString()
             val password: String = binding.formPassword.text.toString()
 
@@ -71,7 +69,23 @@ class LoginFormActivity : AppCompatActivity() {
             } else if (!password.trim().matches(Regex(passwordCombine))) {
                 dialogWithFragment()
             } else {
-                dialogStandard("Login success", "Selamat. Login berhasil.")
+                // Shared Preferences untuk login
+                val formEmail = binding.formEmail.text.toString()
+                val formPassword = binding.formPassword.text.toString()
+
+                // untuk mengambil data dari shared preferences menggunakan kode berikut
+                val prefEmail = pref.getString(Constant.Preferences.KEY.PREF_EMAIL, "")
+                val prefPassword = pref.getString(Constant.Preferences.KEY.PREF_PASSWORD, "")
+
+                if ((formEmail != prefEmail) || (formPassword != prefPassword)) {
+                    dialogStandard(
+                        "Email atau password salah",
+                        "Pastikan email dan pasword yang kamu masukkan sudah benar."
+                    )
+                } else {
+                    val intentMenu = Intent(this@LoginFormActivity, MenuActivity::class.java)
+                    startActivity(intentMenu)
+                }
             }
 
 
@@ -102,26 +116,6 @@ class LoginFormActivity : AppCompatActivity() {
         Toast.makeText(this, R.string.backPressed, Toast.LENGTH_SHORT).show()
     }
 
-    /* Kumpulan Shared Preferences */
-    private fun sharedPreferences() {
-        // Shared Preferences untuk login
-        val prefEmail = binding.formEmail.text.toString()
-        val prefPassword = binding.formPassword.text.toString()
-        // untuk melakukan penyimpanan ke sharedpreferences hanya menggunakan kode berikut
-        pref.edit {
-            putString(Constant.Preferences.KEY.PREF_EMAIL, prefEmail)
-            putString(Constant.Preferences.KEY.PREF_PASSWORD, prefPassword)
-            apply()
-        }
-        // untuk mengambil data dari shared preferences menggunakan kode berikut
-        val preferencesEmail = pref.getString(Constant.Preferences.KEY.PREF_EMAIL, "")
-        val preferencesPassword = pref.getString(Constant.Preferences.KEY.PREF_PASSWORD, "")
-        Snackbar.make(
-            binding.root,
-            "Value yang tersimpan adalah berukut: Email $preferencesEmail dan password $preferencesPassword",
-            Snackbar.LENGTH_INDEFINITE
-        ).show()
-    }
 
     /* Kumpulan Dialog */
     private fun dialogStandard(title: String, message: String) {
