@@ -12,11 +12,15 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.exercise_project.Home.ActivityForHome
 import com.example.exercise_project.R
 import com.example.exercise_project.databinding.ActivitySignInBinding
 import com.example.exercise_project.databinding.FragmentCustomDialogBinding
 
 class SignInActivity : AppCompatActivity() {
+    companion object {
+        const val KEY = "KEY"
+    }
     private lateinit var binding: ActivitySignInBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,12 +30,18 @@ class SignInActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnSignIn2.setOnClickListener {
-            emailpassValidation()
+            //emailpassValidation()
+
+            //untuk mengambil data dari sharedpreferences menggunakan code berikut ini
+            //val prefEmail = pref.getString(Data.Preferences.PREF_EMAIL, "")
+            //val prefPass = pref.getString(Data.Preferences.PREF_PASS, "")
+
+            prefValidation()
         }
 
-        //toast&snackbar dengan kondisi
         binding.tvGoToSignUp.setOnClickListener {
-
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -49,8 +59,44 @@ class SignInActivity : AppCompatActivity() {
         dialogAction.show()
     }
 
+    private fun prefValidation(){
+        val pref = this.getSharedPreferences(Data.Preferences.PREF_NAME, MODE_PRIVATE)
 
-    private fun emailpassValidation(){
+        val prefEmail = pref.getString(Data.Preferences.PREF_EMAIL, "")
+        val prefPass = pref.getString(Data.Preferences.PREF_PASS, "")
+
+        val email = binding.etEmailSignIn.text.toString()
+        val pass = binding.etPassSignIn.text.toString()
+
+        if (email.isEmpty() && pass.isEmpty()){
+            Toast.makeText(this, "Email dan password tidak boleh kosong", Toast.LENGTH_SHORT).show()
+        }else if (email.isEmpty()) {
+            Toast.makeText(this, "Email tidak boleh kosong", Toast.LENGTH_SHORT).show()
+        }else if(email != prefEmail){
+            Toast.makeText(this, "Email salah", Toast.LENGTH_SHORT).show()
+        }else if (pass.isEmpty()) {
+            Toast.makeText(this, "Password tidak boleh kosong", Toast.LENGTH_SHORT).show()
+        }else if(pass != prefPass){
+            Toast.makeText(this, "Password salah", Toast.LENGTH_SHORT).show()
+        }else{
+            val intent = Intent(this, ActivityForHome::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    private fun getBoolean(): Boolean {
+        val pref = this.getSharedPreferences(Data.Preferences.PREF_NAME, MODE_PRIVATE)
+
+        return pref.getBoolean(Data.Preferences.IS_LOGIN, false)
+    }
+
+
+    private fun loginSession() {
+
+    }
+
+    private fun emailpassValidationDialog(){
         val email = binding.etEmailSignIn.text.toString()
         val pass = binding.etPassSignIn.text.toString()
 
@@ -111,6 +157,26 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
+    private fun emailpassValidationToast(){
+        val email = binding.etEmailSignIn.text.toString()
+        val pass = binding.etPassSignIn.text.toString()
+
+        if  (email.isEmpty() && pass.isEmpty()){
+            Toast.makeText(this, "Email dan password tidak boleh kosong", Toast.LENGTH_SHORT).show()
+        }else if (email.isEmpty()) {
+            Toast.makeText(this, "Email tidak boleh kosong", Toast.LENGTH_SHORT).show()
+        }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            Toast.makeText(this, "Email tidak valid", Toast.LENGTH_SHORT).show()
+        }else if (pass.isEmpty()) {
+            Toast.makeText(this, "Password tidak boleh kosong", Toast.LENGTH_SHORT).show()
+        }else if (pass.length < 8){
+            Toast.makeText(this, "Password harus lebih dari 8 character", Toast.LENGTH_SHORT).show()
+        }else if (!pass.matches(".*[A-Z].*".toRegex())){
+            Toast.makeText(this, "Password harus mengandung 1 uppercase", Toast.LENGTH_SHORT).show()
+        }else if (!pass.matches(".*[a-z].*".toRegex())){
+            Toast.makeText(this, "Password harus mengandung 1 lowercase", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     private fun openSignUpPage(){
         Toast.makeText(this, "Anda membuka halaman sign up", Toast.LENGTH_LONG).show()
