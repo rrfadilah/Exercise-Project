@@ -29,13 +29,6 @@ class SignInActivity : AppCompatActivity() {
         return Patterns.EMAIL_ADDRESS.matcher(target).matches()
     }
 
-    fun passwordValidated(target: CharSequence): Boolean {
-        val passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])\$"
-        val pattern = Pattern.compile(passwordPattern)
-        val matcher = pattern.matcher(this.toString())
-        return matcher.matches()
-    }
-
     fun signIn() {
 
         binding.btnSignIn.setOnClickListener {
@@ -110,13 +103,13 @@ class SignInActivity : AppCompatActivity() {
 
 
                 ///////////////////////////
-//            }else if (!passwordValidated(password)) {
-//                Toast.makeText(
-//                    binding.btnSignIn.context,
-//                    "Password harus mengandung upper case dan lowercase",
-//                    Toast.LENGTH_SHORT
-//                )
-//                    .show()
+            }else if (!password.matches(Regex("(?=.*[a-z])(?=.*[A-Z]).+"))) {
+                Toast.makeText(
+                    binding.btnSignIn.context,
+                    "Password harus mengandung upper case dan lowercase",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
             } else {
                 val intent = Intent(this, NavigationActivity::class.java)
                 startActivity(intent)
