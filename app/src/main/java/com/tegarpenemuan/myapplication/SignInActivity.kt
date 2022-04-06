@@ -1,13 +1,18 @@
 package com.tegarpenemuan.myapplication
 
+import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.tegarpenemuan.myapplication.databinding.ActivitySignBinding
 import com.tegarpenemuan.myapplication.model.Biodata
 import com.tegarpenemuan.myapplication.model.UserInfo
+import com.tegarpenemuan.myapplication.utils.showCustomToast
 
 class SignInActivity : AppCompatActivity() {
 
@@ -23,20 +28,41 @@ class SignInActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.tvCreateNewAccount.setOnClickListener {
+            Toast(this).showCustomToast("Tombol create new accoiunt di pencet", this)
             startActivity(Intent(this, SignUpActivity::class.java))
         }
 
         binding.btnSignIn.setOnClickListener {
+            validasiForm()
+        }
+
+        binding.tvForgotPassword.setOnClickListener {
+            Toast(this).showCustomToast("Forgot Password Clicked", this)
+        }
+
+    }
+
+    private fun validasiForm() {
+        if (binding.etEmail.text.isEmpty()) {
+            Toast(this).showCustomToast("Email tidak boleh kosong", this)
+        } else if (!binding.etEmail.text.matches(Regex("^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"))
+        ) {
+            Toast(this).showCustomToast("Email Tidak Valid", this)
+        } else if (binding.etPassword.text.isEmpty()) {
+            Toast(this).showCustomToast("Password tidak boleh ksong", this)
+        } else if (binding.etPassword.text.length < 8) {
+            Toast(this).showCustomToast("Password harus lebih dari 8 karakter", this)
+        } else if (!binding.etPassword.text.matches(Regex("(?=.*[a-z])(?=.*[A-Z]).+"))) {
+            Toast(this).showCustomToast("Password harus mengandung upper case dan lowercase", this)
+        } else {
             openPage()
         }
-//        IntentData()
     }
 
     private fun openPage() {
-        Snackbar.make(binding.root, "Membuka Halaman Sign In", Snackbar.LENGTH_INDEFINITE)
-            .setAction("Klik Disini") {
-                // aksi yang akan kita jalan kan ketika klik di action nya...
-                Toast.makeText(this, "Membuka halaman Sign In", Toast.LENGTH_LONG).show()
+        Snackbar.make(binding.root, "Selamat Anda Berhasil Login", Snackbar.LENGTH_INDEFINITE)
+            .setAction("Logout") {
+                Toast.makeText(this, "Anda Sudah Logout", Toast.LENGTH_LONG).show()
             }.show()
     }
 
@@ -52,5 +78,10 @@ class SignInActivity : AppCompatActivity() {
 
         // Untuk menerima intent parcelize
         intent.extras?.getParcelable<UserInfo>(Constant.Parcelize.KEY)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Toast(this).showCustomToast("Close Sign In", this)
     }
 }
