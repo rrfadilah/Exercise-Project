@@ -1,14 +1,9 @@
 package com.tegarpenemuan.myapplication
 
-import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -37,8 +32,9 @@ class SignInActivity : AppCompatActivity() {
         }
 
         binding.btnSignIn.setOnClickListener {
-            dialogCustomLayout()
-            validasiForm()
+//            dialogCustomLayout()
+//            validasiFormToastSnack()
+            validasiFormDialog()
         }
 
         binding.tvForgotPassword.setOnClickListener {
@@ -47,21 +43,40 @@ class SignInActivity : AppCompatActivity() {
 
     }
 
-    fun dialogStandard() {
+    private fun validasiFormDialog() {
+        if (binding.etEmail.text.isEmpty() && binding.etPassword.text.isEmpty()) {
+            dialogAction("Peringatan","Email dan Password tidak boleh kosong")
+        } else if (binding.etEmail.text.isEmpty()) {
+            dialogStandard("Peringatan","Email Tidak Boleh Kosnong")
+        } else if (!binding.etEmail.text.matches(Regex("^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"))
+        ) {
+            dialogWithFragment()
+        } else if (binding.etPassword.text.isEmpty()) {
+            dialogStandard("Peringatan","Password Tidak Boleh Kosnong")
+        } else if (binding.etPassword.text.length < 8) {
+            dialogStandard("Peringatan","Password harus lebih dari 8 karakter")
+        } else if (!binding.etPassword.text.matches(Regex("(?=.*[a-z])(?=.*[A-Z]).+"))) {
+            dialogStandard("Peringatan","Password harus mengandung upper case dan lowercase")
+        } else {
+            dialogCustomLayout()
+        }
+    }
+
+    fun dialogStandard(title:String,message:String) {
         // Dialog standard
         val dialog = AlertDialog.Builder(this)
-        dialog.setTitle("judul dialog")
-        dialog.setMessage("isi pesan dialog")
+        dialog.setTitle(title)
+        dialog.setMessage(message)
         dialog.setCancelable(true)
         dialog.show()
     }
 
-    fun dialogAction() {
+    fun dialogAction(title:String,message:String) {
         // dialog dengan action
         val dialog = AlertDialog.Builder(this)
-        dialog.setTitle("judul dialog")
-        dialog.setMessage("isi pesan dialog")
-        dialog.setPositiveButton("POsitif", object : DialogInterface.OnClickListener {
+        dialog.setTitle(title)
+        dialog.setMessage(message)
+        dialog.setPositiveButton("Positif", object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface?, which: Int) {
                 dialog?.dismiss()
             }
@@ -88,7 +103,7 @@ class SignInActivity : AppCompatActivity() {
         dialog.show(supportFragmentManager, null)
     }
 
-    private fun validasiForm() {
+    private fun validasiFormToastSnack() {
         if (binding.etEmail.text.isEmpty()) {
             Toast(this).showCustomToast("Email tidak boleh kosong", this)
         } else if (!binding.etEmail.text.matches(Regex("^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"))
