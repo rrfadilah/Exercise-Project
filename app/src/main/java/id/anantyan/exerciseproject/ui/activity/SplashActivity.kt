@@ -1,4 +1,4 @@
-package id.anantyan.exerciseproject.activity
+package id.anantyan.exerciseproject.ui.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

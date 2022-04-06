@@ -10,25 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExerciseProject.NoActionBar">
         <activity
-            android:name=".activity.MessagesDetailActivity"
+            android:name="id.anantyan.exerciseproject.ui.activity.MessagesDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.BaseFragmentActivity"
+            android:name="id.anantyan.exerciseproject.ui.activity.BaseFragmentActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SignUpActivity"
+            android:name="id.anantyan.exerciseproject.ui.activity.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SignInActivity"
+            android:name="id.anantyan.exerciseproject.ui.activity.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.OnBoardActivity"
+            android:name="id.anantyan.exerciseproject.ui.activity.OnBoardActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="id.anantyan.exerciseproject.ui.activity.SplashActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name="id.anantyan.exerciseproject.ui.activity.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.ExerciseProject.Main">
             <intent-filter>

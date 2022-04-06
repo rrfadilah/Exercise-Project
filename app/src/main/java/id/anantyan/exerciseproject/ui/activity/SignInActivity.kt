@@ -1,4 +1,4 @@
-package id.anantyan.exerciseproject.activity
+package id.anantyan.exerciseproject.ui.activity
 
 import android.content.Context
 import android.content.Intent
@@ -13,9 +13,8 @@ import com.google.android.material.snackbar.Snackbar
 import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.databinding.ActivitySignInBinding
 import id.anantyan.exerciseproject.databinding.DialogExampleBinding
-import id.anantyan.exerciseproject.fragment.DialogExampleFragment
-import id.anantyan.exerciseproject.fragment.DialogExampleFragment.Companion.ARG_DIALOG_EXAMPLE
-import id.anantyan.exerciseproject.model.Users
+import id.anantyan.exerciseproject.ui.fragment.DialogExampleFragment
+import id.anantyan.exerciseproject.ui.fragment.DialogExampleFragment.Companion.ARG_DIALOG_EXAMPLE
 import id.anantyan.utils.Constant.PASSING_TO_SIGN_UP_ACTIVITY
 import id.anantyan.utils.Validation.emailValid
 import id.anantyan.utils.Validation.passwordValid
@@ -72,6 +71,7 @@ class SignInActivity : AppCompatActivity() {
                     onSnackbar(binding.root, getString(R.string.txt_not_found_password))
                 }
                 else -> {
+                    preferences.setLogIn(true)
                     val intent = Intent(this@SignInActivity, BaseFragmentActivity::class.java)
                     startActivity(intent)
                     finish()

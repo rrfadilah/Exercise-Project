@@ -1,4 +1,4 @@
-package id.anantyan.exerciseproject.activity
+package id.anantyan.exerciseproject.ui.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import id.anantyan.exerciseproject.R
-import id.anantyan.exerciseproject.adapter.OnBoardAdapter
+import id.anantyan.exerciseproject.ui.adapter.OnBoardAdapter
 import id.anantyan.exerciseproject.databinding.ActivityOnBoardBinding
 import id.anantyan.utils.sharedPreferences.PreferenceHelper
 import id.anantyan.utils.sharedPreferences.PreferenceManager
@@ -22,7 +22,7 @@ class OnBoardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityOnBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if (preferences.getEmail().isNullOrEmpty()) {
+        if (preferences.getLogIn() == false) {
             onBinding()
         } else {
             val intent = Intent(this, BaseFragmentActivity::class.java)

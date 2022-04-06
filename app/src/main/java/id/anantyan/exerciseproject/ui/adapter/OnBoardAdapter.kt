@@ -1,4 +1,4 @@
-package id.anantyan.exerciseproject.adapter
+package id.anantyan.exerciseproject.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

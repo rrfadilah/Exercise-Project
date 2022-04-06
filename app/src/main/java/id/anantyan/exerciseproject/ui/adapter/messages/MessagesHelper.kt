@@ -1,4 +1,4 @@
-package id.anantyan.exerciseproject.adapter.messages
+package id.anantyan.exerciseproject.ui.adapter.messages
 
 import androidx.recyclerview.widget.RecyclerView
 import id.anantyan.exerciseproject.model.Messages

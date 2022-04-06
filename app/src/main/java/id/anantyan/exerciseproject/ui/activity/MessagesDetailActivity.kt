@@ -1,9 +1,8 @@
-package id.anantyan.exerciseproject.activity
+package id.anantyan.exerciseproject.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.databinding.ActivityMessagesDetailBinding
 import id.anantyan.exerciseproject.model.Messages
 import id.anantyan.utils.Constant.PASSING_TO_MESSAGES_ACTIVITY
@@ -35,6 +34,7 @@ class MessagesDetailActivity : AppCompatActivity() {
             binding.txtInputMessages.setText(messages?.message)
             binding.btnSubmit.setOnClickListener {
                 messages = Messages(
+                    messages?.id,
                     messages?.fromName,
                     binding.txtInputSendTo.text.toString(),
                     binding.txtInputMessages.text.toString()
@@ -47,6 +47,7 @@ class MessagesDetailActivity : AppCompatActivity() {
         } else {
             binding.btnSubmit.setOnClickListener {
                 messages = Messages(
+                    null,
                     "Arya Rezza",
                     binding.txtInputSendTo.text.toString(),
                     binding.txtInputMessages.text.toString()

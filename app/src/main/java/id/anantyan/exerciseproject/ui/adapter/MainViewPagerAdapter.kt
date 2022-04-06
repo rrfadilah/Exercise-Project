@@ -1,4 +1,4 @@
-package id.anantyan.exerciseproject.adapter
+package id.anantyan.exerciseproject.ui.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

@@ -1,4 +1,4 @@
-package id.anantyan.exerciseproject.fragment
+package id.anantyan.exerciseproject.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
