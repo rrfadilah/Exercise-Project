@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="colorPrimary">#0AA8B0</color>
+    <color name="InactiveBottomNavIconColor">#DADADA</color>
+    <color name="BottomNavBarColor">#112340</color>
+    <color name="teal">#0BCAD4</color>
 </resources>
