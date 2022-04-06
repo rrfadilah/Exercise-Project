@@ -36,7 +36,7 @@ class SignUpActivity : AppCompatActivity() {
             binding.inputPassword.setText(password)
         }
 
-        val pref = this.getSharedPreferences(Constant.Register.PREF_REGISTER, MODE_PRIVATE)
+        val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
         binding.btnSignUp.setOnClickListener {
             sharedPreferences(pref)
         }
@@ -55,7 +55,7 @@ class SignUpActivity : AppCompatActivity() {
         if (email.isEmpty() || password.isEmpty() || fullName.isEmpty() || pekerjaan.isEmpty()) {
             Toast.makeText(
                 binding.btnSignUp.context,
-                "Semua Field tidak boleh kosong",
+                "Fields tidak boleh kosong",
                 Toast.LENGTH_SHORT
             )
                 .show()
@@ -76,12 +76,19 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             )
                 .show()
+        } else if (fullName == pref.getString(Constant.Preferences.KEY.FULLNAME, "") ||
+            pekerjaan == pref.getString(Constant.Preferences.KEY.PEKERJAAN, "") ||
+            email == pref.getString(Constant.Preferences.KEY.EMAIL, "") ||
+            password == pref.getString(Constant.Preferences.KEY.PASSWORD, "")
+        ) {
+            Toast.makeText(this, "Akun Sudah Terdaftar", Toast.LENGTH_SHORT)
+                .show()
         } else {
             pref.edit {
-                putString(Constant.Register.KEY.FULLNAME, fullName)
-                putString(Constant.Register.KEY.PEKERJAAN, pekerjaan)
-                putString(Constant.Register.KEY.EMAIL, email)
-                putString(Constant.Register.KEY.PASSWORD, password)
+                putString(Constant.Preferences.KEY.FULLNAME, fullName)
+                putString(Constant.Preferences.KEY.PEKERJAAN, pekerjaan)
+                putString(Constant.Preferences.KEY.EMAIL, email)
+                putString(Constant.Preferences.KEY.PASSWORD, password)
                 apply()
             }
             val intent = Intent(this, SignInActivity::class.java)
