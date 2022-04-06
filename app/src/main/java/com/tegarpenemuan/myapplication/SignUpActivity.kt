@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.tegarpenemuan.myapplication.databinding.ActivitySignupBinding
 
-class SignupActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySignupBinding
 

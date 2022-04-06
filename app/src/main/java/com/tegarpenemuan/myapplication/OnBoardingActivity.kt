@@ -21,7 +21,7 @@ class OnBoardingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnSignIn.setOnClickListener {
-            startActivity(Intent(this, SignActivity::class.java))
+            startActivity(Intent(this, SignInActivity::class.java))
         }
 
         binding.btnGetStarted.setOnClickListener {
@@ -34,7 +34,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
     fun intentExplicit() {
         // Contoh Pengguanaan explisit
-        val intent = Intent(this, SignActivity::class.java).apply {
+        val intent = Intent(this, SignInActivity::class.java).apply {
             putExtra(Constant.Intent.EMAIL, "value")
         }
         startActivity(intent)
@@ -42,7 +42,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
     fun intentImplicit() {
         // Contoh Penggunaan impicit
-        val intent = Intent(this, SignActivity::class.java).apply {
+        val intent = Intent(this, SignInActivity::class.java).apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, "VALUE")
         }
@@ -53,7 +53,7 @@ class OnBoardingActivity : AppCompatActivity() {
     }
 
     fun intentBundle() {
-        val intent = Intent(this, SignActivity::class.java)
+        val intent = Intent(this, SignInActivity::class.java)
         val bundle = Bundle()
 
         bundle.putString(Constant.Intent.PHONE, "VALUE")
@@ -65,7 +65,7 @@ class OnBoardingActivity : AppCompatActivity() {
     }
 
     fun intentSerialize() {
-        val intent = Intent(this, SignActivity::class.java)
+        val intent = Intent(this, SignInActivity::class.java)
         val biodata = Biodata(
             key = "VALUE_KEY",
             phone = "VALUE_PHONE",
@@ -77,7 +77,7 @@ class OnBoardingActivity : AppCompatActivity() {
     }
 
     fun intentParcelable() {
-        val intent = Intent(this, SignActivity::class.java)
+        val intent = Intent(this, SignInActivity::class.java)
         val userInfo = UserInfo(
             key = "VALUE_KEY",
             phone = "VALUE_PHONE",
