@@ -41,10 +41,13 @@ class MessageFragment : Fragment() {
         _binding = FragmentMessageBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+//        val textView: TextView = binding.textDashboard
+//        dashboardViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
+
+        val adapter_message = MessageAdapter(DummyMessage.messages)
+        binding.rvMessage.adapter = adapter_message
 
         Log.d("Lifecycle", "Lifecycle DashboardFragment onCreateView")
         return root
