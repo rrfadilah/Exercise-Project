@@ -10,32 +10,102 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.google.android.material.snackbar.Snackbar
+import net.mzhasanah.fiveinone.exerciseproject.home.HomeActivity
 
 class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
-        openPage()
+
+        val editEmail = findViewById<EditText>(R.id.etEmail)
+        val editPassword = findViewById<EditText>(R.id.etPassword)
+        val registerPreferences =
+            this.getSharedPreferences(Constant.Register.PREF_REGISTER_NAME, MODE_PRIVATE)
+        val btnlogin = findViewById<TextView>(R.id.btnSignIn)
+
+        btnlogin.setOnClickListener {
+            val email = editEmail.text.toString()
+            val password = editPassword.text.toString()
+            if (email.isEmpty() && password.isEmpty()) {
+                Toast.makeText(this, R.string.EmailPasswordKosong, Toast.LENGTH_SHORT).show()
+            } else if (email.isEmpty()) {
+                Toast.makeText(this, R.string.EmailKosong, Toast.LENGTH_SHORT).show()
+            } else if (password.isEmpty()) {
+                Toast.makeText(this, R.string.PasswordKosong, Toast.LENGTH_SHORT).show()
+            } else if (password.length < 8) {
+                Toast.makeText(this, R.string.PasswordKurang, Toast.LENGTH_SHORT).show()
+            } else if (!password.matches(Regex("(?=.*[a-z])(?=.*[A-Z]).+"))) {
+                Toast.makeText(this, R.string.PasswordUpLow, Toast.LENGTH_SHORT).show()
+            } else if (!email
+                    .matches(Regex("^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"))
+            ) {
+                Toast.makeText(this, R.string.EmailInvalid, Toast.LENGTH_SHORT).show()
+            } else {
+                val emailPreferences =
+                    registerPreferences.getString(Constant.Register.KEY.EMAIL, "")
+                val passwordPreferences =
+                    registerPreferences.getString(Constant.Register.KEY.PASSWORD, "")
+                if (email == emailPreferences && password == passwordPreferences) {
+                    val intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Snackbar.make(
+                        it, "Email atau password tidak terdaftar",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+        val btnRegister = findViewById<TextView>(R.id.tvCreateAccount)
+        btnRegister.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
 
         val forgot = findViewById<TextView>(R.id.tvForgotPassword)
         forgot.setOnClickListener {
             Toast.makeText(this, R.string.ForgotPassword, Toast.LENGTH_SHORT).show()
         }
 
+        val createNewAccount = findViewById<TextView>(R.id.tvCreateAccount)
+        createNewAccount.setOnClickListener {
+            val etDataEmail = findViewById<View>(R.id.etEmail) as EditText
+            val etDataPassword = findViewById<View>(R.id.etPassword) as EditText
+            val intent = Intent(this, SignUpActivity::class.java)
+            intent.putExtra("dataEmail", etDataEmail.getText().toString())
+            intent.putExtra("dataPassword", etDataPassword.getText().toString())
+            startActivity(intent)
+        }
+
+//        openPage()
+//        binding = ActivitySignInBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
 //        dialogStandard()
 //        dialogAction()
 //        dialogCustomLayout()
-        dialogWithFragment()
-    }
+//        dialogWithFragment()
 
-    fun ClickCreateNewAccount(V: View?) {
-        val etDataEmail = findViewById<View>(R.id.etEmail) as EditText
-        val etDataPassword = findViewById<View>(R.id.etPassword) as EditText
-        var tvCreate = findViewById<View>(R.id.tvCreateAccount) as TextView
-        val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
-        intent.putExtra("dataEmail", etDataEmail.getText().toString())
-        intent.putExtra("dataPassword", etDataPassword.getText().toString())
-        startActivity(intent)
+//        val login = findViewById<Button>(R.id.btnSignIn)
+//        login.setOnClickListener{
+//            val e_mail = binding.etEmail.text.toString()
+//            val password = binding.etPassword.text.toString()
+//
+//            val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
+//            pref.edit {
+//                putString(Constant.Preferences.KEY.EMAIL, e_mail.toString())
+//                putString(Constant.Preferences.KEY.PASSWORD, password.toString())
+//                apply()
+//            }
+//
+//            val prefEmail = pref.getString(Constant.Preferences.KEY.EMAIL, "")
+//            val prefPassword = pref.getString(Constant.Preferences.KEY.PASSWORD, "")
+//            Snackbar.make(
+//                binding.root,
+//                "Value yang tersimpan adalah berikut: Email: $prefEmail Password: $prefPassword",
+//                Snackbar.LENGTH_LONG
+//            ).show()
+//        }
     }
 
     fun openPage() {
