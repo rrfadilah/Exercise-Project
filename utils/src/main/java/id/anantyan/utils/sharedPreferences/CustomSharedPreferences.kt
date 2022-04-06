@@ -11,10 +11,15 @@ class PreferenceManager(context: Context) : PreferenceHelper {
     private var prefShared: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     companion object {
+        private const val LOG_IN = "LOG_IN"
         private const val FULL_NAME = "FULL_NAME"
         private const val PROFESSION = "PROFESSION"
         private const val EMAIL = "EMAIL"
         private const val PASSWORD = "PASSWORD"
+    }
+
+    override fun setLogIn(value: Boolean) {
+        prefShared.set(LOG_IN, value)
     }
 
     override fun setFullname(value: String) {
@@ -31,6 +36,10 @@ class PreferenceManager(context: Context) : PreferenceHelper {
 
     override fun setPassword(value: String) {
         prefShared.set(PASSWORD, value)
+    }
+
+    override fun getLogIn(): Boolean? {
+        return prefShared.getBoolean(LOG_IN, false)
     }
 
     override fun getFullname(): String? {

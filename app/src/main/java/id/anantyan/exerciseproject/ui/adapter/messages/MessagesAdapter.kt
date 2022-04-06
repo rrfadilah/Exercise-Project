@@ -1,4 +1,4 @@
-package id.anantyan.exerciseproject.adapter.messages
+package id.anantyan.exerciseproject.ui.adapter.messages
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

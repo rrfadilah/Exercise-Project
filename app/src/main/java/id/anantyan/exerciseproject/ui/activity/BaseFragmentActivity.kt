@@ -1,4 +1,4 @@
-package id.anantyan.exerciseproject.activity
+package id.anantyan.exerciseproject.ui.activity
 
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
@@ -6,12 +6,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.navigation.NavigationBarView
 import id.anantyan.exerciseproject.R
-import id.anantyan.exerciseproject.adapter.MainViewPagerAdapter
+import id.anantyan.exerciseproject.ui.adapter.MainViewPagerAdapter
 import id.anantyan.exerciseproject.databinding.ActivityBaseFragmentBinding
-import id.anantyan.exerciseproject.fragment.DoctorFragment
-import id.anantyan.exerciseproject.fragment.HospitalFragment
-import id.anantyan.exerciseproject.fragment.MessagesFragment
-import id.anantyan.exerciseproject.fragment.SharedViewModel
+import id.anantyan.exerciseproject.ui.fragment.DoctorFragment
+import id.anantyan.exerciseproject.ui.fragment.HospitalFragment
+import id.anantyan.exerciseproject.ui.fragment.messages.MessagesFragment
+import id.anantyan.exerciseproject.ui.fragment.SharedViewModel
 import id.anantyan.exerciseproject.model.Messages
 import id.anantyan.utils.Constant.PASSING_TO_MESSAGES_ACTIVITY
 

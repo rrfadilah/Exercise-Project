@@ -1,4 +1,4 @@
-package id.anantyan.exerciseproject.fragment
+package id.anantyan.exerciseproject.ui.fragment.messages
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,17 +6,21 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.anantyan.exerciseproject.R
-import id.anantyan.exerciseproject.activity.BaseFragmentActivity
-import id.anantyan.exerciseproject.activity.MessagesDetailActivity
-import id.anantyan.exerciseproject.adapter.messages.MessagesAdapter
-import id.anantyan.exerciseproject.adapter.messages.MessagesHelper
+import id.anantyan.exerciseproject.ui.activity.BaseFragmentActivity
+import id.anantyan.exerciseproject.ui.activity.MessagesDetailActivity
+import id.anantyan.exerciseproject.ui.adapter.messages.MessagesAdapter
+import id.anantyan.exerciseproject.ui.adapter.messages.MessagesHelper
 import id.anantyan.exerciseproject.databinding.FragmentMessagesBinding
 import id.anantyan.exerciseproject.model.Messages
+import id.anantyan.exerciseproject.ui.fragment.SharedViewModel
 import id.anantyan.utils.Constant.PASSING_TO_MESSAGES_ACTIVITY
 import id.anantyan.utils.dividerVertical
+import kotlinx.coroutines.launch
 
 class MessagesFragment : Fragment() {
 
@@ -24,7 +28,8 @@ class MessagesFragment : Fragment() {
     private var position: Int? = null
     private var _binding: FragmentMessagesBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: SharedViewModel by activityViewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val viewModel: MessagesViewModel by viewModels()
     private val adapter: MessagesHelper by lazy { MessagesAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,18 +55,13 @@ class MessagesFragment : Fragment() {
     }
 
     private fun onViewModel() {
-        viewModel.listMessages.observe(viewLifecycleOwner) {
-            list.clear()
-            list.addAll(it)
-            adapter.differ(it)
-        }
-        viewModel.messages.observe(viewLifecycleOwner) { item ->
+        sharedViewModel.messages.observe(viewLifecycleOwner) { item ->
             item?.let {
                 if (position == null) {
                     onInsertData(item)
                 }
                 position?.let {
-                    onUpdateData(it, item)
+                    onUpdateData(item)
                     position = null
                 }
             }
@@ -81,7 +81,7 @@ class MessagesFragment : Fragment() {
             (activity as BaseFragmentActivity).onResultActivity.launch(intent)
         }
         adapter.onLongClick { i, messages ->
-            onDeleteData(i)
+            onDeleteData(messages)
             Toast.makeText(
                 (activity as BaseFragmentActivity),
                 messages.senderName,
@@ -105,31 +105,31 @@ class MessagesFragment : Fragment() {
     }
 
     private fun onGetData() {
-        list.addAll(onDataDummy())
-        adapter.differ(list)
+        lifecycleScope.launch {
+            viewModel.select().observe(viewLifecycleOwner) {
+                list.clear()
+                list.addAll(it)
+                adapter.differ(list)
+            }
+        }
     }
 
     private fun onInsertData(item: Messages) {
-        list.add(item)
-        adapter.differ(list)
+        lifecycleScope.launch {
+            viewModel.insert(item)
+        }
     }
 
-    private fun onUpdateData(position: Int, item: Messages) {
-        list[position] = item
-        adapter.differ(list)
+    private fun onUpdateData(item: Messages) {
+        lifecycleScope.launch {
+            viewModel.update(item)
+        }
     }
 
-    private fun onDeleteData(position: Int) {
-        list.removeAt(position)
-        adapter.differ(list)
-    }
-
-    private fun onDataDummy(): MutableList<Messages> {
-        return mutableListOf(
-            Messages("Arya Rezza", "Annisa Era", "Hi ❤"),
-            Messages("Arya Rezza", "Kevin Sanjaya", "Holla"),
-            Messages("Arya Rezza", "Prilly Latuconsina", "Hello")
-        )
+    private fun onDeleteData(item: Messages) {
+        lifecycleScope.launch {
+            viewModel.delete(item)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -149,8 +149,7 @@ class MessagesFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewModel.setMessages(null)
-        viewModel.setListMessages(list)
+        sharedViewModel.setMessages(null)
         _binding = null
     }
 }
