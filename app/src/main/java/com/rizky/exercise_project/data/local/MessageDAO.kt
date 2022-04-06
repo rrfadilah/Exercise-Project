@@ -1,7 +1,6 @@
 package com.rizky.exercise_project.data.local
 
-import android.arch.persistence.room.*
-import com.rizky.exercise_project.model.Message
+import androidx.room.*
 
 /**
  * com.rizky.exercise_project.data
@@ -15,14 +14,14 @@ import com.rizky.exercise_project.model.Message
 interface MessageDAO {
 
     @Query("SELECT * FROM message")
-    fun getMessage(): List<Message>
+    fun getMessage(): List<MessageEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMessage(message: Message): Long
+    fun insertMessage(message: MessageEntity): Long
 
     @Update
-    fun updateMessage(message: Message): Int
+    fun updateMessage(message: MessageEntity): Int
 
     @Delete
-    fun deleteMessage(message: Message): Int
+    fun deleteMessage(message: MessageEntity): Int
 }

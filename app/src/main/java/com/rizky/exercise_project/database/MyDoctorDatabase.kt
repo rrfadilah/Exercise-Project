@@ -1,10 +1,11 @@
 package com.rizky.exercise_project.database
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
 import android.content.Context
-import com.rizky.exercise_project.model.Message
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.rizky.exercise_project.data.local.MessageDAO
+import com.rizky.exercise_project.data.local.MessageEntity
 
 /**
  * com.rizky.exercise_project.database
@@ -14,23 +15,25 @@ import com.rizky.exercise_project.model.Message
  *
  */
 
-@Database(entities = [Message::class], version = 1)
+@Database(entities = [MessageEntity::class], version = 1)
 abstract class MyDoctorDatabase : RoomDatabase() {
+    abstract fun messageDAO(): MessageDAO
+
     companion object {
-        private var INSTANCE: MyDoctorDatabase? = null
         private const val DB_NAME = "MyDoctor.db"
 
+        @Volatile
+        private var INSTANCE: MyDoctorDatabase? = null
+
         fun getInstance(context: Context): MyDoctorDatabase {
-            if (INSTANCE == null) {
-                synchronized(MyDoctorDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(
-                        context.applicationContext,
-                        MyDoctorDatabase::class.java,
-                        DB_NAME
-                    ).build()
-                }
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
             }
-            return INSTANCE!!
+        }
+
+        private fun buildDatabase(context: Context): MyDoctorDatabase {
+            return Room.databaseBuilder(context, MyDoctorDatabase::class.java, DB_NAME)
+                .build()
         }
 
         fun destroyInstance() {
