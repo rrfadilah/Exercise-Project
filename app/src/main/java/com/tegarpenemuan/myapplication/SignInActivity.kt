@@ -1,12 +1,16 @@
 package com.tegarpenemuan.myapplication
 
 import android.app.Activity
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.view.LayoutInflater
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.tegarpenemuan.myapplication.databinding.ActivitySignBinding
@@ -33,6 +37,7 @@ class SignInActivity : AppCompatActivity() {
         }
 
         binding.btnSignIn.setOnClickListener {
+            dialogCustomLayout()
             validasiForm()
         }
 
@@ -40,6 +45,47 @@ class SignInActivity : AppCompatActivity() {
             Toast(this).showCustomToast("Forgot Password Clicked", this)
         }
 
+    }
+
+    fun dialogStandard() {
+        // Dialog standard
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle("judul dialog")
+        dialog.setMessage("isi pesan dialog")
+        dialog.setCancelable(true)
+        dialog.show()
+    }
+
+    fun dialogAction() {
+        // dialog dengan action
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle("judul dialog")
+        dialog.setMessage("isi pesan dialog")
+        dialog.setPositiveButton("POsitif", object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                dialog?.dismiss()
+            }
+        })
+        dialog.setNegativeButton("Negatif") { dialog, which ->
+            dialog.dismiss()
+        }
+        dialog.setNeutralButton("Netral") { dialog, which ->
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    fun dialogCustomLayout() {
+        val view = LayoutInflater.from(this).inflate(R.layout.dialog_custom, null, false)
+        val dialog = AlertDialog.Builder(this)
+        dialog.setView(view)
+        dialog.create().show()
+    }
+
+    fun dialogWithFragment() {
+        val dialog = CustomDialogFragment()
+        dialog.show(supportFragmentManager, null)
     }
 
     private fun validasiForm() {
