@@ -7,19 +7,30 @@
 
     <fragment
         android:id="@+id/navigation_doctor"
-        android:name="com.tegarpenemuan.myapplication.home.ui.home.HomeFragment"
+        android:name="com.tegarpenemuan.myapplication.home.ui.doctor.DoctorFragment"
         android:label="@string/Doctor"
-        tools:layout="@layout/fragment_doctor" />
+        tools:layout="@layout/fragment_doctor" >
+        <action
+            android:id="@+id/action_navigation_doctor_to_navigation_hospitals"
+            app:destination="@id/navigation_hospitals" />
+        <action
+            android:id="@+id/action_navigation_doctor_to_navigation_message"
+            app:destination="@id/navigation_message" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_message"
-        android:name="com.tegarpenemuan.myapplication.home.ui.dashboard.DashboardFragment"
+        android:name="com.tegarpenemuan.myapplication.home.ui.message.MessageFragment"
         android:label="@string/Message"
-        tools:layout="@layout/fragment_message" />
+        tools:layout="@layout/fragment_message" >
+        <action
+            android:id="@+id/action_navigation_message_to_navigation_hospitals"
+            app:destination="@id/navigation_hospitals" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_hospitals"
-        android:name="com.tegarpenemuan.myapplication.home.ui.notifications.NotificationsFragment"
+        android:name="com.tegarpenemuan.myapplication.home.ui.hospitals.HospitalsFragment"
         android:label="@string/Hospitals"
         tools:layout="@layout/fragment_hospitals" />
 </navigation>

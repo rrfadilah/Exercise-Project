@@ -1,13 +1,13 @@
-package com.tegarpenemuan.myapplication.home.ui.dashboard
+package com.tegarpenemuan.myapplication.home.ui.message
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class MessageViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "This is message Fragment"
     }
     val text: LiveData<String> = _text
 }

@@ -1,4 +1,4 @@
-package com.tegarpenemuan.myapplication.home.ui.dashboard
+package com.tegarpenemuan.myapplication.home.ui.message
 
 import android.content.Context
 import android.os.Bundle
@@ -9,9 +9,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.tegarpenemuan.myapplication.Constant
 import com.tegarpenemuan.myapplication.databinding.FragmentMessageBinding
 
-class DashboardFragment : Fragment() {
+class MessageFragment : Fragment() {
 
     private var _binding: FragmentMessageBinding? = null
 
@@ -35,7 +36,7 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+            ViewModelProvider(this).get(MessageViewModel::class.java)
 
         _binding = FragmentMessageBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -52,6 +53,9 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("Lifecycle", "Lifecycle DashboardFragment onViewCreated")
+
+//        val data = arguments?.getString(Constant.Intent.KEY)
+//        binding.textDashboard.text = "Dashboard akan mencetak ::: $data"
     }
 
     override fun onStart() {

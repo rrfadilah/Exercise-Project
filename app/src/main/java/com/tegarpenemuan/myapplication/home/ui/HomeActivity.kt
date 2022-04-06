@@ -30,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.navigation_doctor, R.id.navigation_message, R.id.navigation_hospitals
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 }

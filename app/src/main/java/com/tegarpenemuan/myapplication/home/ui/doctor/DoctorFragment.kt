@@ -1,4 +1,4 @@
-package com.tegarpenemuan.myapplication.home.ui.home
+package com.tegarpenemuan.myapplication.home.ui.doctor
 
 import android.content.Context
 import android.os.Bundle
@@ -9,9 +9,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import com.tegarpenemuan.myapplication.Constant
+import com.tegarpenemuan.myapplication.R
 import com.tegarpenemuan.myapplication.databinding.FragmentDoctorBinding
 
-class HomeFragment : Fragment() {
+class DoctorFragment : Fragment() {
 
     private var _binding: FragmentDoctorBinding? = null
 
@@ -35,7 +38,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+            ViewModelProvider(this).get(DoctorViewModel::class.java)
 
         _binding = FragmentDoctorBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -44,6 +47,14 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+//        textView.setOnClickListener {
+//            it.findNavController().navigate(R.id.action_navigation_doctor_to_navigation_message)
+//            val bundle = Bundle()
+//            bundle.putString(Constant.Intent.KEY, "Value disini akan tercetak di halaman dashboard")
+//            it.findNavController().navigate(R.id.action_navigation_doctor_to_navigation_message, bundle)
+//        }
+
         Log.d("Lifecycle", "Lifecycle NotificationsFragment onCreateView")
         return root
     }
