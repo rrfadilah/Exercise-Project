@@ -7,6 +7,9 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import com.tegarpenemuan.myapplication.databinding.ActivityMainBinding
+import com.tegarpenemuan.myapplication.galleryfragment.GalleryActivity
+import com.tegarpenemuan.myapplication.home.ui.HomeActivity
+import com.tegarpenemuan.myapplication.sampleFragment.PicturesActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this, GalleryActivity::class.java)
             startActivity(intent)
         }, 3000)
 

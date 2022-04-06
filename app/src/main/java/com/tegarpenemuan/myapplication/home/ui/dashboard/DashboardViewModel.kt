@@ -1,4 +1,4 @@
-package com.tegarpenemuan.myapplication.ui.dashboard
+package com.tegarpenemuan.myapplication.home.ui.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
