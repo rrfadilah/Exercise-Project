@@ -1,6 +1,7 @@
 package com.tegarpenemuan.myapplication.home.ui.doctor
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,10 +10,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import com.tegarpenemuan.myapplication.Constant
-import com.tegarpenemuan.myapplication.R
+import com.tegarpenemuan.myapplication.SignInActivity
 import com.tegarpenemuan.myapplication.databinding.FragmentDoctorBinding
+
 
 class DoctorFragment : Fragment() {
 
@@ -54,6 +55,19 @@ class DoctorFragment : Fragment() {
 //            bundle.putString(Constant.Intent.KEY, "Value disini akan tercetak di halaman dashboard")
 //            it.findNavController().navigate(R.id.action_navigation_doctor_to_navigation_message, bundle)
 //        }
+        val preferences = this.requireActivity()
+            .getSharedPreferences(Constant.Register.PREF_REGISTER_NAME, Context.MODE_PRIVATE)
+
+        binding.tvFullname.text = preferences.getString(Constant.Register.KEY.NAMA,"").toString()
+        binding.tvPekerjaan.text = preferences.getString(Constant.Register.KEY.PEKERJAAN,"").toString()
+        binding.tvEmail.text = preferences.getString(Constant.Register.KEY.EMAIL,"").toString()
+        binding.tvPassword.text = preferences.getString(Constant.Register.KEY.PASSWORD,"").toString()
+        binding.btnLogout.setOnClickListener {
+            preferences.edit().clear().commit()
+            val intent = Intent(activity, SignInActivity::class.java)
+            startActivity(intent)
+            this.activity?.finish()
+        }
 
         Log.d("Lifecycle", "Lifecycle NotificationsFragment onCreateView")
         return root

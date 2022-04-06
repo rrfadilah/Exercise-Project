@@ -4,12 +4,14 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
 import com.tegarpenemuan.myapplication.databinding.ActivityOnBoardingBinding
 import com.tegarpenemuan.myapplication.home.ui.HomeActivity
 import com.tegarpenemuan.myapplication.model.Biodata
 import com.tegarpenemuan.myapplication.model.UserInfo
+import com.tegarpenemuan.myapplication.utils.showCustomToast
 
 class OnBoardingActivity : AppCompatActivity() {
 
@@ -25,8 +27,9 @@ class OnBoardingActivity : AppCompatActivity() {
         }
 
         binding.btnGetStarted.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, HomeActivity::class.java)
+//            startActivity(intent)
+            Toast(this).showCustomToast("Maaf, Login Terlebih Dahulu", this)
         }
 
         onBoarding()

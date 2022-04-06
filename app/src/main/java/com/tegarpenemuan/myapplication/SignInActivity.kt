@@ -8,10 +8,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.content.SharedPreferences
-import android.provider.Settings.Global.putString
 import androidx.core.content.edit
 import com.google.android.material.snackbar.Snackbar
 import com.tegarpenemuan.myapplication.databinding.ActivitySignBinding
+import com.tegarpenemuan.myapplication.home.ui.HomeActivity
 import com.tegarpenemuan.myapplication.model.Biodata
 import com.tegarpenemuan.myapplication.model.UserInfo
 import com.tegarpenemuan.myapplication.utils.showCustomToast
@@ -29,20 +29,20 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val registerPreferences =
+            this.getSharedPreferences(Constant.Register.PREF_REGISTER_NAME, MODE_PRIVATE)
         val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
+
         binding.btnSignIn.setOnClickListener {
+            // dialogCustomLayout()
+            validasiFormToastSnack(registerPreferences)
+//            validasiFormDialog()
             sharedPreferences(pref)
         }
 
         binding.tvCreateNewAccount.setOnClickListener {
-            Toast(this).showCustomToast("Tombol create new accoiunt di pencet", this)
+//            Toast(this).showCustomToast("Tombol create new accoiunt di pencet", this)
             startActivity(Intent(this, SignUpActivity::class.java))
-        }
-
-        binding.btnSignIn.setOnClickListener {
-//            dialogCustomLayout()
-//            validasiFormToastSnack()
-            validasiFormDialog()
         }
 
         binding.tvForgotPassword.setOnClickListener {
@@ -64,13 +64,15 @@ class SignInActivity : AppCompatActivity() {
         }
 
         // untuk mengambil data dari shared preferences menggunakan code berikut ini
-        val prefEmail = pref.getString(Constant.Preferences.KEY.EMAIL, "")
-        val prefPassword = pref.getString(Constant.Preferences.KEY.PASSWORD, "")
-        Snackbar.make(
-            binding.root,
-            "Value yang tersimpan adalah berikut: Email: $prefEmail dan Password: $prefPassword",
-            Snackbar.LENGTH_INDEFINITE
-        ).show()
+        if (pref.contains(Constant.Register.KEY.NAMA)) {
+            val prefEmail = pref.getString(Constant.Preferences.KEY.EMAIL, "")
+            val prefPassword = pref.getString(Constant.Preferences.KEY.PASSWORD, "")
+            Snackbar.make(
+                binding.root,
+                "Value yang tersimpan adalah berikut: Email: $prefEmail dan Password: $prefPassword",
+                Snackbar.LENGTH_INDEFINITE
+            ).show()
+        }
     }
 
     // contoh satu lagi pengguanaan shared preferences untuk konfigurasi aplikasi
@@ -149,20 +151,30 @@ class SignInActivity : AppCompatActivity() {
         dialog.show(supportFragmentManager, null)
     }
 
-    private fun validasiFormToastSnack() {
+    private fun validasiFormToastSnack(pref: SharedPreferences) {
         if (binding.etEmail.text.isEmpty()) {
             Toast(this).showCustomToast("Email tidak boleh kosong", this)
         } else if (!binding.etEmail.text.matches(Regex("^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"))
         ) {
             Toast(this).showCustomToast("Email Tidak Valid", this)
         } else if (binding.etPassword.text.isEmpty()) {
-            Toast(this).showCustomToast("Password tidak boleh ksong", this)
+            Toast(this).showCustomToast("Password tidak boleh kosong", this)
         } else if (binding.etPassword.text.length < 8) {
             Toast(this).showCustomToast("Password harus lebih dari 8 karakter", this)
         } else if (!binding.etPassword.text.matches(Regex("(?=.*[a-z])(?=.*[A-Z]).+"))) {
             Toast(this).showCustomToast("Password harus mengandung upper case dan lowercase", this)
         } else {
-            openPage()
+            val emailPreferences =
+                pref.getString(Constant.Register.KEY.EMAIL, "")
+            val passwordPreferences =
+                pref.getString(Constant.Register.KEY.PASSWORD, "")
+            if (binding.etEmail.text.toString() == emailPreferences && binding.etPassword.text.toString() == passwordPreferences) {
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, "Anda Belum Memiliki Akun", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -189,6 +201,6 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        Toast(this).showCustomToast("Close Sign In", this)
+//        Toast(this).showCustomToast("Close Sign In", this)
     }
 }
