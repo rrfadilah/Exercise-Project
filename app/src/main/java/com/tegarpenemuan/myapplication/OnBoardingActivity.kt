@@ -1,5 +1,6 @@
 package com.tegarpenemuan.myapplication
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +16,10 @@ class OnBoardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnSignIn.setOnClickListener {
+            startActivity(Intent(this,SignActivity::class.java))
+        }
 
         onBoarding()
     }

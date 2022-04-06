@@ -1,5 +1,6 @@
 package com.tegarpenemuan.myapplication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.tegarpenemuan.myapplication.databinding.ActivitySignupBinding
@@ -13,6 +14,8 @@ class SignupActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        binding.ibBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 }
