@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/shape_rounded_cyan"
+        android:background="@drawable/button_custom"
         android:text="Get Started"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
