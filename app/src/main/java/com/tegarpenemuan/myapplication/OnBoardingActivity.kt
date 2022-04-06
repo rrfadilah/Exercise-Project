@@ -7,6 +7,8 @@ import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
 import com.tegarpenemuan.myapplication.databinding.ActivityOnBoardingBinding
+import com.tegarpenemuan.myapplication.model.Biodata
+import com.tegarpenemuan.myapplication.model.UserInfo
 
 class OnBoardingActivity : AppCompatActivity() {
 
@@ -18,10 +20,66 @@ class OnBoardingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnSignIn.setOnClickListener {
-            startActivity(Intent(this,SignActivity::class.java))
+            startActivity(Intent(this, SignActivity::class.java))
         }
 
         onBoarding()
+    }
+
+    fun intentExplicit() {
+        // Contoh Pengguanaan explisit
+        val intent = Intent(this, SignActivity::class.java).apply {
+            putExtra(Constant.Intent.EMAIL, "value")
+        }
+        startActivity(intent)
+    }
+
+    fun intentImplicit() {
+        // Contoh Penggunaan impicit
+        val intent = Intent(this, SignActivity::class.java).apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "VALUE")
+        }
+
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        }
+    }
+
+    fun intentBundle() {
+        val intent = Intent(this, SignActivity::class.java)
+        val bundle = Bundle()
+
+        bundle.putString(Constant.Intent.PHONE, "VALUE")
+        bundle.putString(Constant.Intent.EMAIL, "VALUE")
+        bundle.putString(Constant.Intent.KEY, "VALUE")
+        intent.putExtras(bundle)
+
+        startActivity(intent)
+    }
+
+    fun intentSerialize() {
+        val intent = Intent(this, SignActivity::class.java)
+        val biodata = Biodata(
+            key = "VALUE_KEY",
+            phone = "VALUE_PHONE",
+            email = "VALUE_EMAIL"
+        )
+
+        intent.putExtra(Constant.Serialize.KEY, biodata)
+        startActivity(intent)
+    }
+
+    fun intentParcelable() {
+        val intent = Intent(this, SignActivity::class.java)
+        val userInfo = UserInfo(
+            key = "VALUE_KEY",
+            phone = "VALUE_PHONE",
+            email = "VALUE_EMAIL"
+        )
+
+        intent.putExtra(Constant.Parcelize.KEY, userInfo)
+        startActivity(intent)
     }
 
     private fun onBoarding() {
