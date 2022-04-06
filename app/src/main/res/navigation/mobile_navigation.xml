@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_doctor">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_doctor"
         android:name="com.tegarpenemuan.myapplication.home.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="@string/Doctor"
+        tools:layout="@layout/fragment_doctor" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_message"
         android:name="com.tegarpenemuan.myapplication.home.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:label="@string/Message"
+        tools:layout="@layout/fragment_message" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_hospitals"
         android:name="com.tegarpenemuan.myapplication.home.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:label="@string/Hospitals"
+        tools:layout="@layout/fragment_hospitals" />
 </navigation>

@@ -24,6 +24,10 @@ class SignActivity : AppCompatActivity() {
             startActivity(Intent(this,SignupActivity::class.java))
         }
 
+//        IntentData()
+    }
+
+    private fun IntentData() {
         // Untuk menerima intent explicit
         val valueFromAnotherActivity = intent.getStringExtra(Constant.Intent.EMAIL)
 

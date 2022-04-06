@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
 import com.tegarpenemuan.myapplication.databinding.ActivityOnBoardingBinding
+import com.tegarpenemuan.myapplication.home.ui.HomeActivity
 import com.tegarpenemuan.myapplication.model.Biodata
 import com.tegarpenemuan.myapplication.model.UserInfo
 
@@ -21,6 +22,11 @@ class OnBoardingActivity : AppCompatActivity() {
 
         binding.btnSignIn.setOnClickListener {
             startActivity(Intent(this, SignActivity::class.java))
+        }
+
+        binding.btnGetStarted.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
         }
 
         onBoarding()

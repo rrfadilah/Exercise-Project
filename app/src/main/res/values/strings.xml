@@ -5,4 +5,10 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="hospitals">Hospitals</string>
+    <string name="message">Message</string>
+    <string name="doctor">Doctor</string>
+    <string name="Doctor">Doctor</string>
+    <string name="Message">Message</string>
+    <string name="Hospitals">Hospitals</string>
 </resources>
