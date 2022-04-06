@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import android.content.SharedPreferences
+import android.provider.Settings.Global.putString
+import androidx.core.content.edit
 import com.google.android.material.snackbar.Snackbar
 import com.tegarpenemuan.myapplication.databinding.ActivitySignBinding
 import com.tegarpenemuan.myapplication.model.Biodata
@@ -26,6 +29,11 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
+        binding.btnSignIn.setOnClickListener {
+            sharedPreferences(pref)
+        }
+
         binding.tvCreateNewAccount.setOnClickListener {
             Toast(this).showCustomToast("Tombol create new accoiunt di pencet", this)
             startActivity(Intent(this, SignUpActivity::class.java))
@@ -43,26 +51,64 @@ class SignInActivity : AppCompatActivity() {
 
     }
 
+    // contoh pengguanan sharedpreferences di dalam sign in
+    fun sharedPreferences(pref: SharedPreferences) {
+        val email = binding.etEmail.text.toString()
+        val password = binding.etPassword.text.toString()
+
+        // untuk melakukan penyimpanan ke sharedpreferences hanya mengguanakn code berikut ini
+        pref.edit {
+            putString(Constant.Preferences.KEY.EMAIL, email)
+            putString(Constant.Preferences.KEY.PASSWORD, password)
+            apply()
+        }
+
+        // untuk mengambil data dari shared preferences menggunakan code berikut ini
+        val prefEmail = pref.getString(Constant.Preferences.KEY.EMAIL, "")
+        val prefPassword = pref.getString(Constant.Preferences.KEY.PASSWORD, "")
+        Snackbar.make(
+            binding.root,
+            "Value yang tersimpan adalah berikut: Email: $prefEmail dan Password: $prefPassword",
+            Snackbar.LENGTH_INDEFINITE
+        ).show()
+    }
+
+    // contoh satu lagi pengguanaan shared preferences untuk konfigurasi aplikasi
+    fun sharedPrefDarkMode(pref: SharedPreferences, darkMode: Boolean) {
+        pref.edit {
+            putBoolean(Constant.Preferences.KEY.DARK_MODE, darkMode)
+        }
+        pref.getBoolean(Constant.Preferences.KEY.DARK_MODE, false)
+    }
+
+    // contoh satu lagi pengguanaan shared preferences untuk konfigurasi aplikasi
+    fun sharedPrefLanguage(pref: SharedPreferences, language: String) {
+        pref.edit {
+            putString(Constant.Preferences.KEY.APP_LANGUAGE, language)
+        }
+        pref.getString(Constant.Preferences.KEY.APP_LANGUAGE, "id")
+    }
+
     private fun validasiFormDialog() {
         if (binding.etEmail.text.isEmpty() && binding.etPassword.text.isEmpty()) {
-            dialogAction("Peringatan","Email dan Password tidak boleh kosong")
+            dialogAction("Peringatan", "Email dan Password tidak boleh kosong")
         } else if (binding.etEmail.text.isEmpty()) {
-            dialogStandard("Peringatan","Email Tidak Boleh Kosnong")
+            dialogStandard("Peringatan", "Email Tidak Boleh Kosnong")
         } else if (!binding.etEmail.text.matches(Regex("^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"))
         ) {
             dialogWithFragment()
         } else if (binding.etPassword.text.isEmpty()) {
-            dialogStandard("Peringatan","Password Tidak Boleh Kosnong")
+            dialogStandard("Peringatan", "Password Tidak Boleh Kosnong")
         } else if (binding.etPassword.text.length < 8) {
-            dialogStandard("Peringatan","Password harus lebih dari 8 karakter")
+            dialogStandard("Peringatan", "Password harus lebih dari 8 karakter")
         } else if (!binding.etPassword.text.matches(Regex("(?=.*[a-z])(?=.*[A-Z]).+"))) {
-            dialogStandard("Peringatan","Password harus mengandung upper case dan lowercase")
+            dialogStandard("Peringatan", "Password harus mengandung upper case dan lowercase")
         } else {
             dialogCustomLayout()
         }
     }
 
-    fun dialogStandard(title:String,message:String) {
+    fun dialogStandard(title: String, message: String) {
         // Dialog standard
         val dialog = AlertDialog.Builder(this)
         dialog.setTitle(title)
@@ -71,7 +117,7 @@ class SignInActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    fun dialogAction(title:String,message:String) {
+    fun dialogAction(title: String, message: String) {
         // dialog dengan action
         val dialog = AlertDialog.Builder(this)
         dialog.setTitle(title)
