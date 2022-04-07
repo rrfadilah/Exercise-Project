@@ -13,7 +13,6 @@ import com.mutawalli.exercise_project.databinding.ActivitySignInBinding
 import com.mutawalli.exercise_project.model.Biodata
 import com.mutawalli.exercise_project.model.UserInfo
 
-
 class SignInActivity : AppCompatActivity() {
     companion object {
         const val KEY = "KEY"
@@ -67,7 +66,7 @@ class SignInActivity : AppCompatActivity() {
         val dialog = AlertDialog.Builder(this)
         dialog.setTitle("judul dialog")
         dialog.setMessage("isi pesan dialog")
-        dialog.setPositiveButton("POsitif", object : DialogInterface.OnClickListener {
+        dialog.setPositiveButton("Positif", object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface?, which: Int) {
                 dialog?.dismiss()
             }
