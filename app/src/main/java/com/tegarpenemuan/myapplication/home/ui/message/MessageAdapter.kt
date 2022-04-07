@@ -1,36 +1,52 @@
 package com.tegarpenemuan.myapplication.home.ui.message
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.tegarpenemuan.myapplication.R
+import com.tegarpenemuan.myapplication.databinding.ListItemMessagesBinding
 
-class MessageAdapter(private val list: List<MessageModel>): RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
+class MessageAdapter(private val listener: EventListener, private var list: List<MessageModel>) :
+    RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageAvatar = itemView.findViewById<ImageView>(R.id.iv_img)
-        val textName = itemView.findViewById<TextView>(R.id.tv_name)
-        val textMessage = itemView.findViewById<TextView>(R.id.tv_last_message)
+    inner class ViewHolder(val binding: ListItemMessagesBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(list: List<MessageModel>) {
+        this.list = list
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val context = parent.context
-        val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.list_item_messages, parent, false)
-        return ViewHolder(view)
+        val binding =
+            ListItemMessagesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val message: MessageModel = list[position]
-        holder.imageAvatar.setImageResource(message.image)
-        holder.textName.text = message.name
-        holder.textMessage.text = message.lastMessage
+        val item = list[position]
+        holder.binding.tvName.text = item.name
+        holder.binding.tvLastMessage.text = item.lastMessage
+        holder.binding.ivImg.setImageResource(item.imageRes)
+        holder.binding.ivUpdate.setOnClickListener {
+            listener.onUpdate(item)
+        }
+        holder.binding.ivCancel.setOnClickListener {
+            listener.onDelete(item)
+        }
+        holder.itemView.setOnClickListener {
+            listener.onClick(item)
+        }
     }
 
     override fun getItemCount(): Int {
-        return list.count()
+        return list.size
+    }
+
+    interface EventListener {
+        fun onClick(item: MessageModel)
+        fun onDelete(item: MessageModel)
+        fun onUpdate(item: MessageModel)
     }
 }

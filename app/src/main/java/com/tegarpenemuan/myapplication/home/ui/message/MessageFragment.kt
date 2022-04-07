@@ -6,19 +6,24 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.tegarpenemuan.myapplication.Constant
+import com.tegarpenemuan.myapplication.R
+import com.tegarpenemuan.myapplication.data.local.MessageEntity
+import com.tegarpenemuan.myapplication.database.MyDoctorDatabase
 import com.tegarpenemuan.myapplication.databinding.FragmentMessageBinding
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class MessageFragment : Fragment() {
 
     private var _binding: FragmentMessageBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+
+    private var db: MyDoctorDatabase? = null
+    private lateinit var adapter: MessageAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -35,8 +40,7 @@ class MessageFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(MessageViewModel::class.java)
+        ViewModelProvider(this).get(MessageViewModel::class.java)
 
         _binding = FragmentMessageBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -46,8 +50,8 @@ class MessageFragment : Fragment() {
 //            textView.text = it
 //        }
 
-        val adapter_message = MessageAdapter(DummyMessage.messages)
-        binding.rvMessage.adapter = adapter_message
+//        val adapter_message = MessageAdapter(DummyMessage.messages)
+//        binding.rvMessage.adapter = adapter_message
 
         Log.d("Lifecycle", "Lifecycle DashboardFragment onCreateView")
         return root
@@ -55,10 +59,149 @@ class MessageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         Log.d("Lifecycle", "Lifecycle DashboardFragment onViewCreated")
 
 //        val data = arguments?.getString(Constant.Intent.KEY)
 //        binding.textDashboard.text = "Dashboard akan mencetak ::: $data"
+
+        db = MyDoctorDatabase.getInstance(requireContext().applicationContext)
+
+        adapter = MessageAdapter(
+            listener = object : MessageAdapter.EventListener {
+                override fun onClick(item: MessageModel) {
+                    Toast.makeText(requireContext(), item.lastMessage, Toast.LENGTH_SHORT).show()
+                }
+                override fun onDelete(item: MessageModel) {
+                    val message = MessageEntity(
+                        id = item.id,
+                        name = item.name,
+                        image = item.image,
+                        message = item.lastMessage
+                    )
+                    deleteDataDatabase(message)
+                }
+                override fun onUpdate(item: MessageModel) {
+                    val message = MessageEntity(
+                        id = item.id,
+                        name = item.name + " Updated",
+                        image = item.image,
+                        message = item.lastMessage + " Updated"
+                    )
+                    updateDataDatabase(message)
+                }
+            },
+            list = emptyList()
+        )
+
+        binding.rvMessage.adapter = adapter
+
+        loadDataDatabase()
+
+        binding.fabPlus.setOnClickListener {
+            val message = MessageEntity(
+                id = System.currentTimeMillis().toString(),
+                image = System.currentTimeMillis().toString(),
+                name = System.currentTimeMillis().toString() + " This is Name",
+                message = System.currentTimeMillis().toString() + " This is Last Messages"
+            )
+
+            insertDataDatabase(message)
+        }
+    }
+
+    // function untuk load data dummy
+    fun loadDataDummy(): List<MessageModel> {
+        return listOf(
+            MessageModel(
+                id = "1",
+                imageRes = R.drawable.img_user3,
+                name = "Alexander Jannie",
+                lastMessage = "Baik ibu, terima kasih banyak atas wakt..."
+            ),
+            MessageModel(
+                id = "2",
+                imageRes = R.drawable.img_user1,
+                name = "Nairobi Putri Hayza",
+                lastMessage = "Oh tentu saja tidak karena jeruk it..."
+            ),
+            MessageModel(
+                id = "3",
+                imageRes = R.drawable.img_user2,
+                name = "John McParker Steve",
+                lastMessage = "Oke menurut pak dokter bagaimana unt"
+            ),
+        )
+    }
+
+    // function untuk insert data pada database
+    private fun insertDataDatabase(message: MessageEntity) {
+        GlobalScope.async {
+            val result = db?.messageDAO()?.insertMessage(message)
+            requireActivity().runOnUiThread {
+                if (result != 0L) {
+                    Toast.makeText(requireContext(), "Success insert", Toast.LENGTH_SHORT)
+                        .show()
+                    loadDataDatabase()
+                } else {
+                    Toast.makeText(requireContext(), "Failure insert", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+    }
+
+    // function untuk update data pada database
+    private fun updateDataDatabase(message: MessageEntity) {
+        GlobalScope.async {
+            val result = db?.messageDAO()?.updateMessage(message)
+            requireActivity().runOnUiThread {
+                if (result != 0) {
+                    Toast.makeText(requireContext(), "Success update", Toast.LENGTH_SHORT)
+                        .show()
+                    loadDataDatabase()
+                } else {
+                    Toast.makeText(requireContext(), "Failure update", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+    }
+
+    // function untuk load data dari database
+    private fun loadDataDatabase() {
+        GlobalScope.launch {
+            val results = db?.messageDAO()?.getMessage()
+            requireActivity().runOnUiThread {
+                results?.let {
+                    val messages = it.map {
+                        MessageModel(
+                            id = it.id,
+                            name = it.name,
+                            imageRes = R.drawable.img_user1,
+                            image = it.image,
+                            lastMessage = it.message
+                        )
+                    }
+                    adapter.updateList(messages)
+                }
+            }
+        }
+    }
+
+    // function untuk mendelete data pada databse
+    private fun deleteDataDatabase(message: MessageEntity) {
+        GlobalScope.async {
+            val results = db?.messageDAO()?.deleteMessage(message)
+            requireActivity().runOnUiThread {
+                if (results != 0) {
+                    Toast.makeText(requireContext(), "Berhasil delete", Toast.LENGTH_SHORT).show()
+                    loadDataDatabase()
+                } else {
+                    Toast.makeText(requireContext(), "Gagal delete", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     override fun onStart() {
@@ -94,6 +237,7 @@ class MessageFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        MyDoctorDatabase.destroyInstance()
         Log.d("Lifecycle", "Lifecycle DashboardFragment onDestroyView")
     }
 

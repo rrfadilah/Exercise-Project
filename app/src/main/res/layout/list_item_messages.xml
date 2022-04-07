@@ -8,7 +8,7 @@
         android:id="@+id/iv_img"
         android:layout_width="46dp"
         android:layout_height="46dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/img_user1"
@@ -20,26 +20,48 @@
         android:id="@+id/tv_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
-        android:layout_marginRight="16dp"
-        android:text="Alexander Jannie"
+        android:layout_marginEnd="16dp"
+        android:text="@string/alexander_jannie"
         android:textColor="#112340"
         android:textSize="16sp"
         app:layout_constraintLeft_toRightOf="@id/iv_img"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/iv_update"
         app:layout_constraintTop_toTopOf="@id/iv_img" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_last_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Baik ibu, terima kasih banyak atas wakt..."
+        android:text="@string/message_satu"
         android:textColor="#7D8797"
         android:textSize="12sp"
         app:layout_constraintLeft_toLeftOf="@id/tv_name"
         app:layout_constraintRight_toRightOf="@id/tv_name"
         app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+    <ImageView
+        android:id="@+id/iv_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/edit"
+        android:src="@drawable/ic_edit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/iv_cancel"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/delete"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/v_separator"

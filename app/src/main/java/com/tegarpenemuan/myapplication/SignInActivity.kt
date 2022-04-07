@@ -171,6 +171,11 @@ class SignInActivity : AppCompatActivity() {
             if (binding.etEmail.text.toString() == emailPreferences && binding.etPassword.text.toString() == passwordPreferences) {
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
+                val registerPreferences =
+                    this.getSharedPreferences(Constant.Register.PREF_REGISTER_NAME, MODE_PRIVATE)
+                val editor = registerPreferences.edit()
+                editor.putBoolean(Constant.Register.KEY.LOGIN, true)
+                editor.apply()
                 finish()
             } else {
                 Toast.makeText(this, "Anda Belum Memiliki Akun", Toast.LENGTH_LONG).show()
@@ -201,6 +206,8 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
+        finish()
+//        startActivity(Intent(this,MainActivity::class.java))
 //        Toast(this).showCustomToast("Close Sign In", this)
     }
 }
