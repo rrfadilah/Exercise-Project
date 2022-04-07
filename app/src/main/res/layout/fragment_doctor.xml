@@ -5,79 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:layout_marginLeft="16sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/img_doctor" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="16dp"
-        android:textColor="#112340"
-        android:textSize="16sp"
-        app:layout_constraintLeft_toRightOf="@id/iv_img"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Shayna Melinda" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_jobdesk"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="#7D8797"
-        android:textSize="12sp"
-        app:layout_constraintLeft_toLeftOf="@id/tv_name"
-        app:layout_constraintRight_toRightOf="@id/tv_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_name"
-        tools:text="Product Designer" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_question"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="#7D8797"
-        android:textSize="12sp"
-        app:layout_constraintLeft_toLeftOf="@id/tv_name"
-        app:layout_constraintRight_toRightOf="@id/tv_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_name"
-        tools:text="Product Designer" />
-
     <TextView
-        android:id="@+id/tv_label_question"
-        android:layout_width="wrap_content"
+        android:id="@+id/text_doctor"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="34dp"
-        android:text="Mau konsultasi dengan\nsiapa hari ini?"
-        android:textColor="#112340"
-        android:textFontWeight="600"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_img" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_message"
-        android:layout_width="101dp"
-        android:layout_height="129dp"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_label_question"
-        app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/list_item_spesialis" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,12 @@
-package net.mhus.fiveinone.exerciseproject.home.ui.hospital
+package net.mhus.fiveinone.exerciseproject
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.mhus.exercise_project.databinding.FragmentHospitalBinding
+import androidx.fragment.app.DialogFragment
+import com.mhus.exercise_project.R
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -14,16 +15,13 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [HostpitalFragment.newInstance] factory method to
+ * Use the [CostumDialogPasswordUpLowFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HospitalFragment : Fragment() {
+class CostumDialogPasswordUpLowFragment : DialogFragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
-    private var _binding: FragmentHospitalBinding? = null
-    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,14 +32,11 @@ class HospitalFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHospitalBinding.inflate(inflater, container, false)
-
+    ): View? {
         // Inflate the layout for this fragment
-        return binding.root
+        return inflater.inflate(R.layout.fragment_custom_dialog_password_up_low, container, false)
     }
 
     companion object {
@@ -51,12 +46,12 @@ class HospitalFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment HostpitalFragment.
+         * @return A new instance of fragment CostumDialogPasswordUpLowFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            HospitalFragment().apply {
+            CostumDialogPasswordUpLowFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

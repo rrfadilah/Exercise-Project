@@ -7,6 +7,14 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
+    <string name="EmailKosong">Email tidak boleh kosong</string>
+    <string name="EmailPasswordKosong">Email dan Password tidak boleh kosong</string>
+    <string name="EmailInvalid">Email tidak valid</string>
+    <string name="PasswordKosong">Password tidak boleh kosong</string>
+    <string name="PasswordKurang">Password kurang dari 8 karakter</string>
+    <string name="PasswordUpLow">Password harus mengandung uppercase dan lowercase</string>
+    <string name="ForgotPassword">Cek email anda</string>
+
     <!--Other Name for menu-->
     <string name="title_menu_doctor">Doctor</string>
     <string name="title_menu_messages">Messages</string>
