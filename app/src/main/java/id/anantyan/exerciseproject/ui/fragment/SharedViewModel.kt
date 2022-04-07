@@ -5,10 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import id.anantyan.exerciseproject.model.Messages
 import id.anantyan.exerciseproject.model.Users
+import id.anantyan.utils.LiveEvent
 
 class SharedViewModel : ViewModel() {
     private val _item: MutableLiveData<Users?> = MutableLiveData()
-    private val _messages: MutableLiveData<Messages?> = MutableLiveData()
+    private val _messages: LiveEvent<Messages?> = LiveEvent()
 
     val item: LiveData<Users?> = _item
     val messages: LiveData<Messages?> = _messages
