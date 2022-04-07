@@ -1,4 +1,4 @@
-package com.example.mydoctor.model
+package com.example.mydoctor.data.local
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
@@ -8,9 +8,8 @@ import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "message")
 @Parcelize
-
-data class Message(
-    @PrimaryKey(autoGenerate = true) var id: String,
+data class MessageEntity(
+    @PrimaryKey var id: String,
     @ColumnInfo(name = "image") var image: String,
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "message") var message: String

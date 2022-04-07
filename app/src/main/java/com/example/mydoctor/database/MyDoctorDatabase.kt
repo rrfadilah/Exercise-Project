@@ -1,12 +1,13 @@
 package com.example.mydoctor.database
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
 import android.content.Context
-import com.example.mydoctor.model.Message
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.example.mydoctor.data.local.MessageDAO
+import com.example.mydoctor.data.local.MessageEntity
 
-@Database(entities = [Message::class], version = 1)
+@Database(entities = [MessageEntity::class], version = 1)
 abstract class MyDoctorDatabase : RoomDatabase() {
     companion object {
         private var INSTANCE: MyDoctorDatabase? = null
@@ -28,4 +29,6 @@ abstract class MyDoctorDatabase : RoomDatabase() {
             INSTANCE = null
         }
     }
+
+    abstract fun messageDAO(): MessageDAO
 }

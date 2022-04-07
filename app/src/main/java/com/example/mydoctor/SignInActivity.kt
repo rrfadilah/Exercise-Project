@@ -1,17 +1,13 @@
 package com.example.mydoctor
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
-import android.view.LayoutInflater
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.edit
 import com.example.mydoctor.databinding.ActivitySignInBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.mydoctor.home.HomeActivity
 
 class SignInActivity : AppCompatActivity() {
 
@@ -93,7 +89,7 @@ class SignInActivity : AppCompatActivity() {
             val prefEmail = pref.getString(Constant.Preferences.KEY.EMAIL, "")
             val prefPassword = pref.getString(Constant.Preferences.KEY.PASSWORD, "")
             if (email == prefEmail && password == prefPassword) {
-                val intent = Intent(this, NavigationActivity::class.java)
+                val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
             } else {
                 Toast.makeText(
