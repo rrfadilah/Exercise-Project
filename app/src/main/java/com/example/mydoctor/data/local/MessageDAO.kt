@@ -7,7 +7,8 @@ import com.example.mydoctor.model.Message
 interface MessageDAO {
 
     @Query("SELECT * FROM message")
-    fun getMessage(): List<Message>
+    fun getMessage
+                (): List<Message>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMessage(message: Message): Long

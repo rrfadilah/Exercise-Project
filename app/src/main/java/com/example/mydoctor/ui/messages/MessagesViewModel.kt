@@ -1,13 +1,8 @@
 package com.example.mydoctor.ui.messages
 
-//import androidx.lifecycle.LiveData
-//import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-
-class MessagesViewModel : ViewModel() {
-
-//    private val _text = MutableLiveData<String>().apply {
-//        value = "This is messages Fragment"
-//    }
-//    val text: LiveData<String> = _text
-}
+data class MessagesViewModel(
+    val id: String,
+    val image: String,
+    val name: String,
+    val lastMessage: String
+)
