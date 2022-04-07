@@ -1,4 +1,4 @@
-package id.anantyan.exerciseproject.ui.fragment
+package id.anantyan.exerciseproject.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

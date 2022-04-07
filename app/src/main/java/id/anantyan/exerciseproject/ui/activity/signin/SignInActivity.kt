@@ -1,4 +1,4 @@
-package id.anantyan.exerciseproject.ui.activity
+package id.anantyan.exerciseproject.ui.activity.signin
 
 import android.content.Context
 import android.content.Intent
@@ -7,14 +7,19 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.databinding.ActivitySignInBinding
 import id.anantyan.exerciseproject.databinding.DialogExampleBinding
+import id.anantyan.exerciseproject.model.Users
+import id.anantyan.exerciseproject.ui.activity.BaseFragmentActivity
 import id.anantyan.exerciseproject.ui.fragment.DialogExampleFragment
 import id.anantyan.exerciseproject.ui.fragment.DialogExampleFragment.Companion.ARG_DIALOG_EXAMPLE
+import id.anantyan.exerciseproject.ui.activity.signup.SignUpActivity
 import id.anantyan.utils.Constant.PASSING_TO_SIGN_UP_ACTIVITY
 import id.anantyan.utils.Validation.emailValid
 import id.anantyan.utils.Validation.passwordValid
@@ -27,6 +32,7 @@ import id.anantyan.utils.validator.validator
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
+    private val viewModel: SignInViewModel by viewModels()
     private val preferences: PreferenceHelper by lazy { PreferenceManager(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +40,7 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
         onBinding()
+        onObserver()
     }
 
     private fun onBinding() {
@@ -63,23 +70,34 @@ class SignInActivity : AppCompatActivity() {
 
     private val onSignIn = object : Validator.OnValidateListener {
         override fun onValidateSuccess(values: List<String>) {
-            when {
-                preferences.getEmail() != binding.txtInputLayoutEmail.text.toString() -> {
-                    onSnackbar(binding.root, getString(R.string.txt_not_found_email))
-                }
-                preferences.getPassword() != binding.txtInputLayoutPassword.text.toString() -> {
-                    onSnackbar(binding.root, getString(R.string.txt_not_found_password))
-                }
-                else -> {
-                    preferences.setLogIn(true)
-                    val intent = Intent(this@SignInActivity, BaseFragmentActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-            }
+            onSelectData()
         }
 
         override fun onValidateFailed(errors: List<String>) {}
+    }
+
+    /**
+     * Observer LiveData
+     * */
+    private fun onSelectData() {
+        val users = Users(
+            email = binding.txtInputLayoutEmail.text.toString(),
+            password = binding.txtInputLayoutPassword.text.toString()
+        )
+        viewModel.selectByUsers(users)
+    }
+
+    private fun onObserver() {
+        viewModel.selectByUsers.observe(this) {
+            if (it != null) {
+                preferences.setLogIn(true)
+                val intent = Intent(this@SignInActivity, BaseFragmentActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                onSnackbar(binding.root, getString(R.string.txt_not_found_data))
+            }
+        }
     }
 
     /**
