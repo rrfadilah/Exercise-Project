@@ -1,6 +1,7 @@
 package com.rizky.exercise_project
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +10,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import com.google.android.material.snackbar.Snackbar
+import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.ActivitySignInBinding
+import com.rizky.exercise_project.home.HomeActivity
 import com.rizky.exercise_project.model.Biodata
 import com.rizky.exercise_project.model.UserInfo
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class SignInActivity : AppCompatActivity() {
     companion object {
@@ -19,15 +25,22 @@ class SignInActivity : AppCompatActivity() {
     }
 
     lateinit var binding: ActivitySignInBinding
+    private var db: MyDoctorDatabase? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        db = MyDoctorDatabase.getInstance(this.applicationContext)
+
         val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
         binding.btnSignIn.setOnClickListener {
-            sharedPreferences(pref)
+//            sharedPreferences(pref)
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
+            getUser(email, password)
         }
 
         // Untuk menerima intent explicit
@@ -129,5 +142,19 @@ class SignInActivity : AppCompatActivity() {
             putString(Constant.Preferences.KEY.APP_LANGUAGE, language)
         }
         pref.getString(Constant.Preferences.KEY.APP_LANGUAGE, "id")
+    }
+
+    fun getUser(email: String, password: String) {
+        GlobalScope.launch {
+            val user = db?.userDAO()?.getUser(email = email, password = password)
+            runOnUiThread {
+                user?.let {
+                    startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
+                } ?: run {
+                    Toast.makeText(this@SignInActivity, "User tidak ditemukan", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
     }
 }
