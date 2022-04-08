@@ -10,11 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.google.android.material.snackbar.Snackbar
+import com.tegarpenemuan.myapplication.database.MyDoctorDatabase
 import com.tegarpenemuan.myapplication.databinding.ActivitySignBinding
 import com.tegarpenemuan.myapplication.home.ui.HomeActivity
 import com.tegarpenemuan.myapplication.model.Biodata
 import com.tegarpenemuan.myapplication.model.UserInfo
 import com.tegarpenemuan.myapplication.utils.showCustomToast
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class SignInActivity : AppCompatActivity() {
 
@@ -23,19 +26,26 @@ class SignInActivity : AppCompatActivity() {
     }
 
     lateinit var binding: ActivitySignBinding
+    private var db: MyDoctorDatabase? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        db = MyDoctorDatabase.getInstance(this.applicationContext)
+
         val registerPreferences =
             this.getSharedPreferences(Constant.Register.PREF_REGISTER_NAME, MODE_PRIVATE)
         val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
 
         binding.btnSignIn.setOnClickListener {
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
+            getUser(email, password)
+
             // dialogCustomLayout()
-            validasiFormToastSnack(registerPreferences)
+//            validasiFormToastSnack(registerPreferences)
 //            validasiFormDialog()
             sharedPreferences(pref)
         }
@@ -49,6 +59,20 @@ class SignInActivity : AppCompatActivity() {
             Toast(this).showCustomToast("Forgot Password Clicked", this)
         }
 
+    }
+
+    fun getUser(email: String, password: String) {
+        GlobalScope.launch {
+            val user = db?.userDAO()?.getUser(email = email, password = password)
+            runOnUiThread {
+                user?.let {
+                    startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
+                } ?: run {
+                    Toast.makeText(this@SignInActivity, "User tidak ditemukan", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
     }
 
     // contoh pengguanan sharedpreferences di dalam sign in

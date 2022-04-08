@@ -6,11 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.tegarpenemuan.myapplication.data.local.MessageDAO
 import com.tegarpenemuan.myapplication.data.local.MessageEntity
+import com.tegarpenemuan.myapplication.data.local.UserDAO
+import com.tegarpenemuan.myapplication.data.local.UserEntity
 
-@Database(entities = [MessageEntity::class], version = 1)
+@Database(entities = [MessageEntity::class, UserEntity::class], version = 2)
 abstract class MyDoctorDatabase : RoomDatabase() {
 
     abstract fun messageDAO(): MessageDAO
+    abstract fun userDAO(): UserDAO
 
     companion object {
         private const val DB_NAME = "MyDoctor.db"
@@ -26,6 +29,7 @@ abstract class MyDoctorDatabase : RoomDatabase() {
 
             private fun buildDatabase(context: Context): MyDoctorDatabase {
                 return Room.databaseBuilder(context, MyDoctorDatabase::class.java, DB_NAME)
+                    .fallbackToDestructiveMigration()
                     .build()
             }
 
