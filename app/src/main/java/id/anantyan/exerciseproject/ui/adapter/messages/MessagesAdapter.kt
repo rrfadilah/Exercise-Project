@@ -4,6 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.size.ViewSizeResolver
+import coil.transform.CircleCropTransformation
+import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.databinding.ListItemMessagesBinding
 import id.anantyan.exerciseproject.model.Messages
 
@@ -30,8 +34,15 @@ class MessagesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Message
         }
 
         fun bind(items: Messages) {
-            binding.txtSender.text = items.senderName
-            binding.txtMessages.text = items.message
+            binding.txtName.text = items.name
+            binding.txtMessage.text = items.message
+            binding.imgView.load(items.image) {
+                crossfade(true)
+                placeholder(R.drawable.ic_baseline_image_24)
+                error(R.drawable.ic_baseline_image_not_supported_24)
+                transformations(CircleCropTransformation())
+                size(ViewSizeResolver(binding.imgView))
+            }
         }
     }
 
@@ -85,15 +96,15 @@ class DiffUtilMessages(
     override fun getNewListSize() = newMessages.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldMessages[oldItemPosition].senderName == newMessages[newItemPosition].senderName
+        return oldMessages[oldItemPosition].id == newMessages[newItemPosition].id
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return when {
-            oldMessages[oldItemPosition].senderName != newMessages[newItemPosition].senderName -> {
+            oldMessages[oldItemPosition].name != newMessages[newItemPosition].name -> {
                 false
             }
-            oldMessages[oldItemPosition].fromName != newMessages[newItemPosition].fromName -> {
+            oldMessages[oldItemPosition].image != newMessages[newItemPosition].image -> {
                 false
             }
             oldMessages[oldItemPosition].message != newMessages[newItemPosition].message -> {

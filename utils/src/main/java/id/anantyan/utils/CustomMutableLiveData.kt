@@ -22,7 +22,7 @@ enum class LiveEventConfig {
     PreferFirstObserver
 }
 
-open class LiveEvent<T>(
+class LiveEvent<T>(
     private val config: LiveEventConfig = LiveEventConfig.Normal
 ) : MediatorLiveData<T>() {
 

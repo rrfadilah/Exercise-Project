@@ -1,18 +1,40 @@
 package id.anantyan.exerciseproject.repository
 
-import id.anantyan.exerciseproject.data.MessagesDao
+import androidx.lifecycle.MutableLiveData
+import id.anantyan.exerciseproject.data.local.MessagesDao
 import id.anantyan.exerciseproject.model.Messages
+import id.anantyan.exerciseproject.model.MessagesList
+import id.anantyan.exerciseproject.network.RetrofitNetwork
 import id.anantyan.utils.LiveEvent
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MessagesRepository(private val usersDao: MessagesDao) {
 
+    val _selectApiSuccess: MutableLiveData<List<Messages>> = MutableLiveData()
+    val _failure: LiveEvent<String> = LiveEvent()
     val _seectById: LiveEvent<Messages> = LiveEvent()
     val _insert: LiveEvent<Messages> = LiveEvent()
     val _update: LiveEvent<Messages> = LiveEvent()
     val _delete: LiveEvent<Messages> = LiveEvent()
     var _deleteAll: LiveEvent<Unit> = LiveEvent()
 
-    fun select() = usersDao.select()
+    fun selectLocal() = usersDao.select()
+    fun selectApi() = RetrofitNetwork.messagesApi.getMessage()
+        .enqueue(object : Callback<MessagesList> {
+            override fun onResponse(call: Call<MessagesList>, response: Response<MessagesList>) {
+                if (response.isSuccessful) {
+                    _selectApiSuccess.postValue(response.body()?.message!!)
+                } else {
+                    _failure.postValue("Gagal membuat data API!")
+                }
+            }
+
+            override fun onFailure(call: Call<MessagesList>, t: Throwable) {
+                _failure.postValue("${t.message}")
+            }
+        })
 
     suspend fun selectById(id: Int) {
         _seectById.postValue(usersDao.selectById(id))

@@ -49,6 +49,7 @@ class MessagesFragment : Fragment() {
         onBinding()
         onAdapter()
         onObserver()
+        onSelectData()
     }
 
     override fun onResume() {
@@ -67,7 +68,7 @@ class MessagesFragment : Fragment() {
             onDeleteData(messages)
             Toast.makeText(
                 (activity as BaseFragmentActivity),
-                messages.senderName,
+                messages.name,
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -78,13 +79,7 @@ class MessagesFragment : Fragment() {
         binding.rvItems.setHasFixedSize(true)
         binding.rvItems.layoutManager = LinearLayoutManager((activity as BaseFragmentActivity))
         binding.rvItems.itemAnimator = DefaultItemAnimator()
-        binding.rvItems.addItemDecoration(
-            dividerVertical(
-                (activity as BaseFragmentActivity),
-                32,
-                0
-            )
-        )
+        binding.rvItems.addItemDecoration(dividerVertical((activity as BaseFragmentActivity), 0, 0))
     }
 
     /**
@@ -103,11 +98,12 @@ class MessagesFragment : Fragment() {
     }
 
     private fun onSelectData() {
-        viewModel.select().observe(viewLifecycleOwner) {
+        /*viewModel.selectLocal().observe(viewLifecycleOwner) {
             list.clear()
             list.addAll(it)
             adapter.differ(list)
-        }
+        }*/
+        viewModel.selectApi()
     }
 
     private fun onInsertData(item: Messages) {
@@ -124,7 +120,14 @@ class MessagesFragment : Fragment() {
 
     private fun onObserver() {
         onSharedData()
-        onSelectData()
+        viewModel.selectApiSuccess.observe(viewLifecycleOwner) {
+            list.clear()
+            list.addAll(it)
+            adapter.differ(list)
+        }
+        viewModel.failure.observe(viewLifecycleOwner) {
+            Toast.makeText((activity as BaseFragmentActivity), it, Toast.LENGTH_SHORT).show()
+        }
         viewModel.insert.observe(viewLifecycleOwner) {
             Toast.makeText((activity as BaseFragmentActivity), "Data tersimpan!", Toast.LENGTH_SHORT).show()
         }

@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import id.anantyan.exerciseproject.data.MessagesDao
-import id.anantyan.exerciseproject.data.UsersDao
+import id.anantyan.exerciseproject.data.local.MessagesDao
+import id.anantyan.exerciseproject.data.local.UsersDao
 import id.anantyan.exerciseproject.model.Messages
 import id.anantyan.exerciseproject.model.Users
 

@@ -30,12 +30,12 @@ class MessagesDetailActivity : AppCompatActivity() {
     private fun onBinding() {
         var messages = intent.extras?.getParcelable<Messages>(PASSING_TO_MESSAGES_ACTIVITY)
         if (intent.hasExtra(PASSING_TO_MESSAGES_ACTIVITY)) {
-            binding.txtInputSendTo.setText(messages?.senderName)
+            binding.txtInputSendTo.setText(messages?.name)
             binding.txtInputMessages.setText(messages?.message)
             binding.btnSubmit.setOnClickListener {
                 messages = Messages(
                     messages?.id,
-                    messages?.fromName,
+                    messages?.name,
                     binding.txtInputSendTo.text.toString(),
                     binding.txtInputMessages.text.toString()
                 )

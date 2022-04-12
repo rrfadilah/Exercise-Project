@@ -1,6 +1,6 @@
 package id.anantyan.exerciseproject.repository
 
-import id.anantyan.exerciseproject.data.UsersDao
+import id.anantyan.exerciseproject.data.local.UsersDao
 import id.anantyan.exerciseproject.model.Users
 import id.anantyan.utils.LiveEvent
 

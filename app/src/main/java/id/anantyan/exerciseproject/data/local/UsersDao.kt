@@ -1,4 +1,4 @@
-package id.anantyan.exerciseproject.data
+package id.anantyan.exerciseproject.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
