@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.rizky.exercise_project.R
 import com.rizky.exercise_project.databinding.ListItemMessageBinding
 
 /**
@@ -36,7 +38,17 @@ class MessageAdapter(private val listener: EventListener, private var list: List
         val item = list[position]
         holder.binding.tvName.text = item.name
         holder.binding.tvLastMessage.text = item.lastMessage
-        holder.binding.ivImg.setImageResource(item.imageRes)
+        if (item.image.isNotEmpty()) {
+            Glide.with(holder.binding.root)
+                .load(item.image)
+                .fitCenter()
+                .circleCrop()
+                .placeholder(R.drawable.img_user_1)
+                .error(R.drawable.img_user_1)
+                .into(holder.binding.ivImg)
+        } else {
+            holder.binding.ivImg.setImageResource(item.imageRes)
+        }
         holder.binding.ivUpdate.setOnClickListener {
             listener.onUpdate(item)
         }

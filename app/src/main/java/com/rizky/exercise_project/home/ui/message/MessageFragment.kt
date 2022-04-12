@@ -7,12 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.rizky.exercise_project.R
+import com.rizky.exercise_project.data.api.MessagesResponse
 import com.rizky.exercise_project.data.local.MessageEntity
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.FragmentMessageBinding
+import com.rizky.exercise_project.network.MyDoctorApiClient
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MessageFragment : Fragment() {
     private var _binding: FragmentMessageBinding? = null
@@ -38,6 +43,7 @@ class MessageFragment : Fragment() {
                 override fun onClick(item: MessageModel) {
                     Toast.makeText(requireContext(), item.lastMessage, Toast.LENGTH_SHORT).show()
                 }
+
                 override fun onDelete(item: MessageModel) {
                     val message = MessageEntity(
                         id = item.id,
@@ -47,6 +53,7 @@ class MessageFragment : Fragment() {
                     )
                     deleteDataDatabase(message)
                 }
+
                 override fun onUpdate(item: MessageModel) {
                     val message = MessageEntity(
                         id = item.id,
@@ -62,7 +69,8 @@ class MessageFragment : Fragment() {
 
         binding.rvMessage.adapter = adapter
 
-        loadDataDatabase()
+//        loadDataDatabase()
+        loadDataAPI()
 
         binding.fabPlus.setOnClickListener {
             val message = MessageEntity(
@@ -162,6 +170,42 @@ class MessageFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun loadDataAPI() {
+        MyDoctorApiClient.instanceMessage.getMessages()
+            .enqueue(object : Callback<MessagesResponse> {
+                override fun onResponse(
+                    call: Call<MessagesResponse>,
+                    response: Response<MessagesResponse>
+                ) {
+                    val code = response.code()
+                    val body = response.body()
+
+                    if (code == 200) {
+                        val message = body?.message?.map {
+                            MessageModel(
+                                id = it.id.orEmpty(),
+                                name = it.name.orEmpty(),
+                                imageRes = R.drawable.img_user_1,
+                                image = it.image.orEmpty(),
+                                lastMessage = it.message.orEmpty()
+                            )
+                        } ?: emptyList()
+                        adapter.updateList(message)
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Gagal Mengambil data dari API",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<MessagesResponse>, t: Throwable) {
+                    Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 
     override fun onDestroyView() {
