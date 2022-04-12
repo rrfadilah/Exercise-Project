@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "message")
 @Parcelize
-data class MessageEntity(
+data class  MessageEntity(
     @PrimaryKey var id: String,
     @ColumnInfo(name = "image") var image: String,
     @ColumnInfo(name = "name") var name: String,

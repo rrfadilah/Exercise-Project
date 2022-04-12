@@ -42,10 +42,10 @@ class SignInActivity : AppCompatActivity() {
         binding.btnSignIn.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
-            getUser(email, password)
+//            getUser(email, password)
 
             // dialogCustomLayout()
-//            validasiFormToastSnack(registerPreferences)
+            validasiFormToastSnack(registerPreferences)
 //            validasiFormDialog()
             sharedPreferences(pref)
         }

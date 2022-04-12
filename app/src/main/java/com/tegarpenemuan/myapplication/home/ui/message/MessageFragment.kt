@@ -10,12 +10,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.tegarpenemuan.myapplication.R
+import com.tegarpenemuan.myapplication.data.api.MessagesResponse
 import com.tegarpenemuan.myapplication.data.local.MessageEntity
 import com.tegarpenemuan.myapplication.database.MyDoctorDatabase
 import com.tegarpenemuan.myapplication.databinding.FragmentMessageBinding
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import com.tegarpenemuan.myapplication.network.MyDoctorApiClient
+import kotlinx.coroutines.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MessageFragment : Fragment() {
 
@@ -96,7 +99,8 @@ class MessageFragment : Fragment() {
 
         binding.rvMessage.adapter = adapter
 
-        loadDataDatabase()
+        loadDataAPI()
+//        loadDataDatabase()
 
         binding.fabPlus.setOnClickListener {
             val message = MessageEntity(
@@ -108,6 +112,42 @@ class MessageFragment : Fragment() {
 
             insertDataDatabase(message)
         }
+    }
+
+    private fun loadDataAPI() {
+        MyDoctorApiClient.instanceMessage.getMessage()
+            .enqueue(object : Callback<MessagesResponse> {
+                override fun onResponse(
+                    call: Call<MessagesResponse>,
+                    response: Response<MessagesResponse>
+                ) {
+                    val code = response.code()
+                    val body = response.body()
+
+                    if (code == 200) {
+                        val message = body?.message?.map {
+                            MessageModel(
+                                id = it.id.orEmpty(),
+                                name = it.name.orEmpty(),
+                                imageRes = R.drawable.img_user1,
+                                image = it.image.orEmpty(),
+                                lastMessage = it.message.orEmpty()
+                            )
+                        } ?: emptyList()
+                        adapter.updateList(message)
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Gagal Mengambil data dari API",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<MessagesResponse>, t: Throwable) {
+                    Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 
     // function untuk load data dummy
@@ -136,7 +176,7 @@ class MessageFragment : Fragment() {
 
     // function untuk insert data pada database
     private fun insertDataDatabase(message: MessageEntity) {
-        GlobalScope.async {
+        CoroutineScope(Dispatchers.IO).async {
             val result = db?.messageDAO()?.insertMessage(message)
             requireActivity().runOnUiThread {
                 if (result != 0L) {
@@ -172,6 +212,7 @@ class MessageFragment : Fragment() {
     private fun loadDataDatabase() {
         GlobalScope.launch {
             val results = db?.messageDAO()?.getMessage()
+            Log.d("data","datas: $results")
             requireActivity().runOnUiThread {
                 results?.let {
                     val messages = it.map {

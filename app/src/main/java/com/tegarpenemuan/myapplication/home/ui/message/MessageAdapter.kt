@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.tegarpenemuan.myapplication.R
 import com.tegarpenemuan.myapplication.databinding.ListItemMessagesBinding
 
 class MessageAdapter(private val listener: EventListener, private var list: List<MessageModel>) :
@@ -29,9 +31,19 @@ class MessageAdapter(private val listener: EventListener, private var list: List
         holder.binding.tvName.text = item.name
         holder.binding.tvLastMessage.text = item.lastMessage
         holder.binding.ivImg.setImageResource(item.imageRes)
+        Glide
+            .with(holder.itemView.context)
+            .load(item.image)
+            .centerCrop()
+            .circleCrop()
+            .placeholder(R.drawable.placeholder)
+            .error(R.drawable.error)
+            .into(holder.binding.ivImg)
+
         holder.binding.ivUpdate.setOnClickListener {
             listener.onUpdate(item)
         }
+
         holder.binding.ivCancel.setOnClickListener {
             listener.onDelete(item)
         }
