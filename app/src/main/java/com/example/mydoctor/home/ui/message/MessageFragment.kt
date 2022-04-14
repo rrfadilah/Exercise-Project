@@ -7,12 +7,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.mydoctor.R
+import com.example.mydoctor.data.api.MessagesResponse
 import com.example.mydoctor.data.local.MessageEntity
 import com.example.mydoctor.database.MyDoctorDatabase
 import com.example.mydoctor.databinding.FragmentMessageBinding
+import com.example.mydoctor.network.MyDoctorApiClient
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MessageFragment : Fragment() {
     private var _binding: FragmentMessageBinding? = null
@@ -62,7 +67,8 @@ class MessageFragment : Fragment() {
 
         binding.rvMessage.adapter = adapter
 
-        loadDataDatabase()
+//        loadDataDatabase()
+        loadDataAPI()
 
         binding.fabPlus.setOnClickListener {
             val message = MessageEntity(
@@ -93,6 +99,7 @@ class MessageFragment : Fragment() {
             ),
         )
     }
+
     // function untuk insert data pada database
     private fun insertDataDatabase(message: MessageEntity) {
         GlobalScope.async {
@@ -161,6 +168,42 @@ class MessageFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun loadDataAPI() {
+        MyDoctorApiClient.instanceMessage.getMessages()
+            .enqueue(object : Callback<MessagesResponse> {
+                override fun onResponse(
+                    call: Call<MessagesResponse>,
+                    response: Response<MessagesResponse>
+                ) {
+                    val code = response.code()
+                    val body = response.body()
+
+                    if (code == 200) {
+                        val message = body?.message?.map {
+                            MessageModel(
+                                id = it.id.orEmpty(),
+                                name = it.name.orEmpty(),
+                                imageRes = R.drawable.img_user_1,
+                                image = it.image.orEmpty(),
+                                lastMessage = it.message.orEmpty()
+                            )
+                        } ?: emptyList()
+                        adapter.updateList(message)
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Gagal Mengambil data dari API",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<MessagesResponse>, t: Throwable) {
+                    Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 
     override fun onDestroyView() {
