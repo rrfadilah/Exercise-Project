@@ -34,8 +34,8 @@ class MessagesDetailActivity : AppCompatActivity() {
             binding.txtInputMessages.setText(messages?.message)
             binding.btnSubmit.setOnClickListener {
                 messages = Messages(
-                    messages?.id,
-                    messages?.name,
+                    messages?.id!!,
+                    messages?.image,
                     binding.txtInputSendTo.text.toString(),
                     binding.txtInputMessages.text.toString()
                 )
@@ -47,8 +47,8 @@ class MessagesDetailActivity : AppCompatActivity() {
         } else {
             binding.btnSubmit.setOnClickListener {
                 messages = Messages(
-                    null,
-                    "Arya Rezza",
+                    System.currentTimeMillis().toString(),
+                    "https://asset.kompas.com/crops/y-WWkS0Pf0xss9ilSe531dt3d-Y=/0x25:1280x878/750x500/data/photo/2022/01/07/61d80c31006ac.jpg",
                     binding.txtInputSendTo.text.toString(),
                     binding.txtInputMessages.text.toString()
                 )

@@ -10,9 +10,9 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "table_messages")
 @Parcelize
 data class Messages(
-    @SerializedName("id")
-    @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+    @SerializedName("objectId")
+    @PrimaryKey
+    val id: String,
     @SerializedName("image")
     @ColumnInfo(name = "image")
     val image: String? = null,
@@ -25,7 +25,9 @@ data class Messages(
 ) : Parcelable
 
 @Parcelize
-data class MessagesList(
+data class MessagesResponse(
     @SerializedName("message")
-    val message: List<Messages>? = null
+    val items: List<Messages>? = null,
+    @SerializedName("message")
+    val item: Messages? = null
 ) : Parcelable

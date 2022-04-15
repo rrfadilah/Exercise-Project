@@ -12,7 +12,7 @@ import id.anantyan.exerciseproject.model.Users
 @Database(entities = [
     Messages::class,
     Users::class
-], version = 2, exportSchema = false)
+], version = 3, exportSchema = false)
 abstract class RoomDB : RoomDatabase() {
 
     companion object {

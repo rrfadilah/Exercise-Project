@@ -18,7 +18,7 @@ object RetrofitNetwork {
     private fun retrofit(): Retrofit {
         return Retrofit.Builder().apply {
             client(providerHttpClient())
-            baseUrl("https://private-82636-mydoctorexample.apiary-mock.com/api/")
+            baseUrl("http://drivingrake.backendless.app/api/")
             addConverterFactory(GsonConverterFactory.create(gson()))
         }.build()
     }

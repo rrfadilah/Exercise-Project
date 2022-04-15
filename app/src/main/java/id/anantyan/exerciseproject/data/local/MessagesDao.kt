@@ -19,7 +19,7 @@ interface MessagesDao {
     suspend fun deleteAll()
 
     @Query("SELECT * FROM table_messages WHERE id=:id")
-    suspend fun selectById(id: Int): Messages
+    suspend fun selectById(id: String): Messages
 
     @Query("SELECT * FROM table_messages ORDER BY id ASC")
     fun select(): LiveData<List<Messages>>

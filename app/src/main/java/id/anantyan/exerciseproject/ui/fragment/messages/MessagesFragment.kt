@@ -18,6 +18,7 @@ import id.anantyan.exerciseproject.ui.adapter.messages.MessagesHelper
 import id.anantyan.exerciseproject.ui.SharedViewModel
 import id.anantyan.exerciseproject.ui.activity.MessagesDetailActivity
 import id.anantyan.utils.Constant.PASSING_TO_MESSAGES_ACTIVITY
+import id.anantyan.utils.Resource
 import id.anantyan.utils.dividerVertical
 
 class MessagesFragment : Fragment() {
@@ -85,18 +86,6 @@ class MessagesFragment : Fragment() {
     /**
      * Observer LiveData
      * */
-    private fun onSharedData() {
-        sharedViewModel.messages.observe(viewLifecycleOwner) { item ->
-            item?.let {
-                if (position == -1) {
-                    onInsertData(it)
-                } else {
-                    onUpdateData(it)
-                }
-            }
-        }
-    }
-
     private fun onSelectData() {
         /*viewModel.selectLocal().observe(viewLifecycleOwner) {
             list.clear()
@@ -107,36 +96,106 @@ class MessagesFragment : Fragment() {
     }
 
     private fun onInsertData(item: Messages) {
-        viewModel.insert(item)
+        /*viewModel.insertLocal(item)*/
+        viewModel.insertApi(item)
     }
 
     private fun onUpdateData(item: Messages) {
-        viewModel.update(item)
+        /*viewModel.updateLocal(item)*/
+        viewModel.updateApi(item)
     }
 
     private fun onDeleteData(item: Messages) {
-        viewModel.delete(item)
+        /*viewModel.deleteLocal(item)*/
+        viewModel.deleteApi(item)
     }
 
     private fun onObserver() {
-        onSharedData()
-        viewModel.selectApiSuccess.observe(viewLifecycleOwner) {
-            list.clear()
-            list.addAll(it)
-            adapter.differ(list)
+        sharedViewModel.messages.observe(viewLifecycleOwner) { item ->
+            item?.let {
+                if (position == -1) {
+                    onInsertData(it)
+                } else {
+                    onUpdateData(it)
+                }
+            }
         }
-        viewModel.failure.observe(viewLifecycleOwner) {
-            Toast.makeText((activity as BaseFragmentActivity), it, Toast.LENGTH_SHORT).show()
+        viewModel.selectResponse.observe(viewLifecycleOwner) {
+            when(it) {
+                is Resource.Success -> {
+                    list.clear()
+                    list.addAll(it.data!!)
+                    adapter.differ(list)
+                    binding.rvItems.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                }
+                is Resource.Loading -> {
+                    binding.rvItems.visibility = View.GONE
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), "${it.message}", Toast.LENGTH_SHORT).show()
+                    binding.rvItems.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
         }
-        viewModel.insert.observe(viewLifecycleOwner) {
+        viewModel.insertResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+                    list.add(it.data!!)
+                    adapter.differ(list)
+                    Toast.makeText(requireContext(), "${it.message}", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Loading -> {
+                    Toast.makeText(requireContext(), "Tunggu...", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), "${it.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        viewModel.updateResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+                    list[position] = it.data!!
+                    adapter.differ(list)
+                    Toast.makeText(requireContext(), "${it.message}", Toast.LENGTH_SHORT).show()
+                    position = -1
+                }
+                is Resource.Loading -> {
+                    Toast.makeText(requireContext(), "Tunggu...", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), "${it.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        viewModel.deleteResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+                    list.remove(it.data!!)
+                    adapter.differ(list)
+                    Toast.makeText(requireContext(), "${it.message}", Toast.LENGTH_SHORT).show()
+                    position = -1
+                }
+                is Resource.Loading -> {
+                    Toast.makeText(requireContext(), "Tunggu...", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), "${it.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        /*viewModel.insertLocal.observe(viewLifecycleOwner) {
             Toast.makeText((activity as BaseFragmentActivity), "Data tersimpan!", Toast.LENGTH_SHORT).show()
         }
-        viewModel.update.observe(viewLifecycleOwner) {
+        viewModel.updateLocal.observe(viewLifecycleOwner) {
             Toast.makeText((activity as BaseFragmentActivity), "Data terupdate!", Toast.LENGTH_SHORT).show()
         }
-        viewModel.delete.observe(viewLifecycleOwner) {
+        viewModel.deleteLocal.observe(viewLifecycleOwner) {
             Toast.makeText((activity as BaseFragmentActivity), "Data terhapus!", Toast.LENGTH_SHORT).show()
-        }
+        }*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

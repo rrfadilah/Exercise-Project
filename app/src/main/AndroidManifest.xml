@@ -10,7 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ExerciseProject.NoActionBar">
+        android:theme="@style/Theme.ExerciseProject.NoActionBar"
+        android:networkSecurityConfig="@xml/network_cors">
         <activity
             android:name="id.anantyan.exerciseproject.ui.activity.MessagesDetailActivity"
             android:exported="false" />

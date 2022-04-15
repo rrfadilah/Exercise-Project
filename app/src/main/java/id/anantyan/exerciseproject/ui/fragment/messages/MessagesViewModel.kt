@@ -4,8 +4,9 @@ import android.app.Application
 import androidx.lifecycle.*
 import id.anantyan.exerciseproject.database.RoomDB
 import id.anantyan.exerciseproject.model.Messages
-import id.anantyan.exerciseproject.model.MessagesList
+import id.anantyan.exerciseproject.model.MessagesResponse
 import id.anantyan.exerciseproject.repository.MessagesRepository
+import id.anantyan.utils.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,34 +15,52 @@ class MessagesViewModel(application: Application): AndroidViewModel(application)
 
     private val repository: MessagesRepository
 
-    val selectApiSuccess: LiveData<List<Messages>>
-    val failure: LiveData<String>
-    val insert: LiveData<Messages>
-    val update: LiveData<Messages>
-    val delete: LiveData<Messages>
+    val selectResponse: LiveData<Resource<List<Messages>>>
+    val insertResponse: LiveData<Resource<Messages>>
+    val updateResponse: LiveData<Resource<Messages>>
+    val deleteResponse: LiveData<Resource<Messages>>
+
+    val insertLocal: LiveData<Messages>
+    val updateLocal: LiveData<Messages>
+    val deleteLocal: LiveData<Messages>
 
     init {
         val messagesDao = RoomDB.database(application).messagesDao()
         repository = MessagesRepository(messagesDao)
-        selectApiSuccess = repository._selectApiSuccess
-        failure = repository._failure
-        insert = repository._insert
-        update = repository._update
-        delete = repository._delete
+
+        selectResponse = repository._selectResponse
+        insertResponse = repository._insertResponse
+        updateResponse = repository._updateResponse
+        deleteResponse = repository._deleteResponse
+
+        insertLocal = repository._insertLocal
+        updateLocal = repository._updateLocal
+        deleteLocal = repository._deleteLocal
     }
 
     fun selectLocal() = repository.selectLocal()
-    fun selectApi() = repository.selectApi()
-
-    fun insert(item: Messages) = CoroutineScope(Dispatchers.IO).launch {
-        repository.insert(item)
+    fun selectApi() = CoroutineScope(Dispatchers.IO).launch {
+        repository.selectApi()
     }
 
-    fun update(item: Messages) = CoroutineScope(Dispatchers.IO).launch {
-        repository.update(item)
+    fun insertLocal(item: Messages) = CoroutineScope(Dispatchers.IO).launch {
+        repository.insertLocal(item)
+    }
+    fun insertApi(item: Messages) = CoroutineScope(Dispatchers.IO).launch {
+        repository.insertApi(item)
     }
 
-    fun delete(item: Messages) = CoroutineScope(Dispatchers.IO).launch {
-        repository.delete(item)
+    fun updateLocal(item: Messages) = CoroutineScope(Dispatchers.IO).launch {
+        repository.updateLocal(item)
+    }
+    fun updateApi(item: Messages) = CoroutineScope(Dispatchers.IO).launch {
+        repository.updateApi(item)
+    }
+
+    fun deleteLocal(item: Messages) = CoroutineScope(Dispatchers.IO).launch {
+        repository.deleteLocal(item)
+    }
+    fun deleteApi(item: Messages) = CoroutineScope(Dispatchers.IO).launch {
+        repository.deleteApi(item)
     }
 }
