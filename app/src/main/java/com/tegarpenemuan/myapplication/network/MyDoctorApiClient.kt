@@ -1,14 +1,17 @@
 package com.tegarpenemuan.myapplication.network
 
+import com.google.gson.GsonBuilder
 import com.tegarpenemuan.myapplication.data.api.MessageAPI
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 object MyDoctorApiClient {
     // BASE_URL merupakan URL default untuk mengkoneksikan aplikasi dengan endpoint pada API
-    const val BASE_URL = "https://private-82636-mydoctorexample.apiary-mock.com/api/"
+//    const val BASE_URL = "https://private-82636-mydoctorexample.apiary-mock.com/api/"
+    const val BASE_URL = "http://drivingrake.backendless.app/api/"
 
     private val logging: HttpLoggingInterceptor
         get() {

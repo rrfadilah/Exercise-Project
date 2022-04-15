@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.tegarpenemuan.myapplication.R
+import com.tegarpenemuan.myapplication.data.api.MessagesRequest
 import com.tegarpenemuan.myapplication.data.api.MessagesResponse
 import com.tegarpenemuan.myapplication.data.local.MessageEntity
 import com.tegarpenemuan.myapplication.database.MyDoctorDatabase
@@ -75,23 +76,34 @@ class MessageFragment : Fragment() {
                 override fun onClick(item: MessageModel) {
                     Toast.makeText(requireContext(), item.lastMessage, Toast.LENGTH_SHORT).show()
                 }
+
                 override fun onDelete(item: MessageModel) {
-                    val message = MessageEntity(
-                        id = item.id,
-                        name = item.name,
-                        image = item.image,
-                        message = item.lastMessage
-                    )
-                    deleteDataDatabase(message)
+//                    val message = MessageEntity(
+//                        id = item.id,
+//                        name = item.name,
+//                        image = item.image,
+//                        message = item.lastMessage
+//                    )
+//                    deleteDataDatabase(message)
+
+                    deleteDataAPI(item.id)
                 }
+
                 override fun onUpdate(item: MessageModel) {
-                    val message = MessageEntity(
-                        id = item.id,
-                        name = item.name + " Updated",
+//                    val message = MessageEntity(
+//                        id = item.id,
+//                        name = item.name + " Updated",
+//                        image = item.image,
+//                        message = item.lastMessage + " Updated"
+//                    )
+//                    updateDataDatabase(message)
+
+                    val message = MessagesRequest(
+                        name = "#" + item.name,
                         image = item.image,
-                        message = item.lastMessage + " Updated"
+                        message = "# " + item.lastMessage
                     )
-                    updateDataDatabase(message)
+                    updateDataAPI(id = item.id, message = message)
                 }
             },
             list = emptyList()
@@ -103,19 +115,60 @@ class MessageFragment : Fragment() {
 //        loadDataDatabase()
 
         binding.fabPlus.setOnClickListener {
-            val message = MessageEntity(
-                id = System.currentTimeMillis().toString(),
-                image = System.currentTimeMillis().toString(),
+//            val message = MessageEntity(
+//                id = System.currentTimeMillis().toString(),
+//                image = System.currentTimeMillis().toString(),
+//                name = System.currentTimeMillis().toString() + " This is Name",
+//                message = System.currentTimeMillis().toString() + " This is Last Messages"
+//            )
+//
+//            insertDataDatabase(message)
+
+            val message = MessagesRequest(
+                image = "https://www.dmarge.com/wp-content/uploads/2021/01/dwayne-the-rock-.jpg",
                 name = System.currentTimeMillis().toString() + " This is Name",
                 message = System.currentTimeMillis().toString() + " This is Last Messages"
             )
 
-            insertDataDatabase(message)
+            postDataAPI(message)
         }
     }
 
     private fun loadDataAPI() {
-        MyDoctorApiClient.instanceMessage.getMessage()
+        MyDoctorApiClient.instanceMessage.getMessages()
+            .enqueue(object : Callback<List<MessagesResponse>> {
+                override fun onResponse(
+                    call: Call<List<MessagesResponse>>,
+                    response: Response<List<MessagesResponse>>
+                ) {
+                    val code = response.code()
+                    val body = response.body()
+
+                    if (code == 200) {
+                        val message = body?.map {
+                            MessageModel(
+                                id = it.id.orEmpty(),
+                                name = it.name.orEmpty(),
+                                imageRes = R.drawable.img_user1,
+                                image = it.image.orEmpty(),
+                                lastMessage = it.message.orEmpty()
+                            )
+                        } ?: emptyList()
+                        adapter.updateList(message.sortedBy { it.name })
+                    } else {
+                        showErrorMessage("Gagal Mengambil data dari API")
+                    }
+                }
+
+                override fun onFailure(call: Call<List<MessagesResponse>>, t: Throwable) {
+                    showErrorMessage(t.message)
+                }
+            })
+    }
+
+    // function untuk menginsert data pada api
+    private fun postDataAPI(message: MessagesRequest) {
+        MyDoctorApiClient.instanceMessage.postMessages(request = message)
             .enqueue(object : Callback<MessagesResponse> {
                 override fun onResponse(
                     call: Call<MessagesResponse>,
@@ -125,29 +178,68 @@ class MessageFragment : Fragment() {
                     val body = response.body()
 
                     if (code == 200) {
-                        val message = body?.message?.map {
-                            MessageModel(
-                                id = it.id.orEmpty(),
-                                name = it.name.orEmpty(),
-                                imageRes = R.drawable.img_user1,
-                                image = it.image.orEmpty(),
-                                lastMessage = it.message.orEmpty()
-                            )
-                        } ?: emptyList()
-                        adapter.updateList(message)
+                        loadDataAPI()
                     } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "Gagal Mengambil data dari API",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        showErrorMessage("Gagal Mengambil data dari API")
                     }
                 }
 
                 override fun onFailure(call: Call<MessagesResponse>, t: Throwable) {
-                    Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
+                    showErrorMessage(t.message)
                 }
             })
+    }
+
+    // function untuk menghapus data pada api
+    private fun deleteDataAPI(id: String) {
+        MyDoctorApiClient.instanceMessage.deleteMessages(id = id)
+            .enqueue(object : Callback<Unit> {
+                override fun onResponse(
+                    call: Call<Unit>,
+                    response: Response<Unit>
+                ) {
+                    val code = response.code()
+                    val body = response.body()
+
+                    if (code == 200) {
+                        loadDataAPI()
+                    } else {
+                        showErrorMessage("Gagal Mengambil data dari API")
+                    }
+                }
+
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    showErrorMessage(t.message)
+                }
+            })
+    }
+
+    // function untuk mengupdate data pada api
+    private fun updateDataAPI(id: String, message: MessagesRequest) {
+        MyDoctorApiClient.instanceMessage.updateMessages(id = id, request = message)
+            .enqueue(object : Callback<MessagesResponse> {
+                override fun onResponse(
+                    call: Call<MessagesResponse>,
+                    response: Response<MessagesResponse>
+                ) {
+                    val code = response.code()
+                    val body = response.body()
+
+                    if (code == 200) {
+                        loadDataAPI()
+                    } else {
+                        showErrorMessage("Gagal Mengambil data dari API")
+                    }
+                }
+
+                override fun onFailure(call: Call<MessagesResponse>, t: Throwable) {
+                    showErrorMessage(t.message)
+                }
+            })
+    }
+
+    private fun showErrorMessage(message: String?) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     // function untuk load data dummy
@@ -180,11 +272,19 @@ class MessageFragment : Fragment() {
             val result = db?.messageDAO()?.insertMessage(message)
             requireActivity().runOnUiThread {
                 if (result != 0L) {
-                    Toast.makeText(requireContext(), "Success insert", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        requireContext(),
+                        "Success insert",
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                     loadDataDatabase()
                 } else {
-                    Toast.makeText(requireContext(), "Failure insert", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        requireContext(),
+                        "Failure insert",
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                 }
             }
@@ -197,11 +297,19 @@ class MessageFragment : Fragment() {
             val result = db?.messageDAO()?.updateMessage(message)
             requireActivity().runOnUiThread {
                 if (result != 0) {
-                    Toast.makeText(requireContext(), "Success update", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        requireContext(),
+                        "Success update",
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                     loadDataDatabase()
                 } else {
-                    Toast.makeText(requireContext(), "Failure update", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        requireContext(),
+                        "Failure update",
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                 }
             }
@@ -212,7 +320,7 @@ class MessageFragment : Fragment() {
     private fun loadDataDatabase() {
         GlobalScope.launch {
             val results = db?.messageDAO()?.getMessage()
-            Log.d("data","datas: $results")
+            Log.d("data", "datas: $results")
             requireActivity().runOnUiThread {
                 results?.let {
                     val messages = it.map {
@@ -236,10 +344,15 @@ class MessageFragment : Fragment() {
             val results = db?.messageDAO()?.deleteMessage(message)
             requireActivity().runOnUiThread {
                 if (results != 0) {
-                    Toast.makeText(requireContext(), "Berhasil delete", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Berhasil delete",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     loadDataDatabase()
                 } else {
-                    Toast.makeText(requireContext(), "Gagal delete", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Gagal delete", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
