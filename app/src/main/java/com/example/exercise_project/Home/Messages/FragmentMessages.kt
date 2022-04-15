@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.exercise_project.Home.TaskList
 import com.example.exercise_project.R
+import com.example.exercise_project.data.API.MessagesRequest
+import com.example.exercise_project.data.API.MessagesResponse
 import com.example.exercise_project.data.local.MessageEntity
 import com.example.exercise_project.database.MyDoctorDatabase
 import com.example.exercise_project.databinding.FragmentMessagesBinding
+import com.example.exercise_project.network.MyDoctorAPIClient
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -20,17 +23,17 @@ import retrofit2.Response
 
 
 class FragmentMessages : Fragment() {
-    private var _binding: FragmentMessageBinding? = null
+    private var _binding: FragmentMessagesBinding? = null
     private val binding get() = _binding!!
 
     private var db: MyDoctorDatabase? = null
-    private lateinit var adapter: MessageAdapter
+    private lateinit var adapter: AdapterMessages
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMessageBinding.inflate(inflater, container, false)
+        _binding = FragmentMessagesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -38,13 +41,13 @@ class FragmentMessages : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         db = MyDoctorDatabase.getInstance(requireContext().applicationContext)
 
-        adapter = MessageAdapter(
-            listener = object : MessageAdapter.EventListener {
-                override fun onClick(item: MessageModel) {
-                    Toast.makeText(requireContext(), item.lastMessage, Toast.LENGTH_SHORT).show()
+        adapter = AdapterMessages(
+            listener = object : AdapterMessages.EventListener {
+                override fun onClick(item: ModelMessages) {
+                    Toast.makeText(requireContext(), item.text2, Toast.LENGTH_SHORT).show()
                 }
 
-                override fun onDelete(item: MessageModel) {
+                override fun onDelete(item: ModelMessages) {
 //                    val message = MessageEntity(
 //                        id = item.id,
 //                        name = item.name,
@@ -56,7 +59,7 @@ class FragmentMessages : Fragment() {
                     deleteDataAPI(item.id)
                 }
 
-                override fun onUpdate(item: MessageModel) {
+                override fun onUpdate(item: ModelMessages) {
 //                    val message = MessageEntity(
 //                        id = item.id,
 //                        name = item.name + " Updated",
@@ -66,9 +69,9 @@ class FragmentMessages : Fragment() {
 //                    updateDataDatabase(message)
 
                     val message = MessagesRequest(
-                        name = "#" + item.name,
-                        image = item.image,
-                        message = "# " + item.lastMessage
+                        name = "#" + item.text1,
+                        image = item.image2,
+                        message = "# " + item.text2
                     )
                     updateDataAPI(id = item.id, message = message)
                 }
@@ -76,12 +79,12 @@ class FragmentMessages : Fragment() {
             list = emptyList()
         )
 
-        binding.rvMessage.adapter = adapter
+        binding.rvDokterAnak.adapter = adapter
 
 //        loadDataDatabase()
         loadDataAPI()
 
-        binding.fabPlus.setOnClickListener {
+        binding.fabAdd.setOnClickListener {
 //            val message = MessageEntity(
 //                id = System.currentTimeMillis().toString(),
 //                image = System.currentTimeMillis().toString(),
@@ -102,19 +105,19 @@ class FragmentMessages : Fragment() {
     }
 
     // function untuk load data dummy
-    fun loadDataDummy(): List<MessageModel> {
+    fun loadDataDummy(): List<ModelMessages> {
         return listOf(
-            MessageModel(
+            ModelMessages(
                 id = "1",
-                name = "Rizky Fadilah",
-                imageRes = R.drawable.img_user_1,
-                lastMessage = "Ini Contoh Message nya."
+                text1 = "Rizky Fadilah",
+                image1 = R.drawable.img_user_1,
+                text2 = "Ini Contoh Message nya."
             ),
-            MessageModel(
+            ModelMessages(
                 id = "2",
-                name = "Rizky Fadilah 2",
-                imageRes = R.drawable.img_user_2,
-                lastMessage = "Ini Contoh Message nya Yang kedua."
+                text1 = "Rizky Fadilah 2",
+                image1 = R.drawable.img_user_2,
+                text2 = "Ini Contoh Message nya Yang kedua."
             ),
         )
     }
@@ -160,12 +163,12 @@ class FragmentMessages : Fragment() {
             requireActivity().runOnUiThread {
                 results?.let {
                     val messages = it.map {
-                        MessageModel(
+                        ModelMessages(
                             id = it.id,
-                            name = it.name,
-                            imageRes = R.drawable.img_user_1,
-                            image = it.image,
-                            lastMessage = it.message
+                            text1 = it.name,
+                            image1 = R.drawable.img_user_1,
+                            image2 = it.image,
+                            text2 = it.message
                         )
                     }
                     adapter.updateList(messages)
@@ -191,7 +194,7 @@ class FragmentMessages : Fragment() {
 
     // function untuk load data dari api
     private fun loadDataAPI() {
-        MyDoctorApiClient.instanceMessage.getMessages()
+        MyDoctorAPIClient.instanceMessage.getMessages()
             .enqueue(object : Callback<List<MessagesResponse>> {
                 override fun onResponse(
                     call: Call<List<MessagesResponse>>,
@@ -202,15 +205,15 @@ class FragmentMessages : Fragment() {
 
                     if (code == 200) {
                         val message = body?.map {
-                            MessageModel(
+                            ModelMessages(
                                 id = it.id.orEmpty(),
-                                name = it.name.orEmpty(),
-                                imageRes = R.drawable.img_user_1,
-                                image = it.image.orEmpty(),
-                                lastMessage = it.message.orEmpty()
+                                text1 = it.name.orEmpty(),
+                                image1 = R.drawable.img_user_1,
+                                image2 = it.image.orEmpty(),
+                                text2 = it.message.orEmpty()
                             )
                         } ?: emptyList()
-                        adapter.updateList(message.sortedBy { it.name })
+                        adapter.updateList(message.sortedBy { it.text1 })
                     } else {
                         showErrorMessage("Gagal Mengambil data dari API")
                     }
@@ -224,7 +227,7 @@ class FragmentMessages : Fragment() {
 
     // function untuk menginsert data pada api
     private fun postDataAPI(message: MessagesRequest) {
-        MyDoctorApiClient.instanceMessage.postMessages(request = message)
+        MyDoctorAPIClient.instanceMessage.postMessages(request = message)
             .enqueue(object : Callback<MessagesResponse> {
                 override fun onResponse(
                     call: Call<MessagesResponse>,
@@ -248,7 +251,7 @@ class FragmentMessages : Fragment() {
 
     // function untuk menghapus data pada api
     private fun deleteDataAPI(id: String) {
-        MyDoctorApiClient.instanceMessage.deleteMessages(id = id)
+        MyDoctorAPIClient.instanceMessage.deleteMessages(id = id)
             .enqueue(object : Callback<Unit> {
                 override fun onResponse(
                     call: Call<Unit>,
@@ -272,7 +275,7 @@ class FragmentMessages : Fragment() {
 
     // function untuk mengupdate data pada api
     private fun updateDataAPI(id: String, message: MessagesRequest) {
-        MyDoctorApiClient.instanceMessage.updateMessages(id = id, request = message)
+        MyDoctorAPIClient.instanceMessage.updateMessages(id = id, request = message)
             .enqueue(object : Callback<MessagesResponse> {
                 override fun onResponse(
                     call: Call<MessagesResponse>,
