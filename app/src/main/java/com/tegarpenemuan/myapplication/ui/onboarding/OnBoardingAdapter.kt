@@ -1,4 +1,4 @@
-package com.tegarpenemuan.myapplication
+package com.tegarpenemuan.myapplication.ui.onboarding
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
+import com.tegarpenemuan.myapplication.R
 
 class OnBoardingAdapter(private var list: List<Int>, private var ctx: Context) : PagerAdapter() {
 

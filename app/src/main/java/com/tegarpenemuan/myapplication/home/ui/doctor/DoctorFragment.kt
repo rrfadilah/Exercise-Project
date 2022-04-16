@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.tegarpenemuan.myapplication.Constant
-import com.tegarpenemuan.myapplication.SignInActivity
+import com.tegarpenemuan.myapplication.ui.signin.SignInActivity
 import com.tegarpenemuan.myapplication.databinding.FragmentDoctorBinding
 
 

@@ -1,10 +1,12 @@
-package com.tegarpenemuan.myapplication
+package com.tegarpenemuan.myapplication.ui.signup
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.tegarpenemuan.myapplication.Constant
 import com.tegarpenemuan.myapplication.databinding.ActivitySignupBinding
+import com.tegarpenemuan.myapplication.ui.signin.SignInActivity
 import com.tegarpenemuan.myapplication.utils.showCustomToast
 
 class SignUpActivity : AppCompatActivity() {

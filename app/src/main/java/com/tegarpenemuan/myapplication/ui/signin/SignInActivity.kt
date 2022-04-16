@@ -1,4 +1,4 @@
-package com.tegarpenemuan.myapplication
+package com.tegarpenemuan.myapplication.ui.signin
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -10,6 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.google.android.material.snackbar.Snackbar
+import com.tegarpenemuan.myapplication.Constant
+import com.tegarpenemuan.myapplication.CustomDialogFragment
+import com.tegarpenemuan.myapplication.R
+import com.tegarpenemuan.myapplication.ui.signup.SignUpActivity
 import com.tegarpenemuan.myapplication.database.MyDoctorDatabase
 import com.tegarpenemuan.myapplication.databinding.ActivitySignBinding
 import com.tegarpenemuan.myapplication.home.ui.HomeActivity
