@@ -76,7 +76,7 @@ class FragmentMessages : Fragment() {
                     updateDataAPI(id = item.id, message = message)
                 }
             },
-            list = emptyList()
+            ListMessages = emptyList()
         )
 
         binding.rvDokterAnak.adapter = adapter
@@ -110,13 +110,13 @@ class FragmentMessages : Fragment() {
             ModelMessages(
                 id = "1",
                 text1 = "Rizky Fadilah",
-                image1 = R.drawable.img_user_1,
+                image1 = R.drawable.image_doctor1,
                 text2 = "Ini Contoh Message nya."
             ),
             ModelMessages(
                 id = "2",
                 text1 = "Rizky Fadilah 2",
-                image1 = R.drawable.img_user_2,
+                image1 = R.drawable.image_doctor2,
                 text2 = "Ini Contoh Message nya Yang kedua."
             ),
         )
@@ -166,7 +166,7 @@ class FragmentMessages : Fragment() {
                         ModelMessages(
                             id = it.id,
                             text1 = it.name,
-                            image1 = R.drawable.img_user_1,
+                            image1 = R.drawable.image_doctor1,
                             image2 = it.image,
                             text2 = it.message
                         )
@@ -208,7 +208,7 @@ class FragmentMessages : Fragment() {
                             ModelMessages(
                                 id = it.id.orEmpty(),
                                 text1 = it.name.orEmpty(),
-                                image1 = R.drawable.img_user_1,
+                                image1 = R.drawable.image_doctor1,
                                 image2 = it.image.orEmpty(),
                                 text2 = it.message.orEmpty()
                             )
