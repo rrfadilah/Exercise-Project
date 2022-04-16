@@ -17,7 +17,7 @@ import com.rizky.exercise_project.data.local.UserEntity
  *
  */
 
-@Database(entities = [MessageEntity::class, UserEntity::class], version = 2)
+@Database(entities = [MessageEntity::class, UserEntity::class], version = 3)
 abstract class MyDoctorDatabase : RoomDatabase() {
     abstract fun messageDAO(): MessageDAO
     abstract fun userDAO(): UserDAO
