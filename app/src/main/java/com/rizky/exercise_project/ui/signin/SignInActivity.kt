@@ -1,4 +1,4 @@
-package com.rizky.exercise_project
+package com.rizky.exercise_project.ui.signin
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -10,13 +10,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import com.google.android.material.snackbar.Snackbar
+import com.rizky.exercise_project.Constant
+import com.rizky.exercise_project.CustomDialogFragment
+import com.rizky.exercise_project.R
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.ActivitySignInBinding
 import com.rizky.exercise_project.home.HomeActivity
-import com.rizky.exercise_project.model.Biodata
-import com.rizky.exercise_project.model.UserInfo
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class SignInActivity : AppCompatActivity() {

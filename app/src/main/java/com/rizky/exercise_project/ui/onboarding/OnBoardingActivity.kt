@@ -1,12 +1,15 @@
-package com.rizky.exercise_project
+package com.rizky.exercise_project.ui.onboarding
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.rizky.exercise_project.Constant
+import com.rizky.exercise_project.ui.signin.SignInActivity
 import com.rizky.exercise_project.databinding.ActivityOnBoardingBinding
 import com.rizky.exercise_project.home.HomeActivity
 import com.rizky.exercise_project.model.Biodata
 import com.rizky.exercise_project.model.UserInfo
+import com.rizky.exercise_project.ui.signup.SignUpActivity
 
 class OnBoardingActivity : AppCompatActivity() {
 
@@ -18,7 +21,7 @@ class OnBoardingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnGetStarted.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
 
