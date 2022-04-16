@@ -1,31 +1,39 @@
 package net.mzhasanah.fiveinone.exerciseproject.database
 
-//import android.arch.persistence.room.Database
-//import android.arch.persistence.room.Room
-//import android.arch.persistence.room.RoomDatabase
-//import android.content.Context
-//import net.mzhasanah.fiveinone.exerciseproject.model.Message
-//
-//@Database(entities = [Message::class], version = 1)
-//abstract class MyDoctorDatabase : RoomDatabase() {
-//    companion object {
-//        private var INSTANCE: MyDoctorDatabase? = null
-//        private const val DB_NAME = "MyDoctor.db"
-//
-//        fun getInstance(context: Context): MyDoctorDatabase {
-//            if (INSTANCE == null) {
-//                synchronized(MyDoctorDatabase::class) {
-//                    INSTANCE = Room.databaseBuilder(
-//                        context.applicationContext,
-//                        MyDoctorDatabase::class.java, DB_NAME
-//                    ).build()
-//                }
-//            }
-//            return INSTANCE!!
-//        }
-//
-//        fun destroyInstance() {
-//            INSTANCE = null
-//        }
-//    }
-//}
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import net.mzhasanah.fiveinone.exerciseproject.data.local.MessageDAO
+import net.mzhasanah.fiveinone.exerciseproject.data.local.MessageEntity
+import net.mzhasanah.fiveinone.exerciseproject.data.local.UserDAO
+import net.mzhasanah.fiveinone.exerciseproject.data.local.UserEntity
+
+@Database(entities = [MessageEntity::class, UserEntity::class], version = 2)
+abstract class MyDoctorDatabase : RoomDatabase() {
+    abstract fun messageDAO(): MessageDAO
+    abstract fun userDAO(): UserDAO
+
+    companion object {
+        private const val DB_NAME = "MyDoctor.db"
+
+        @Volatile
+        private var INSTANCE: MyDoctorDatabase? = null
+
+        fun getInstance(context: Context): MyDoctorDatabase {
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
+            }
+        }
+
+        private fun buildDatabase(context: Context): MyDoctorDatabase {
+            return Room.databaseBuilder(context, MyDoctorDatabase::class.java, DB_NAME)
+                .fallbackToDestructiveMigration()
+                .build()
+        }
+
+        fun destroyInstance() {
+            INSTANCE = null
+        }
+    }
+}

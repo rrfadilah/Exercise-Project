@@ -1,60 +1,65 @@
 package net.mzhasanah.fiveinone.exerciseproject.home.ui.message
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import net.mzhasanah.fiveinone.exerciseproject.R
 import com.bumptech.glide.Glide
+import net.mzhasanah.fiveinone.exerciseproject.R
+import net.mzhasanah.fiveinone.exerciseproject.databinding.ListItemMessageBinding
 
-class MessageAdapter(private val list: List<MessageModel>): RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // Your holder should contain and initialize a member variable
-        // for any view that will be set as you render a row
-        val imageAvatar = itemView.findViewById<ImageView>(R.id.iv_img)
-        val textName = itemView.findViewById<TextView>(R.id.tv_name)
-        val textDesc = itemView.findViewById<TextView>(R.id.tv_last_message)
+class MessageAdapter(private val listener: EventListener, private var list: List<MessageModel>) :
+    RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
+
+    inner class ViewHolder(val binding: ListItemMessageBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(list: List<MessageModel>) {
+        this.list = list
+        notifyDataSetChanged()
     }
 
-    // seperti template akan terus seperti ini,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val context = parent.context
-        val inflater = LayoutInflater.from(context)
-        // Inflate the custom layout
-        val view = inflater.inflate(R.layout.list_item_message, parent, false)
-        // Return a new holder instance
-        return ViewHolder(view)
+        val binding =
+            ListItemMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // Get the data model based on position
-        val message: MessageModel = list[position]
-
-        Glide.with(holder.itemView.context)
-            //.load("https://i.ibb.co/zJHYGBP/binarlogo.jpg")
-            .load(message.image)
-            .circleCrop()
-            .into(holder.imageAvatar)
-
-        // Set item views based on your views and data model
-        holder.textName.text = message.name
-        holder.textDesc.text = message.lastMessage
-
-        // disini untuk kita memberikan action click pada item tsb
+        val item = list[position]
+        holder.binding.tvName.text = item.name
+        holder.binding.tvLastMessage.text = item.lastMessage
+        if (item.image.isNotEmpty()) {
+            Glide.with(holder.binding.root)
+                .load(item.image)
+                .fitCenter()
+                .circleCrop()
+                .placeholder(R.drawable.img_user_1)
+                .error(R.drawable.img_user_1)
+                .into(holder.binding.ivImg)
+        } else {
+            holder.binding.ivImg.setImageResource(item.imageRes)
+        }
+        holder.binding.ivUpdate.setOnClickListener {
+            listener.onUpdate(item)
+        }
+        holder.binding.ivCancel.setOnClickListener {
+            listener.onDelete(item)
+        }
         holder.itemView.setOnClickListener {
-            Toast.makeText(
-                holder.itemView.context,
-                "Haii ${message.name}, ${message.lastMessage}",
-                Toast.LENGTH_LONG
-            ).show()
+            listener.onClick(item)
         }
     }
 
     override fun getItemCount(): Int {
-        return list.count()
+        return list.size
+    }
+
+    interface EventListener {
+        fun onClick(item: MessageModel)
+        fun onDelete(item: MessageModel)
+        fun onUpdate(item: MessageModel)
     }
 }

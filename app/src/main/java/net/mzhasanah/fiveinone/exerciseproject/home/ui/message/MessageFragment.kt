@@ -1,151 +1,302 @@
 package net.mzhasanah.fiveinone.exerciseproject.home.ui.message
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.content.pm.PackageManager
-import android.location.LocationManager
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat.checkSelfPermission
-import androidx.recyclerview.widget.RecyclerView
 import net.mzhasanah.fiveinone.exerciseproject.R
+import net.mzhasanah.fiveinone.exerciseproject.data.api.MessagesRequest
+import net.mzhasanah.fiveinone.exerciseproject.data.api.MessagesResponse
+import net.mzhasanah.fiveinone.exerciseproject.data.local.MessageEntity
+import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
+import net.mzhasanah.fiveinone.exerciseproject.databinding.FragmentMessageBinding
+import net.mzhasanah.fiveinone.exerciseproject.network.MyDoctorApiClient
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MessageFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MessageFragment : Fragment() {
-//    @RequiresApi(Build.VERSION_CODES.M)
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentMessageBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var db: MyDoctorDatabase? = null
+    private lateinit var adapter: MessageAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message, container, false)
-//        val recyclerView: RecyclerView? = view?.findViewById(R.id.rv_message)
-//
-//        // untuk keperluan datanya
-//        val messages: List<MessageModel> = listOf(
-//            MessageModel(
-//                image = "https://i.ibb.co/zJHYGBP/binarlogo.jpg",
-//                name = "Muhammad Zain Ramadhan",
-//                lastMessage = "Hallo gais semuanya disini"
-//            ),
-//            MessageModel(
-//                image = "https://lh3.googleusercontent.com/-nRrSWU--Dfk/X2LaaEbsIyI/AAAAAAAAAQA/n7AH_xi8iAI9WT7aslf0YGAt4Ab_lElvwCLcBGAsYHQ/s1600/1600313957610819-0.png",
-//                name = "Aliza Farikhah",
-//                lastMessage = "Mau isi aapa disini boleh aja ya teman teman semuanya",
-//            ),
-//            MessageModel(
-//                image = "https://i.pinimg.com/originals/e9/71/25/e9712514c7cd98b232b27f444a504b3e.jpg",
-//                name = "Mau'idzoh Hasanah",
-//                lastMessage = "Halo bayar hutang jangan lupa!!"
-//            ),
-//            MessageModel(
-//                image = "https://images.bisnis-cdn.com/thumb/posts/2019/10/13/1158440/langit-jepang.jpg?w=400&h=400",
-//                name = "Bella Shafira",
-//                lastMessage = "Assalamu'alaikum, hari ini ada jadwal kosong?",
-//            ),
-//            MessageModel(
-//                image = "https://img.tek.id/crop/600x400/content/2021/05/21/40991/nickelodeon-akan-garap-film-spin-off-live-action-sandy-cheeks-9oWmTe67O2.jpg",
-//                name = "Sandy Chick",
-//                lastMessage = "Telah meninggal dunia bapak dari saudara saya",
-//            ),
-//            MessageModel(
-//                image = "https://pbs.twimg.com/profile_images/1260483394871472133/QyNUYyHM_400x400.jpg",
-//                name = "Rudy Tabuty",
-//                lastMessage = "Hei dimana kapur baru aku kamu simpan?",
-//            )
-//        )
-//
-//        // untuk keperluan data ke recyclerviewnya
-//        val adapter = MessageAdapter(messages)
-//        recyclerView?.adapter = adapter
-//
-//        val permissionsCheck = checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION)
-//        if (permissionsCheck == PackageManager.PERMISSION_GRANTED){
-//            Toast.makeText(this, "Access Denied", Toast.LENGTH_LONG).show()
-//            getLatLong()
-//        } else {
-//            Toast.makeText(this, "Access Denied", Toast.LENGTH_LONG).show()
-//            requestPermissionLocation()
-//        }
+    ): View {
+        _binding = FragmentMessageBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-//    @RequiresApi(Build.VERSION_CODES.M)
-//    fun requestPermissionLocation(){
-//        requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1001)
-//    }
-//
-//    @SuppressLint("MissingPermission")
-//    fun getLatLong(){
-//        val locationManager = applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-//        val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-//        Toast.makeText(this, "Our Location id ${location?.latitude}, ${location?.longitude}", Toast.LENGTH_LONG).show()
-//    }
-//
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<out String>,
-//        grantResults: IntArray
-//    ) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        when(requestCode) {
-//            1001 -> {
-//                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    Toast.makeText(this, "User Chooses Access Granted", Toast.LENGTH_LONG).show()
-//                    getLatLong()
-//                } else {
-//                    Toast.makeText(this, "User Choose Access Denied", Toast.LENGTH_LONG).show()
-//                }
-//            }
-//            else -> {
-//                Toast.makeText(this, "Wrong requested", Toast.LENGTH_LONG).show()
-//            }
-//        }
-//    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        db = MyDoctorDatabase.getInstance(requireContext().applicationContext)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MessageFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MessageFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        adapter = MessageAdapter(
+            listener = object : MessageAdapter.EventListener {
+                override fun onClick(item: MessageModel) {
+                    Toast.makeText(requireContext(), item.lastMessage, Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onDelete(item: MessageModel) {
+//                    val message = MessageEntity(
+//                        id = item.id,
+//                        name = item.name,
+//                        image = item.image,
+//                        message = item.lastMessage
+//                    )
+//                    deleteDataDatabase(message)
+                    deleteDataAPI(item.id)
+                }
+
+                override fun onUpdate(item: MessageModel) {
+//                    val message = MessageEntity(
+//                        id = item.id,
+//                        name = item.name + " Updated",
+//                        image = item.image,
+//                        message = item.lastMessage + " Updated"
+//                    )
+//                    updateDataDatabase(message)
+                    val message = MessagesRequest(
+                        name = "#" + item.name,
+                        image = item.image,
+                        message = "# " + item.lastMessage
+                    )
+                    updateDataAPI(id = item.id, message = message)
+                }
+            },
+            list = emptyList()
+        )
+
+        binding.rvMessage.adapter = adapter
+
+//        loadDataDatabase()
+        loadDataAPI()
+
+        binding.fabPlus.setOnClickListener {
+//            val message = MessageEntity(
+//                id = System.currentTimeMillis().toString(),
+//                image = System.currentTimeMillis().toString(),
+//                name = System.currentTimeMillis().toString() + " This is Name",
+//                message = System.currentTimeMillis().toString() + " This is Last Messages"
+//            )
+//
+//            insertDataDatabase(message)
+            val message = MessagesRequest(
+                image = "https://www.dmarge.com/wp-content/uploads/2021/01/dwayne-the-rock-.jpg",
+                name = System.currentTimeMillis().toString() + " This is Name",
+                message = System.currentTimeMillis().toString() + " This is Last Messages"
+            )
+            postDataAPI(message)
+        }
+    }
+
+    // function untuk load data dummy
+    fun loadDataDummy(): List<MessageModel> {
+        return listOf(
+            MessageModel(
+                id = "1",
+                name = "Rizky Fadilah",
+                imageRes = R.drawable.img_user_1,
+                lastMessage = "Ini Contoh Message nya."
+            ),
+            MessageModel(
+                id = "2",
+                name = "Rizky Fadilah 2",
+                imageRes = R.drawable.img_user_2,
+                lastMessage = "Ini Contoh Message nya Yang kedua."
+            ),
+        )
+    }
+
+    // function untuk insert data pada database
+    private fun insertDataDatabase(message: MessageEntity) {
+        GlobalScope.async {
+            val result = db?.messageDAO()?.insertMessage(message)
+            requireActivity().runOnUiThread {
+                if (result != 0L) {
+                    Toast.makeText(requireContext(), "Success insert", Toast.LENGTH_SHORT)
+                        .show()
+                    loadDataDatabase()
+                } else {
+                    Toast.makeText(requireContext(), "Failure insert", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
+        }
+    }
+
+    // function untuk update data pada database
+    private fun updateDataDatabase(message: MessageEntity) {
+        GlobalScope.async {
+            val result = db?.messageDAO()?.updateMessage(message)
+            requireActivity().runOnUiThread {
+                if (result != 0) {
+                    Toast.makeText(requireContext(), "Success update", Toast.LENGTH_SHORT)
+                        .show()
+                    loadDataDatabase()
+                } else {
+                    Toast.makeText(requireContext(), "Failure update", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+    }
+
+    // function untuk load data dari database
+    private fun loadDataDatabase() {
+        GlobalScope.launch {
+            val results = db?.messageDAO()?.getMessage()
+            requireActivity().runOnUiThread {
+                results?.let {
+                    val messages = it.map {
+                        MessageModel(
+                            id = it.id,
+                            name = it.name,
+                            imageRes = R.drawable.img_user_1,
+                            image = it.image,
+                            lastMessage = it.message
+                        )
+                    }
+                    adapter.updateList(messages)
+                }
+            }
+        }
+    }
+
+    // function untuk mendelete data pada databse
+    private fun deleteDataDatabase(message: MessageEntity) {
+        GlobalScope.async {
+            val results = db?.messageDAO()?.deleteMessage(message)
+            requireActivity().runOnUiThread {
+                if (results != 0) {
+                    Toast.makeText(requireContext(), "Berhasil delete", Toast.LENGTH_SHORT).show()
+                    loadDataDatabase()
+                } else {
+                    Toast.makeText(requireContext(), "Gagal delete", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun loadDataAPI() {
+        MyDoctorApiClient.instanceMessage.getMessages()
+            .enqueue(object : Callback<List<MessagesResponse>> {
+                override fun onResponse(
+                    call: Call<List<MessagesResponse>>,
+                    response: Response<List<MessagesResponse>>
+                ) {
+                    val code = response.code()
+                    val body = response.body()
+
+                    if (code == 200) {
+                        val message = body?.map {
+                            MessageModel(
+                                id = it.id.orEmpty(),
+                                name = it.name.orEmpty(),
+                                imageRes = R.drawable.img_user_1,
+                                image = it.image.orEmpty(),
+                                lastMessage = it.message.orEmpty()
+                            )
+                        } ?: emptyList()
+                        adapter.updateList(message.sortedBy { it.name })
+                    } else {
+                        showErrorMessage("Gagal Mengambil data dari API")
+                    }
+                }
+
+                override fun onFailure(call: Call<List<MessagesResponse>>, t: Throwable) {
+                    showErrorMessage(t.message)
+                }
+            })
+    }
+
+    // function untuk menginsert data pada api
+    private fun postDataAPI(message: MessagesRequest) {
+        MyDoctorApiClient.instanceMessage.postMessages(request = message)
+            .enqueue(object : Callback<MessagesResponse> {
+                override fun onResponse(
+                    call: Call<MessagesResponse>,
+                    response: Response<MessagesResponse>
+                ) {
+                    val code = response.code()
+                    val body = response.body()
+
+                    if (code == 200) {
+                        loadDataAPI()
+                    } else {
+                        showErrorMessage("Gagal Mengambil data dari API")
+                    }
+                }
+
+                override fun onFailure(call: Call<MessagesResponse>, t: Throwable) {
+                    showErrorMessage(t.message)
+                }
+            })
+    }
+
+    // function untuk menghapus data pada api
+    private fun deleteDataAPI(id: String) {
+        MyDoctorApiClient.instanceMessage.deleteMessages(id = id)
+            .enqueue(object : Callback<Unit> {
+                override fun onResponse(
+                    call: Call<Unit>,
+                    response: Response<Unit>
+                ) {
+                    val code = response.code()
+                    val body = response.body()
+
+                    if (code == 200) {
+                        loadDataAPI()
+                    } else {
+                        showErrorMessage("Gagal Mengambil data dari API")
+                    }
+                }
+
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    showErrorMessage(t.message)
+                }
+            })
+    }
+
+    // function untuk mengupdate data pada api
+    private fun updateDataAPI(id: String, message: MessagesRequest) {
+        MyDoctorApiClient.instanceMessage.updateMessages(id = id, request = message)
+            .enqueue(object : Callback<MessagesResponse> {
+                override fun onResponse(
+                    call: Call<MessagesResponse>,
+                    response: Response<MessagesResponse>
+                ) {
+                    val code = response.code()
+                    val body = response.body()
+
+                    if (code == 200) {
+                        loadDataAPI()
+                    } else {
+                        showErrorMessage("Gagal Mengambil data dari API")
+                    }
+                }
+
+                override fun onFailure(call: Call<MessagesResponse>, t: Throwable) {
+                    showErrorMessage(t.message)
+                }
+            })
+    }
+
+    private fun showErrorMessage(message: String?) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+        MyDoctorDatabase.destroyInstance()
     }
 }
