@@ -13,18 +13,22 @@ import id.anantyan.exerciseproject.ui.activity.signin.SignInActivity
 import id.anantyan.exerciseproject.ui.activity.signup.SignUpActivity
 import id.anantyan.utils.sharedPreferences.PreferenceHelper
 import id.anantyan.utils.sharedPreferences.PreferenceManager
+import id.anantyan.utils.sharedPreferences.preference
 
 class OnBoardActivity : AppCompatActivity() {
 
     private lateinit var adapter: OnBoardAdapter
     private lateinit var binding: ActivityOnBoardBinding
-    private val preferences: PreferenceHelper by lazy { PreferenceManager(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOnBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if (preferences.getLogIn() == false) {
+        onObserverData()
+    }
+
+    private fun onObserverData() {
+        if (application.preference().getLogIn() == false && application.preference().getUserToken()!!.isEmpty()) {
             onBinding()
         } else {
             val intent = Intent(this, BaseFragmentActivity::class.java)

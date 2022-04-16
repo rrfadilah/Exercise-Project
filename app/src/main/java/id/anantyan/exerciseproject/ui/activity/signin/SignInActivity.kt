@@ -13,18 +13,22 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import id.anantyan.exerciseproject.R
+import id.anantyan.exerciseproject.database.RoomDB
 import id.anantyan.exerciseproject.databinding.ActivitySignInBinding
 import id.anantyan.exerciseproject.databinding.DialogExampleBinding
 import id.anantyan.exerciseproject.model.Users
+import id.anantyan.exerciseproject.repository.UsersRepository
 import id.anantyan.exerciseproject.ui.activity.BaseFragmentActivity
 import id.anantyan.exerciseproject.ui.fragment.DialogExampleFragment
 import id.anantyan.exerciseproject.ui.fragment.DialogExampleFragment.Companion.ARG_DIALOG_EXAMPLE
 import id.anantyan.exerciseproject.ui.activity.signup.SignUpActivity
 import id.anantyan.utils.Constant.PASSING_TO_SIGN_UP_ACTIVITY
+import id.anantyan.utils.Resource
 import id.anantyan.utils.Validation.emailValid
 import id.anantyan.utils.Validation.passwordValid
 import id.anantyan.utils.sharedPreferences.PreferenceHelper
 import id.anantyan.utils.sharedPreferences.PreferenceManager
+import id.anantyan.utils.sharedPreferences.preference
 import id.anantyan.utils.validator.Validator
 import id.anantyan.utils.validator.constant.Mode
 import id.anantyan.utils.validator.validator
@@ -32,8 +36,10 @@ import id.anantyan.utils.validator.validator
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
-    private val viewModel: SignInViewModel by viewModels()
-    private val preferences: PreferenceHelper by lazy { PreferenceManager(this) }
+    private val viewModel: SignInViewModel by viewModels {
+        val usersDao = RoomDB.database(application).usersDao()
+        SignInViewModelFactory(UsersRepository(usersDao))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,21 +87,42 @@ class SignInActivity : AppCompatActivity() {
      * */
     private fun onSelectData() {
         val users = Users(
-            email = binding.txtInputLayoutEmail.text.toString(),
+            id = System.currentTimeMillis().toString(),
+            login = binding.txtInputLayoutEmail.text.toString(),
             password = binding.txtInputLayoutPassword.text.toString()
         )
-        viewModel.selectByUsers(users)
+        /*viewModel.selectByUsersLocal(users)*/
+        viewModel.signInApi(users)
     }
 
     private fun onObserver() {
-        viewModel.selectByUsers.observe(this) {
+        /*viewModel.selectByUsersLocal.observe(this) {
             if (it != null) {
-                preferences.setLogIn(true)
+                application.preference().setLogIn(true)
                 val intent = Intent(this@SignInActivity, BaseFragmentActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
                 onSnackbar(binding.root, getString(R.string.txt_not_found_data))
+            }
+        }*/
+        viewModel.signInResponse.observe(this) {
+            when(it) {
+                is Resource.Success -> {
+                    application.preference().setLogIn(true)
+                    application.preference().setUserToken(it.data?.userToken!!)
+                    val intent = Intent(this@SignInActivity, BaseFragmentActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                is Resource.Loading -> {
+                    Toast.makeText(this, "Tunggu...", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Error -> {
+                    it.message?.let { it1 ->
+                        onSnackbar(binding.root, it1)
+                    }
+                }
             }
         }
     }

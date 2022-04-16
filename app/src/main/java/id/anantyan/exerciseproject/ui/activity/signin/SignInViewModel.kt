@@ -3,26 +3,31 @@ package id.anantyan.exerciseproject.ui.activity.signin
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import id.anantyan.exerciseproject.database.RoomDB
 import id.anantyan.exerciseproject.model.Users
 import id.anantyan.exerciseproject.repository.UsersRepository
+import id.anantyan.utils.LiveEvent
+import id.anantyan.utils.Resource
+import id.anantyan.utils.sharedPreferences.PreferenceHelper
+import id.anantyan.utils.sharedPreferences.PreferenceManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SignInViewModel(application: Application): AndroidViewModel(application) {
-
+class SignInViewModel(
     private val repository: UsersRepository
+): ViewModel() {
 
-    val selectByUsers: LiveData<Users>
+    val signInResponse: LiveData<Resource<Users>> = repository._signInResponse
 
-    init {
-        val usersDao = RoomDB.database(application).usersDao()
-        repository = UsersRepository(usersDao)
-        selectByUsers = repository._selectByUsers
+    val selectByUsersLocal: LiveData<Users> = repository._selectByUsersLocal
+
+    fun selectByUsersLocal(item: Users) = CoroutineScope(Dispatchers.IO).launch {
+        repository.selectByUsersLocal(item)
     }
 
-    fun selectByUsers(item: Users) = CoroutineScope(Dispatchers.IO).launch {
-        repository.selectByUsers(item)
+    fun signInApi(item: Users) = CoroutineScope(Dispatchers.IO).launch {
+        repository.signInApi(item)
     }
 }

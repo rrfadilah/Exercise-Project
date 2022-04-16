@@ -10,8 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.anantyan.exerciseproject.R
+import id.anantyan.exerciseproject.database.RoomDB
 import id.anantyan.exerciseproject.databinding.FragmentMessagesBinding
 import id.anantyan.exerciseproject.model.Messages
+import id.anantyan.exerciseproject.repository.MessagesRepository
 import id.anantyan.exerciseproject.ui.activity.BaseFragmentActivity
 import id.anantyan.exerciseproject.ui.adapter.messages.MessagesAdapter
 import id.anantyan.exerciseproject.ui.adapter.messages.MessagesHelper
@@ -28,7 +30,10 @@ class MessagesFragment : Fragment() {
     private val binding get() = _binding!!
     private val list: MutableList<Messages> = mutableListOf()
     private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val viewModel: MessagesViewModel by viewModels()
+    private val viewModel: MessagesViewModel by viewModels {
+        val messagesDao = RoomDB.database(requireContext()).messagesDao()
+        MessagesViewModelFactory(MessagesRepository(messagesDao))
+    }
     private val adapter: MessagesHelper by lazy { MessagesAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {

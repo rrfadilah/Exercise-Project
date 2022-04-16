@@ -4,7 +4,13 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
-import java.lang.UnsupportedOperationException
+
+fun Context.preference(): PreferenceHelper {
+    val pref: PreferenceHelper by lazy {
+        id.anantyan.utils.sharedPreferences.PreferenceManager(this)
+    }
+    return pref
+}
 
 class PreferenceManager(context: Context) : PreferenceHelper {
 
@@ -12,14 +18,23 @@ class PreferenceManager(context: Context) : PreferenceHelper {
 
     companion object {
         private const val LOG_IN = "LOG_IN"
+        private const val USR_TOKEN = "USR_TOKEN"
     }
 
     override fun setLogIn(value: Boolean) {
         prefShared.set(LOG_IN, value)
     }
 
+    override fun setUserToken(value: String) {
+        prefShared.set(USR_TOKEN, value)
+    }
+
     override fun getLogIn(): Boolean? {
         return prefShared.getBoolean(LOG_IN, false)
+    }
+
+    override fun getUserToken(): String? {
+        return prefShared.getString(USR_TOKEN, "")
     }
 }
 

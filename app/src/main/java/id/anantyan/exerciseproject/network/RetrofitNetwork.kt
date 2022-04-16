@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializer
 import id.anantyan.exerciseproject.data.api.MessagesApi
+import id.anantyan.exerciseproject.data.api.UsersApi
 import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -50,4 +51,5 @@ object RetrofitNetwork {
     }
 
     val messagesApi: MessagesApi by lazy { retrofit().create(MessagesApi::class.java) }
+    val usersApi: UsersApi by lazy { retrofit().create(UsersApi::class.java) }
 }

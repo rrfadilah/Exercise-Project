@@ -11,32 +11,16 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MessagesViewModel(application: Application): AndroidViewModel(application) {
+class MessagesViewModel(private val repository: MessagesRepository): ViewModel() {
 
-    private val repository: MessagesRepository
+    val selectResponse: LiveData<Resource<List<Messages>>> = repository._selectResponse
+    val insertResponse: LiveData<Resource<Messages>> = repository._insertResponse
+    val updateResponse: LiveData<Resource<Messages>> = repository._updateResponse
+    val deleteResponse: LiveData<Resource<Messages>> = repository._deleteResponse
 
-    val selectResponse: LiveData<Resource<List<Messages>>>
-    val insertResponse: LiveData<Resource<Messages>>
-    val updateResponse: LiveData<Resource<Messages>>
-    val deleteResponse: LiveData<Resource<Messages>>
-
-    val insertLocal: LiveData<Messages>
-    val updateLocal: LiveData<Messages>
-    val deleteLocal: LiveData<Messages>
-
-    init {
-        val messagesDao = RoomDB.database(application).messagesDao()
-        repository = MessagesRepository(messagesDao)
-
-        selectResponse = repository._selectResponse
-        insertResponse = repository._insertResponse
-        updateResponse = repository._updateResponse
-        deleteResponse = repository._deleteResponse
-
-        insertLocal = repository._insertLocal
-        updateLocal = repository._updateLocal
-        deleteLocal = repository._deleteLocal
-    }
+    val insertLocal: LiveData<Messages> = repository._insertLocal
+    val updateLocal: LiveData<Messages> = repository._updateLocal
+    val deleteLocal: LiveData<Messages> = repository._deleteLocal
 
     fun selectLocal() = repository.selectLocal()
     fun selectApi() = CoroutineScope(Dispatchers.IO).launch {
