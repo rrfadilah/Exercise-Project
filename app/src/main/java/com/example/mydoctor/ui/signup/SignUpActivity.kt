@@ -1,17 +1,15 @@
-package com.example.mydoctor
+package com.example.mydoctor.ui.signup
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
-import android.view.LayoutInflater
 import android.widget.Toast
-import androidx.activity.addCallback
-import androidx.appcompat.app.AlertDialog
 import androidx.core.content.edit
+import com.example.mydoctor.Constant
 import com.example.mydoctor.databinding.ActivitySignUpBinding
+import com.example.mydoctor.ui.signin.SignInActivity
 
 class SignUpActivity : AppCompatActivity() {
 

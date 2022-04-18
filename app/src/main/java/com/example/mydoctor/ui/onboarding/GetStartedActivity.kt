@@ -1,8 +1,10 @@
-package com.example.mydoctor
+package com.example.mydoctor.ui.onboarding
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.mydoctor.ui.signin.SignInActivity
+import com.example.mydoctor.ui.signup.SignUpActivity
 import com.example.mydoctor.databinding.ActivityGetStartedBinding
 
 class GetStartedActivity : AppCompatActivity() {

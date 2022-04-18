@@ -16,16 +16,16 @@
             android:exported="false"
             android:label="@string/title_activity_home" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".ui.signup.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInActivity"
+            android:name=".ui.signin.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".GetStartedActivity"
+            android:name=".ui.onboarding.GetStartedActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.splashscreen.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

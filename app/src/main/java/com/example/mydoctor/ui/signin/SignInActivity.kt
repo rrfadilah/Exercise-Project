@@ -1,13 +1,15 @@
-package com.example.mydoctor
+package com.example.mydoctor.ui.signin
 
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.mydoctor.Constant
 import com.example.mydoctor.databinding.ActivitySignInBinding
 import com.example.mydoctor.home.HomeActivity
+import com.example.mydoctor.ui.signup.SignUpActivity
 
 class SignInActivity : AppCompatActivity() {
 
