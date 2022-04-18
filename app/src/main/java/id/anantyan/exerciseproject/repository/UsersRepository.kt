@@ -33,6 +33,7 @@ class UsersRepository(
                 response.isSuccessful -> {
                     response.body()?.let {
                         _signInResponse.postValue(Resource.Success(it))
+                        usersDao.insert(it)
                     }
                 }
                 response.code() == 401 -> {

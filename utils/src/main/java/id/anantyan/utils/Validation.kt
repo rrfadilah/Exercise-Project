@@ -34,11 +34,12 @@ object Validation {
         }
     }
 
-    fun generalValid(textInputLayout: TextInputLayout): Validation {
+    fun namelValid(textInputLayout: TextInputLayout): Validation {
         return validation(textInputLayout) {
             rules {
                 +notNull(R.string.txt_not_null)
                 +notEmpty(R.string.txt_not_empty)
+                +minimumLength(3, R.string.txt_not_min_length_3)
             }
         }
     }

@@ -36,11 +36,6 @@ class MessagesFragment : Fragment() {
     }
     private val adapter: MessagesHelper by lazy { MessagesAdapter() }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -81,7 +76,6 @@ class MessagesFragment : Fragment() {
     }
 
     private fun onBinding() {
-        binding.rvItems.adapter = adapter.init()
         binding.rvItems.setHasFixedSize(true)
         binding.rvItems.layoutManager = LinearLayoutManager((activity as BaseFragmentActivity))
         binding.rvItems.itemAnimator = DefaultItemAnimator()
@@ -133,6 +127,7 @@ class MessagesFragment : Fragment() {
                     adapter.differ(list)
                     binding.rvItems.visibility = View.VISIBLE
                     binding.progressBar.visibility = View.GONE
+                    binding.rvItems.adapter = adapter.init()
                 }
                 is Resource.Loading -> {
                     binding.rvItems.visibility = View.GONE
@@ -201,22 +196,6 @@ class MessagesFragment : Fragment() {
         viewModel.deleteLocal.observe(viewLifecycleOwner) {
             Toast.makeText((activity as BaseFragmentActivity), "Data terhapus!", Toast.LENGTH_SHORT).show()
         }*/
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_action_bar, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_add -> {
-                position = -1
-                val intent = Intent((activity as BaseFragmentActivity), MessagesDetailActivity::class.java)
-                (activity as BaseFragmentActivity).onResultActivity.launch(intent)
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroyView() {

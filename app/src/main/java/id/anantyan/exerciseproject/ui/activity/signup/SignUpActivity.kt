@@ -19,7 +19,7 @@ import id.anantyan.exerciseproject.ui.activity.signin.SignInActivity
 import id.anantyan.utils.Constant.PASSING_TO_SIGN_UP_ACTIVITY
 import id.anantyan.utils.Resource
 import id.anantyan.utils.Validation.emailValid
-import id.anantyan.utils.Validation.generalValid
+import id.anantyan.utils.Validation.namelValid
 import id.anantyan.utils.Validation.passwordValid
 import id.anantyan.utils.validator.Validator
 import id.anantyan.utils.validator.constant.Mode
@@ -65,7 +65,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun onBinding() {
         binding.btnContinue.setOnClickListener {
-            onValidation(this, onSignUp)
+            onValidation()
         }
     }
 
@@ -73,26 +73,16 @@ class SignUpActivity : AppCompatActivity() {
         return intent.hasExtra(PASSING_TO_SIGN_UP_ACTIVITY)
     }
 
-    private fun onValidation(context: Context, obj: Validator.OnValidateListener) {
-        validator(context) {
+    private fun onValidation() {
+        validator(this) {
             mode = Mode.CONTINUOUS
-            listener = obj
+            listener = onSignUp
             validate(
-                generalValid(binding.txtLayoutFullName),
-                generalValid(binding.txtLayoutPekerjaan),
+                namelValid(binding.txtLayoutFullName),
                 emailValid(binding.txtLayoutEmail),
                 passwordValid(binding.txtLayoutPassword)
             )
         }
-    }
-
-    private val onSignUp = object : Validator.OnValidateListener {
-        override fun onValidateSuccess(values: List<String>) {
-            /*onSelectData()*/
-            onInsertData()
-        }
-
-        override fun onValidateFailed(errors: List<String>) {}
     }
 
     /**
@@ -152,5 +142,14 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun onSnackbar(viewContext: View, message: String) {
         Snackbar.make(viewContext, message, Snackbar.LENGTH_LONG).show()
+    }
+
+    private val onSignUp = object : Validator.OnValidateListener {
+        override fun onValidateSuccess(values: List<String>) {
+            /*onSelectData()*/
+            onInsertData()
+        }
+
+        override fun onValidateFailed(errors: List<String>) {}
     }
 }

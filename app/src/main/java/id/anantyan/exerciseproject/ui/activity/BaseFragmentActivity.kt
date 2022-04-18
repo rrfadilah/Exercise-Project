@@ -1,6 +1,10 @@
 package id.anantyan.exerciseproject.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +17,9 @@ import id.anantyan.exerciseproject.ui.fragment.HospitalFragment
 import id.anantyan.exerciseproject.ui.fragment.messages.MessagesFragment
 import id.anantyan.exerciseproject.ui.SharedViewModel
 import id.anantyan.exerciseproject.model.Messages
+import id.anantyan.exerciseproject.ui.activity.signin.SignInActivity
 import id.anantyan.utils.Constant.PASSING_TO_MESSAGES_ACTIVITY
+import id.anantyan.utils.sharedPreferences.preference
 
 class BaseFragmentActivity : AppCompatActivity() {
 
@@ -61,6 +67,21 @@ class BaseFragmentActivity : AppCompatActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_action_bar, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_add -> {
+                val intent = Intent(this, MessagesDetailActivity::class.java)
+                onResultActivity.launch(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private val onNavigationListener = NavigationBarView.OnItemSelectedListener {

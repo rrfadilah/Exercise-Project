@@ -10,5 +10,6 @@
     <string name="txt_not_empty">Tidak boleh kosong!</string>
     <string name="txt_not_email">Email tidak valid!</string>
     <string name="txt_not_min_length">Password harus lebih dari 8 karakter!</string>
+    <string name="txt_not_min_length_3">Nama harus lebih dari 3 karakter!</string>
     <string name="txt_not_lowercase_and_uppercase"><![CDATA[Harus mengandung setidaknya 1 karakter uppercase & lowercase!]]></string>
 </resources>
