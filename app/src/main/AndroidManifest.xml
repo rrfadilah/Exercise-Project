@@ -16,29 +16,29 @@
             android:name=".home.HomeActivity"
             android:exported="true"
             android:label="@string/title_activity_home" >
+        </activity>
+        <activity
+            android:name=".ui.signup.SignUpActivity"
+            android:exported="true" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".SignUpActivity"
-            android:exported="false" />
         <activity
             android:name=".galleryfragment.GalleryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".samplefragment.PicturesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OnBoardingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SignInActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".samplefragment.PicturesActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.onboarding.OnBoardingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.signin.SignInActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.splashscreen.SplashActivity"
             android:exported="true">
         </activity>
     </application>

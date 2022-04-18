@@ -1,4 +1,4 @@
-package net.mzhasanah.fiveinone.exerciseproject
+package net.mzhasanah.fiveinone.exerciseproject.customdialog
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

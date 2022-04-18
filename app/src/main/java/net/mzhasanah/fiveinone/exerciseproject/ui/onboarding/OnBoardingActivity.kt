@@ -1,13 +1,17 @@
-package net.mzhasanah.fiveinone.exerciseproject
+package net.mzhasanah.fiveinone.exerciseproject.ui.onboarding
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import net.mzhasanah.fiveinone.exerciseproject.Constant
 import androidx.fragment.app.Fragment
+import net.mzhasanah.fiveinone.exerciseproject.*
 import net.mzhasanah.fiveinone.exerciseproject.databinding.ActivityOnBoardingBinding
 import net.mzhasanah.fiveinone.exerciseproject.galleryfragment.AdapterGallery
+import net.mzhasanah.fiveinone.exerciseproject.ui.signin.SignInActivity
+import net.mzhasanah.fiveinone.exerciseproject.ui.signup.SignUpActivity
 
 class OnBoardingActivity : AppCompatActivity() {
     lateinit var binding: ActivityOnBoardingBinding
@@ -16,6 +20,11 @@ class OnBoardingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_on_boarding)
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnGetStarted.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
 
         val listGallery = listOf<Fragment>(
             FirstFragment(),
@@ -28,11 +37,6 @@ class OnBoardingActivity : AppCompatActivity() {
         binding.vpOnboarding.adapter = adapter
 
         Log.d("Lifecycle", "Lifecycle OnCreate")
-    }
-
-    fun ClickGetStarted(V: View?) {
-        startActivity(Intent(this, SignUpActivity::class.java))
-        finish()
     }
 
     fun ClickSignIn(V: View?) {

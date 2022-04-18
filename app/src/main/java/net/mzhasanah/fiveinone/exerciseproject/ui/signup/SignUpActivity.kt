@@ -1,4 +1,4 @@
-package net.mzhasanah.fiveinone.exerciseproject
+package net.mzhasanah.fiveinone.exerciseproject.ui.signup
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,12 +7,19 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import net.mzhasanah.fiveinone.exerciseproject.Constant
+import net.mzhasanah.fiveinone.exerciseproject.R
+import net.mzhasanah.fiveinone.exerciseproject.databinding.ActivitySignUpBinding
 import net.mzhasanah.fiveinone.exerciseproject.galleryfragment.GalleryActivity
+import net.mzhasanah.fiveinone.exerciseproject.ui.onboarding.OnBoardingActivity
+import net.mzhasanah.fiveinone.exerciseproject.ui.signin.SignInActivity
 
 class SignUpActivity : AppCompatActivity() {
+    lateinit var binding: ActivitySignUpBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val etEmailData = findViewById<View>(R.id.etEmailAddress) as EditText
         val etPasswordData = findViewById<View>(R.id.etPassword2) as EditText

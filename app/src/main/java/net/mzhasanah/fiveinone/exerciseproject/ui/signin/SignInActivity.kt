@@ -1,4 +1,4 @@
-package net.mzhasanah.fiveinone.exerciseproject
+package net.mzhasanah.fiveinone.exerciseproject.ui.signin
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -11,6 +11,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
+import net.mzhasanah.fiveinone.exerciseproject.Constant
+import net.mzhasanah.fiveinone.exerciseproject.R
+import net.mzhasanah.fiveinone.exerciseproject.customdialog.*
+import net.mzhasanah.fiveinone.exerciseproject.ui.signup.SignUpActivity
 import net.mzhasanah.fiveinone.exerciseproject.home.HomeActivity
 
 class SignInActivity : AppCompatActivity() {
