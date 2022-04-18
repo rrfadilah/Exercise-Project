@@ -33,7 +33,6 @@ class LoginFormActivity : AppCompatActivity() {
     private fun bindViewModel() {
         viewModel.shouldShowError.observe(this) {
             val snackbar = Snackbar.make(binding.root, it, Snackbar.LENGTH_LONG)
-            snackbar.view.setBackgroundColor(Color.RED)
             snackbar.show()
         }
 

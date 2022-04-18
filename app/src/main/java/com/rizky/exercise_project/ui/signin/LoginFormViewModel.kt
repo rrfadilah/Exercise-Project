@@ -56,7 +56,7 @@ class LoginFormViewModel() : ViewModel() {
                 login = email,
                 password = password
             )
-            val response = MyDoctorApiClient.instanceSignIn.signIn(request)
+            val response = MyDoctorApiClient.instanceAuth.signIn(request)
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
                     val signInResponse = response.body()
