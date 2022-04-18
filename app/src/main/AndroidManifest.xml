@@ -11,12 +11,23 @@
         android:theme="@style/Theme.Exercise_Project">
 
         <activity
-            android:name=".SignInActivity"
+            android:name=".galleryfragment.GalleryActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".samplefragment.PicturesActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".SignInActivity"
+            android:exported="true">
         </activity>
 
         <activity
