@@ -20,11 +20,6 @@
         <activity
             android:name=".ui.signup.SignUpActivity"
             android:exported="true" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         <activity
             android:name=".galleryfragment.GalleryActivity"
             android:exported="true" />
@@ -40,6 +35,11 @@
         <activity
             android:name=".ui.splashscreen.SplashActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

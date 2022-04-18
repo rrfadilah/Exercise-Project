@@ -2,25 +2,40 @@ package net.mzhasanah.fiveinone.exerciseproject.ui.signin
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
+import androidx.core.widget.doAfterTextChanged
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
+import androidx.activity.viewModels
 import net.mzhasanah.fiveinone.exerciseproject.Constant
 import net.mzhasanah.fiveinone.exerciseproject.R
 import net.mzhasanah.fiveinone.exerciseproject.customdialog.*
+import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
+import net.mzhasanah.fiveinone.exerciseproject.databinding.ActivitySignInBinding
 import net.mzhasanah.fiveinone.exerciseproject.ui.signup.SignUpActivity
 import net.mzhasanah.fiveinone.exerciseproject.home.HomeActivity
 
 class SignInActivity : AppCompatActivity() {
+    lateinit var binding: ActivitySignInBinding
+    private val viewModel: SignInViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_in)
+        binding = ActivitySignInBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val db = MyDoctorDatabase.getInstance(this.applicationContext)
+        val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
+        viewModel.onViewLoaded(db, pref)
+
+        bindViewModel()
+        bindView()
 
         val editEmail = findViewById<EditText>(R.id.etEmail)
         val editPassword = findViewById<EditText>(R.id.etPassword)
@@ -112,6 +127,36 @@ class SignInActivity : AppCompatActivity() {
 //        }
     }
 
+    private fun bindViewModel() {
+        viewModel.shouldShowError.observe(this) {
+            val snackbar = Snackbar.make(binding.root, it, Snackbar.LENGTH_LONG)
+            snackbar.view.setBackgroundColor(Color.RED)
+            snackbar.show()
+        }
+
+        viewModel.shouldOpenHomePage.observe(this) {
+            if (it) {
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
+
+    private fun bindView() {
+        binding.etEmail.doAfterTextChanged {
+            viewModel.onChangeEmail(it.toString())
+        }
+
+        binding.etPassword.doAfterTextChanged {
+            viewModel.onChangePassword(it.toString())
+        }
+
+        binding.btnSignIn.setOnClickListener {
+            viewModel.onClickSignIn()
+        }
+    }
+
+    // not used area
     fun openPage() {
         Toast.makeText(this, "Membuka halaman Sign In", Toast.LENGTH_LONG).show()
     }
