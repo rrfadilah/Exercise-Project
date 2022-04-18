@@ -9,7 +9,7 @@ import com.tegarpenemuan.myapplication.data.local.MessageEntity
 import com.tegarpenemuan.myapplication.data.local.UserDAO
 import com.tegarpenemuan.myapplication.data.local.UserEntity
 
-@Database(entities = [MessageEntity::class, UserEntity::class], version = 2)
+@Database(entities = [MessageEntity::class, UserEntity::class], version = 3)
 abstract class MyDoctorDatabase : RoomDatabase() {
 
     abstract fun messageDAO(): MessageDAO
