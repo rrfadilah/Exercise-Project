@@ -6,10 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.rizky.exercise_project.data.local.MessageDAO
 import com.rizky.exercise_project.data.local.MessageEntity
+import com.rizky.exercise_project.data.local.UserDAO
+import com.rizky.exercise_project.data.local.UserEntity
 
-@Database(entities = [MessageEntity::class], version = 1)
+@Database(entities = [MessageEntity::class, UserEntity::class], version = 3)
 abstract class MyDoctorDatabase : RoomDatabase() {
     abstract fun messageDAO(): MessageDAO
+    abstract fun userDAO(): UserDAO
 
     companion object {
         private const val DB_NAME = "MyDoctor.db"

@@ -1,12 +1,15 @@
-package com.rizky.exercise_project
+package com.rizky.exercise_project.ui.onboarding
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import com.rizky.exercise_project.R
 import com.rizky.exercise_project.databinding.ActivityOnBoardingBinding
 import com.rizky.exercise_project.onboardingfragment.*
+import com.rizky.exercise_project.ui.signin.LoginFormActivity
+import com.rizky.exercise_project.ui.signup.RegisterFormActivity
 
 class OnBoardingActivity : AppCompatActivity() {
     lateinit var binding: ActivityOnBoardingBinding

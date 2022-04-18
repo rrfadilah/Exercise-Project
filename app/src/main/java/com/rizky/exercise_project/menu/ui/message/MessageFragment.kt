@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.rizky.exercise_project.R
-import com.rizky.exercise_project.data.api.MessagesResponse
+import com.rizky.exercise_project.data.api.MessageRequest
+import com.rizky.exercise_project.data.api.MessageResponse
 import com.rizky.exercise_project.data.local.MessageEntity
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.FragmentMessageBinding
@@ -48,23 +49,34 @@ class MessageFragment : Fragment() {
                 override fun onClick(item: MessageModel) {
                     Toast.makeText(requireContext(), item.lastMessage, Toast.LENGTH_SHORT).show()
                 }
+
                 override fun onDelete(item: MessageModel) {
-                    val message = MessageEntity(
-                        id = item.id,
-                        name = item.name,
-                        image = item.image,
-                        message = item.lastMessage
-                    )
-                    deleteDataDatabase(message)
+//                    val message = MessageEntity(
+//                        id = item.id,
+//                        name = item.name,
+//                        image = item.image,
+//                        message = item.lastMessage
+//                    )
+//                    deleteDataDatabase(message)
+
+                    deleteDataAPI(item.id)
                 }
+
                 override fun onUpdate(item: MessageModel) {
-                    val message = MessageEntity(
-                        id = item.id,
-                        name = item.name + " Updated",
+//                    val message = MessageEntity(
+//                        id = item.id,
+//                        name = item.name + " Updated",
+//                        image = item.image,
+//                        message = item.lastMessage + " Updated"
+//                    )
+//                    updateDataDatabase(message)
+
+                    val message = MessageRequest(
+                        name = "#" + item.name,
                         image = item.image,
-                        message = item.lastMessage + " Updated"
+                        message = "# " + item.lastMessage
                     )
-                    updateDataDatabase(message)
+                    updateDataAPI(id = item.id, message = message)
                 }
             },
             list = emptyList()
@@ -76,14 +88,20 @@ class MessageFragment : Fragment() {
         loadDataAPI()
 
         binding.fabPlus.setOnClickListener {
-            val message = MessageEntity(
-                id = System.currentTimeMillis().toString(),
-                image = System.currentTimeMillis().toString(),
+//            val message = MessageEntity(
+//                id = System.currentTimeMillis().toString(),
+//                image = System.currentTimeMillis().toString(),
+//                name = System.currentTimeMillis().toString() + " This is Name",
+//                message = System.currentTimeMillis().toString() + " This is Last Messages"
+//            )
+
+            val message = MessageRequest(
+                image = "https://www.dmarge.com/wp-content/uploads/2021/01/dwayne-the-rock-.jpg",
                 name = System.currentTimeMillis().toString() + " This is Name",
                 message = System.currentTimeMillis().toString() + " This is Last Messages"
             )
 
-            insertDataDatabase(message)
+            postDataAPI(message)
         }
     }
 
@@ -103,43 +121,6 @@ class MessageFragment : Fragment() {
                 lastMessage = "Ini Contoh Message nya Yang kedua."
             ),
         )
-    }
-
-    // Load datadari API
-    private fun loadDataAPI() {
-        MyDoctorApiClient.instanceMessage.getMessages()
-            .enqueue(object : Callback<MessagesResponse> {
-                override fun onResponse(
-                    call: Call<MessagesResponse>,
-                    response: Response<MessagesResponse>
-                ) {
-                    val code = response.code()
-                    val body = response.body()
-
-                    if (code == 200) {
-                        val message = body?.message?.map {
-                            MessageModel(
-                                id = it.id.orEmpty(),
-                                name = it.name.orEmpty(),
-                                imageRes = R.drawable.img_user_1,
-                                image = it.image.orEmpty(),
-                                lastMessage = it.message.orEmpty()
-                            )
-                        } ?: emptyList()
-                        adapter.updateList(message)
-                    } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "Gagal Mengambil data dari API",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<MessagesResponse>, t: Throwable) {
-                    Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
-                }
-            })
     }
 
     // function untuk insert data pada database
@@ -210,6 +191,115 @@ class MessageFragment : Fragment() {
                 }
             }
         }
+    }
+
+    // function untuk load data dari api
+    private fun loadDataAPI() {
+        MyDoctorApiClient.instanceMessage.getMessages()
+            .enqueue(object : Callback<List<MessageResponse>> {
+                override fun onResponse(
+                    call: Call<List<MessageResponse>>,
+                    response: Response<List<MessageResponse>>
+                ) {
+                    val code = response.code()
+                    val body = response.body()
+
+                    if (code == 200) {
+                        val message = body?.map {
+                            MessageModel(
+                                id = it.id.orEmpty(),
+                                name = it.name.orEmpty(),
+                                imageRes = R.drawable.img_user_1,
+                                image = it.image.orEmpty(),
+                                lastMessage = it.message.orEmpty()
+                            )
+                        } ?: emptyList()
+                        adapter.updateList(message.sortedBy { it.name })
+                    } else {
+                        showErrorMessage("Gagal Mengambil data dari API")
+                    }
+                }
+
+                override fun onFailure(call: Call<List<MessageResponse>>, t: Throwable) {
+                    showErrorMessage(t.message)
+                }
+            })
+    }
+
+    // function untuk menginsert data pada api
+    private fun postDataAPI(message: MessageRequest) {
+        MyDoctorApiClient.instanceMessage.postMessages(request = message)
+            .enqueue(object : Callback<MessageResponse> {
+                override fun onResponse(
+                    call: Call<MessageResponse>,
+                    response: Response<MessageResponse>
+                ) {
+                    val code = response.code()
+                    val body = response.body()
+
+                    if (code == 200) {
+                        loadDataAPI()
+                    } else {
+                        showErrorMessage("Gagal Mengambil data dari API")
+                    }
+                }
+
+                override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
+                    showErrorMessage(t.message)
+                }
+            })
+    }
+
+    // function untuk menghapus data pada api
+    private fun deleteDataAPI(id: String) {
+        MyDoctorApiClient.instanceMessage.deleteMessages(id = id)
+            .enqueue(object : Callback<Unit> {
+                override fun onResponse(
+                    call: Call<Unit>,
+                    response: Response<Unit>
+                ) {
+                    val code = response.code()
+                    val body = response.body()
+
+                    if (code == 200) {
+                        loadDataAPI()
+                    } else {
+                        showErrorMessage("Gagal Mengambil data dari API")
+                    }
+                }
+
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    showErrorMessage(t.message)
+                }
+            })
+    }
+
+    // function untuk mengupdate data pada api
+    private fun updateDataAPI(id: String, message: MessageRequest) {
+        MyDoctorApiClient.instanceMessage.updateMessages(id = id, request = message)
+            .enqueue(object : Callback<MessageResponse> {
+                override fun onResponse(
+                    call: Call<MessageResponse>,
+                    response: Response<MessageResponse>
+                ) {
+                    val code = response.code()
+                    val body = response.body()
+
+                    if (code == 200) {
+                        loadDataAPI()
+                    } else {
+                        showErrorMessage("Gagal Mengambil data dari API")
+                    }
+                }
+
+                override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
+                    showErrorMessage(t.message)
+                }
+            })
+    }
+
+    private fun showErrorMessage(message: String?) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
