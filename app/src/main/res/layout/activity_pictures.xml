@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".samplefragment.PicturesActivity">
+    tools:context=".Others.samplefragment.PicturesActivity">
 
     <fragment
         android:id="@+id/fragmentPictures"
-        android:name="com.example.exercise_project.samplefragment.PicturesFragment"
+        android:name="com.example.exercise_project.Others.samplefragment.PicturesFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/flBottom"

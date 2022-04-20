@@ -1,11 +1,10 @@
-package com.example.exercise_project.galleryfragment
+package com.example.exercise_project.Others.galleryfragment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.example.exercise_project.R
 import com.example.exercise_project.databinding.ActivityGalleryBinding
-import com.example.exercise_project.samplefragment.PicturesFragment
+import com.example.exercise_project.Others.samplefragment.PicturesFragment
 
 class GalleryActivity : AppCompatActivity() {
     lateinit var binding: ActivityGalleryBinding

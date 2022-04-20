@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/activity_onboarding"
-    tools:context=".onBoardingFragment.onBoardingActivity">
+    tools:context=".UI.onBoarding.onBoardingActivity">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vpOnBoarding"

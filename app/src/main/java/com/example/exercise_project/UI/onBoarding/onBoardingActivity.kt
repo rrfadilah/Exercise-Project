@@ -1,26 +1,10 @@
-package com.example.exercise_project.onBoardingFragment
+package com.example.exercise_project.UI.onBoarding
 
 import Transform
-import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.View.inflate
-import android.widget.ImageButton
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import androidx.viewpager.widget.ViewPager
-import com.example.exercise_project.GetStartedActivity
 import com.example.exercise_project.R
-import com.example.exercise_project.databinding.ActivityGalleryBinding.inflate
-import com.example.exercise_project.databinding.ActivityMainBinding.inflate
 import com.example.exercise_project.databinding.ActivityOnBoardingBinding
-import com.example.exercise_project.databinding.ActivityPicturesBinding.inflate
-import com.example.exercise_project.databinding.FragmentOnBoardingFourthBinding
-import com.example.exercise_project.galleryfragment.GalleryFragment
-import com.example.exercise_project.samplefragment.PicturesFragment
-import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 
 class onBoardingActivity : AppCompatActivity() {
     lateinit var binding: ActivityOnBoardingBinding

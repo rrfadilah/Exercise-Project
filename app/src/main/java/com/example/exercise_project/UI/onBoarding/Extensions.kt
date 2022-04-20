@@ -1,4 +1,4 @@
-package com.example.exercise_project.onBoardingFragment
+package com.example.exercise_project.UI.onBoarding
 
 import android.os.Handler
 import androidx.viewpager.widget.ViewPager

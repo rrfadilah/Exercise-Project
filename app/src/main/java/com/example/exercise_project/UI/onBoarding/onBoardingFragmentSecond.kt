@@ -1,15 +1,12 @@
-package com.example.exercise_project.onBoardingFragment
+package com.example.exercise_project.UI.onBoarding
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import androidx.viewpager.widget.ViewPager
 import com.example.exercise_project.R
-import com.example.exercise_project.databinding.ActivityOnBoardingBinding
-import com.example.exercise_project.databinding.FragmentOnBoardingBinding
 import com.example.exercise_project.databinding.FragmentOnBoardingSecondBinding
 
 class onBoardingFragmentSecond : Fragment() {

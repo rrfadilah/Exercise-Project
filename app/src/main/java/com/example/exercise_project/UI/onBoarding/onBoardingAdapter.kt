@@ -1,11 +1,10 @@
-package com.example.exercise_project.galleryfragment
+package com.example.exercise_project.UI.onBoarding
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.fragment.app.ListFragment
 
-class AdapterGallery(fragmentManager: FragmentManager, val listFragment: List<Fragment>):
+class onBoardingAdapter(fragmentManager: FragmentManager, val listFragment: List<Fragment>):
     FragmentStatePagerAdapter(fragmentManager) {
     override fun getCount(): Int {
         return listFragment.size

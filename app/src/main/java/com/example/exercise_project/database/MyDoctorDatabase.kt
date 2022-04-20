@@ -6,11 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.exercise_project.data.local.MessageDAO
 import com.example.exercise_project.data.local.MessageEntity
+import com.example.exercise_project.data.local.UserDAO
 
 @Database(entities = [MessageEntity::class], version = 2)
 abstract class MyDoctorDatabase : RoomDatabase() {
     abstract fun messageDAO(): MessageDAO
-    //abstract fun userDAO(): UserDAO
+    abstract fun userDAO(): UserDAO
 
     companion object {
         private const val DB_NAME = "MyDoctor.db"

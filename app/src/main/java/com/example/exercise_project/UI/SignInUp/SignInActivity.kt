@@ -1,4 +1,4 @@
-package com.example.exercise_project.SignInUp
+package com.example.exercise_project.UI.SignInUp
 
 import android.app.Dialog
 import android.content.DialogInterface
@@ -11,37 +11,78 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.core.widget.doAfterTextChanged
 import com.example.exercise_project.Home.ActivityForHome
 import com.example.exercise_project.R
+import com.example.exercise_project.UI.Data
+import com.example.exercise_project.database.MyDoctorDatabase
 import com.example.exercise_project.databinding.ActivitySignInBinding
-import com.example.exercise_project.databinding.FragmentCustomDialogBinding
+import com.google.android.material.snackbar.Snackbar
 
 class SignInActivity : AppCompatActivity() {
-    companion object {
-        const val KEY = "KEY"
-    }
+//    companion object {
+//        const val KEY = "KEY"
+//    }
     private lateinit var binding: ActivitySignInBinding
+    private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val db = MyDoctorDatabase.getInstance(this.applicationContext)
+        val pref = this.getSharedPreferences(Data.Preferences.PREF_NAME, MODE_PRIVATE)
 
-        binding.btnSignIn2.setOnClickListener {
-            //emailpassValidation()
+        viewModel.onViewLoaded(db, pref)
 
-            //untuk mengambil data dari sharedpreferences menggunakan code berikut ini
-            //val prefEmail = pref.getString(Data.Preferences.PREF_EMAIL, "")
-            //val prefPass = pref.getString(Data.Preferences.PREF_PASS, "")
+        bindViewModel()
+        bindView()
 
-            prefValidation()
+//        binding.btnSignIn2.setOnClickListener {
+//            emailpassValidation()
+
+//            untuk mengambil data dari sharedpreferences menggunakan code berikut ini
+//            val prefEmail = pref.getString(Data.Preferences.PREF_EMAIL, "")
+//            val prefPass = pref.getString(Data.Preferences.PREF_PASS, "")
+
+//            prefValidation()
+//        }
+
+//        binding.tvGoToSignUp.setOnClickListener {
+//            val intent = Intent(this, SignUpActivity::class.java)
+//            startActivity(intent)
+//        }
+    }
+
+    private fun bindViewModel(){
+        viewModel.shouldShowError.observe(this){
+            val snackbar = Snackbar.make(binding.root, it, Snackbar.LENGTH_LONG)
+            snackbar.view.setBackgroundColor(Color.RED)
+            snackbar.show()
         }
 
-        binding.tvGoToSignUp.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
+        viewModel.shouldOpenHomePage.observe(this) {
+            if (it) {
+                val intent = Intent(this, ActivityForHome::class.java)
+                startActivity(intent)
+            }
+        }
+    }
+
+    private fun bindView() {
+        binding.etEmailSignIn.doAfterTextChanged {
+            viewModel.onChangeEmail(it.toString())
+        }
+
+        binding.etPassSignIn.doAfterTextChanged {
+            viewModel.onChangePassword(it.toString())
+        }
+
+        binding.btnSignIn2.setOnClickListener {
+            viewModel.onClickSignIn()
         }
     }
 
@@ -62,35 +103,28 @@ class SignInActivity : AppCompatActivity() {
     private fun prefValidation(){
         val pref = this.getSharedPreferences(Data.Preferences.PREF_NAME, MODE_PRIVATE)
 
-        val prefEmail = pref.getString(Data.Preferences.PREF_EMAIL, "")
-        val prefPass = pref.getString(Data.Preferences.PREF_PASS, "")
+//        val prefEmail = pref.getString(Data.Preferences.PREF_EMAIL, "")
+//        val prefPass = pref.getString(Data.Preferences.PREF_PASS, "")
 
-        val email = binding.etEmailSignIn.text.toString()
-        val pass = binding.etPassSignIn.text.toString()
-
-        if (email.isEmpty() && pass.isEmpty()){
-            Toast.makeText(this, "Email dan password tidak boleh kosong", Toast.LENGTH_SHORT).show()
-        }else if (email.isEmpty()) {
-            Toast.makeText(this, "Email tidak boleh kosong", Toast.LENGTH_SHORT).show()
-        }else if(email != prefEmail){
-            Toast.makeText(this, "Email salah", Toast.LENGTH_SHORT).show()
-        }else if (pass.isEmpty()) {
-            Toast.makeText(this, "Password tidak boleh kosong", Toast.LENGTH_SHORT).show()
-        }else if(pass != prefPass){
-            Toast.makeText(this, "Password salah", Toast.LENGTH_SHORT).show()
-        }else{
-            val intent = Intent(this, ActivityForHome::class.java)
-            startActivity(intent)
-            finish()
-        }
+//        val email = binding.etEmailSignIn.text.toString()
+//        val pass = binding.etPassSignIn.text.toString()
+//
+//        if (email.isEmpty() && pass.isEmpty()){
+//            Toast.makeText(this, "Email dan password tidak boleh kosong", Toast.LENGTH_SHORT).show()
+//        }else if (email.isEmpty()) {
+//            Toast.makeText(this, "Email tidak boleh kosong", Toast.LENGTH_SHORT).show()
+//        }else if(email != prefEmail){
+//            Toast.makeText(this, "Email salah", Toast.LENGTH_SHORT).show()
+//        }else if (pass.isEmpty()) {
+//            Toast.makeText(this, "Password tidak boleh kosong", Toast.LENGTH_SHORT).show()
+//        }else if(pass != prefPass){
+//            Toast.makeText(this, "Password salah", Toast.LENGTH_SHORT).show()
+//        }else{
+//            val intent = Intent(this, ActivityForHome::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
     }
-
-    private fun getBoolean(): Boolean {
-        val pref = this.getSharedPreferences(Data.Preferences.PREF_NAME, MODE_PRIVATE)
-
-        return pref.getBoolean(Data.Preferences.IS_LOGIN, false)
-    }
-
 
     private fun loginSession() {
 
@@ -233,5 +267,25 @@ class SignInActivity : AppCompatActivity() {
         val dialogFragment = CustomDialogFragment()
         dialogFragment.show(supportFragmentManager, null)
     }
+
+//    private fun getBoolean(): Boolean {
+//        val pref = this.getSharedPreferences(Data.Preferences.PREF_NAME, MODE_PRIVATE)
+//
+//        return pref.getBoolean(Data.Preferences.IS_LOGIN, false)
+//    }
+
+//    fun getUser(email: String, password: String) {
+//        GlobalScope.launch {
+//            val user = db?.UserDAO()?.getUser(email = email, password = password)
+//            runOnUiThread {
+//                user?.let {
+//                    startActivity(Intent(this@SignInActivity, ActivityForHome::class.java))
+//                } ?: run {
+//                    Toast.makeText(this@SignInActivity, "User tidak ditemukan", Toast.LENGTH_SHORT)
+//                        .show()
+//                }
+//            }
+//        }
+//    }
 
 }

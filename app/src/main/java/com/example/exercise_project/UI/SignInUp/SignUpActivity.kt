@@ -1,4 +1,4 @@
-package com.example.exercise_project.SignInUp
+package com.example.exercise_project.UI.SignInUp
 
 import android.app.Dialog
 import android.content.Intent
@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.example.exercise_project.R
+import com.example.exercise_project.UI.Data
 import com.example.exercise_project.databinding.ActivitySignUpBinding
 
 class SignUpActivity : AppCompatActivity() {
