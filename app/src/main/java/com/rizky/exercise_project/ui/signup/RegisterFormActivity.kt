@@ -47,6 +47,18 @@ class RegisterFormActivity : AppCompatActivity() {
             viewModel.onChangeFullName(it.toString())
         }
 
+        binding.formPekerjaan.doAfterTextChanged {
+            viewModel.onChangeJob(it.toString())
+        }
+
+        binding.formEmail.doAfterTextChanged {
+            viewModel.onChangeEmail(it.toString())
+        }
+
+        binding.formPassword.doAfterTextChanged {
+            viewModel.onChangePassword(it.toString())
+        }
+
         binding.btnRegisterContinue.setOnClickListener {
             viewModel.onClickRegister()
         }

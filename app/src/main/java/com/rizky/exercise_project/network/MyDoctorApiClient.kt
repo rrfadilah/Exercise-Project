@@ -36,8 +36,4 @@ object MyDoctorApiClient {
     val instanceAuth: AuthAPI by lazy {
         retrofit.create(AuthAPI::class.java)
     }
-
-    val instanceRegister: AuthAPI by lazy {
-        retrofit.create(AuthAPI::class.java)
-    }
 }

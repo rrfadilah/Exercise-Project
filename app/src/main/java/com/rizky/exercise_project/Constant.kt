@@ -3,8 +3,8 @@ package com.rizky.exercise_project
 object Constant {
     object Intent {
         const val KEY = "KEY"
-        const val EMAIL = "EMAIL"
-        const val PHONE = "PHONE"
+        const val PREF_EMAIL = "PREF_EMAIL"
+        const val PREF_PHONE = "PREF_PHONE"
     }
 
     object Serialize {
@@ -19,8 +19,8 @@ object Constant {
         const val PREF_NAME = "MyDoctor"
         object KEY {
             const val TOKEN = "TOKEN"
-            const val EMAIL = "EMAIL"
-            const val PASSWORD = "PASSWORD"
+            const val PREF_EMAIL = "EMAIL"
+            const val PREF_PASSWORD = "PASSWORD"
             const val DARK_MODE = "DARK_MODE"
             const val APP_LANGUAGE = "APP_LANGUAGE"
         }

@@ -46,11 +46,11 @@ class LoginFormViewModel() : ViewModel() {
         } else if (password.isEmpty() && password.length < 8) {
             shouldShowError.postValue("Password tidak valid")
         } else {
-            signInFromAPI()
+            signInFormAPI()
         }
     }
 
-    private fun signInFromAPI() {
+    private fun signInFormAPI() {
         CoroutineScope(Dispatchers.IO).launch {
             val request = SignInRequest(
                 login = email,
