@@ -2,28 +2,65 @@ package com.example.mydoctor.ui.signin
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import com.example.mydoctor.Constant
+import com.example.mydoctor.database.MyDoctorDatabase
 import com.example.mydoctor.databinding.ActivitySignInBinding
 import com.example.mydoctor.home.HomeActivity
 import com.example.mydoctor.ui.signup.SignUpActivity
+import com.google.android.material.snackbar.Snackbar
 
 class SignInActivity : AppCompatActivity() {
-
     lateinit var binding: ActivitySignInBinding
+    private val viewModel: SignInViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val db = MyDoctorDatabase.getInstance(this.applicationContext)
         val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
-        binding.btnSignIn.setOnClickListener {
-            signIn(pref)
+        viewModel.onViewLoaded(db, pref)
+
+//        signUp()
+        bindViewModel()
+        bindView()
+    }
+
+    private fun bindViewModel() {
+        viewModel.shouldShowError.observe(this){
+            val snackbar = Snackbar.make(binding.root, it, Snackbar.LENGTH_LONG)
+            snackbar.view.setBackgroundColor(Color.RED)
+            snackbar.show()
         }
-        signUp()
+
+        viewModel.shouldOpenHomePage.observe(this) {
+            if (it) {
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
+
+    private fun bindView() {
+        binding.inputEmail.doAfterTextChanged {
+            viewModel.onChangeEmail(it.toString())
+        }
+
+        binding.inputPassword.doAfterTextChanged {
+            viewModel.onChangePassword(it.toString())
+        }
+
+        binding.btnSignIn.setOnClickListener {
+            viewModel.onClickSignIn()
+        }
     }
 
     fun signUp() {

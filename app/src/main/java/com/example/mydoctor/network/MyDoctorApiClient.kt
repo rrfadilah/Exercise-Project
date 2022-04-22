@@ -1,5 +1,6 @@
 package com.example.mydoctor.network
 
+import com.example.mydoctor.data.api.auth.AuthAPI
 import com.example.mydoctor.data.api.MessageAPI
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,13 +24,18 @@ object MyDoctorApiClient {
         .addInterceptor(logging)
         .build()
 
-    val instanceMessage: MessageAPI by lazy {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
-            .build()
+    private val retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(client)
+        .build()
 
+
+    val instanceMessage: MessageAPI by lazy {
         retrofit.create(MessageAPI::class.java)
+    }
+
+    val instanceSignIn: AuthAPI by lazy {
+        retrofit.create(AuthAPI::class.java)
     }
 }

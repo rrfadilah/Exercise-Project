@@ -6,29 +6,34 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.mydoctor.data.local.MessageDAO
 import com.example.mydoctor.data.local.MessageEntity
+import com.example.mydoctor.data.local.UserDAO
+import com.example.mydoctor.data.local.UserEntity
 
-@Database(entities = [MessageEntity::class], version = 1)
+@Database(entities = [MessageEntity::class, UserEntity::class], version = 3)
 abstract class MyDoctorDatabase : RoomDatabase() {
+    abstract fun messageDAO(): MessageDAO
+    abstract fun userDAO(): UserDAO
+
     companion object {
-        private var INSTANCE: MyDoctorDatabase? = null
         private const val DB_NAME = "MyDoctor.db"
 
+        @Volatile
+        private var INSTANCE: MyDoctorDatabase? = null
+
         fun getInstance(context: Context): MyDoctorDatabase {
-            if (INSTANCE == null) {
-                synchronized(MyDoctorDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(
-                        context.applicationContext,
-                        MyDoctorDatabase::class.java, DB_NAME
-                    ).build()
-                }
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
             }
-            return INSTANCE!!
+        }
+
+        private fun buildDatabase(context: Context): MyDoctorDatabase {
+            return Room.databaseBuilder(context, MyDoctorDatabase::class.java, DB_NAME)
+                .fallbackToDestructiveMigration()
+                .build()
         }
 
         fun destroyInstance() {
             INSTANCE = null
         }
     }
-
-    abstract fun messageDAO(): MessageDAO
 }
