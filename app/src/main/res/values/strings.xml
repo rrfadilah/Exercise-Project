@@ -4,7 +4,6 @@
     <string name="create_new_account"> <u>Create New Account</u> </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_home">HomeActivity</string>
     <string name="title_doctor">Doctor</string>
     <string name="email_kosong">Email Tidak Boleh Kosong</string>
     <string name="password_kosong">Password Tidak Boleh Kosong</string>

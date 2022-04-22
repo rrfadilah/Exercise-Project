@@ -1,4 +1,4 @@
-package com.example.exercise_project
+package com.example.exercise_project.ui.onboarading
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
+import com.example.exercise_project.R
 
 class OnBoardingAdapter(private var list: List<Int>, private var ctx: Context) : PagerAdapter() {
 
