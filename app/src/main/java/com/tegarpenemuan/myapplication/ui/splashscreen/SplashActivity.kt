@@ -7,7 +7,7 @@ import android.os.CountDownTimer
 import androidx.activity.viewModels
 import com.tegarpenemuan.myapplication.Constant
 import com.tegarpenemuan.myapplication.databinding.ActivityMainBinding
-import com.tegarpenemuan.myapplication.home.ui.HomeActivity
+import com.tegarpenemuan.myapplication.ui.home.HomeActivity
 import com.tegarpenemuan.myapplication.ui.onboarding.OnBoardingActivity
 
 class SplashActivity : AppCompatActivity() {

@@ -8,8 +8,8 @@ import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
 import com.tegarpenemuan.myapplication.*
 import com.tegarpenemuan.myapplication.databinding.ActivityOnBoardingBinding
-import com.tegarpenemuan.myapplication.model.Biodata
-import com.tegarpenemuan.myapplication.model.UserInfo
+import com.tegarpenemuan.myapplication.ui.model.Biodata
+import com.tegarpenemuan.myapplication.ui.model.UserInfo
 import com.tegarpenemuan.myapplication.ui.signin.SignInActivity
 import com.tegarpenemuan.myapplication.ui.signup.SignUpActivity
 

@@ -1,4 +1,4 @@
-package com.tegarpenemuan.myapplication.home.ui.hospitals
+package com.tegarpenemuan.myapplication.ui.home.hospitals
 
 import android.os.Bundle
 import android.view.LayoutInflater

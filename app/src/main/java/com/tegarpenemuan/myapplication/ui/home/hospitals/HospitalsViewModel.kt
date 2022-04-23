@@ -1,4 +1,4 @@
-package com.tegarpenemuan.myapplication.home.ui.hospitals
+package com.tegarpenemuan.myapplication.ui.home.hospitals
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

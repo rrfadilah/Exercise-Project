@@ -1,4 +1,4 @@
-package com.tegarpenemuan.myapplication.home.ui.message
+package com.tegarpenemuan.myapplication.ui.home.message
 
 import android.content.Context
 import android.os.Bundle

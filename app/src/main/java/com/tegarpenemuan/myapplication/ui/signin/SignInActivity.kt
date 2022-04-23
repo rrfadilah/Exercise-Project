@@ -12,7 +12,7 @@ import com.tegarpenemuan.myapplication.Constant
 import com.tegarpenemuan.myapplication.ui.signup.SignUpActivity
 import com.tegarpenemuan.myapplication.database.MyDoctorDatabase
 import com.tegarpenemuan.myapplication.databinding.ActivitySignBinding
-import com.tegarpenemuan.myapplication.home.ui.HomeActivity
+import com.tegarpenemuan.myapplication.ui.home.HomeActivity
 import com.tegarpenemuan.myapplication.utils.showCustomToast
 
 class SignInActivity : AppCompatActivity() {

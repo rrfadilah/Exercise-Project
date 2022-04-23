@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_doctor"
-        android:name="com.tegarpenemuan.myapplication.home.ui.doctor.DoctorFragment"
+        android:name="com.tegarpenemuan.myapplication.ui.home.doctor.DoctorFragment"
         android:label="@string/Doctor"
         tools:layout="@layout/fragment_doctor" >
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/navigation_message"
-        android:name="com.tegarpenemuan.myapplication.home.ui.message.MessageFragment"
+        android:name="com.tegarpenemuan.myapplication.ui.home.message.MessageFragment"
         android:label="@string/Message"
         tools:layout="@layout/fragment_message" >
         <action
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/navigation_hospitals"
-        android:name="com.tegarpenemuan.myapplication.home.ui.hospitals.HospitalsFragment"
+        android:name="com.tegarpenemuan.myapplication.ui.home.hospitals.HospitalsFragment"
         android:label="@string/Hospitals"
         tools:layout="@layout/fragment_hospitals" />
 </navigation>

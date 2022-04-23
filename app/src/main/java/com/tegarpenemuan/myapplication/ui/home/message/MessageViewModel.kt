@@ -1,13 +1,13 @@
-package com.tegarpenemuan.myapplication.home.ui.doctor
+package com.tegarpenemuan.myapplication.ui.home.message
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DoctorViewModel : ViewModel() {
+class MessageViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is doctor Fragment"
+        value = "This is message Fragment"
     }
     val text: LiveData<String> = _text
 }

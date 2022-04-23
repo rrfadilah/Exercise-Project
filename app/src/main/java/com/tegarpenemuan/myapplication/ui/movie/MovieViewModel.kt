@@ -2,7 +2,7 @@ package com.tegarpenemuan.myapplication.ui.movie
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tegarpenemuan.myapplication.model.movie.NowPlayingModel
+import com.tegarpenemuan.myapplication.ui.model.movie.NowPlayingModel
 import com.tegarpenemuan.myapplication.network.TMDBApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package com.tegarpenemuan.myapplication.model
+package com.tegarpenemuan.myapplication.ui.model
 
 import java.io.Serializable
 

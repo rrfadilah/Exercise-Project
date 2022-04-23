@@ -1,4 +1,4 @@
-package com.tegarpenemuan.myapplication.home.ui.message
+package com.tegarpenemuan.myapplication.ui.home.message
 
 data class MessageModel(
     val id: String,

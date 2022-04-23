@@ -6,16 +6,13 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.snackbar.Snackbar
 import com.tegarpenemuan.myapplication.Constant
 import com.tegarpenemuan.myapplication.database.MyDoctorDatabase
 import com.tegarpenemuan.myapplication.databinding.ActivitySignupBinding
-import com.tegarpenemuan.myapplication.home.ui.HomeActivity
-import com.tegarpenemuan.myapplication.ui.signin.SignInActivity
-import com.tegarpenemuan.myapplication.utils.showCustomToast
+import com.tegarpenemuan.myapplication.ui.home.HomeActivity
 
 class SignUpActivity : AppCompatActivity() {
 

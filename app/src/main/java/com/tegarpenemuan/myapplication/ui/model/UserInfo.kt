@@ -1,4 +1,4 @@
-package com.tegarpenemuan.myapplication.model
+package com.tegarpenemuan.myapplication.ui.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

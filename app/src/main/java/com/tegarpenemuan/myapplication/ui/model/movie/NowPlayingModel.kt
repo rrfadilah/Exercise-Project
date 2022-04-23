@@ -1,4 +1,4 @@
-package com.tegarpenemuan.myapplication.model.movie
+package com.tegarpenemuan.myapplication.ui.model.movie
 
 data class NowPlayingModel(
     val id: Int,

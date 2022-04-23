@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tegarpenemuan.myapplication.databinding.ListItemNowplayingBinding
-import com.tegarpenemuan.myapplication.model.movie.NowPlayingModel
+import com.tegarpenemuan.myapplication.ui.model.movie.NowPlayingModel
 
 class NowPlayingAdapter(private var list: List<NowPlayingModel>) :
     RecyclerView.Adapter<NowPlayingAdapter.ViewHolder>() {

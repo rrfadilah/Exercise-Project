@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.ui.hospitals.HospitalsFragment">
+    tools:context=".ui.home.hospitals.HospitalsFragment">
 
     <TextView
         android:id="@+id/text_notifications"

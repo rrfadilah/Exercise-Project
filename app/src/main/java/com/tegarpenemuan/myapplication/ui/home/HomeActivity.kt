@@ -1,11 +1,10 @@
-package com.tegarpenemuan.myapplication.home.ui
+package com.tegarpenemuan.myapplication.ui.home
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.tegarpenemuan.myapplication.R
 import com.tegarpenemuan.myapplication.databinding.ActivityHomeBinding
