@@ -82,7 +82,6 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
     }
-}
 
     private fun saveData() {
 //        val pref = this.getSharedPreferences(Data.Preferences.PREF_NAME, MODE_PRIVATE)
@@ -157,4 +156,6 @@ class SignUpActivity : AppCompatActivity() {
 //                dialogCustom.dismiss()
 //            }
 //        }
+    }
 }
+

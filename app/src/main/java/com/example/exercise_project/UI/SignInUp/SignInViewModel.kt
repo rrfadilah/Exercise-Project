@@ -10,7 +10,7 @@ import com.example.exercise_project.data.API.Auth.SignInRequest
 import com.example.exercise_project.data.API.ErrorResponse
 import com.example.exercise_project.data.local.UserEntity
 import com.example.exercise_project.database.MyDoctorDatabase
-import com.example.exercise_project.network.MyDoctorApiClient
+import com.example.exercise_project.network.MyDoctorAPIClient
 import com.google.gson.Gson
 import kotlinx.coroutines.*
 
@@ -52,7 +52,7 @@ class SignInViewModel: ViewModel() {
                 login = email,
                 password = password
             )
-            val response = MyDoctorApiClient.instanceSignIn.signIn(request)
+            val response = MyDoctorAPIClient.instanceAuth.signIn(request)
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
                     val signInResponse = response.body()

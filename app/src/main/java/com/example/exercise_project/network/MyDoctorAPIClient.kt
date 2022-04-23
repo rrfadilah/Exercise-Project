@@ -33,7 +33,7 @@ object MyDoctorAPIClient {
         retrofit.create(MessageAPI::class.java)
     }
 
-    val instanceSignIn: AuthAPI by lazy {
+    val instanceAuth: AuthAPI by lazy {
         retrofit.create(AuthAPI::class.java)
     }
 }
