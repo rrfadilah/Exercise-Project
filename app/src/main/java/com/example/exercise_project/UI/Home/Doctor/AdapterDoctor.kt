@@ -1,9 +1,8 @@
-package com.example.exercise_project.Home.Doctor
+package com.example.exercise_project.UI.Home.Doctor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.exercise_project.databinding.LinearHorizontalDoctorBinding
 import com.example.exercise_project.databinding.RecyclerDoctorFirstBinding
 
 class AdapterDoctor(private val listDoctor: List<ModelDoctor>): RecyclerView.Adapter<AdapterDoctor.ViewHolder>() {

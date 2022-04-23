@@ -1,4 +1,4 @@
-package com.example.exercise_project.Home.Doctor
+package com.example.exercise_project.UI.Home.Doctor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

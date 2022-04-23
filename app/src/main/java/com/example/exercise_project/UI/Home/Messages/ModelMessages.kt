@@ -1,4 +1,4 @@
-package com.example.exercise_project.Home.Messages
+package com.example.exercise_project.UI.Home.Messages
 
 class ModelMessages(
     val id: String,

@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExerciseProject">
         <activity
-            android:name=".Home.ActivityForHome"
+            android:name="com.example.exercise_project.UI.Home.ActivityForHome"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

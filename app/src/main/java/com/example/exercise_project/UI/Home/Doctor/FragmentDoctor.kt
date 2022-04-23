@@ -1,12 +1,11 @@
-package com.example.exercise_project.Home.Doctor
+package com.example.exercise_project.UI.Home.Doctor
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.exercise_project.Home.TaskList
-import com.example.exercise_project.R
+import com.example.exercise_project.UI.Home.TaskList
 import com.example.exercise_project.databinding.FragmentDoctorBinding
 
 

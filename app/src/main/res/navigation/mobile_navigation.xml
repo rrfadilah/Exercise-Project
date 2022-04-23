@@ -7,20 +7,20 @@
 
     <fragment
         android:id="@+id/navbar_Doctor"
-        android:name="com.example.exercise_project.Home.Doctor.FragmentDoctor"
+        android:name="com.example.exercise_project.UI.Home.Doctor.FragmentDoctor"
         android:label="title doctor"
         tools:layout="@layout/fragment_doctor" >
     </fragment>
 
     <fragment
         android:id="@+id/navbar_Messages"
-        android:name="com.example.exercise_project.Home.Messages.FragmentMessages"
+        android:name="com.example.exercise_project.UI.Home.Messages.FragmentMessages"
         android:label="title messages"
         tools:layout="@layout/fragment_messages" />
 
     <fragment
         android:id="@+id/navbar_Hospital"
-        android:name="com.example.exercise_project.Home.Hospitals.FragmentHospitals"
+        android:name="com.example.exercise_project.UI.Home.Hospitals.FragmentHospitals"
         android:label="title hospitals"
         tools:layout="@layout/fragment_hospitals" />
 

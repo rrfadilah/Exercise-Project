@@ -1,4 +1,4 @@
-package com.example.exercise_project.Home.Messages
+package com.example.exercise_project.UI.Home.Messages
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

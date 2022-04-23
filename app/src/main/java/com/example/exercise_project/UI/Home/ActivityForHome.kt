@@ -1,11 +1,11 @@
-package com.example.exercise_project.Home
+package com.example.exercise_project.UI.Home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.exercise_project.Home.Doctor.FragmentDoctor
-import com.example.exercise_project.Home.Hospitals.FragmentHospitals
-import com.example.exercise_project.Home.Messages.FragmentMessages
+import com.example.exercise_project.UI.Home.Doctor.FragmentDoctor
+import com.example.exercise_project.UI.Home.Hospitals.FragmentHospitals
+import com.example.exercise_project.UI.Home.Messages.FragmentMessages
 import com.example.exercise_project.R
 import com.example.exercise_project.databinding.ActivityForHomeBinding
 

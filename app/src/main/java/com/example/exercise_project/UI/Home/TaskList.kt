@@ -1,10 +1,9 @@
-package com.example.exercise_project.Home
+package com.example.exercise_project.UI.Home
 
-import com.example.exercise_project.Home.Doctor.ModelDoctor
-import com.example.exercise_project.Home.Doctor.ModelDoctorSecond
-import com.example.exercise_project.Home.Doctor.ModelDoctorThird
-import com.example.exercise_project.Home.Hospitals.ModelHospital
-import com.example.exercise_project.Home.Messages.ModelMessages
+import com.example.exercise_project.UI.Home.Doctor.ModelDoctor
+import com.example.exercise_project.UI.Home.Doctor.ModelDoctorSecond
+import com.example.exercise_project.UI.Home.Doctor.ModelDoctorThird
+import com.example.exercise_project.UI.Home.Hospitals.ModelHospital
 import com.example.exercise_project.R
 
 object TaskList {

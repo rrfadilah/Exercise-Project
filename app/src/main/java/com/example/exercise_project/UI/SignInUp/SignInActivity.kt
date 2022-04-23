@@ -14,7 +14,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.doAfterTextChanged
-import com.example.exercise_project.Home.ActivityForHome
+import com.example.exercise_project.UI.Home.ActivityForHome
 import com.example.exercise_project.R
 import com.example.exercise_project.UI.Data
 import com.example.exercise_project.database.MyDoctorDatabase

@@ -1,11 +1,9 @@
-package com.example.exercise_project.Home.Hospitals
+package com.example.exercise_project.UI.Home.Hospitals
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.exercise_project.Home.Doctor.ModelDoctorThird
 import com.example.exercise_project.databinding.LinearVerticalDoctor2Binding
-import com.example.exercise_project.databinding.LinearVerticalHospitalBinding
 
 class AdapterHospital(private val listHospital: List<ModelHospital>): RecyclerView.Adapter<AdapterHospital.ViewHolder>() {
     inner class ViewHolder(val binding: LinearVerticalDoctor2Binding): RecyclerView.ViewHolder(binding.root)
