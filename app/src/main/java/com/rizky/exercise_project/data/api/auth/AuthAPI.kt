@@ -1,8 +1,7 @@
 package com.rizky.exercise_project.data.api.auth
 
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  * com.rizky.exercise_project.data.api
@@ -18,4 +17,7 @@ interface AuthAPI {
 
     @POST("users/register")
     suspend fun signUp(@Body request: SignUpRequest): Response<SignUpResponse>
+
+    @GET("users/logout")
+    suspend fun logout(@HeaderMap headers: Map<String, String>): Response<LogoutResponse>
 }

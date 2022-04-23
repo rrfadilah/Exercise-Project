@@ -19,7 +19,7 @@
             android:name=".ui.signup.SignUpActivity"
             android:exported="true" />
         <activity
-            android:name=".home.HomeActivity"
+            android:name="com.rizky.exercise_project.ui.home.HomeActivity"
             android:exported="true"
             android:label="@string/title_activity_home" />
         <activity

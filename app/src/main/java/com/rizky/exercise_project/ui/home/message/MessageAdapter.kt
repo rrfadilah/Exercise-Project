@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.home.ui.message
+package com.rizky.exercise_project.ui.home.message
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import com.rizky.exercise_project.R
 import com.rizky.exercise_project.databinding.ListItemMessageBinding
 
 /**
- * com.rizky.exercise_project.home.ui.message
+ * com.rizky.exercise_project.ui.home.message
  *
  * Created by Rizky Fadilah on 23/03/22.
  * https://github.com/rizkyfadilah

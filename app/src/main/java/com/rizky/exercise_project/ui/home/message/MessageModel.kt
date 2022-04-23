@@ -1,7 +1,7 @@
-package com.rizky.exercise_project.home.ui.message
+package com.rizky.exercise_project.ui.home.message
 
 /**
- * com.rizky.exercise_project.home.ui.message
+ * com.rizky.exercise_project.ui.home.message
  *
  * Created by Rizky Fadilah on 23/03/22.
  * https://github.com/rizkyfadilah

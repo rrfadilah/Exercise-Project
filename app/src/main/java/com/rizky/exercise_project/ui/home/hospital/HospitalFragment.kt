@@ -1,11 +1,10 @@
-package com.rizky.exercise_project.home.ui.hospital
+package com.rizky.exercise_project.ui.home.hospital
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.rizky.exercise_project.R
 import com.rizky.exercise_project.databinding.FragmentHostpitalBinding
 
 // TODO: Rename parameter arguments, choose names that match

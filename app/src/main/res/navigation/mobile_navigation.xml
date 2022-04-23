@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.rizky.exercise_project.home.ui.home.HomeFragment"
+        android:name="com.rizky.exercise_project.ui.home.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -17,25 +17,25 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.rizky.exercise_project.home.ui.dashboard.DashboardFragment"
+        android:name="com.rizky.exercise_project.ui.home.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.rizky.exercise_project.home.ui.notifications.NotificationsFragment"
+        android:name="com.rizky.exercise_project.ui.home.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
         android:id="@+id/navigation_hospital"
-        android:name="com.rizky.exercise_project.home.ui.hospital.HostpitalFragment"
+        android:name="com.rizky.exercise_project.ui.home.hospital.HostpitalFragment"
         android:label="@string/title_menu_hospitals"
         tools:layout="@layout/fragment_hostpital" />
 
     <fragment
         android:id="@+id/navigation_doctor"
-        android:name="com.rizky.exercise_project.home.ui.doctor.DoctorFragment"
+        android:name="com.rizky.exercise_project.ui.home.doctor.DoctorFragment"
         android:label="@string/title_menu_doctor"
         tools:layout="@layout/fragment_doctor" >
         <action
@@ -45,7 +45,7 @@
 
     <fragment
         android:id="@+id/navigation_message"
-        android:name="com.rizky.exercise_project.home.ui.message.MessageFragment"
+        android:name="com.rizky.exercise_project.ui.home.message.MessageFragment"
         android:label="@string/title_menu_messages"
         tools:layout="@layout/fragment_message" >
         <action

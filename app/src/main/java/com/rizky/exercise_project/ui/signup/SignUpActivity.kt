@@ -2,7 +2,6 @@ package com.rizky.exercise_project.ui.signup
 
 import android.app.ProgressDialog
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,11 +10,9 @@ import androidx.activity.viewModels
 import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.snackbar.Snackbar
 import com.rizky.exercise_project.Constant
-import com.rizky.exercise_project.R
 import com.rizky.exercise_project.database.MyDoctorDatabase
-import com.rizky.exercise_project.databinding.ActivitySignInBinding
 import com.rizky.exercise_project.databinding.ActivitySignUpBinding
-import com.rizky.exercise_project.home.HomeActivity
+import com.rizky.exercise_project.ui.home.HomeActivity
 
 class SignUpActivity : AppCompatActivity() {
 

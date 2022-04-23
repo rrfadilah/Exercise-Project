@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.rizky.exercise_project.Constant
 import com.rizky.exercise_project.ui.signin.SignInActivity
 import com.rizky.exercise_project.databinding.ActivityOnBoardingBinding
-import com.rizky.exercise_project.home.HomeActivity
 import com.rizky.exercise_project.model.Biodata
 import com.rizky.exercise_project.model.UserInfo
 import com.rizky.exercise_project.ui.signup.SignUpActivity

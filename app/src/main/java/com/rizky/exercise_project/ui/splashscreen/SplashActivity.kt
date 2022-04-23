@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.rizky.exercise_project.Constant
 import com.rizky.exercise_project.databinding.ActivityMainBinding
-import com.rizky.exercise_project.home.HomeActivity
+import com.rizky.exercise_project.ui.home.HomeActivity
 import com.rizky.exercise_project.ui.onboarding.OnBoardingActivity
 
 class SplashActivity : AppCompatActivity() {

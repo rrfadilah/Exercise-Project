@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.home.ui.message
+package com.rizky.exercise_project.ui.home.message
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
