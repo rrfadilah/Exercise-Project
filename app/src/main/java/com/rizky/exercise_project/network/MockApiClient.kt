@@ -16,9 +16,9 @@ import retrofit2.converter.gson.GsonConverterFactory
  *
  */
 
-object MyDoctorApiClient {
+object MockApiClient {
     // BASE_URL merupakan URL default untuk mengkoneksikan aplikasi dengan endpoint pada API
-    const val BASE_URL = "http://drivingrake.backendless.app/api/"
+    const val BASE_URL = "http://private-82636-mydoctorexample.apiary-mock.com/api/"
 
     private val logging: HttpLoggingInterceptor
         get() {

@@ -7,20 +7,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.rizky.exercise_project.Constant
 import com.rizky.exercise_project.R
+import com.rizky.exercise_project.data.api.MessagesRequest
+import com.rizky.exercise_project.data.api.home.ConsultationResponse
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.FragmentDoctorBinding
+import com.rizky.exercise_project.ui.home.message.MessageAdapter
+import com.rizky.exercise_project.ui.home.message.MessageModel
 
 class DoctorFragment : Fragment() {
 
     private lateinit var binding: FragmentDoctorBinding
     private val progressDialog: ProgressDialog by lazy { ProgressDialog(requireContext()) }
     private val viewModel: DoctorViewModel by viewModels()
+    private lateinit var adapterConsultation: ConsultationAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +41,16 @@ class DoctorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        adapterConsultation = ConsultationAdapter(
+            listener = object : ConsultationAdapter.EventListener {
+                override fun onClick(item: ConsultationResponse) {
+                    Toast.makeText(requireContext(), item.title, Toast.LENGTH_SHORT).show()
+                }
+            },
+            list = emptyList()
+        )
+
+        binding.rvConsultation.adapter = adapterConsultation
         bindView()
         bindViewModel()
 
@@ -74,6 +91,10 @@ class DoctorFragment : Fragment() {
                 .load(it.image)
                 .circleCrop()
                 .into(binding.ivImg)
+        }
+
+        viewModel.shouldShowConsultation.observe(viewLifecycleOwner) {
+            adapterConsultation.updateList(it)
         }
     }
 }

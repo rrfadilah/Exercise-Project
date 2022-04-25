@@ -6,8 +6,12 @@ import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.rizky.exercise_project.Constant
 import com.rizky.exercise_project.data.api.ErrorResponse
+import com.rizky.exercise_project.data.api.home.ConsultationResponse
+import com.rizky.exercise_project.data.api.home.GoodNewsResponse
+import com.rizky.exercise_project.data.api.home.TopRatedResponse
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.model.ProfileModel
+import com.rizky.exercise_project.network.MockApiClient
 import com.rizky.exercise_project.network.MyDoctorApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,11 +35,18 @@ class DoctorViewModel : ViewModel() {
     val shouldShowProfile: MutableLiveData<ProfileModel> = MutableLiveData()
     val shouldShowLoading: MutableLiveData<Boolean> = MutableLiveData()
 
+    val shouldShowConsultation: MutableLiveData<List<ConsultationResponse>> = MutableLiveData()
+    val shouldShowTopRated: MutableLiveData<List<TopRatedResponse>> = MutableLiveData()
+    val shouldShowGoodNews: MutableLiveData<List<GoodNewsResponse>> = MutableLiveData()
+
     fun onViewLoaded(db: MyDoctorDatabase, preferences: SharedPreferences) {
         this.db = db
         this.pref = preferences
 
         getProfile()
+        getConsultations()
+        getTopRated()
+        getGoodNews()
     }
 
     fun logout() {
@@ -73,6 +84,45 @@ class DoctorViewModel : ViewModel() {
                     shouldShowProfile.postValue(profile)
                 } ?: run {
                     showErrorMessage(message = "Data Kosong")
+                }
+            }
+        }
+    }
+
+    private fun getConsultations() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = MockApiClient.instanceHome.consultations()
+            withContext(Dispatchers.Main) {
+                if (result.isSuccessful) {
+                    shouldShowConsultation.postValue(result.body())
+                } else {
+                    showErrorMessage(response = result.errorBody())
+                }
+            }
+        }
+    }
+
+    private fun getTopRated() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = MockApiClient.instanceHome.toprates()
+            withContext(Dispatchers.Main) {
+                if (result.isSuccessful) {
+                    shouldShowTopRated.postValue(result.body())
+                } else {
+                    showErrorMessage(response = result.errorBody())
+                }
+            }
+        }
+    }
+
+    private fun getGoodNews() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = MockApiClient.instanceHome.goodnews()
+            withContext(Dispatchers.Main) {
+                if (result.isSuccessful) {
+                    shouldShowGoodNews.postValue(result.body())
+                } else {
+                    showErrorMessage(response = result.errorBody())
                 }
             }
         }
