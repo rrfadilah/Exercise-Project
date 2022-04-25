@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import com.rizky.exercise_project.R
 import com.rizky.exercise_project.data.api.MessagesRequest
 import com.rizky.exercise_project.data.api.MessagesResponse
@@ -26,6 +27,7 @@ class MessageFragment : Fragment() {
 
     private var db: MyDoctorDatabase? = null
     private lateinit var adapter: MessageAdapter
+    private val viewModel: MessageViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +56,7 @@ class MessageFragment : Fragment() {
 //                    )
 //                    deleteDataDatabase(message)
 
-                    deleteDataAPI(item.id)
+                    viewModel.deleteDataAPI(item.id)
                 }
 
                 override fun onUpdate(item: MessageModel) {
@@ -71,7 +73,7 @@ class MessageFragment : Fragment() {
                         image = item.image,
                         message = "# " + item.lastMessage
                     )
-                    updateDataAPI(id = item.id, message = message)
+                    viewModel.updateDataAPI(id = item.id, message = message)
                 }
             },
             list = emptyList()
@@ -79,9 +81,12 @@ class MessageFragment : Fragment() {
 
         binding.rvMessage.adapter = adapter
 
-//        loadDataDatabase()
-        loadDataAPI()
+        bindView()
+        bindViewModel()
+        viewModel.loadDataAPI()
+    }
 
+    private fun bindView() {
         binding.fabPlus.setOnClickListener {
 //            val message = MessageEntity(
 //                id = System.currentTimeMillis().toString(),
@@ -98,7 +103,17 @@ class MessageFragment : Fragment() {
                 message = System.currentTimeMillis().toString() + " This is Last Messages"
             )
 
-            postDataAPI(message)
+            viewModel.postDataAPI(message)
+        }
+    }
+
+    private fun bindViewModel() {
+        viewModel.shouldShowData.observe(viewLifecycleOwner) {
+            adapter.updateList(it)
+        }
+
+        viewModel.shouldShowError.observe(viewLifecycleOwner) {
+            showErrorMessage(it)
         }
     }
 
@@ -188,111 +203,6 @@ class MessageFragment : Fragment() {
                 }
             }
         }
-    }
-
-    // function untuk load data dari api
-    private fun loadDataAPI() {
-        MyDoctorApiClient.instanceMessage.getMessages()
-            .enqueue(object : Callback<List<MessagesResponse>> {
-                override fun onResponse(
-                    call: Call<List<MessagesResponse>>,
-                    response: Response<List<MessagesResponse>>
-                ) {
-                    val code = response.code()
-                    val body = response.body()
-
-                    if (code == 200) {
-                        val message = body?.map {
-                            MessageModel(
-                                id = it.id.orEmpty(),
-                                name = it.name.orEmpty(),
-                                imageRes = R.drawable.img_user_1,
-                                image = it.image.orEmpty(),
-                                lastMessage = it.message.orEmpty()
-                            )
-                        } ?: emptyList()
-                        adapter.updateList(message.sortedBy { it.name })
-                    } else {
-                        showErrorMessage("Gagal Mengambil data dari API")
-                    }
-                }
-
-                override fun onFailure(call: Call<List<MessagesResponse>>, t: Throwable) {
-                    showErrorMessage(t.message)
-                }
-            })
-    }
-
-    // function untuk menginsert data pada api
-    private fun postDataAPI(message: MessagesRequest) {
-        MyDoctorApiClient.instanceMessage.postMessages(request = message)
-            .enqueue(object : Callback<MessagesResponse> {
-                override fun onResponse(
-                    call: Call<MessagesResponse>,
-                    response: Response<MessagesResponse>
-                ) {
-                    val code = response.code()
-                    val body = response.body()
-
-                    if (code == 200) {
-                        loadDataAPI()
-                    } else {
-                        showErrorMessage("Gagal Mengambil data dari API")
-                    }
-                }
-
-                override fun onFailure(call: Call<MessagesResponse>, t: Throwable) {
-                    showErrorMessage(t.message)
-                }
-            })
-    }
-
-    // function untuk menghapus data pada api
-    private fun deleteDataAPI(id: String) {
-        MyDoctorApiClient.instanceMessage.deleteMessages(id = id)
-            .enqueue(object : Callback<Unit> {
-                override fun onResponse(
-                    call: Call<Unit>,
-                    response: Response<Unit>
-                ) {
-                    val code = response.code()
-                    val body = response.body()
-
-                    if (code == 200) {
-                        loadDataAPI()
-                    } else {
-                        showErrorMessage("Gagal Mengambil data dari API")
-                    }
-                }
-
-                override fun onFailure(call: Call<Unit>, t: Throwable) {
-                    showErrorMessage(t.message)
-                }
-            })
-    }
-
-    // function untuk mengupdate data pada api
-    private fun updateDataAPI(id: String, message: MessagesRequest) {
-        MyDoctorApiClient.instanceMessage.updateMessages(id = id, request = message)
-            .enqueue(object : Callback<MessagesResponse> {
-                override fun onResponse(
-                    call: Call<MessagesResponse>,
-                    response: Response<MessagesResponse>
-                ) {
-                    val code = response.code()
-                    val body = response.body()
-
-                    if (code == 200) {
-                        loadDataAPI()
-                    } else {
-                        showErrorMessage("Gagal Mengambil data dari API")
-                    }
-                }
-
-                override fun onFailure(call: Call<MessagesResponse>, t: Throwable) {
-                    showErrorMessage(t.message)
-                }
-            })
     }
 
     private fun showErrorMessage(message: String?) {
