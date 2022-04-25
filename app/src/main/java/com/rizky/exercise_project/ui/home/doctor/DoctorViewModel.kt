@@ -7,6 +7,7 @@ import com.google.gson.Gson
 import com.rizky.exercise_project.Constant
 import com.rizky.exercise_project.data.api.ErrorResponse
 import com.rizky.exercise_project.database.MyDoctorDatabase
+import com.rizky.exercise_project.model.ProfileModel
 import com.rizky.exercise_project.network.MyDoctorApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +28,7 @@ class DoctorViewModel : ViewModel() {
     private var pref: SharedPreferences? = null
 
     val shouldShowError: MutableLiveData<String> = MutableLiveData()
-    val shouldShowImageProfile: MutableLiveData<String> = MutableLiveData()
+    val shouldShowProfile: MutableLiveData<ProfileModel> = MutableLiveData()
     val shouldShowLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     fun onViewLoaded(db: MyDoctorDatabase, preferences: SharedPreferences) {
@@ -63,7 +64,13 @@ class DoctorViewModel : ViewModel() {
             val result = db?.userDAO()?.getUser()
             withContext(Dispatchers.Main) {
                 result?.let {
-                    shouldShowImageProfile.postValue(it.image)
+                    val profile = ProfileModel(
+                        id = it.id,
+                        name = it.name,
+                        image = it.image,
+                        job = it.job
+                    )
+                    shouldShowProfile.postValue(profile)
                 } ?: run {
                     showErrorMessage(message = "Data Kosong")
                 }
