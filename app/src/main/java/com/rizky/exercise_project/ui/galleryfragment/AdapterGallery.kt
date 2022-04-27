@@ -1,11 +1,11 @@
-package com.rizky.exercise_project.galleryfragment
+package com.rizky.exercise_project.ui.galleryfragment
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 
 /**
- * com.rizky.exercise_project.galleryfragment
+ * com.rizky.exercise_project.ui.galleryfragment
  *
  * Created by Rizky Fadilah on 17/03/22.
  * https://github.com/rizkyfadilah

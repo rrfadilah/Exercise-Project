@@ -1,10 +1,9 @@
-package com.rizky.exercise_project.galleryfragment
+package com.rizky.exercise_project.ui.galleryfragment
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.rizky.exercise_project.databinding.ActivityGalleryBinding
-import com.rizky.exercise_project.samplefragment.PicturesFragment
+import com.rizky.exercise_project.ui.samplefragment.PicturesFragment
 
 class GalleryActivity : AppCompatActivity() {
     lateinit var binding: ActivityGalleryBinding

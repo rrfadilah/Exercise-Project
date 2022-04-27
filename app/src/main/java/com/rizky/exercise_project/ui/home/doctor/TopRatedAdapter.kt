@@ -3,13 +3,11 @@ package com.rizky.exercise_project.ui.home.doctor
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rizky.exercise_project.R
-import com.rizky.exercise_project.data.api.home.ConsultationResponse
-import com.rizky.exercise_project.databinding.ListItemConsultationBinding
-import com.rizky.exercise_project.ui.home.message.MessageModel
+import com.rizky.exercise_project.data.api.home.TopRatedResponse
+import com.rizky.exercise_project.databinding.ListItemTopRatedBinding
 
 /**
  * com.rizky.exercise_project.ui.home.doctor
@@ -19,38 +17,40 @@ import com.rizky.exercise_project.ui.home.message.MessageModel
  *
  */
 
-class ConsultationAdapter(
+class TopRatedAdapter(
     private val listener: EventListener,
-    private var list: List<ConsultationResponse>
+    private var list: List<TopRatedResponse>
 ) :
-    RecyclerView.Adapter<ConsultationAdapter.ViewHolder>() {
-    inner class ViewHolder(val binding: ListItemConsultationBinding) :
+    RecyclerView.Adapter<TopRatedAdapter.ViewHolder>() {
+    inner class ViewHolder(val binding: ListItemTopRatedBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateList(list: List<ConsultationResponse>) {
+    fun updateList(list: List<TopRatedResponse>) {
         this.list = list
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ListItemConsultationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ListItemTopRatedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
-        holder.binding.tvName.text = HtmlCompat.fromHtml(item.title.orEmpty(), HtmlCompat.FROM_HTML_MODE_COMPACT)
-        if (!item.icon.isNullOrEmpty()) {
+        holder.binding.tvName.text = item.name
+        holder.binding.tvSpecialist.text = item.specialist
+        if (!item.image.isNullOrEmpty()) {
             Glide.with(holder.binding.root)
-                .load(item.icon)
+                .load(item.image)
                 .fitCenter()
                 .circleCrop()
                 .placeholder(R.drawable.img_user_1)
                 .error(R.drawable.img_user_1)
                 .into(holder.binding.ivImg)
         }
+        holder.binding.rbRate.rating = (item.rating ?: 0.0).toFloat()
         holder.itemView.setOnClickListener {
             listener.onClick(item)
         }
@@ -61,7 +61,7 @@ class ConsultationAdapter(
     }
 
     interface EventListener {
-        fun onClick(item: ConsultationResponse)
+        fun onClick(item: TopRatedResponse)
     }
 
 }

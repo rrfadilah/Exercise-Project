@@ -23,10 +23,10 @@
             android:exported="true"
             android:theme="@style/ThemeNavbar"/>
         <activity
-            android:name=".galleryfragment.GalleryActivity"
+            android:name="com.rizky.exercise_project.ui.galleryfragment.GalleryActivity"
             android:exported="true" />
         <activity
-            android:name=".samplefragment.PicturesActivity"
+            android:name="com.rizky.exercise_project.ui.samplefragment.PicturesActivity"
             android:exported="true" />
         <activity
             android:name=".ui.signin.SignInActivity"

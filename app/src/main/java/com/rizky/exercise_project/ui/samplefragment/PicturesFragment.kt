@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.samplefragment
+package com.rizky.exercise_project.ui.samplefragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
