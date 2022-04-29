@@ -3,6 +3,7 @@ package com.example.exercise_project.UI.SignInUp
 import android.content.SharedPreferences
 import android.provider.Settings.Global.putString
 import android.util.Patterns
+import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.exercise_project.UI.Data

@@ -84,6 +84,10 @@ class SignInActivity : AppCompatActivity() {
         binding.btnSignIn2.setOnClickListener {
             viewModel.onClickSignIn()
         }
+        binding.tvGoToSignUp.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onBackPressed() {

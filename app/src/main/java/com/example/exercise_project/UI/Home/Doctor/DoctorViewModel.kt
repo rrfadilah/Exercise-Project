@@ -20,6 +20,7 @@ class DoctorViewModel : ViewModel() {
 
     val shouldShowError: MutableLiveData<String> = MutableLiveData()
     val shouldShowImageProfile: MutableLiveData<String> = MutableLiveData()
+    val shouldShowUsername: MutableLiveData<String> = MutableLiveData()
     val shouldShowLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     fun onViewLoaded(db: MyDoctorDatabase, preferences: SharedPreferences) {
@@ -27,6 +28,7 @@ class DoctorViewModel : ViewModel() {
         this.pref = preferences
 
         getProfile()
+        getUsername()
     }
 
     fun logout() {
@@ -56,6 +58,19 @@ class DoctorViewModel : ViewModel() {
             withContext(Dispatchers.Main) {
                 result?.let {
                     shouldShowImageProfile.postValue(it.image)
+                } ?: run {
+                    showErrorMessage(message = "Data Kosong")
+                }
+            }
+        }
+    }
+
+    private fun getUsername() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val result = db?.userDAO()?.getUser()
+            withContext(Dispatchers.Main) {
+                result?.let {
+                    shouldShowUsername.postValue(it.name)
                 } ?: run {
                     showErrorMessage(message = "Data Kosong")
                 }

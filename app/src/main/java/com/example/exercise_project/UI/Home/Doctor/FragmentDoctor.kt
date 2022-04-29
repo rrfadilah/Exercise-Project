@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.exercise_project.UI.Data
@@ -77,6 +78,11 @@ class FragmentDoctor : Fragment() {
                 .load(it)
                 .circleCrop()
                 .into(binding.rivProfile)
+        }
+
+        viewModel.shouldShowUsername.observe(viewLifecycleOwner) { shouldShowUsername ->
+            binding.tvNama.isVisible = !shouldShowUsername.isNullOrEmpty()
+            binding.tvNama.text = shouldShowUsername
         }
     }
 }

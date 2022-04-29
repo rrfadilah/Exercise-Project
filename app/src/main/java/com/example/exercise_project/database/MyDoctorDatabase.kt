@@ -7,8 +7,9 @@ import androidx.room.RoomDatabase
 import com.example.exercise_project.data.local.MessageDAO
 import com.example.exercise_project.data.local.MessageEntity
 import com.example.exercise_project.data.local.UserDAO
+import com.example.exercise_project.data.local.UserEntity
 
-@Database(entities = [MessageEntity::class], version = 2)
+@Database(entities = [MessageEntity::class, UserEntity::class], version = 1, exportSchema = true)
 abstract class MyDoctorDatabase : RoomDatabase() {
     abstract fun messageDAO(): MessageDAO
     abstract fun userDAO(): UserDAO

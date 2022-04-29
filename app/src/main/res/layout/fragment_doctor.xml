@@ -26,7 +26,7 @@
                 app:riv_corner_radius="50dp" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tv_Nama"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -48,8 +48,8 @@
                 android:text="Product Designer"
                 android:textColor="#7D8797"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintStart_toStartOf="@+id/tv_Nama"
+                app:layout_constraintTop_toBottomOf="@+id/tv_Nama" />
 
             <TextView
                 android:id="@+id/tv_HeaderDoctor"
@@ -71,8 +71,8 @@
                 android:text="Logout"
                 app:layout_constraintBottom_toTopOf="@+id/textView2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="@+id/textView" />
+                app:layout_constraintStart_toEndOf="@+id/tv_Nama"
+                app:layout_constraintTop_toTopOf="@+id/tv_Nama" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_listDoctor"
