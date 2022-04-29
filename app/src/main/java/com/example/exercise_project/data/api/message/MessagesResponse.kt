@@ -1,4 +1,4 @@
-package com.example.exercise_project.data.api
+package com.example.exercise_project.data.api.message
 
 import com.google.gson.annotations.SerializedName
 

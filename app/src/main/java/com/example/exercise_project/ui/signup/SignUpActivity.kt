@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import com.example.exercise_project.Constant
 import com.example.exercise_project.databinding.ActivitySignUpBinding
-import com.example.exercise_project.home.database.MyDoctorDatabase
+import com.example.exercise_project.ui.home.database.MyDoctorDatabase
 import com.example.exercise_project.ui.signin.SignActivity
 import com.google.android.material.snackbar.Snackbar
 

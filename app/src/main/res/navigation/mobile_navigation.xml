@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_doctor"
-        android:name="com.example.exercise_project.home.ui.doctor.DoctorFragment"
+        android:name="com.example.exercise_project.ui.home.ui.doctor.DoctorFragment"
         android:label="@string/title_doctor"
         tools:layout="@layout/fragment_doctor">
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/navigation_messages"
-        android:name="com.example.exercise_project.home.ui.messages.MessagesFragment"
+        android:name="com.example.exercise_project.ui.home.ui.messages.MessagesFragment"
         android:label="@string/title_messages"
         tools:layout="@layout/fragment_messages">
         <action
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/navigation_hospital"
-        android:name="com.example.exercise_project.home.ui.hospital.HospitalFragment"
+        android:name="com.example.exercise_project.ui.home.ui.hospital.HospitalFragment"
         android:label="@string/title_hospital"
         tools:layout="@layout/fragment_hospital" />
 </navigation>

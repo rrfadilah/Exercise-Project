@@ -1,4 +1,4 @@
-package com.example.exercise_project.home
+package com.example.exercise_project.ui.home
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView

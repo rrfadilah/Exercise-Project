@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.exercise_project.data.api.auth.RegisterRequest
 import com.example.exercise_project.data.api.auth.RegisterResponse
-import com.example.exercise_project.home.database.MyDoctorDatabase
+import com.example.exercise_project.ui.home.database.MyDoctorDatabase
 import com.example.exercise_project.network.MyDoctorApiClient
 import retrofit2.Call
 import retrofit2.Response

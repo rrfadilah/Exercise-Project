@@ -1,15 +1,17 @@
 package com.example.exercise_project.network
 
-import com.example.exercise_project.data.api.message.MessageApi
 import com.example.exercise_project.data.api.auth.AuthAPI
+import com.example.exercise_project.data.api.home.HomeAPI
+import com.example.exercise_project.data.local.MessageAPI
+import com.example.exercise_project.ui.home.Message
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object MyDoctorApiClient {
+object DoctorApi {
     // BASE_URL merupakan URL default untuk mengkoneksikan aplikasi dengan endpoint pada API
-    const val BASE_URL = "http://drivingrake.backendless.app/api/"
+    const val BASE_URL = "https://private-anon-36a02d1bf5-mydoctorexample.apiary-mock.com/api/"
 
     private val logging: HttpLoggingInterceptor
         get() {
@@ -29,14 +31,14 @@ object MyDoctorApiClient {
         .client(client)
         .build()
 
-    val instanceMessage: MessageApi by lazy {
-        retrofit.create(MessageApi::class.java)
+    val instanceHome: HomeAPI by lazy {
+        retrofit.create(HomeAPI::class.java)
+    }
+    val instanceMessage: MessageAPI by lazy {
+        retrofit.create(MessageAPI::class.java)
     }
 
     val instanceAuth: AuthAPI by lazy {
-        retrofit.create(AuthAPI::class.java)
-    }
-    val instanceSignIn: AuthAPI by lazy {
         retrofit.create(AuthAPI::class.java)
     }
 }

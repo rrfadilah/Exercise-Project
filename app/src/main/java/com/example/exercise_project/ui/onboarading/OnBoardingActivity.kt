@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.viewpagerdots.DotsIndicator
 import com.example.exercise_project.R
-import com.example.exercise_project.home.HomeActivity
+import com.example.exercise_project.ui.home.HomeActivity
 import com.example.exercise_project.ui.signin.SignActivity
 
 class OnBoardingActivity : AppCompatActivity() {

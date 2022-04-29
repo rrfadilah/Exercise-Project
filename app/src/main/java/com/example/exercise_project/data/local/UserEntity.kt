@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.data.local
+package com.example.exercise_project.data.local
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

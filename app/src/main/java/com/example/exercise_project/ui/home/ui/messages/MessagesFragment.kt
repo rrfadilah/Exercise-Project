@@ -1,4 +1,4 @@
-package com.example.exercise_project.home.ui.messages
+package com.example.exercise_project.ui.home.ui.messages
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,19 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.exercise_project.R
-import com.example.exercise_project.data.api.MessagesRequest
-import com.example.exercise_project.data.api.MessagesResponse
-import com.example.exercise_project.databinding.FragmentMessagesBinding
+import com.example.exercise_project.data.api.message.MessagesRequest
 import com.example.exercise_project.data.local.MessageEntity
-import com.example.exercise_project.home.database.MyDoctorDatabase
-import com.example.exercise_project.network.MyDoctorApiClient
+import com.example.exercise_project.databinding.FragmentMessagesBinding
+import com.example.exercise_project.ui.home.database.MyDoctorDatabase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MessagesFragment : Fragment() {
     private var _binding: FragmentMessagesBinding? = null
@@ -26,6 +22,7 @@ class MessagesFragment : Fragment() {
 
     private var db: MyDoctorDatabase? = null
     private lateinit var adapter: MessageAdapter
+    private val viewModel: MessagesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +50,8 @@ class MessagesFragment : Fragment() {
 //                        message = item.lastMessage
 //                    )
 //                    deleteDataDatabase(message)
-                    deleteDataAPI(item.id)
+
+                    viewModel.deleteDataAPI(item.id)
                 }
 
                 override fun onUpdate(item: MessageModel) {
@@ -70,7 +68,7 @@ class MessagesFragment : Fragment() {
                         image = item.image,
                         message = "# " + item.lastMessage
                     )
-                    updateDataAPI(id = item.id, message = message)
+                    viewModel.updateDataAPI(id = item.id, message = message)
                 }
             },
             list = emptyList()
@@ -78,9 +76,12 @@ class MessagesFragment : Fragment() {
 
         binding.rvMessage.adapter = adapter
 
-//        loadDataDatabase()
-        loadDataAPI()
+        bindView()
+        bindViewModel()
+        viewModel.loadDataAPI()
+    }
 
+    private fun bindView() {
         binding.fabPlus.setOnClickListener {
 //            val message = MessageEntity(
 //                id = System.currentTimeMillis().toString(),
@@ -97,7 +98,17 @@ class MessagesFragment : Fragment() {
                 message = System.currentTimeMillis().toString() + " This is Last Messages"
             )
 
-            postDataAPI(message)
+            viewModel.postDataAPI(message)
+        }
+    }
+
+    private fun bindViewModel() {
+        viewModel.shouldShowData.observe(viewLifecycleOwner) {
+            adapter.updateList(it)
+        }
+
+        viewModel.shouldShowError.observe(viewLifecycleOwner) {
+            showErrorMessage(it)
         }
     }
 
@@ -106,14 +117,14 @@ class MessagesFragment : Fragment() {
         return listOf(
             MessageModel(
                 id = "1",
-                name = "Rizky Fadilah",
-                imageRes = R.drawable.img_user1,
+                name = "Faiz Zaki Ramadhan",
+                imageRes = R.drawable.img_user2,
                 lastMessage = "Ini Contoh Message nya."
             ),
             MessageModel(
                 id = "2",
-                name = "Rizky Fadilah 2",
-                imageRes = R.drawable.img_user2,
+                name = "Zaki",
+                imageRes = R.drawable.img_user1,
                 lastMessage = "Ini Contoh Message nya Yang kedua."
             ),
         )
@@ -158,7 +169,7 @@ class MessagesFragment : Fragment() {
         GlobalScope.launch {
             val results = db?.messageDAO()?.getMessage()
             requireActivity().runOnUiThread {
-                results?.let { it ->
+                results?.let {
                     val messages = it.map {
                         MessageModel(
                             id = it.id,
@@ -187,112 +198,6 @@ class MessagesFragment : Fragment() {
                 }
             }
         }
-    }
-
-
-    // function untuk load data dari api
-    private fun loadDataAPI() {
-        MyDoctorApiClient.instanceMessage.getMessages()
-            .enqueue(object : Callback<List<MessagesResponse>> {
-                override fun onResponse(
-                    call: Call<List<MessagesResponse>>,
-                    response: Response<List<MessagesResponse>>
-                ) {
-                    val code = response.code()
-                    val body = response.body()
-
-                    if (code == 200) {
-                        val message = body?.map {
-                            MessageModel(
-                                id = it.id.orEmpty(),
-                                name = it.name.orEmpty(),
-                                imageRes = R.drawable.img_user1,
-                                image = it.image.orEmpty(),
-                                lastMessage = it.message.orEmpty()
-                            )
-                        } ?: emptyList()
-                        adapter.updateList(message.sortedBy { it.name })
-                    } else {
-                        showErrorMessage("Gagal Mengambil data dari API")
-                    }
-                }
-
-                override fun onFailure(call: Call<List<MessagesResponse>>, t: Throwable) {
-                    showErrorMessage(t.message)
-                }
-            })
-    }
-
-    // function untuk menginsert data pada api
-    private fun postDataAPI(message: MessagesRequest) {
-        MyDoctorApiClient.instanceMessage.postMessages(request = message)
-            .enqueue(object : Callback<MessagesResponse> {
-                override fun onResponse(
-                    call: Call<MessagesResponse>,
-                    response: Response<MessagesResponse>
-                ) {
-                    val code = response.code()
-                    val body = response.body()
-
-                    if (code == 200) {
-                        loadDataAPI()
-                    } else {
-                        showErrorMessage("Gagal Mengambil data dari API")
-                    }
-                }
-
-                override fun onFailure(call: Call<MessagesResponse>, t: Throwable) {
-                    showErrorMessage(t.message)
-                }
-            })
-    }
-
-    // function untuk menghapus data pada api
-    private fun deleteDataAPI(id: String) {
-        MyDoctorApiClient.instanceMessage.deleteMessages(id = id)
-            .enqueue(object : Callback<Unit> {
-                override fun onResponse(
-                    call: Call<Unit>,
-                    response: Response<Unit>
-                ) {
-                    val code = response.code()
-                    val body = response.body()
-
-                    if (code == 200) {
-                        loadDataAPI()
-                    } else {
-                        showErrorMessage("Gagal Mengambil data dari API")
-                    }
-                }
-
-                override fun onFailure(call: Call<Unit>, t: Throwable) {
-                    showErrorMessage(t.message)
-                }
-            })
-    }
-
-    // function untuk mengupdate data pada api
-    private fun updateDataAPI(id: String, message: MessagesRequest) {
-        MyDoctorApiClient.instanceMessage.updateMessages(id = id, request = message)
-            .enqueue(object : Callback<MessagesResponse> {
-                override fun onResponse(
-                    call: Call<MessagesResponse>,
-                    response: Response<MessagesResponse>
-                ) {
-                    val code = response.code()
-                    val body = response.body()
-
-                    if (code == 200) {
-                        loadDataAPI()
-                    } else {
-                        showErrorMessage("Gagal Mengambil data dari API")
-                    }
-                }
-
-                override fun onFailure(call: Call<MessagesResponse>, t: Throwable) {
-                    showErrorMessage(t.message)
-                }
-            })
     }
 
     private fun showErrorMessage(message: String?) {

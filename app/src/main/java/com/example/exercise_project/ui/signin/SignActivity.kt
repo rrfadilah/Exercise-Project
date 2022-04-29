@@ -17,8 +17,8 @@ import com.example.exercise_project.Constant
 import com.example.exercise_project.CustomDialogFragment
 import com.example.exercise_project.R
 import com.example.exercise_project.databinding.ActivitySignBinding
-import com.example.exercise_project.home.HomeActivity
-import com.example.exercise_project.home.database.MyDoctorDatabase
+import com.example.exercise_project.ui.home.HomeActivity
+import com.example.exercise_project.ui.home.database.MyDoctorDatabase
 import com.example.exercise_project.ui.signup.SignUpActivity
 import com.google.android.material.snackbar.Snackbar
 

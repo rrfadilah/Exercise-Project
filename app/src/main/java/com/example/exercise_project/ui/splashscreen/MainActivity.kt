@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.exercise_project.Constant
 import com.example.exercise_project.R
 import com.example.exercise_project.databinding.ActivityMainBinding
-import com.example.exercise_project.home.HomeActivity
+import com.example.exercise_project.ui.home.HomeActivity
 import com.example.exercise_project.ui.onboarading.OnBoardingActivity
 
 class MainActivity : AppCompatActivity() {

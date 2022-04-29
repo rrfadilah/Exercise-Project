@@ -8,10 +8,10 @@ import androidx.lifecycle.ViewModel
 import com.example.exercise_project.Constant
 import com.example.exercise_project.data.api.ErrorResponse
 import com.example.exercise_project.data.api.auth.SignInRequest
-import com.example.exercise_project.home.database.MyDoctorDatabase
+import com.example.exercise_project.ui.home.database.MyDoctorDatabase
 import com.example.exercise_project.network.MyDoctorApiClient
 import com.google.gson.Gson
-import com.rizky.exercise_project.data.local.UserEntity
+import com.example.exercise_project.data.local.UserEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

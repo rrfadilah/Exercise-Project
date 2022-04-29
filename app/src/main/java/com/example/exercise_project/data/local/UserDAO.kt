@@ -1,4 +1,4 @@
-package com.rizky.exercise_project.data.local
+package com.example.exercise_project.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert

@@ -3,6 +3,8 @@ package com.example.exercise_project.data.api.auth
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.HeaderMap
 import retrofit2.http.POST
 
 
@@ -14,4 +16,7 @@ interface AuthAPI {
     fun register(
         @Body request: RegisterRequest
     ): Call<RegisterResponse>
+
+    @GET("users/logout")
+    suspend fun logout(@HeaderMap headers: Map<String, String>): Response<LogoutResponse>
 }

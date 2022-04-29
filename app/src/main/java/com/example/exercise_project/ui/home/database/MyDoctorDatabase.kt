@@ -1,4 +1,4 @@
-package com.example.exercise_project.home.database
+package com.example.exercise_project.ui.home.database
 
 
 import android.content.Context
@@ -7,8 +7,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.exercise_project.data.local.MessageDAO
 import com.example.exercise_project.data.local.MessageEntity
-import com.rizky.exercise_project.data.local.UserDAO
-import com.rizky.exercise_project.data.local.UserEntity
+import com.example.exercise_project.data.local.UserDAO
+import com.example.exercise_project.data.local.UserEntity
 
 @Database(entities = [MessageEntity::class, UserEntity::class], version = 3)
 abstract class MyDoctorDatabase : RoomDatabase() {
