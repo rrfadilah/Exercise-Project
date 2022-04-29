@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.rizky.exercise_project.R
 import com.rizky.exercise_project.data.api.MessageRequest
 import com.rizky.exercise_project.data.api.MessageResponse
@@ -30,6 +31,7 @@ class MessageFragment : Fragment() {
 
     private var db: MyDoctorDatabase? = null
     private lateinit var adapter: MessageAdapter
+    private val viewModel: MessageViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

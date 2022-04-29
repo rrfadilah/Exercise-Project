@@ -1,16 +1,24 @@
 package com.rizky.exercise_project.network
 
-import com.rizky.exercise_project.data.api.MessageAPI
 import com.rizky.exercise_project.data.api.auth.AuthAPI
+import com.rizky.exercise_project.data.api.MessageAPI
 import com.rizky.exercise_project.data.api.home.HomeAPI
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object MyDoctorApiClient {
+/**
+ * com.rizky.exercise_project.network
+ *
+ * Created by Rizky Fadilah on 12/04/22.
+ * https://github.com/rizkyfadilah
+ *
+ */
+
+object MockApiClient {
     // BASE_URL merupakan URL default untuk mengkoneksikan aplikasi dengan endpoint pada API
-    const val BASE_URL = "http://drivingrake.backendless.app/api/"
+    const val BASE_URL = "http://private-82636-mydoctorexample.apiary-mock.com/api/"
 
     private val logging: HttpLoggingInterceptor
         get() {
