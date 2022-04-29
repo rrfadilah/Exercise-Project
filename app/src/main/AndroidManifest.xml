@@ -15,7 +15,11 @@
         android:theme="@style/Theme.ExerciseProject">
         <activity
             android:name="com.example.exercise_project.UI.Home.ActivityForHome"
-            android:exported="false">
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.example.exercise_project.UI.SignInUp.SignUpActivity"
@@ -26,11 +30,7 @@
         </activity>
         <activity
             android:name="com.example.exercise_project.UI.Splash.SplashActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
         </activity>
         <activity
             android:name="com.example.exercise_project.UI.onBoarding.onBoardingActivity"

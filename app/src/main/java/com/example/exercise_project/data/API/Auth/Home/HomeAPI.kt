@@ -4,6 +4,9 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface HomeAPI {
-    @GET("hospital")
+    @GET("data/hospital")
     suspend fun hospital(): Response<List<HospitalResponse>>
+
+    @GET("goodnews")
+    suspend fun goodnews(): Response<List<GoodNewsResponse>>
 }

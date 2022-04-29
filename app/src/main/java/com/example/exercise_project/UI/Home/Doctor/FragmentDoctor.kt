@@ -7,12 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.exercise_project.UI.Data
 import com.example.exercise_project.UI.Home.TaskList
+import com.example.exercise_project.data.API.Auth.Home.GoodNewsResponse
 import com.example.exercise_project.database.MyDoctorDatabase
 import com.example.exercise_project.databinding.FragmentDoctorBinding
 import com.google.android.material.snackbar.Snackbar
@@ -22,6 +24,7 @@ class FragmentDoctor : Fragment() {
     lateinit var binding: FragmentDoctorBinding
     private val progressDialog: ProgressDialog by lazy { ProgressDialog(requireContext()) }
     private val viewModel: DoctorViewModel by viewModels()
+    private lateinit var adapterGoodNewsAdapter: AdapterDoctorThird
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,9 +38,16 @@ class FragmentDoctor : Fragment() {
         val adapterRated = AdapterDoctorSecond(TaskList.listRatedDoctor)
         binding.rvListRatedDoctor.adapter = adapterRated
 
-        val adapterGoodNews = AdapterDoctorThird(TaskList.listGoodNews)
-        binding.rvGoodNews.adapter = adapterGoodNews
+        adapterGoodNewsAdapter = AdapterDoctorThird(
+            listener = object : AdapterDoctorThird.EventListener {
+                override fun onClick(item: GoodNewsResponse) {
+                    Toast.makeText(requireContext(), item.title, Toast.LENGTH_SHORT).show()
+                }
+            },
+            list = emptyList()
+        )
 
+        binding.rvGoodNews.adapter = adapterGoodNewsAdapter
         bindView()
         bindViewModel()
 
@@ -83,6 +93,10 @@ class FragmentDoctor : Fragment() {
         viewModel.shouldShowUsername.observe(viewLifecycleOwner) { shouldShowUsername ->
             binding.tvNama.isVisible = !shouldShowUsername.isNullOrEmpty()
             binding.tvNama.text = shouldShowUsername
+        }
+
+        viewModel.shouldShowGoodNews.observe(viewLifecycleOwner) {
+            adapterGoodNewsAdapter.updateList(it)
         }
     }
 }

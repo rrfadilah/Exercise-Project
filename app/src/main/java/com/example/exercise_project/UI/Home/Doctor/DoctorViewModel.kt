@@ -4,8 +4,10 @@ import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.exercise_project.UI.Data
+import com.example.exercise_project.data.API.Auth.Home.GoodNewsResponse
 import com.example.exercise_project.data.API.ErrorResponse
 import com.example.exercise_project.database.MyDoctorDatabase
+import com.example.exercise_project.network.MockAPIClient
 import com.example.exercise_project.network.MyDoctorAPIClient
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
@@ -22,6 +24,7 @@ class DoctorViewModel : ViewModel() {
     val shouldShowImageProfile: MutableLiveData<String> = MutableLiveData()
     val shouldShowUsername: MutableLiveData<String> = MutableLiveData()
     val shouldShowLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val shouldShowGoodNews: MutableLiveData<List<GoodNewsResponse>> = MutableLiveData()
 
     fun onViewLoaded(db: MyDoctorDatabase, preferences: SharedPreferences) {
         this.db = db
@@ -29,6 +32,7 @@ class DoctorViewModel : ViewModel() {
 
         getProfile()
         getUsername()
+        getGoodNews()
     }
 
     fun logout() {
@@ -73,6 +77,19 @@ class DoctorViewModel : ViewModel() {
                     shouldShowUsername.postValue(it.name)
                 } ?: run {
                     showErrorMessage(message = "Data Kosong")
+                }
+            }
+        }
+    }
+
+    private fun getGoodNews() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = MockAPIClient.instanceHome.goodnews()
+            withContext(Dispatchers.Main) {
+                if (result.isSuccessful) {
+                    shouldShowGoodNews.postValue(result.body())
+                } else {
+                    showErrorMessage(response = result.errorBody())
                 }
             }
         }

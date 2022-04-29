@@ -3,12 +3,17 @@ package com.example.exercise_project.UI.Home.Hospitals
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.exercise_project.data.API.Auth.Home.GoodNewsResponse
 import com.example.exercise_project.data.API.Auth.Home.HospitalResponse
+import com.example.exercise_project.data.API.ErrorResponse
 import com.example.exercise_project.database.MyDoctorDatabase
+import com.example.exercise_project.network.MockAPIClient
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.ResponseBody
 
 class HospitalViewModel: ViewModel() {
     private var db: MyDoctorDatabase? = null
@@ -26,7 +31,7 @@ class HospitalViewModel: ViewModel() {
 
     private fun getHospital() {
         CoroutineScope(Dispatchers.IO).launch {
-            val result = MockApiClient.instanceHome.goodnews()
+            val result = MockAPIClient.instanceHome.hospital()
             withContext(Dispatchers.Main) {
                 if (result.isSuccessful) {
                     shouldShowHospital.postValue(result.body())
@@ -35,5 +40,11 @@ class HospitalViewModel: ViewModel() {
                 }
             }
         }
+    }
+
+    private fun showErrorMessage(response: ResponseBody? = null, message: String? = null) {
+        val error =
+            Gson().fromJson(response?.string() ?: message ?: "", ErrorResponse::class.java)
+        shouldShowError.postValue(error.message.orEmpty() + " #${error.code}")
     }
 }
