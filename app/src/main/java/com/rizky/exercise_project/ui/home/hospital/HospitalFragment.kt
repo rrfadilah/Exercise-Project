@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.rizky.exercise_project.databinding.FragmentHostpitalBinding
 import com.rizky.exercise_project.model.HospitalModel
@@ -15,7 +16,9 @@ class HostpitalFragment : Fragment() {
     private var _binding: FragmentHostpitalBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: HospitalViewModel
+    private val viewModel: HospitalViewModel by viewModels {
+        HospitalViewModel.Factory(HomeRepository(MyDoctorApiClient.instanceHome))
+    }
     private lateinit var adapter: HospitalAdapter
 
     override fun onCreateView(
@@ -31,10 +34,11 @@ class HostpitalFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(
-            this,
-            HospitalViewModel.Factory(HomeRepository(MyDoctorApiClient.instanceHome))
-        )[HospitalViewModel::class.java]
+//        TODO: if you want to using viewmodel provider
+//        viewModel = ViewModelProvider(
+//            this,
+//            HospitalViewModel.Factory(HomeRepository(MyDoctorApiClient.instanceHome))
+//        )[HospitalViewModel::class.java]
 
         adapter = HospitalAdapter(
             listener = object : HospitalAdapter.EventListener {
