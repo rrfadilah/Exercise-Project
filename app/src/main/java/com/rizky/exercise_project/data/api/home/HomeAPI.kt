@@ -1,7 +1,7 @@
 package com.rizky.exercise_project.data.api.home
 
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.GET
 
 /**
  * com.rizky.exercise_project.data.api
@@ -20,4 +20,7 @@ interface HomeAPI {
 
     @GET("goodnews")
     suspend fun goodnews(): Response<List<GoodNewsResponse>>
+
+    @GET("data/hospital")
+    suspend fun getHospital(): Response<List<HospitalResponse>>
 }
