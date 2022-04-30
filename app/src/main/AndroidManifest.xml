@@ -3,6 +3,8 @@
     package="com.rizky.exercise_project">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -13,20 +15,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExerciseProject">
         <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.movie.MovieActivity"
             android:exported="false" />
         <activity
             android:name=".ui.signup.SignUpActivity"
             android:exported="true" />
         <activity
-            android:name="com.rizky.exercise_project.ui.home.HomeActivity"
+            android:name=".ui.home.HomeActivity"
             android:exported="true"
-            android:theme="@style/ThemeNavbar"/>
+            android:theme="@style/ThemeNavbar" />
         <activity
-            android:name="com.rizky.exercise_project.ui.galleryfragment.GalleryActivity"
+            android:name=".ui.galleryfragment.GalleryActivity"
             android:exported="true" />
         <activity
-            android:name="com.rizky.exercise_project.ui.samplefragment.PicturesActivity"
+            android:name=".ui.samplefragment.PicturesActivity"
             android:exported="true" />
         <activity
             android:name=".ui.signin.SignInActivity"
