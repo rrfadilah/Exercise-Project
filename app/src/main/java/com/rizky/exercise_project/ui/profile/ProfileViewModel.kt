@@ -1,15 +1,18 @@
 package com.rizky.exercise_project.ui.profile
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
+import com.google.gson.Gson
 import com.rizky.exercise_project.common.Status
+import com.rizky.exercise_project.data.api.ErrorResponse
+import com.rizky.exercise_project.database.MyDoctorDatabase
+import com.rizky.exercise_project.model.ProfileModel
 import com.rizky.exercise_project.repository.ProfileRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 
 /**
  * com.rizky.exercise_project.ui.profile
@@ -23,16 +26,17 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
 
     val shouldShowImage: MutableLiveData<String> = MutableLiveData()
     val shouldShowError: MutableLiveData<String> = MutableLiveData()
+    val shouldShowProfile: MutableLiveData<ProfileModel> = MutableLiveData()
 
     fun onViewLoaded() {
-
+       getProfile()
     }
 
     fun uploadImage(body: MultipartBody.Part) {
         CoroutineScope(Dispatchers.IO).launch {
             val result = repository.uploadImage(body)
             withContext(Dispatchers.Main) {
-                when(result.status) {
+                when (result.status) {
                     Status.SUCCESS -> {
                         shouldShowImage.postValue(result.data?.data?.image?.url)
                     }
@@ -42,6 +46,17 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
                     Status.LOADING -> {
 
                     }
+                }
+            }
+        }
+    }
+
+    fun getProfile() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val result = repository.getProfile()
+            withContext(Dispatchers.Main) {
+                result.let {
+                    shouldShowProfile.postValue(it)
                 }
             }
         }
