@@ -26,6 +26,7 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
 
     val shouldShowImage: MutableLiveData<String> = MutableLiveData()
     val shouldShowError: MutableLiveData<String> = MutableLiveData()
+    val shouldShowLoading: MutableLiveData<Boolean> = MutableLiveData()
     val shouldShowProfile: MutableLiveData<ProfileModel> = MutableLiveData()
 
     fun onViewLoaded() {
@@ -33,12 +34,14 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
     }
 
     fun uploadImage(body: MultipartBody.Part) {
+        shouldShowLoading.postValue(true)
         CoroutineScope(Dispatchers.IO).launch {
             val result = repository.uploadImage(body)
             withContext(Dispatchers.Main) {
+                shouldShowLoading.postValue(false)
                 when (result.status) {
                     Status.SUCCESS -> {
-                        shouldShowImage.postValue(result.data?.data?.image?.url)
+                        shouldShowImage.postValue(result.data?.data?.thumb?.url)
                     }
                     Status.ERROR -> {
                         shouldShowError.postValue(result.message.orEmpty())

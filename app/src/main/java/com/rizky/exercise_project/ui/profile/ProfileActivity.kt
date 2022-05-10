@@ -1,12 +1,12 @@
 package com.rizky.exercise_project.ui.profile
 
+import android.app.ProgressDialog
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
-import com.rizky.exercise_project.R
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.ActivityProfileBinding
 import com.rizky.exercise_project.network.ImageApiClient
@@ -27,6 +27,7 @@ class ProfileActivity : AppCompatActivity() {
             )
         )
     }
+    private val progressDialog: ProgressDialog by lazy { ProgressDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,6 +88,15 @@ class ProfileActivity : AppCompatActivity() {
                 .load(it.image)
                 .circleCrop()
                 .into(binding.ivProfile)
+        }
+
+        viewModel.shouldShowLoading.observe(this) {
+            if (it) {
+                progressDialog.setMessage("Loading...")
+                progressDialog.show()
+            } else {
+                progressDialog.hide()
+            }
         }
     }
 }

@@ -23,6 +23,7 @@ class ProfileRepository(private val imageAPI: ImageAPI, private val db: MyDoctor
     suspend fun uploadImage(image: MultipartBody.Part): Resource<ImageDataResponse> {
         imageAPI.uploadImage(image = image).let {
             if (it.isSuccessful) {
+                updateImageProfile(it.body()?.data?.thumb?.url.orEmpty())
                 return Resource(
                     status = Status.SUCCESS,
                     data = it.body(),
@@ -47,5 +48,17 @@ class ProfileRepository(private val imageAPI: ImageAPI, private val db: MyDoctor
                 image = it?.image.orEmpty()
             )
         }
+    }
+
+    suspend fun updateImageProfile(image:String): Long {
+        val profile = db.userDAO().getUser()
+        val updatedProfile = UserEntity(
+            id = profile?.id.orEmpty(),
+            email = profile?.email.orEmpty(),
+            name = profile?.name.orEmpty(),
+            job = profile?.job.orEmpty(),
+            image = image
+        )
+        return db.userDAO().insertUser(updatedProfile)
     }
 }
