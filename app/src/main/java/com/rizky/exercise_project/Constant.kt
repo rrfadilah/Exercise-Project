@@ -1,5 +1,7 @@
 package com.rizky.exercise_project
 
+import androidx.datastore.preferences.core.intPreferencesKey
+
 /**
  * com.rizky.exercise_project
  *
@@ -32,5 +34,9 @@ object Constant {
             const val DARK_MODE = "DARK_MODE"
             const val APP_LANGUAGE = "APP_LANGUAGE"
         }
+    }
+
+    object PrefDataStore {
+        val COUNTER_KEY = intPreferencesKey("counter_key")
     }
 }

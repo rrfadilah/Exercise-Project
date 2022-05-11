@@ -28,9 +28,10 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
     val shouldShowError: MutableLiveData<String> = MutableLiveData()
     val shouldShowLoading: MutableLiveData<Boolean> = MutableLiveData()
     val shouldShowProfile: MutableLiveData<ProfileModel> = MutableLiveData()
+    var shouldShowCounter: LiveData<Int> = repository.getCounter().asLiveData()
 
     fun onViewLoaded() {
-       getProfile()
+        getProfile()
     }
 
     fun uploadImage(body: MultipartBody.Part) {
@@ -64,6 +65,19 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
             }
         }
     }
+
+    fun increment() {
+        viewModelScope.launch {
+            repository.increment()
+        }
+    }
+
+    fun decrement() {
+        viewModelScope.launch {
+            repository.decrement()
+        }
+    }
+
 
     @Suppress("UNCHECKED_CAST")
     class Factory(private val repository: ProfileRepository) :

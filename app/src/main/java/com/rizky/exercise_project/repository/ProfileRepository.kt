@@ -6,6 +6,7 @@ import com.rizky.exercise_project.data.api.image.ImageAPI
 import com.rizky.exercise_project.data.api.image.ImageDataResponse
 import com.rizky.exercise_project.data.local.UserEntity
 import com.rizky.exercise_project.database.MyDoctorDatabase
+import com.rizky.exercise_project.datastore.CounterDataStoreManager
 import com.rizky.exercise_project.model.ProfileModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -19,7 +20,11 @@ import okhttp3.MultipartBody
  *
  */
 
-class ProfileRepository(private val imageAPI: ImageAPI, private val db: MyDoctorDatabase) {
+class ProfileRepository(
+    private val imageAPI: ImageAPI,
+    private val db: MyDoctorDatabase,
+    private val prefDataStore: CounterDataStoreManager,
+) {
     suspend fun uploadImage(image: MultipartBody.Part): Resource<ImageDataResponse> {
         imageAPI.uploadImage(image = image).let {
             if (it.isSuccessful) {
@@ -50,7 +55,7 @@ class ProfileRepository(private val imageAPI: ImageAPI, private val db: MyDoctor
         }
     }
 
-    suspend fun updateImageProfile(image:String): Long {
+    suspend fun updateImageProfile(image: String): Long {
         val profile = db.userDAO().getUser()
         val updatedProfile = UserEntity(
             id = profile?.id.orEmpty(),
@@ -60,5 +65,21 @@ class ProfileRepository(private val imageAPI: ImageAPI, private val db: MyDoctor
             image = image
         )
         return db.userDAO().insertUser(updatedProfile)
+    }
+
+    suspend fun setCounter(value: Int) {
+        prefDataStore.setCounter(value)
+    }
+
+    fun getCounter(): Flow<Int> {
+        return prefDataStore.getCounter()
+    }
+
+    suspend fun increment() {
+        prefDataStore.incrementCounter()
+    }
+
+    suspend fun decrement() {
+        prefDataStore.decrementCounter()
     }
 }

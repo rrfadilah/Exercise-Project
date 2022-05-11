@@ -21,6 +21,7 @@ import com.rizky.exercise_project.data.api.home.GoodNewsResponse
 import com.rizky.exercise_project.data.api.home.TopRatedResponse
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.FragmentDoctorBinding
+import com.rizky.exercise_project.datastore.CounterDataStoreManager
 import com.rizky.exercise_project.network.ImageApiClient
 import com.rizky.exercise_project.repository.ProfileRepository
 import com.rizky.exercise_project.ui.home.message.MessageAdapter
@@ -35,7 +36,8 @@ class DoctorFragment : Fragment() {
         DoctorViewModel.Factory(
             ProfileRepository(
                 ImageApiClient.instanceImage,
-                MyDoctorDatabase.getInstance(requireContext())
+                MyDoctorDatabase.getInstance(requireContext()),
+                CounterDataStoreManager(requireContext())
             )
         )
     }

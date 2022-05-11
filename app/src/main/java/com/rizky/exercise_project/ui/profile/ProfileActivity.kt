@@ -1,16 +1,26 @@
 package com.rizky.exercise_project.ui.profile
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
 import com.bumptech.glide.Glide
+import com.rizky.exercise_project.Constant
+import com.rizky.exercise_project.common.dataStoreCounter
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.ActivityProfileBinding
+import com.rizky.exercise_project.datastore.CounterDataStoreManager
 import com.rizky.exercise_project.network.ImageApiClient
 import com.rizky.exercise_project.repository.ProfileRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -22,8 +32,9 @@ class ProfileActivity : AppCompatActivity() {
     private val viewModel: ProfileViewModel by viewModels {
         ProfileViewModel.Factory(
             ProfileRepository(
-                ImageApiClient.instanceImage,
-                MyDoctorDatabase.getInstance(this)
+                imageAPI = ImageApiClient.instanceImage,
+                db = MyDoctorDatabase.getInstance(this),
+                prefDataStore = CounterDataStoreManager(this)
             )
         )
     }
@@ -70,6 +81,14 @@ class ProfileActivity : AppCompatActivity() {
         binding.ivBack.setOnClickListener {
             onBackPressed()
         }
+
+        binding.btnIncrement.setOnClickListener {
+            viewModel.increment()
+        }
+
+        binding.btnDecrement.setOnClickListener {
+            viewModel.decrement()
+        }
     }
 
     private fun bindViewModel() {
@@ -97,6 +116,10 @@ class ProfileActivity : AppCompatActivity() {
             } else {
                 progressDialog.hide()
             }
+        }
+
+        viewModel.shouldShowCounter.observe(this) {
+            binding.tvCounter.text = "$it"
         }
     }
 }
