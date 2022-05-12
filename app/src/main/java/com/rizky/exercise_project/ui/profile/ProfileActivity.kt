@@ -11,6 +11,7 @@ import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.ActivityProfileBinding
 import com.rizky.exercise_project.datastore.CounterDataStoreManager
 import com.rizky.exercise_project.network.ImageApiClient
+import com.rizky.exercise_project.network.MyDoctorApiClient
 import com.rizky.exercise_project.repository.ProfileRepository
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -24,6 +25,7 @@ class ProfileActivity : AppCompatActivity() {
         ProfileViewModel.Factory(
             ProfileRepository(
                 imageAPI = ImageApiClient.instanceImage,
+                authAPI = MyDoctorApiClient.instanceAuth,
                 db = MyDoctorDatabase.getInstance(this),
                 prefDataStore = CounterDataStoreManager(this)
             )

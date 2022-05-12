@@ -2,6 +2,9 @@ package com.rizky.exercise_project.repository
 
 import com.rizky.exercise_project.common.Resource
 import com.rizky.exercise_project.common.Status
+import com.rizky.exercise_project.data.api.auth.AuthAPI
+import com.rizky.exercise_project.data.api.auth.SignInResponse
+import com.rizky.exercise_project.data.api.auth.UpdateProfileRequest
 import com.rizky.exercise_project.data.api.image.ImageAPI
 import com.rizky.exercise_project.data.api.image.ImageDataResponse
 import com.rizky.exercise_project.data.local.UserEntity
@@ -11,6 +14,7 @@ import com.rizky.exercise_project.model.ProfileModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import okhttp3.MultipartBody
+import retrofit2.Response
 
 /**
  * com.rizky.exercise_project.repository
@@ -22,6 +26,7 @@ import okhttp3.MultipartBody
 
 class ProfileRepository(
     private val imageAPI: ImageAPI,
+    private val authAPI: AuthAPI,
     private val db: MyDoctorDatabase,
     private val prefDataStore: CounterDataStoreManager,
 ) {
@@ -36,6 +41,34 @@ class ProfileRepository(
                 )
             } else {
                 return Resource(
+                    status = Status.ERROR,
+                    data = null,
+                    message = it.errorBody().toString()
+                )
+            }
+        }
+    }
+
+    suspend fun updateProfile(image: String): Resource<SignInResponse> {
+        val profile = getProfile()
+        val request = UpdateProfileRequest(
+            name = profile.name,
+            image = image,
+            job = profile.job
+        )
+
+        return authAPI.updateProfile(
+            id = profile.id,
+            request = request
+        ).let {
+            if (it.isSuccessful) {
+                Resource(
+                    status = Status.SUCCESS,
+                    data = it.body(),
+                    message = null
+                )
+            } else {
+                Resource(
                     status = Status.ERROR,
                     data = null,
                     message = it.errorBody().toString()

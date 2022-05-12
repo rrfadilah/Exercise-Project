@@ -24,6 +24,7 @@ import com.rizky.exercise_project.databinding.FragmentDoctorBinding
 import com.rizky.exercise_project.datastore.AuthDataStoreManager
 import com.rizky.exercise_project.datastore.CounterDataStoreManager
 import com.rizky.exercise_project.network.ImageApiClient
+import com.rizky.exercise_project.network.MyDoctorApiClient
 import com.rizky.exercise_project.repository.AuthRepository
 import com.rizky.exercise_project.repository.ProfileRepository
 import com.rizky.exercise_project.ui.home.HomeActivity
@@ -39,9 +40,10 @@ class DoctorFragment : Fragment() {
     private val viewModel: DoctorViewModel by viewModels {
         DoctorViewModel.Factory(
             ProfileRepository(
-                ImageApiClient.instanceImage,
-                MyDoctorDatabase.getInstance(requireContext()),
-                CounterDataStoreManager(requireContext())
+                imageAPI = ImageApiClient.instanceImage,
+                authAPI = MyDoctorApiClient.instanceAuth,
+                db = MyDoctorDatabase.getInstance(requireContext()),
+                prefDataStore = CounterDataStoreManager(requireContext())
             ),
             AuthRepository(
                 AuthDataStoreManager(requireContext())
