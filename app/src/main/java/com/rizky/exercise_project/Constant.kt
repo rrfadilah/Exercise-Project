@@ -1,6 +1,7 @@
 package com.rizky.exercise_project
 
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 
 /**
  * com.rizky.exercise_project
@@ -37,6 +38,8 @@ object Constant {
     }
 
     object PrefDataStore {
+        const val PREF_NAME = "MyDoctor"
         val COUNTER_KEY = intPreferencesKey("counter_key")
+        val TOKEN_KEY = stringPreferencesKey("TOKEN")
     }
 }

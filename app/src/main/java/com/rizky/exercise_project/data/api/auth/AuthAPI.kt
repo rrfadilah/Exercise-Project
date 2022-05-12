@@ -19,5 +19,5 @@ interface AuthAPI {
     suspend fun signUp(@Body request: SignUpRequest): Response<SignUpResponse>
 
     @GET("users/logout")
-    suspend fun logout(@HeaderMap headers: Map<String, String>): Response<LogoutResponse>
+    suspend fun logout(@HeaderMap headers: Map<String, String>): Response<Unit>
 }

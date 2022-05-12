@@ -5,6 +5,8 @@ import android.util.Patterns
 import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.rizky.exercise_project.Constant
 import com.rizky.exercise_project.data.api.ErrorResponse
@@ -12,6 +14,9 @@ import com.rizky.exercise_project.data.api.auth.SignInRequest
 import com.rizky.exercise_project.data.local.UserEntity
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.network.MyDoctorApiClient
+import com.rizky.exercise_project.repository.AuthRepository
+import com.rizky.exercise_project.repository.ProfileRepository
+import com.rizky.exercise_project.ui.home.doctor.DoctorViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,7 +30,9 @@ import kotlinx.coroutines.withContext
  *
  */
 
-class SignInViewModel() : ViewModel() {
+class SignInViewModel(
+    private val authRepository: AuthRepository
+) : ViewModel() {
     private var db: MyDoctorDatabase? = null
     private var pref: SharedPreferences? = null
 
@@ -93,9 +100,8 @@ class SignInViewModel() : ViewModel() {
 
     private fun insertToken(token: String) {
         if (token.isNotEmpty()) {
-            pref?.edit {
-                putString(Constant.Preferences.KEY.TOKEN, token)
-                apply()
+            viewModelScope.launch {
+                authRepository.updateToken(token)
             }
         }
     }
@@ -110,6 +116,22 @@ class SignInViewModel() : ViewModel() {
                     shouldShowError.postValue("Maaf, Gagal insert ke dalam database")
                 }
             }
+        }
+    }
+
+
+    @Suppress("UNCHECKED_CAST")
+    class Factory(
+        private val authRepository: AuthRepository
+    ) :
+        ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(SignInViewModel::class.java)) {
+                return SignInViewModel(
+                    authRepository
+                ) as T
+            }
+            throw IllegalArgumentException("Unknown class name")
         }
     }
 }

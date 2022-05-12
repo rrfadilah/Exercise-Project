@@ -1,26 +1,17 @@
 package com.rizky.exercise_project.ui.profile
 
 import android.app.ProgressDialog
-import android.content.Context
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.rizky.exercise_project.Constant
-import com.rizky.exercise_project.common.dataStoreCounter
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.ActivityProfileBinding
 import com.rizky.exercise_project.datastore.CounterDataStoreManager
 import com.rizky.exercise_project.network.ImageApiClient
 import com.rizky.exercise_project.repository.ProfileRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

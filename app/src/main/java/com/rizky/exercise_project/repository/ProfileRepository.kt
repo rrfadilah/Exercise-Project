@@ -67,6 +67,18 @@ class ProfileRepository(
         return db.userDAO().insertUser(updatedProfile)
     }
 
+    suspend fun deleteProfile(): Int {
+        val profile = db.userDAO().getUser()
+        val deleteProfile = UserEntity(
+            id = profile?.id.orEmpty(),
+            email = profile?.email.orEmpty(),
+            name = profile?.name.orEmpty(),
+            job = profile?.job.orEmpty(),
+            image = profile?.image.orEmpty()
+        )
+        return db.userDAO().deleteUser(deleteProfile)
+    }
+
     suspend fun setCounter(value: Int) {
         prefDataStore.setCounter(value)
     }

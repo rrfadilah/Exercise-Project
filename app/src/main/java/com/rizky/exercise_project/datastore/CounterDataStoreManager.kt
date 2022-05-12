@@ -1,9 +1,11 @@
 package com.rizky.exercise_project.datastore
 
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.preferencesDataStore
 import com.rizky.exercise_project.Constant
-import com.rizky.exercise_project.common.dataStoreCounter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -31,7 +33,7 @@ class CounterDataStoreManager(private val context: Context) {
     }
 
     suspend fun incrementCounter() {
-        context.dataStoreCounter.edit { preferences->
+        context.dataStoreCounter.edit { preferences ->
             // Membaca value saat ini dari preferences
             val currentCounterValue = preferences[Constant.PrefDataStore.COUNTER_KEY] ?: 0
             // Menulis value saat ini dan ditambahkan 1 ke dalam preferences
@@ -40,11 +42,15 @@ class CounterDataStoreManager(private val context: Context) {
     }
 
     suspend fun decrementCounter() {
-        context.dataStoreCounter.edit { preferences->
+        context.dataStoreCounter.edit { preferences ->
             // Membaca value saat ini dari preferences
             val currentCounterValue = preferences[Constant.PrefDataStore.COUNTER_KEY] ?: 0
             // Menulis value saat ini dan ditambahkan 1 ke dalam preferences
             preferences[Constant.PrefDataStore.COUNTER_KEY] = currentCounterValue - 1
         }
+    }
+
+    companion object {
+        val Context.dataStoreCounter: DataStore<Preferences> by preferencesDataStore(name = "counter")
     }
 }

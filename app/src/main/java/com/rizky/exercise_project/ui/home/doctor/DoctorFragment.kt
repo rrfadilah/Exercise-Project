@@ -21,11 +21,15 @@ import com.rizky.exercise_project.data.api.home.GoodNewsResponse
 import com.rizky.exercise_project.data.api.home.TopRatedResponse
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.FragmentDoctorBinding
+import com.rizky.exercise_project.datastore.AuthDataStoreManager
 import com.rizky.exercise_project.datastore.CounterDataStoreManager
 import com.rizky.exercise_project.network.ImageApiClient
+import com.rizky.exercise_project.repository.AuthRepository
 import com.rizky.exercise_project.repository.ProfileRepository
+import com.rizky.exercise_project.ui.home.HomeActivity
 import com.rizky.exercise_project.ui.home.message.MessageAdapter
 import com.rizky.exercise_project.ui.home.message.MessageModel
+import com.rizky.exercise_project.ui.onboarding.OnBoardingActivity
 import com.rizky.exercise_project.ui.profile.ProfileActivity
 
 class DoctorFragment : Fragment() {
@@ -38,6 +42,9 @@ class DoctorFragment : Fragment() {
                 ImageApiClient.instanceImage,
                 MyDoctorDatabase.getInstance(requireContext()),
                 CounterDataStoreManager(requireContext())
+            ),
+            AuthRepository(
+                AuthDataStoreManager(requireContext())
             )
         )
     }
@@ -104,6 +111,11 @@ class DoctorFragment : Fragment() {
         viewModel.getProfile()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        progressDialog.cancel()
+    }
+
     private fun bindView() {
         binding.tvLogout.setOnClickListener {
             viewModel.logout()
@@ -149,6 +161,14 @@ class DoctorFragment : Fragment() {
 
         viewModel.shouldShowGoodNews.observe(viewLifecycleOwner) {
             adapterGoodNewsAdapter.updateList(it)
+        }
+
+        viewModel.shouldShowGetStarted.observe(viewLifecycleOwner) {
+            if (it) {
+                val intent = Intent(requireContext(), OnBoardingActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }
         }
     }
 }

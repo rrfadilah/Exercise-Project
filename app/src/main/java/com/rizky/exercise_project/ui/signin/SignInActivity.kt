@@ -18,11 +18,17 @@ import com.rizky.exercise_project.CustomDialogFragment
 import com.rizky.exercise_project.R
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.ActivitySignInBinding
+import com.rizky.exercise_project.datastore.AuthDataStoreManager
+import com.rizky.exercise_project.repository.AuthRepository
 import com.rizky.exercise_project.ui.home.HomeActivity
 
 class SignInActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignInBinding
-    private val viewModel: SignInViewModel by viewModels()
+    private val viewModel: SignInViewModel by viewModels {
+        SignInViewModel.Factory(
+            AuthRepository(AuthDataStoreManager(this))
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
