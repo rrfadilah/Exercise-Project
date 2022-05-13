@@ -1,6 +1,7 @@
 package com.rizky.exercise_project.menu.ui.doctor
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import com.rizky.exercise_project.data.api.home.GoodNewsResponse
 import com.rizky.exercise_project.data.api.home.TopRatedResponse
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.FragmentDoctorBinding
+import com.rizky.exercise_project.menu.ui.profile.ProfileActivity
 
 class DoctorFragment : Fragment() {
 
@@ -86,6 +88,10 @@ class DoctorFragment : Fragment() {
     private fun bindView() {
         binding.tvLogout.setOnClickListener {
             viewModel.logout()
+        }
+
+        binding.ivImg.setOnClickListener {
+            startActivity(Intent(requireContext(), ProfileActivity::class.java))
         }
     }
 

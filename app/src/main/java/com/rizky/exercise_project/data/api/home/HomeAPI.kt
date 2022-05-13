@@ -12,4 +12,7 @@ interface HomeAPI {
 
     @GET("goodnews")
     suspend fun goodnews(): Response<List<GoodNewsResponse>>
+
+    @GET("data/hospital")
+    suspend fun getHospital(): Response<List<HospitalResponse>>
 }
