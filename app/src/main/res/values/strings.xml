@@ -2,4 +2,12 @@
     <string name="app_name">Exercise_Project</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="title_menu_doctor">Doctor</string>
+    <string name="title_menu_messeges">Messages</string>
+    <string name="title_menu_hospitals">Hospitals</string>
 </resources>

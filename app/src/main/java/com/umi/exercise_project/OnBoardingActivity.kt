@@ -3,71 +3,85 @@ package com.umi.exercise_project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.umi.exercise_project.databinding.ActivityOnBoardingBinding
+import com.umi.exercise_project.home.HomeActivity
 import com.umi.exercise_project.model.Biodata
 import com.umi.exercise_project.model.UserInfo
 
 class OnBoardingActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityOnBoardingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_on_boarding)
-    }
+        binding = ActivityOnBoardingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-    fun intentexplicit (){
-        //contoh penggunaan explicit intent
-        val intent =Intent (this, SignInActivity:: class.java).apply {
-            putExtra(Constant.Intent.KEY, "value")
+        binding.btnGetStarted.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+
         }
-        startActivity(intent)
-    }
-
-
-    fun intenImplicit (){
-        //contoh penggunaan implicit intent
-        val intent = Intent (this, SignInActivity:: class.java).apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "VALUE")
-        }
-        if (intent.resolveActivity(packageManager) != null){
+        binding.btnSignIn.setOnClickListener {
+            val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
         }
-    }
 
-    fun intenBundle(){
-        val intent = Intent (this, SignInActivity:: class.java)
-        val bundle = Bundle ()
-
-        bundle.putString(Constant.Intent.PHONE, "VALUE")
-        bundle.putString(Constant.Intent.EMAIL, "VALUE")
-        bundle.putString(Constant.Intent.KEY, "VALUE")
-
-        intent.putExtras(bundle)
-        startActivity(intent)
-    }
+        fun intentexplicit() {
+            //contoh penggunaan explicit intent
+            val intent = Intent(this, SignInActivity::class.java).apply {
+                putExtra(Constant.Intent.KEY, "value")
+            }
+            startActivity(intent)
+        }
 
 
-    ////untuk mengirim intent Serializeble
-    fun intentSerialize(){
-        val intent = Intent(this, SignInActivity::class.java)
+        fun intenImplicit() {
+            //contoh penggunaan implicit intent
+            val intent = Intent(this, SignInActivity::class.java).apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "VALUE")
+            }
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
+            }
+        }
 
-        val biodata = Biodata(
-            key = "VALUE_KEY",
-            phone = "VALUE_PHONE",
-            email = "VALUE_EMAIL"
-        )
-        intent.putExtra(Constant.Serialize.KEY, biodata)
-        startActivity(intent)
-    }
+        fun intenBundle() {
+            val intent = Intent(this, SignInActivity::class.java)
+            val bundle = Bundle()
 
-    fun intentParcelable(){
-        val intent = Intent(this, SignInActivity::class.java)
+            bundle.putString(Constant.Intent.PHONE, "VALUE")
+            bundle.putString(Constant.Intent.EMAIL, "VALUE")
+            bundle.putString(Constant.Intent.KEY, "VALUE")
 
-        val userInfo = UserInfo(
-            key = "VALUE_KEY",
-            phone = "VALUE_PHONE",
-            email = "VALUE_EMAIL"
-        )
-        intent.putExtra(Constant.Parcelize.KEY, userInfo)
-        startActivity(intent)
+            intent.putExtras(bundle)
+            startActivity(intent)
+        }
+
+
+        ////untuk mengirim intent Serializeble
+        fun intentSerialize() {
+            val intent = Intent(this, SignInActivity::class.java)
+
+            val biodata = Biodata(
+                key = "VALUE_KEY",
+                phone = "VALUE_PHONE",
+                email = "VALUE_EMAIL"
+            )
+            intent.putExtra(Constant.Serialize.KEY, biodata)
+            startActivity(intent)
+        }
+
+        fun intentParcelable() {
+            val intent = Intent(this, SignInActivity::class.java)
+
+            val userInfo = UserInfo(
+                key = "VALUE_KEY",
+                phone = "VALUE_PHONE",
+                email = "VALUE_EMAIL"
+            )
+            intent.putExtra(Constant.Parcelize.KEY, userInfo)
+            startActivity(intent)
+        }
     }
 }
 

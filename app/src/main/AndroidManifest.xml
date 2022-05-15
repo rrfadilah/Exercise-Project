@@ -9,27 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Exercise_Project">
-
+        <activity
+            android:name=".home.HomeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_home" />
         <activity
             android:name=".galleryfragment.GalleryActivity"
-            android:exported="true" >
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".samplefragment.PicturesActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".SignInActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".OnBoardingActivity"
-            android:exported="false">
-        </activity>
-
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
