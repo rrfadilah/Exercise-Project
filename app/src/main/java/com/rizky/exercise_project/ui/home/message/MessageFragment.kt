@@ -14,6 +14,7 @@ import com.rizky.exercise_project.data.local.MessageEntity
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.FragmentMessageBinding
 import com.rizky.exercise_project.network.MyDoctorApiClient
+import com.rizky.exercise_project.repository.MessageRepository
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -27,7 +28,13 @@ class MessageFragment : Fragment() {
 
     private var db: MyDoctorDatabase? = null
     private lateinit var adapter: MessageAdapter
-    private val viewModel: MessageViewModel by viewModels()
+    private val viewModel: MessageViewModel by viewModels {
+        MessageViewModel.Factory(
+            MessageRepository(
+                MyDoctorApiClient.instanceMessage
+            )
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

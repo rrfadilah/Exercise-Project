@@ -2,17 +2,14 @@ package com.rizky.exercise_project.ui.home.message
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.rizky.exercise_project.R
 import com.rizky.exercise_project.data.api.MessagesRequest
-import com.rizky.exercise_project.data.api.MessagesResponse
-import com.rizky.exercise_project.network.MyDoctorApiClient
+import com.rizky.exercise_project.repository.MessageRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 /**
  * com.rizky.exercise_project.ui.home.message
@@ -22,14 +19,16 @@ import retrofit2.Response
  *
  */
 
-class MessageViewModel : ViewModel() {
+class MessageViewModel(
+    private val repository: MessageRepository
+) : ViewModel() {
     val shouldShowData: MutableLiveData<List<MessageModel>> = MutableLiveData()
     val shouldShowError: MutableLiveData<String> = MutableLiveData()
 
     // function untuk load data dari api
     fun loadDataAPI() {
         CoroutineScope(Dispatchers.IO).launch {
-            val result = MyDoctorApiClient.instanceMessage.getMessages()
+            val result = repository.getMessage()
             withContext(Dispatchers.Main) {
                 if (result.isSuccessful) {
                     val message = result.body()?.map {
@@ -52,7 +51,7 @@ class MessageViewModel : ViewModel() {
     // function untuk menginsert data pada api
     fun postDataAPI(message: MessagesRequest) {
         CoroutineScope(Dispatchers.IO).launch {
-            val result = MyDoctorApiClient.instanceMessage.postMessages(request = message)
+            val result = repository.postMessage(message = message)
             withContext(Dispatchers.Main) {
                 if (result.isSuccessful) {
                     loadDataAPI()
@@ -66,7 +65,7 @@ class MessageViewModel : ViewModel() {
     // function untuk menghapus data pada api
     fun deleteDataAPI(id: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val result = MyDoctorApiClient.instanceMessage.deleteMessages(id = id)
+            val result = repository.deleteMessage(id = id)
             withContext(Dispatchers.Main) {
                 if (result.isSuccessful) {
                     loadDataAPI()
@@ -80,8 +79,7 @@ class MessageViewModel : ViewModel() {
     // function untuk mengupdate data pada api
     fun updateDataAPI(id: String, message: MessagesRequest) {
         CoroutineScope(Dispatchers.IO).launch {
-            val result =
-                MyDoctorApiClient.instanceMessage.updateMessages(id = id, request = message)
+            val result = repository.updateMessage(id = id, message = message)
             withContext(Dispatchers.IO) {
                 if (result.isSuccessful) {
                     loadDataAPI()
@@ -89,6 +87,18 @@ class MessageViewModel : ViewModel() {
                     shouldShowError.postValue("Gagal mengupdate data API")
                 }
             }
+        }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    class Factory(
+        val repository: MessageRepository
+    ) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(MessageViewModel::class.java)) {
+                return MessageViewModel(repository) as T
+            }
+            throw IllegalArgumentException("Unknown class name")
         }
     }
 }
