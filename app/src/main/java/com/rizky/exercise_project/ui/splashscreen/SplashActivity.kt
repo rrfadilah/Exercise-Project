@@ -14,10 +14,19 @@ import com.rizky.exercise_project.datastore.AuthDataStoreManager
 import com.rizky.exercise_project.repository.AuthRepository
 import com.rizky.exercise_project.ui.home.HomeActivity
 import com.rizky.exercise_project.ui.onboarding.OnBoardingActivity
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+import javax.inject.Named
 
 @SuppressLint("CustomSplashScreen")
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+
+    @Inject
+    @Named("TestString2")
+    lateinit var stringDI: String
+
     private val viewModel: SplashViewModel by viewModels {
         SplashViewModel.Factory(
             repository = AuthRepository(AuthDataStoreManager(this))
@@ -67,6 +76,6 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun bindView() {
-
+        binding.tvTitle.text = stringDI
     }
 }
