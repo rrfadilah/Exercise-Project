@@ -42,4 +42,9 @@ object Constant {
         val COUNTER_KEY = intPreferencesKey("counter_key")
         val TOKEN_KEY = stringPreferencesKey("TOKEN")
     }
+
+    object Named {
+        const val BASE_URL_MYDOCTOR = "BASE_URL_MYDOCTOR"
+        const val RETROFIT_MYDOCTOR = "RETROFIT_MYDOCTOR"
+    }
 }

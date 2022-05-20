@@ -16,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.rizky.exercise_project.Constant
 import com.rizky.exercise_project.R
 import com.rizky.exercise_project.data.api.MessagesRequest
+import com.rizky.exercise_project.data.api.auth.AuthAPI
 import com.rizky.exercise_project.data.api.home.ConsultationResponse
 import com.rizky.exercise_project.data.api.home.GoodNewsResponse
 import com.rizky.exercise_project.data.api.home.TopRatedResponse
@@ -32,11 +33,16 @@ import com.rizky.exercise_project.ui.home.message.MessageAdapter
 import com.rizky.exercise_project.ui.home.message.MessageModel
 import com.rizky.exercise_project.ui.onboarding.OnBoardingActivity
 import com.rizky.exercise_project.ui.profile.ProfileActivity
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class DoctorFragment : Fragment() {
 
     private lateinit var binding: FragmentDoctorBinding
     private val progressDialog: ProgressDialog by lazy { ProgressDialog(requireContext()) }
+    @Inject
+    lateinit var authAPI: AuthAPI
     private val viewModel: DoctorViewModel by viewModels {
         DoctorViewModel.Factory(
             ProfileRepository(
@@ -46,7 +52,8 @@ class DoctorFragment : Fragment() {
                 prefDataStore = CounterDataStoreManager(requireContext())
             ),
             AuthRepository(
-                AuthDataStoreManager(requireContext())
+                AuthDataStoreManager(requireContext()),
+                authAPI
             )
         )
     }

@@ -75,7 +75,7 @@ class SignInViewModel @Inject constructor(
                 login = email,
                 password = password
             )
-            val response = MyDoctorApiClient.instanceAuth.signIn(request)
+            val response = authRepository.signIn(request)
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
                     val signInResponse = response.body()
