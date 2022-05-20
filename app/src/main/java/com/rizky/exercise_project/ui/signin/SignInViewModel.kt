@@ -37,19 +37,13 @@ class SignInViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
 
-    private var db: MyDoctorDatabase? = null
-    private var pref: SharedPreferences? = null
-
     private var email: String = ""
     private var password: String = ""
 
     val shouldShowError: MutableLiveData<String> = MutableLiveData()
     val shouldOpenHomePage: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun onViewLoaded(db: MyDoctorDatabase, preferences: SharedPreferences) {
-        this.db = db
-        this.pref = preferences
-    }
+    fun onViewLoaded() {}
 
     fun onChangeEmail(email: String) {
         this.email = email
@@ -112,7 +106,7 @@ class SignInViewModel @Inject constructor(
 
     private fun insertProfile(userEntity: UserEntity) {
         CoroutineScope(Dispatchers.IO).launch {
-            val result = db?.userDAO()?.insertUser(userEntity)
+            val result = authRepository.insertUser(userEntity)
             withContext(Dispatchers.Main) {
                 if (result != 0L) {
                     shouldOpenHomePage.postValue(true)

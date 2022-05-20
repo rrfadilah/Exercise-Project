@@ -2,6 +2,7 @@ package com.rizky.exercise_project.di
 
 import android.content.Context
 import com.rizky.exercise_project.data.api.auth.AuthAPI
+import com.rizky.exercise_project.data.local.UserDAO
 import com.rizky.exercise_project.datastore.AuthDataStoreManager
 import com.rizky.exercise_project.repository.AuthRepository
 import dagger.Module
@@ -42,11 +43,15 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideAuthRepository(authDataStoreManager: AuthDataStoreManager, api: AuthAPI)
-            : AuthRepository {
+    fun provideAuthRepository(
+        authDataStoreManager: AuthDataStoreManager,
+        api: AuthAPI,
+        dao: UserDAO
+    ): AuthRepository {
         return AuthRepository(
             authDataStore = authDataStoreManager,
-            api = api
+            api = api,
+            dao = dao
         )
     }
 }

@@ -33,9 +33,7 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val db = MyDoctorDatabase.getInstance(this.applicationContext)
-        val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
-        viewModel.onViewLoaded(db, pref)
+        viewModel.onViewLoaded()
 
         bindViewModel()
         bindView()

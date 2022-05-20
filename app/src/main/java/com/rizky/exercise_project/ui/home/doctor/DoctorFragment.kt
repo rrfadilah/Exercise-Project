@@ -20,6 +20,7 @@ import com.rizky.exercise_project.data.api.auth.AuthAPI
 import com.rizky.exercise_project.data.api.home.ConsultationResponse
 import com.rizky.exercise_project.data.api.home.GoodNewsResponse
 import com.rizky.exercise_project.data.api.home.TopRatedResponse
+import com.rizky.exercise_project.data.local.UserDAO
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.FragmentDoctorBinding
 import com.rizky.exercise_project.datastore.AuthDataStoreManager
@@ -41,19 +42,28 @@ class DoctorFragment : Fragment() {
 
     private lateinit var binding: FragmentDoctorBinding
     private val progressDialog: ProgressDialog by lazy { ProgressDialog(requireContext()) }
+
+    @Inject
+    lateinit var db: MyDoctorDatabase
+    @Inject
+    lateinit var dataStore: AuthDataStoreManager
     @Inject
     lateinit var authAPI: AuthAPI
+    @Inject
+    lateinit var userDAO: UserDAO
+
     private val viewModel: DoctorViewModel by viewModels {
         DoctorViewModel.Factory(
             ProfileRepository(
                 imageAPI = ImageApiClient.instanceImage,
-                authAPI = MyDoctorApiClient.instanceAuth,
-                db = MyDoctorDatabase.getInstance(requireContext()),
+                authAPI = authAPI,
+                db = db,
                 prefDataStore = CounterDataStoreManager(requireContext())
             ),
             AuthRepository(
-                AuthDataStoreManager(requireContext()),
-                authAPI
+                dataStore,
+                authAPI,
+                userDAO
             )
         )
     }
