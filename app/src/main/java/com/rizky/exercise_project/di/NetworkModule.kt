@@ -1,10 +1,10 @@
 package com.rizky.exercise_project.di
 
+import com.rizky.exercise_project.BuildConfig
 import com.rizky.exercise_project.Constant
 import com.rizky.exercise_project.data.api.MessageAPI
 import com.rizky.exercise_project.data.api.auth.AuthAPI
 import com.rizky.exercise_project.data.api.home.HomeAPI
-import com.rizky.exercise_project.network.MyDoctorApiClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,6 +34,19 @@ class NetworkModule {
 
     @Singleton
     @Provides
+    @Named(Constant.Named.BASE_URL_MOCK)
+    fun provideBaseUrlMock(): String = "http://private-82636-mydoctorexample.apiary-mock.com/api/"
+
+    @Singleton
+    @Provides
+    @Named(Constant.Named.BASE_URL_FLAVOR)
+    fun provideBaseUrl(
+        @Named(Constant.Named.BASE_URL_MOCK) baseUrlMock: String,
+        @Named(Constant.Named.BASE_URL_MYDOCTOR) baseUrlMyDoctor: String
+    ): String = if (BuildConfig.FLAVOR == "ayam_panggang") baseUrlMock else baseUrlMyDoctor
+
+    @Singleton
+    @Provides
     fun provideHttpLogging(): HttpLoggingInterceptor {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         return httpLoggingInterceptor.apply {
@@ -53,7 +66,7 @@ class NetworkModule {
     @Provides
     @Named(Constant.Named.RETROFIT_MYDOCTOR)
     fun provideRetrofitMyDoctor(
-        @Named(Constant.Named.BASE_URL_MYDOCTOR) baseUrl: String,
+        @Named(Constant.Named.BASE_URL_FLAVOR) baseUrl: String,
         client: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
