@@ -2,6 +2,7 @@ package com.rizky.exercise_project.repository
 
 import com.rizky.exercise_project.datastore.AuthDataStoreManager
 import kotlinx.coroutines.flow.firstOrNull
+import javax.inject.Inject
 
 /**
  * com.rizky.exercise_project.repository
@@ -11,7 +12,7 @@ import kotlinx.coroutines.flow.firstOrNull
  *
  */
 
-class AuthRepository(
+class AuthRepository @Inject constructor(
     private val authDataStore: AuthDataStoreManager
 ) {
     suspend fun clearToken() {

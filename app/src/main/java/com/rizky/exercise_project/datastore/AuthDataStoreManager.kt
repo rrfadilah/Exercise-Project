@@ -9,6 +9,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.rizky.exercise_project.Constant
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
 /**
  * com.rizky.exercise_project.database
@@ -18,7 +19,7 @@ import kotlinx.coroutines.flow.map
  *
  */
 
-class AuthDataStoreManager(private val context: Context) {
+class AuthDataStoreManager @Inject constructor(private val context: Context) {
     companion object {
         val Context.dataStoreAuth: DataStore<Preferences> by preferencesDataStore(
             name = Constant.PrefDataStore.PREF_NAME,

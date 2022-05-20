@@ -7,11 +7,13 @@ import com.rizky.exercise_project.common.Status
 import com.rizky.exercise_project.repository.AuthRepository
 import com.rizky.exercise_project.repository.ProfileRepository
 import com.rizky.exercise_project.ui.profile.ProfileViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 /**
  * com.rizky.exercise_project.ui.splashscreen
@@ -21,20 +23,12 @@ import kotlinx.coroutines.withContext
  *
  */
 
-class SplashViewModel(
+@HiltViewModel
+class SplashViewModel @Inject constructor(
     private val repository: AuthRepository
 ) : ViewModel() {
     val shouldOpenOnBoarding: MutableLiveData<Boolean> = MutableLiveData()
     val shouldOpenHomePage: MutableLiveData<Boolean> = MutableLiveData()
-//    val shouldGetToken: LiveData<String> = repository.getToken().asLiveData()
-
-    fun onViewLoaded(sharedPreferences: SharedPreferences) {
-        if (sharedPreferences.getString(Constant.Preferences.KEY.TOKEN, "").isNullOrEmpty()) {
-            shouldOpenOnBoarding.postValue(true)
-        } else {
-            shouldOpenHomePage.postValue(true)
-        }
-    }
 
     fun onViewLoaded() {
         viewModelScope.launch {
@@ -46,17 +40,6 @@ class SplashViewModel(
                     shouldOpenHomePage.postValue(true)
                 }
             }
-        }
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    class Factory(private val repository: AuthRepository) :
-        ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(SplashViewModel::class.java)) {
-                return SplashViewModel(repository) as T
-            }
-            throw IllegalArgumentException("Unknown class name")
         }
     }
 }
