@@ -7,6 +7,7 @@ import com.rizky.exercise_project.Constant
 import com.rizky.exercise_project.data.local.MessageDAO
 import com.rizky.exercise_project.data.local.UserDAO
 import com.rizky.exercise_project.database.MyDoctorDatabase
+import com.rizky.exercise_project.datastore.AuthDataStoreManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -51,5 +52,12 @@ class LocalStorageModule {
             Constant.Preferences.PREF_NAME,
             AppCompatActivity.MODE_PRIVATE
         )
+    }
+
+    @Singleton
+    @Provides
+    fun provideAuthDataStoreManager(@ApplicationContext context: Context)
+            : AuthDataStoreManager {
+        return AuthDataStoreManager(context = context)
     }
 }

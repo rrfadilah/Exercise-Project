@@ -33,14 +33,6 @@ class AppModule {
     @Named("TestString2")
     fun provideTestString2(): String = "Testing string 2 dengan hilt"
 
-
-    @Singleton
-    @Provides
-    fun provideAuthDataStoreManager(@ApplicationContext context: Context)
-            : AuthDataStoreManager {
-        return AuthDataStoreManager(context = context)
-    }
-
     @Singleton
     @Provides
     fun provideAuthRepository(
