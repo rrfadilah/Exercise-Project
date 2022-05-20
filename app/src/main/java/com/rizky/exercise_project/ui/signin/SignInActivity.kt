@@ -21,14 +21,12 @@ import com.rizky.exercise_project.databinding.ActivitySignInBinding
 import com.rizky.exercise_project.datastore.AuthDataStoreManager
 import com.rizky.exercise_project.repository.AuthRepository
 import com.rizky.exercise_project.ui.home.HomeActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignInActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignInBinding
-    private val viewModel: SignInViewModel by viewModels {
-        SignInViewModel.Factory(
-            AuthRepository(AuthDataStoreManager(this))
-        )
-    }
+    private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

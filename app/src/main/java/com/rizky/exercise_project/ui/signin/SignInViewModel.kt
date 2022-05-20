@@ -17,10 +17,12 @@ import com.rizky.exercise_project.network.MyDoctorApiClient
 import com.rizky.exercise_project.repository.AuthRepository
 import com.rizky.exercise_project.repository.ProfileRepository
 import com.rizky.exercise_project.ui.home.doctor.DoctorViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 /**
  * com.rizky.exercise_project.ui.signin
@@ -30,9 +32,11 @@ import kotlinx.coroutines.withContext
  *
  */
 
-class SignInViewModel(
+@HiltViewModel
+class SignInViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
+
     private var db: MyDoctorDatabase? = null
     private var pref: SharedPreferences? = null
 
@@ -119,19 +123,4 @@ class SignInViewModel(
         }
     }
 
-
-    @Suppress("UNCHECKED_CAST")
-    class Factory(
-        private val authRepository: AuthRepository
-    ) :
-        ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(SignInViewModel::class.java)) {
-                return SignInViewModel(
-                    authRepository
-                ) as T
-            }
-            throw IllegalArgumentException("Unknown class name")
-        }
-    }
 }
