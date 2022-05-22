@@ -7,7 +7,9 @@ import id.anantyan.exerciseproject.network.RetrofitNetwork
 import id.anantyan.utils.LiveEvent
 import id.anantyan.utils.Resource
 
-class MessagesRepository(private val usersDao: MessagesDao) {
+class MessagesRepository(
+    private val usersDao: MessagesDao
+) {
 
     val _selectResponse: MutableLiveData<Resource<List<Messages>>> = MutableLiveData()
     val _insertResponse: LiveEvent<Resource<Messages>> = LiveEvent()
