@@ -1,4 +1,4 @@
-package net.mzhasanah.fiveinone.exerciseproject.ui.signin
+package net.mzhasanah.fiveinone.exerciseproject.ui.signup
 
 import android.content.SharedPreferences
 import android.util.Patterns
@@ -6,30 +6,43 @@ import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
-import net.mzhasanah.fiveinone.exerciseproject.Constant
-import net.mzhasanah.fiveinone.exerciseproject.data.api.ErrorResponse
-import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.SignInRequest
-import net.mzhasanah.fiveinone.exerciseproject.data.local.UserEntity
-import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
-import net.mzhasanah.fiveinone.exerciseproject.network.MyDoctorApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import net.mzhasanah.fiveinone.exerciseproject.Constant
+import net.mzhasanah.fiveinone.exerciseproject.data.api.ErrorResponse
+import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.SignInRequest
+import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.SignUpRequest
+import net.mzhasanah.fiveinone.exerciseproject.data.local.UserEntity
+import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
+import net.mzhasanah.fiveinone.exerciseproject.network.MyDoctorApiClient
+import okhttp3.ResponseBody
 
-class SignInViewModel() : ViewModel() {
+class SignUpViewModel : ViewModel() {
     private var db: MyDoctorDatabase? = null
     private var pref: SharedPreferences? = null
 
+    private var name: String = ""
+    private var job: String = ""
     private var email: String = ""
     private var password: String = ""
 
     val shouldShowError: MutableLiveData<String> = MutableLiveData()
-    val shouldOpenHomePage: MutableLiveData<Boolean> = MutableLiveData()
+    val shouldShowLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val shouldOpenUpdateProfile: MutableLiveData<Boolean> = MutableLiveData()
 
     fun onViewLoaded(db: MyDoctorDatabase, preferences: SharedPreferences) {
         this.db = db
         this.pref = preferences
+    }
+
+    fun onChangeName(name: String) {
+        this.name = name
+    }
+
+    fun onChangeJob(job: String) {
+        this.job = job
     }
 
     fun onChangeEmail(email: String) {
@@ -40,17 +53,40 @@ class SignInViewModel() : ViewModel() {
         this.password = password
     }
 
-    fun onClickSignIn() {
-        if (email.isEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+    fun onValidate() {
+        if (name.isEmpty() && name.length < 3) {
+            shouldShowError.postValue("Nama tidak valid")
+        } else if (email.isEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             shouldShowError.postValue("Email tidak valid")
         } else if (password.isEmpty() && password.length < 8) {
             shouldShowError.postValue("Password tidak valid")
         } else {
-            signInFromAPI()
+            processToSignUp()
         }
     }
 
-    private fun signInFromAPI() {
+    private fun processToSignUp() {
+        CoroutineScope(Dispatchers.IO).launch {
+            shouldShowLoading.postValue(true)
+            val request = SignUpRequest(
+                name = name,
+                email = email,
+                job = job,
+                password = password
+            )
+            val result = MyDoctorApiClient.instanceAuth.signUp(request = request)
+            withContext(Dispatchers.Main) {
+                if (result.isSuccessful) {
+                    processToSignIn()
+                } else {
+                    showErrorMessage(result.errorBody())
+                    shouldShowLoading.postValue(false)
+                }
+            }
+        }
+    }
+
+    private fun processToSignIn() {
         CoroutineScope(Dispatchers.IO).launch {
             val request = SignInRequest(
                 login = email,
@@ -74,13 +110,19 @@ class SignInViewModel() : ViewModel() {
                         )
                         insertProfile(userEntity)
                     }
+                    shouldShowLoading.postValue(false)
                 } else {
-                    val error =
-                        Gson().fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
-                    shouldShowError.postValue(error.message.orEmpty() + " #${error.code}")
+                    showErrorMessage(response.errorBody())
+                    shouldShowLoading.postValue(false)
                 }
             }
         }
+    }
+
+    private fun showErrorMessage(response: ResponseBody?) {
+        val error =
+            Gson().fromJson(response?.string(), ErrorResponse::class.java)
+        shouldShowError.postValue(error.message.orEmpty() + " #${error.code}")
     }
 
     private fun insertToken(token: String) {
@@ -97,7 +139,7 @@ class SignInViewModel() : ViewModel() {
             val result = db?.userDAO()?.insertUser(userEntity)
             withContext(Dispatchers.Main) {
                 if (result != 0L) {
-                    shouldOpenHomePage.postValue(true)
+                    shouldOpenUpdateProfile.postValue(true)
                 } else {
                     shouldShowError.postValue("Maaf, Gagal insert ke dalam database")
                 }

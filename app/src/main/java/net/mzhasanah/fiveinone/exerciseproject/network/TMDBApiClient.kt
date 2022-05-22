@@ -1,15 +1,14 @@
 package net.mzhasanah.fiveinone.exerciseproject.network
 
-import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.AuthAPI
-import net.mzhasanah.fiveinone.exerciseproject.data.api.MessageAPI
+import net.mzhasanah.fiveinone.exerciseproject.data.api.tmdb.TMDBAPI
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object MyDoctorApiClient {
-    // BASE_URL merupakan URL default untuk mengkoneksikan aplikasi dengan endpoint pada API
-    const val BASE_URL = "http://drivingrake.backendless.app/api/"
+object TMDBApiClient {
+    const val BASE_URL = "https://api.themoviedb.org/3/"
+    const val APIKEY = "0fbaf8c27d542bc99bfc67fb877e3906"
 
     private val logging: HttpLoggingInterceptor
         get() {
@@ -29,11 +28,8 @@ object MyDoctorApiClient {
         .client(client)
         .build()
 
-    val instanceMessage: MessageAPI by lazy {
-        retrofit.create(MessageAPI::class.java)
+    val instanceTMDB: TMDBAPI by lazy {
+        retrofit.create(TMDBAPI::class.java)
     }
 
-    val instanceAuth: AuthAPI by lazy {
-        retrofit.create(AuthAPI::class.java)
-    }
 }
