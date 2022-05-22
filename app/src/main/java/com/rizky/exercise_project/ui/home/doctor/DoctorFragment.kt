@@ -4,38 +4,24 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.rizky.exercise_project.Constant
-import com.rizky.exercise_project.R
-import com.rizky.exercise_project.data.api.MessagesRequest
-import com.rizky.exercise_project.data.api.auth.AuthAPI
 import com.rizky.exercise_project.data.api.home.ConsultationResponse
 import com.rizky.exercise_project.data.api.home.GoodNewsResponse
 import com.rizky.exercise_project.data.api.home.TopRatedResponse
-import com.rizky.exercise_project.data.local.UserDAO
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.FragmentDoctorBinding
-import com.rizky.exercise_project.datastore.AuthDataStoreManager
-import com.rizky.exercise_project.datastore.CounterDataStoreManager
-import com.rizky.exercise_project.network.ImageApiClient
-import com.rizky.exercise_project.network.MyDoctorApiClient
-import com.rizky.exercise_project.repository.AuthRepository
-import com.rizky.exercise_project.repository.ProfileRepository
-import com.rizky.exercise_project.ui.home.HomeActivity
-import com.rizky.exercise_project.ui.home.message.MessageAdapter
-import com.rizky.exercise_project.ui.home.message.MessageModel
 import com.rizky.exercise_project.ui.onboarding.OnBoardingActivity
 import com.rizky.exercise_project.ui.profile.ProfileActivity
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class DoctorFragment : Fragment() {
@@ -43,34 +29,10 @@ class DoctorFragment : Fragment() {
     private lateinit var binding: FragmentDoctorBinding
     private val progressDialog: ProgressDialog by lazy { ProgressDialog(requireContext()) }
 
-    @Inject
-    lateinit var db: MyDoctorDatabase
-    @Inject
-    lateinit var dataStore: AuthDataStoreManager
-    @Inject
-    lateinit var authAPI: AuthAPI
-    @Inject
-    lateinit var userDAO: UserDAO
-
-    private val viewModel: DoctorViewModel by viewModels {
-        DoctorViewModel.Factory(
-            ProfileRepository(
-                imageAPI = ImageApiClient.instanceImage,
-                authAPI = authAPI,
-                db = db,
-                prefDataStore = CounterDataStoreManager(requireContext())
-            ),
-            AuthRepository(
-                dataStore,
-                authAPI,
-                userDAO
-            )
-        )
-    }
+    private val viewModel: DoctorViewModel by viewModels()
     private lateinit var adapterConsultation: ConsultationAdapter
     private lateinit var adapterTopRatedAdapter: TopRatedAdapter
     private lateinit var adapterGoodNewsAdapter: GoodNewsAdapter
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

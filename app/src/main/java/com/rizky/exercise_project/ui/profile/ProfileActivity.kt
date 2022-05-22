@@ -7,30 +7,18 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.ActivityProfileBinding
-import com.rizky.exercise_project.datastore.CounterDataStoreManager
-import com.rizky.exercise_project.network.ImageApiClient
-import com.rizky.exercise_project.network.MyDoctorApiClient
-import com.rizky.exercise_project.repository.ProfileRepository
+import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
+@AndroidEntryPoint
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
-    private val viewModel: ProfileViewModel by viewModels {
-        ProfileViewModel.Factory(
-            ProfileRepository(
-                imageAPI = ImageApiClient.instanceImage,
-                authAPI = MyDoctorApiClient.instanceAuth,
-                db = MyDoctorDatabase.getInstance(this),
-                prefDataStore = CounterDataStoreManager(this)
-            )
-        )
-    }
+    private val viewModel: ProfileViewModel by viewModels()
     private val progressDialog: ProgressDialog by lazy { ProgressDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {

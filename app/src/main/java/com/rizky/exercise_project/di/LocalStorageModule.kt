@@ -8,6 +8,7 @@ import com.rizky.exercise_project.data.local.MessageDAO
 import com.rizky.exercise_project.data.local.UserDAO
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.datastore.AuthDataStoreManager
+import com.rizky.exercise_project.datastore.CounterDataStoreManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -59,5 +60,12 @@ class LocalStorageModule {
     fun provideAuthDataStoreManager(@ApplicationContext context: Context)
             : AuthDataStoreManager {
         return AuthDataStoreManager(context = context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCounterDataStoreManager(@ApplicationContext context: Context):
+            CounterDataStoreManager {
+        return CounterDataStoreManager(context)
     }
 }

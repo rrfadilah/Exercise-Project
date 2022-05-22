@@ -7,12 +7,14 @@ import com.rizky.exercise_project.data.api.ErrorResponse
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.model.ProfileModel
 import com.rizky.exercise_project.repository.ProfileRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
+import javax.inject.Inject
 
 /**
  * com.rizky.exercise_project.ui.profile
@@ -22,7 +24,8 @@ import okhttp3.ResponseBody
  *
  */
 
-class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() {
+@HiltViewModel
+class ProfileViewModel @Inject constructor(private val repository: ProfileRepository) : ViewModel() {
 
     val shouldShowImage: MutableLiveData<String> = MutableLiveData()
     val shouldShowError: MutableLiveData<String> = MutableLiveData()
@@ -95,18 +98,6 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
     fun decrement() {
         viewModelScope.launch {
             repository.decrement()
-        }
-    }
-
-
-    @Suppress("UNCHECKED_CAST")
-    class Factory(private val repository: ProfileRepository) :
-        ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
-                return ProfileViewModel(repository) as T
-            }
-            throw IllegalArgumentException("Unknown class name")
         }
     }
 }

@@ -1,8 +1,6 @@
 package com.rizky.exercise_project.repository
 
-import com.rizky.exercise_project.data.api.auth.AuthAPI
-import com.rizky.exercise_project.data.api.auth.SignInRequest
-import com.rizky.exercise_project.data.api.auth.SignInResponse
+import com.rizky.exercise_project.data.api.auth.*
 import com.rizky.exercise_project.data.local.UserDAO
 import com.rizky.exercise_project.data.local.UserEntity
 import com.rizky.exercise_project.datastore.AuthDataStoreManager
@@ -37,6 +35,17 @@ class AuthRepository @Inject constructor(
 
     suspend fun signIn(request: SignInRequest): Response<SignInResponse> {
         return api.signIn(request)
+    }
+
+    suspend fun signUp(request: SignUpRequest): Response<SignUpResponse> {
+        return api.signUp(request)
+    }
+
+    suspend fun logout(): Response<Unit> {
+        val headers = mapOf(
+            "user-token" to getToken().orEmpty()
+        )
+        return api.logout(headers)
     }
 
     suspend fun insertUser(userEntity: UserEntity): Long {

@@ -1,5 +1,6 @@
 package com.rizky.exercise_project.repository
 
+import com.rizky.exercise_project.Constant
 import com.rizky.exercise_project.common.Resource
 import com.rizky.exercise_project.common.Status
 import com.rizky.exercise_project.data.api.auth.AuthAPI
@@ -7,14 +8,15 @@ import com.rizky.exercise_project.data.api.auth.SignInResponse
 import com.rizky.exercise_project.data.api.auth.UpdateProfileRequest
 import com.rizky.exercise_project.data.api.image.ImageAPI
 import com.rizky.exercise_project.data.api.image.ImageDataResponse
+import com.rizky.exercise_project.data.local.UserDAO
 import com.rizky.exercise_project.data.local.UserEntity
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.datastore.CounterDataStoreManager
 import com.rizky.exercise_project.model.ProfileModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import okhttp3.MultipartBody
-import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Named
 
 /**
  * com.rizky.exercise_project.repository
@@ -24,14 +26,18 @@ import retrofit2.Response
  *
  */
 
-class ProfileRepository(
+class ProfileRepository @Inject constructor(
     private val imageAPI: ImageAPI,
     private val authAPI: AuthAPI,
-    private val db: MyDoctorDatabase,
+    private val dao: UserDAO,
     private val prefDataStore: CounterDataStoreManager,
+    @Named(Constant.Named.APIKEY_IMAGE) private val apiKey: String
 ) {
     suspend fun uploadImage(image: MultipartBody.Part): Resource<ImageDataResponse> {
-        imageAPI.uploadImage(image = image).let {
+        imageAPI.uploadImage(
+            image = image,
+            key = apiKey
+        ).let {
             if (it.isSuccessful) {
                 updateImageProfile(it.body()?.data?.thumb?.url.orEmpty())
                 return Resource(
@@ -78,7 +84,7 @@ class ProfileRepository(
     }
 
     suspend fun getProfile(): ProfileModel {
-        return db.userDAO().getUser().let {
+        return dao.getUser().let {
             ProfileModel(
                 id = it?.id.orEmpty(),
                 name = it?.name.orEmpty(),
@@ -89,7 +95,7 @@ class ProfileRepository(
     }
 
     suspend fun updateImageProfile(image: String): Long {
-        val profile = db.userDAO().getUser()
+        val profile = dao.getUser()
         val updatedProfile = UserEntity(
             id = profile?.id.orEmpty(),
             email = profile?.email.orEmpty(),
@@ -97,11 +103,11 @@ class ProfileRepository(
             job = profile?.job.orEmpty(),
             image = image
         )
-        return db.userDAO().insertUser(updatedProfile)
+        return dao.insertUser(updatedProfile)
     }
 
     suspend fun deleteProfile(): Int {
-        val profile = db.userDAO().getUser()
+        val profile = dao.getUser()
         val deleteProfile = UserEntity(
             id = profile?.id.orEmpty(),
             email = profile?.email.orEmpty(),
@@ -109,7 +115,7 @@ class ProfileRepository(
             job = profile?.job.orEmpty(),
             image = profile?.image.orEmpty()
         )
-        return db.userDAO().deleteUser(deleteProfile)
+        return dao.deleteUser(deleteProfile)
     }
 
     suspend fun setCounter(value: Int) {

@@ -1,22 +1,14 @@
 package com.rizky.exercise_project.ui.signin
 
-import android.content.SharedPreferences
 import android.util.Patterns
-import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
-import com.rizky.exercise_project.Constant
 import com.rizky.exercise_project.data.api.ErrorResponse
 import com.rizky.exercise_project.data.api.auth.SignInRequest
 import com.rizky.exercise_project.data.local.UserEntity
-import com.rizky.exercise_project.database.MyDoctorDatabase
-import com.rizky.exercise_project.network.MyDoctorApiClient
 import com.rizky.exercise_project.repository.AuthRepository
-import com.rizky.exercise_project.repository.ProfileRepository
-import com.rizky.exercise_project.ui.home.doctor.DoctorViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -1,10 +1,14 @@
 package com.rizky.exercise_project.di
 
 import android.content.Context
+import com.rizky.exercise_project.Constant
 import com.rizky.exercise_project.data.api.auth.AuthAPI
+import com.rizky.exercise_project.data.api.image.ImageAPI
 import com.rizky.exercise_project.data.local.UserDAO
 import com.rizky.exercise_project.datastore.AuthDataStoreManager
+import com.rizky.exercise_project.datastore.CounterDataStoreManager
 import com.rizky.exercise_project.repository.AuthRepository
+import com.rizky.exercise_project.repository.ProfileRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,6 +48,24 @@ class AppModule {
             authDataStore = authDataStoreManager,
             api = api,
             dao = dao
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideProfileRepository(
+        imageAPI: ImageAPI,
+        authAPI: AuthAPI,
+        userDAO: UserDAO,
+        @Named(Constant.Named.APIKEY_IMAGE) apikey: String,
+        counterDataStoreManager: CounterDataStoreManager
+    ): ProfileRepository {
+        return ProfileRepository(
+            imageAPI = imageAPI,
+            authAPI = authAPI,
+            dao = userDAO,
+            apiKey = apikey,
+            prefDataStore = counterDataStoreManager
         )
     }
 }

@@ -8,6 +8,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.rizky.exercise_project.Constant
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
 /**
  * com.rizky.exercise_project.datastore
@@ -17,7 +18,7 @@ import kotlinx.coroutines.flow.map
  *
  */
 
-class CounterDataStoreManager(private val context: Context) {
+class CounterDataStoreManager @Inject constructor(private val context: Context) {
 
     // Fungsi ini akan memetakan Flow<Preferences> menjadi Flow<Int>
     fun getCounter(): Flow<Int> {
