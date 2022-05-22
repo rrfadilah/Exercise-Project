@@ -1,4 +1,4 @@
-package net.mzhasanah.fiveinone.exerciseproject.galleryfragment
+package net.mzhasanah.fiveinone.exerciseproject.ui.galleryfragment
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

@@ -20,7 +20,7 @@ import net.mzhasanah.fiveinone.exerciseproject.customdialog.*
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.databinding.ActivitySignInBinding
 import net.mzhasanah.fiveinone.exerciseproject.ui.signup.SignUpActivity
-import net.mzhasanah.fiveinone.exerciseproject.home.HomeActivity
+import net.mzhasanah.fiveinone.exerciseproject.ui.home.HomeActivity
 
 class SignInActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignInBinding

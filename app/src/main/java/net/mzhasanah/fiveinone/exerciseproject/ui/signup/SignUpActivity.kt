@@ -17,8 +17,8 @@ import net.mzhasanah.fiveinone.exerciseproject.Constant
 import net.mzhasanah.fiveinone.exerciseproject.R
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.databinding.ActivitySignUpBinding
-import net.mzhasanah.fiveinone.exerciseproject.galleryfragment.GalleryActivity
-import net.mzhasanah.fiveinone.exerciseproject.home.HomeActivity
+import net.mzhasanah.fiveinone.exerciseproject.ui.galleryfragment.GalleryActivity
+import net.mzhasanah.fiveinone.exerciseproject.ui.home.HomeActivity
 import net.mzhasanah.fiveinone.exerciseproject.ui.onboarding.OnBoardingActivity
 import net.mzhasanah.fiveinone.exerciseproject.ui.signin.SignInActivity
 

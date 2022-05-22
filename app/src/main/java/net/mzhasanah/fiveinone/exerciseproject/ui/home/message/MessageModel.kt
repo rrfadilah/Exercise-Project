@@ -1,4 +1,4 @@
-package net.mzhasanah.fiveinone.exerciseproject.home.ui.message
+package net.mzhasanah.fiveinone.exerciseproject.ui.home.message
 
 data class MessageModel(
     val id: String,

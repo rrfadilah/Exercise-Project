@@ -1,4 +1,4 @@
-package net.mzhasanah.fiveinone.exerciseproject.home
+package net.mzhasanah.fiveinone.exerciseproject.ui.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

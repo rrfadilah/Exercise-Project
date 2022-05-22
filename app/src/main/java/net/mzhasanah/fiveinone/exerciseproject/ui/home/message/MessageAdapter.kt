@@ -1,4 +1,4 @@
-package net.mzhasanah.fiveinone.exerciseproject.home.ui.message
+package net.mzhasanah.fiveinone.exerciseproject.ui.home.message
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

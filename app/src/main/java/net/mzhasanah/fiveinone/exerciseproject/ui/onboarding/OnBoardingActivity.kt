@@ -5,11 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import net.mzhasanah.fiveinone.exerciseproject.Constant
 import androidx.fragment.app.Fragment
 import net.mzhasanah.fiveinone.exerciseproject.*
 import net.mzhasanah.fiveinone.exerciseproject.databinding.ActivityOnBoardingBinding
-import net.mzhasanah.fiveinone.exerciseproject.galleryfragment.AdapterGallery
+import net.mzhasanah.fiveinone.exerciseproject.ui.galleryfragment.AdapterGallery
 import net.mzhasanah.fiveinone.exerciseproject.ui.signin.SignInActivity
 import net.mzhasanah.fiveinone.exerciseproject.ui.signup.SignUpActivity
 

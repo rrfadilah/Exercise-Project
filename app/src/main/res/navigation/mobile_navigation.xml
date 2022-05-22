@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_doctor"
-        android:name="net.mzhasanah.fiveinone.exerciseproject.home.ui.doctor.DoctorFragment"
+        android:name="net.mzhasanah.fiveinone.exerciseproject.ui.home.doctor.DoctorFragment"
         android:label="@string/title_menu_doctor"
         tools:layout="@layout/fragment_doctor" />
 
     <fragment
         android:id="@+id/navigation_message"
-        android:name="net.mzhasanah.fiveinone.exerciseproject.home.ui.message.MessageFragment"
+        android:name="net.mzhasanah.fiveinone.exerciseproject.ui.home.message.MessageFragment"
         android:label="@string/title_menu_messages"
         tools:layout="@layout/fragment_message" />
 
     <fragment
         android:id="@+id/navigation_hospital"
-        android:name="net.mzhasanah.fiveinone.exerciseproject.home.ui.hospital.HospitalFragment"
+        android:name="net.mzhasanah.fiveinone.exerciseproject.ui.home.hospital.HospitalFragment"
         android:label="@string/title_menu_hospitals"
         tools:layout="@layout/fragment_hospital" />
 </navigation>

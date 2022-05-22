@@ -1,4 +1,4 @@
-package net.mzhasanah.fiveinone.exerciseproject.home.ui.hospital
+package net.mzhasanah.fiveinone.exerciseproject.ui.home.hospital
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

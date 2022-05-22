@@ -16,14 +16,14 @@
             android:name=".ui.movie.MovieActivity"
             android:exported="false" />
         <activity
-            android:name=".home.HomeActivity"
+            android:name="net.mzhasanah.fiveinone.exerciseproject.ui.home.HomeActivity"
             android:exported="true"
             android:label="@string/title_activity_home" />
         <activity
             android:name=".ui.signup.SignUpActivity"
             android:exported="true" />
         <activity
-            android:name=".galleryfragment.GalleryActivity"
+            android:name="net.mzhasanah.fiveinone.exerciseproject.ui.galleryfragment.GalleryActivity"
             android:exported="true" />
         <activity
             android:name=".samplefragment.PicturesActivity"

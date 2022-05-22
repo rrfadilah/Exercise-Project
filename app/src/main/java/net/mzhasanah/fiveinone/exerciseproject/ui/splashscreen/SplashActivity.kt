@@ -4,12 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
 import androidx.activity.viewModels
 import net.mzhasanah.fiveinone.exerciseproject.Constant
 import net.mzhasanah.fiveinone.exerciseproject.ui.onboarding.OnBoardingActivity
 import net.mzhasanah.fiveinone.exerciseproject.databinding.ActivityMainBinding
-import net.mzhasanah.fiveinone.exerciseproject.home.HomeActivity
+import net.mzhasanah.fiveinone.exerciseproject.ui.home.HomeActivity
 
 class SplashActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
