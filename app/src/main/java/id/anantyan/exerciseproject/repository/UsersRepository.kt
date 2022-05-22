@@ -1,14 +1,15 @@
 package id.anantyan.exerciseproject.repository
 
+import id.anantyan.exerciseproject.data.api.UsersApi
 import id.anantyan.exerciseproject.data.local.UsersDao
 import id.anantyan.exerciseproject.model.Users
-import id.anantyan.exerciseproject.network.RetrofitNetwork
 import id.anantyan.utils.LiveEvent
 import id.anantyan.utils.Resource
-import id.anantyan.utils.sharedPreferences.PreferenceHelper
+import javax.inject.Inject
 
-class UsersRepository(
-    private val usersDao: UsersDao
+class UsersRepository @Inject constructor(
+    private val usersDao: UsersDao,
+    private val usersApi: UsersApi
 ) {
     val _signInResponse: LiveEvent<Resource<Users>> = LiveEvent()
     val _signUpResponse: LiveEvent<Resource<Users>> = LiveEvent()
@@ -28,7 +29,7 @@ class UsersRepository(
     suspend fun signInApi(item: Users) {
         _signInResponse.postValue(Resource.Loading())
         try {
-            val response = RetrofitNetwork.usersApi.signInUsers(item)
+            val response = usersApi.signInUsers(item)
             when {
                 response.isSuccessful -> {
                     response.body()?.let {
@@ -53,7 +54,7 @@ class UsersRepository(
     suspend fun signUpApi(item: Users) {
         _signUpResponse.postValue(Resource.Loading())
         try {
-            val response = RetrofitNetwork.usersApi.signUpUsers(item)
+            val response = usersApi.signUpUsers(item)
             when {
                 response.isSuccessful -> {
                     response.body()?.let {

@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.database.RoomDB
 import id.anantyan.exerciseproject.databinding.FragmentMessagesBinding
@@ -23,6 +24,7 @@ import id.anantyan.utils.Constant.PASSING_TO_MESSAGES_ACTIVITY
 import id.anantyan.utils.Resource
 import id.anantyan.utils.dividerVertical
 
+@AndroidEntryPoint
 class MessagesFragment : Fragment() {
 
     private var position: Int = -1
@@ -30,10 +32,7 @@ class MessagesFragment : Fragment() {
     private val binding get() = _binding!!
     private val list: MutableList<Messages> = mutableListOf()
     private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val viewModel: MessagesViewModel by viewModels {
-        val messagesDao = RoomDB.database(requireContext()).messagesDao()
-        MessagesViewModelFactory(MessagesRepository(messagesDao))
-    }
+    private val viewModel: MessagesViewModel by viewModels()
     private val adapter: MessagesHelper by lazy { MessagesAdapter() }
 
     override fun onCreateView(

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.database.RoomDB
 import id.anantyan.exerciseproject.databinding.ActivitySignInBinding
@@ -33,13 +34,11 @@ import id.anantyan.utils.validator.Validator
 import id.anantyan.utils.validator.constant.Mode
 import id.anantyan.utils.validator.validator
 
+@AndroidEntryPoint
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
-    private val viewModel: SignInViewModel by viewModels {
-        val usersDao = RoomDB.database(application).usersDao()
-        SignInViewModelFactory(UsersRepository(usersDao))
-    }
+    private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

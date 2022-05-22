@@ -1,14 +1,16 @@
 package id.anantyan.exerciseproject.repository
 
 import androidx.lifecycle.MutableLiveData
+import id.anantyan.exerciseproject.data.api.MessagesApi
 import id.anantyan.exerciseproject.data.local.MessagesDao
 import id.anantyan.exerciseproject.model.Messages
-import id.anantyan.exerciseproject.network.RetrofitNetwork
 import id.anantyan.utils.LiveEvent
 import id.anantyan.utils.Resource
+import javax.inject.Inject
 
-class MessagesRepository(
-    private val usersDao: MessagesDao
+class MessagesRepository @Inject constructor(
+    private val messagesDao: MessagesDao,
+    private val messagesApi: MessagesApi
 ) {
 
     val _selectResponse: MutableLiveData<Resource<List<Messages>>> = MutableLiveData()
@@ -24,11 +26,11 @@ class MessagesRepository(
 
     var _deleteAll: LiveEvent<Unit> = LiveEvent()
 
-    fun selectLocal() = usersDao.select()
+    fun selectLocal() = messagesDao.select()
     suspend fun selectApi() {
         _selectResponse.postValue(Resource.Loading())
         try {
-            val response = RetrofitNetwork.messagesApi.getMessage()
+            val response = messagesApi.getMessage()
             if (response.isSuccessful) {
                 response.body()?.let {
                     _selectResponse.postValue(Resource.Success(it))
@@ -44,17 +46,17 @@ class MessagesRepository(
     }
 
     suspend fun selectById(id: String) {
-        _seectById.postValue(usersDao.selectById(id))
+        _seectById.postValue(messagesDao.selectById(id))
     }
 
     suspend fun insertLocal(item: Messages) {
-        usersDao.insert(item)
+        messagesDao.insert(item)
         _insertLocal.postValue(item)
     }
     suspend fun insertApi(item: Messages) {
         _insertResponse.postValue(Resource.Loading())
         try {
-            val response = RetrofitNetwork.messagesApi.postMessage(item)
+            val response = messagesApi.postMessage(item)
             if (response.isSuccessful) {
                 response.body()?.let {
                     _insertResponse.postValue(Resource.Success(item, "Data berhasil ditambahkan!"))
@@ -70,13 +72,13 @@ class MessagesRepository(
     }
 
     suspend fun updateLocal(item: Messages) {
-        usersDao.update(item)
+        messagesDao.update(item)
         _updateLocal.postValue(item)
     }
     suspend fun updateApi(item: Messages) {
         _updateResponse.postValue(Resource.Loading())
         try {
-            val response = RetrofitNetwork.messagesApi.updateMessages(item.id, item)
+            val response = messagesApi.updateMessages(item.id, item)
             if (response.isSuccessful) {
                 response.body()?.let {
                     _updateResponse.postValue(Resource.Success(item, "Data berhasil diubah!"))
@@ -92,13 +94,13 @@ class MessagesRepository(
     }
 
     suspend fun deleteLocal(item: Messages) {
-        usersDao.delete(item)
+        messagesDao.delete(item)
         _deleteLocal.postValue(item)
     }
     suspend fun deleteApi(item: Messages) {
         _deleteResponse.postValue(Resource.Loading())
         try {
-            val response = RetrofitNetwork.messagesApi.deleteMessages(item.id)
+            val response = messagesApi.deleteMessages(item.id)
             if (response.isSuccessful) {
                 response.body()?.let {
                     _deleteResponse.postValue(Resource.Success(item, "Data berhasil dihapus!"))
@@ -114,6 +116,6 @@ class MessagesRepository(
     }
 
     suspend fun deleteAll() {
-        _deleteAll.postValue(usersDao.deleteAll())
+        _deleteAll.postValue(messagesDao.deleteAll())
     }
 }

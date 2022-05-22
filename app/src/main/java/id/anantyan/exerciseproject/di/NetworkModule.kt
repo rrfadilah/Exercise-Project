@@ -1,30 +1,45 @@
-package id.anantyan.exerciseproject.network
+package id.anantyan.exerciseproject.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializer
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import id.anantyan.exerciseproject.data.api.MessagesApi
 import id.anantyan.exerciseproject.data.api.UsersApi
+import id.anantyan.exerciseproject.model.Users
 import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.net.CookieManager
 import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
-object RetrofitNetwork {
-    private fun retrofit(): Retrofit {
+@Module
+@InstallIn(SingletonComponent::class)
+object NetworkModule {
+
+    @Singleton
+    @Provides
+    fun retrofit(
+        gson: Gson,
+        okHttpClient: OkHttpClient
+    ): Retrofit {
         return Retrofit.Builder().apply {
-            client(providerHttpClient())
-            baseUrl("http://drivingrake.backendless.app/api/")
-            addConverterFactory(GsonConverterFactory.create(gson()))
+            client(okHttpClient)
+            baseUrl("http://happyplace.backendless.app/api/")
+            addConverterFactory(GsonConverterFactory.create(gson))
         }.build()
     }
 
-    private fun gson(): Gson {
+    @Singleton
+    @Provides
+    fun providerGson(): Gson {
         return GsonBuilder().apply {
             setLenient()
             registerTypeAdapter(Date::class.java, JsonDeserializer { jsonElement, _, _ ->
@@ -33,10 +48,12 @@ object RetrofitNetwork {
         }.create()
     }
 
-    private fun providerHttpClient(): OkHttpClient {
+    @Singleton
+    @Provides
+    fun providerHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder().apply {
             retryOnConnectionFailure(true)
-            addNetworkInterceptor(providerHttpLoggingInterceptor())
+            addNetworkInterceptor(httpLoggingInterceptor)
             cookieJar(JavaNetCookieJar(CookieManager()))
             connectTimeout(15, TimeUnit.MINUTES)
             writeTimeout(30, TimeUnit.SECONDS)
@@ -44,12 +61,23 @@ object RetrofitNetwork {
         }.build()
     }
 
-    private fun providerHttpLoggingInterceptor(): HttpLoggingInterceptor {
+    @Singleton
+    @Provides
+    fun providerHttpLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
             setLevel(HttpLoggingInterceptor.Level.BODY)
         }
     }
 
-    val messagesApi: MessagesApi by lazy { retrofit().create(MessagesApi::class.java) }
-    val usersApi: UsersApi by lazy { retrofit().create(UsersApi::class.java) }
+    @Singleton
+    @Provides
+    fun messagesApi(retrofit: Retrofit): MessagesApi {
+        return retrofit.create(MessagesApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun usersApi(retrofit: Retrofit): UsersApi {
+        return retrofit.create(UsersApi::class.java)
+    }
 }

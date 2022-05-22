@@ -3,18 +3,17 @@ package id.anantyan.exerciseproject.ui.activity.signup
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import id.anantyan.exerciseproject.R
-import id.anantyan.exerciseproject.database.RoomDB
 import id.anantyan.exerciseproject.databinding.ActivitySignUpBinding
 import id.anantyan.exerciseproject.model.Users
-import id.anantyan.exerciseproject.repository.UsersRepository
-import id.anantyan.exerciseproject.ui.UsersViewModelFactory
 import id.anantyan.exerciseproject.ui.activity.signin.SignInActivity
 import id.anantyan.utils.Constant.PASSING_TO_SIGN_UP_ACTIVITY
 import id.anantyan.utils.Resource
@@ -25,15 +24,12 @@ import id.anantyan.utils.validator.Validator
 import id.anantyan.utils.validator.constant.Mode
 import id.anantyan.utils.validator.validator
 
-
+@AndroidEntryPoint
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var users: Users
-    private val viewModel: SignUpViewModel by viewModels {
-        val usersDao = RoomDB.database(application).usersDao()
-        UsersViewModelFactory(UsersRepository(usersDao))
-    }
+    private val viewModel: SignUpViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

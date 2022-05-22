@@ -2,6 +2,7 @@ package id.anantyan.exerciseproject.ui.fragment.messages
 
 import android.app.Application
 import androidx.lifecycle.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import id.anantyan.exerciseproject.database.RoomDB
 import id.anantyan.exerciseproject.model.Messages
 import id.anantyan.exerciseproject.model.MessagesResponse
@@ -10,8 +11,12 @@ import id.anantyan.utils.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MessagesViewModel(private val repository: MessagesRepository): ViewModel() {
+@HiltViewModel
+class MessagesViewModel @Inject constructor(
+    private val repository: MessagesRepository
+): ViewModel() {
 
     val selectResponse: LiveData<Resource<List<Messages>>> = repository._selectResponse
     val insertResponse: LiveData<Resource<Messages>> = repository._insertResponse

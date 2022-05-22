@@ -9,6 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.navigation.NavigationBarView
+import dagger.hilt.android.AndroidEntryPoint
 import id.anantyan.exerciseproject.R
 import id.anantyan.exerciseproject.ui.adapter.MainViewPagerAdapter
 import id.anantyan.exerciseproject.databinding.ActivityBaseFragmentBinding
@@ -21,6 +22,7 @@ import id.anantyan.exerciseproject.ui.activity.signin.SignInActivity
 import id.anantyan.utils.Constant.PASSING_TO_MESSAGES_ACTIVITY
 import id.anantyan.utils.sharedPreferences.preference
 
+@AndroidEntryPoint
 class BaseFragmentActivity : AppCompatActivity() {
 
     private lateinit var sectionViewPager: MainViewPagerAdapter

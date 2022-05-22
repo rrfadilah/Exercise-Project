@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import id.anantyan.exerciseproject.database.RoomDB
 import id.anantyan.exerciseproject.model.Users
 import id.anantyan.exerciseproject.repository.UsersRepository
@@ -14,8 +15,10 @@ import id.anantyan.utils.sharedPreferences.PreferenceManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignInViewModel(
+@HiltViewModel
+class SignInViewModel @Inject constructor(
     private val repository: UsersRepository
 ): ViewModel() {
 

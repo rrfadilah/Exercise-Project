@@ -14,28 +14,6 @@ import id.anantyan.exerciseproject.model.Users
     Users::class
 ], version = 3, exportSchema = false)
 abstract class RoomDB : RoomDatabase() {
-
-    companion object {
-        @Volatile
-        private var INSTANCE: RoomDB? = null
-
-        fun database(context: Context): RoomDB {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) {
-                return tempInstance
-            }
-            synchronized(this) {
-                val db = Room.databaseBuilder(
-                    context.applicationContext,
-                    RoomDB::class.java,
-                    "db_users"
-                ).fallbackToDestructiveMigration().build()
-                INSTANCE = db
-                return db
-            }
-        }
-    }
-
     abstract fun messagesDao(): MessagesDao
     abstract fun usersDao(): UsersDao
 }
