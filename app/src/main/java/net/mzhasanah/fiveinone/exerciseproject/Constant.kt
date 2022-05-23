@@ -1,6 +1,7 @@
 package net.mzhasanah.fiveinone.exerciseproject
 
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 
 object Constant {
     object Intent {
@@ -38,6 +39,8 @@ object Constant {
     }
 
     object PrefDataStore {
+        const val PREF_NAME = "MyDoctor"
         val COUNTER_KEY = intPreferencesKey("counter_key")
+        val TOKEN_KEY = stringPreferencesKey("TOKEN")
     }
 }

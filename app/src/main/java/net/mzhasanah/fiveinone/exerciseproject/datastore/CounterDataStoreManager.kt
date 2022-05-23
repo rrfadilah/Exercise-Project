@@ -1,11 +1,13 @@
 package net.mzhasanah.fiveinone.exerciseproject.datastore
 
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import net.mzhasanah.fiveinone.exerciseproject.Constant
-import net.mzhasanah.fiveinone.exerciseproject.common.dataStoreCounter
 
 class CounterDataStoreManager(private val context: Context) {
 
@@ -38,5 +40,9 @@ class CounterDataStoreManager(private val context: Context) {
             // Menulis value saat ini dan ditambahkan 1 ke dalam preferences
             preferences[Constant.PrefDataStore.COUNTER_KEY] = currentCounterValue - 1
         }
+    }
+
+    companion object {
+        val Context.dataStoreCounter: DataStore<Preferences> by preferencesDataStore(name = "counter")
     }
 }

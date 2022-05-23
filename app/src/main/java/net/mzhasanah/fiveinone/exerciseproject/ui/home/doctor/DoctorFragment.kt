@@ -21,9 +21,12 @@ import net.mzhasanah.fiveinone.exerciseproject.data.api.home.GoodNewsResponse
 import net.mzhasanah.fiveinone.exerciseproject.data.api.home.TopRatedResponse
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.databinding.FragmentDoctorBinding
+import net.mzhasanah.fiveinone.exerciseproject.datastore.AuthDataStoreManager
 import net.mzhasanah.fiveinone.exerciseproject.datastore.CounterDataStoreManager
 import net.mzhasanah.fiveinone.exerciseproject.network.ImageApiClient
+import net.mzhasanah.fiveinone.exerciseproject.repository.AuthRepository
 import net.mzhasanah.fiveinone.exerciseproject.repository.ProfileRepository
+import net.mzhasanah.fiveinone.exerciseproject.ui.onboarding.OnBoardingActivity
 import net.mzhasanah.fiveinone.exerciseproject.ui.profile.ProfileActivity
 
 class DoctorFragment : Fragment() {
@@ -36,6 +39,9 @@ class DoctorFragment : Fragment() {
                 ImageApiClient.instanceImage,
                 MyDoctorDatabase.getInstance(requireContext()),
                 CounterDataStoreManager(requireContext())
+            ),
+            AuthRepository(
+                AuthDataStoreManager(requireContext())
             )
         )
     }
@@ -100,6 +106,11 @@ class DoctorFragment : Fragment() {
         viewModel.getProfile()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        progressDialog.cancel()
+    }
+
     private fun bindView() {
         binding.tvLogout.setOnClickListener {
             viewModel.logout()
@@ -145,6 +156,14 @@ class DoctorFragment : Fragment() {
 
         viewModel.shouldShowGoodNews.observe(viewLifecycleOwner) {
             adapterGoodNewsAdapter.updateList(it)
+        }
+
+        viewModel.shouldShowGetStarted.observe(viewLifecycleOwner) {
+            if (it) {
+                val intent = Intent(requireContext(), OnBoardingActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }
         }
     }
 }

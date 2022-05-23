@@ -19,12 +19,19 @@ import net.mzhasanah.fiveinone.exerciseproject.R
 import net.mzhasanah.fiveinone.exerciseproject.customdialog.*
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.databinding.ActivitySignInBinding
+import net.mzhasanah.fiveinone.exerciseproject.datastore.AuthDataStoreManager
+import net.mzhasanah.fiveinone.exerciseproject.repository.AuthRepository
 import net.mzhasanah.fiveinone.exerciseproject.ui.signup.SignUpActivity
 import net.mzhasanah.fiveinone.exerciseproject.ui.home.HomeActivity
 
 class SignInActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignInBinding
-    private val viewModel: SignInViewModel by viewModels()
+    private val viewModel: SignInViewModel by viewModels {
+        SignInViewModel.Factory(
+            AuthRepository(AuthDataStoreManager(this))
+        )
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)

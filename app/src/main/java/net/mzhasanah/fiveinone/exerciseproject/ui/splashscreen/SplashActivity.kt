@@ -1,5 +1,6 @@
 package net.mzhasanah.fiveinone.exerciseproject.ui.splashscreen
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,11 +9,19 @@ import androidx.activity.viewModels
 import net.mzhasanah.fiveinone.exerciseproject.Constant
 import net.mzhasanah.fiveinone.exerciseproject.ui.onboarding.OnBoardingActivity
 import net.mzhasanah.fiveinone.exerciseproject.databinding.ActivityMainBinding
+import net.mzhasanah.fiveinone.exerciseproject.datastore.AuthDataStoreManager
+import net.mzhasanah.fiveinone.exerciseproject.repository.AuthRepository
 import net.mzhasanah.fiveinone.exerciseproject.ui.home.HomeActivity
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    private val viewModel: SplashViewModel by viewModels()
+    private val viewModel: SplashViewModel by viewModels {
+        SplashViewModel.Factory(
+            repository = AuthRepository(AuthDataStoreManager(this))
+        )
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -21,7 +30,8 @@ class SplashActivity : AppCompatActivity() {
         val timer = object : CountDownTimer(5000, 1000) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
-                viewModel.onViewLoaded(pref)
+//                viewModel.onViewLoaded(pref)
+                viewModel.onViewLoaded()
             }
         }
         timer.start()
@@ -51,6 +61,11 @@ class SplashActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
+//        viewModel.shouldGetToken.observe(this) {
+//            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//            Log.d("TOKEN", it)
+//        }
     }
 
     private fun bindView() {

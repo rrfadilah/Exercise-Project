@@ -16,10 +16,14 @@ import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.model.ProfileModel
 import net.mzhasanah.fiveinone.exerciseproject.network.MockApiClient
 import net.mzhasanah.fiveinone.exerciseproject.network.MyDoctorApiClient
+import net.mzhasanah.fiveinone.exerciseproject.repository.AuthRepository
 import net.mzhasanah.fiveinone.exerciseproject.repository.ProfileRepository
 import okhttp3.ResponseBody
 
-class DoctorViewModel(private val repository: ProfileRepository) : ViewModel() {
+class DoctorViewModel(
+    private val repository: ProfileRepository,
+    private val authRepository: AuthRepository
+) : ViewModel() {
     private var db: MyDoctorDatabase? = null
     private var pref: SharedPreferences? = null
 
@@ -29,7 +33,7 @@ class DoctorViewModel(private val repository: ProfileRepository) : ViewModel() {
     val shouldShowConsultation: MutableLiveData<List<ConsultationResponse>> = MutableLiveData()
     val shouldShowTopRated: MutableLiveData<List<TopRatedResponse>> = MutableLiveData()
     val shouldShowGoodNews: MutableLiveData<List<GoodNewsResponse>> = MutableLiveData()
-
+    val shouldShowGetStarted: MutableLiveData<Boolean> = MutableLiveData()
 
     fun onViewLoaded(db: MyDoctorDatabase, preferences: SharedPreferences) {
         this.db = db
@@ -45,7 +49,7 @@ class DoctorViewModel(private val repository: ProfileRepository) : ViewModel() {
         CoroutineScope(Dispatchers.IO).launch {
             shouldShowLoading.postValue(true)
             val headers = mapOf(
-                "user-token" to pref?.getString(Constant.Preferences.KEY.TOKEN, "").orEmpty()
+                "user-token" to authRepository.getToken().orEmpty()
             )
             val result = MyDoctorApiClient.instanceAuth.logout(headers = headers)
             withContext(Dispatchers.Main) {
@@ -53,6 +57,7 @@ class DoctorViewModel(private val repository: ProfileRepository) : ViewModel() {
                     // clear data profile dari room
                     // clear token dari preferences
                     shouldShowLoading.postValue(false)
+                    clearToken()
                 } else {
                     showErrorMessage(response = result.errorBody())
                     shouldShowLoading.postValue(false)
@@ -62,7 +67,7 @@ class DoctorViewModel(private val repository: ProfileRepository) : ViewModel() {
         }
     }
 
-//    private fun getProfile() {
+//    private fun getProfileDirect() {
 //        CoroutineScope(Dispatchers.Main).launch {
 //            val result = db?.userDAO()?.getUser()
 //            withContext(Dispatchers.Main) {
@@ -80,6 +85,16 @@ class DoctorViewModel(private val repository: ProfileRepository) : ViewModel() {
 //            }
 //        }
 //    }
+
+    private fun clearToken() {
+        viewModelScope.launch {
+            authRepository.clearToken()
+            repository.deleteProfile()
+            withContext(Dispatchers.Main) {
+                shouldShowGetStarted.postValue(true)
+            }
+        }
+    }
 
     fun getProfile() {
         CoroutineScope(Dispatchers.Main).launch {
@@ -138,11 +153,17 @@ class DoctorViewModel(private val repository: ProfileRepository) : ViewModel() {
     }
 
     @Suppress("UNCHECKED_CAST")
-    class Factory(private val repository: ProfileRepository) :
+    class Factory(
+        private val repository: ProfileRepository,
+        private val authRepository: AuthRepository
+    ) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(DoctorViewModel::class.java)) {
-                return DoctorViewModel(repository) as T
+                return DoctorViewModel(
+                    repository,
+                    authRepository
+                ) as T
             }
             throw IllegalArgumentException("Unknown class name")
         }
