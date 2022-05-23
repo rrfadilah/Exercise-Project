@@ -21,6 +21,7 @@ import net.mzhasanah.fiveinone.exerciseproject.data.api.home.GoodNewsResponse
 import net.mzhasanah.fiveinone.exerciseproject.data.api.home.TopRatedResponse
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.databinding.FragmentDoctorBinding
+import net.mzhasanah.fiveinone.exerciseproject.datastore.CounterDataStoreManager
 import net.mzhasanah.fiveinone.exerciseproject.network.ImageApiClient
 import net.mzhasanah.fiveinone.exerciseproject.repository.ProfileRepository
 import net.mzhasanah.fiveinone.exerciseproject.ui.profile.ProfileActivity
@@ -33,7 +34,8 @@ class DoctorFragment : Fragment() {
         DoctorViewModel.Factory(
             ProfileRepository(
                 ImageApiClient.instanceImage,
-                MyDoctorDatabase.getInstance(requireContext())
+                MyDoctorDatabase.getInstance(requireContext()),
+                CounterDataStoreManager(requireContext())
             )
         )
     }

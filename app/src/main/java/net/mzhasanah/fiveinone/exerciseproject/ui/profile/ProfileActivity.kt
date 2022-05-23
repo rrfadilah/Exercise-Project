@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.databinding.ActivityProfileBinding
+import net.mzhasanah.fiveinone.exerciseproject.datastore.CounterDataStoreManager
 import net.mzhasanah.fiveinone.exerciseproject.network.ImageApiClient
 import net.mzhasanah.fiveinone.exerciseproject.repository.ProfileRepository
 import okhttp3.MediaType.Companion.toMediaType
@@ -22,8 +23,9 @@ class ProfileActivity : AppCompatActivity() {
     private val viewModel: ProfileViewModel by viewModels {
         ProfileViewModel.Factory(
             ProfileRepository(
-                ImageApiClient.instanceImage,
-                MyDoctorDatabase.getInstance(this)
+                imageAPI = ImageApiClient.instanceImage,
+                db = MyDoctorDatabase.getInstance(this),
+                prefDataStore = CounterDataStoreManager(this)
             )
         )
     }
@@ -70,6 +72,14 @@ class ProfileActivity : AppCompatActivity() {
         binding.ivBack.setOnClickListener {
             onBackPressed()
         }
+
+        binding.btnIncrement.setOnClickListener {
+            viewModel.increment()
+        }
+
+        binding.btnDecrement.setOnClickListener {
+            viewModel.decrement()
+        }
     }
 
     private fun bindViewModel() {
@@ -97,6 +107,10 @@ class ProfileActivity : AppCompatActivity() {
             } else {
                 progressDialog.hide()
             }
+        }
+
+        viewModel.shouldShowCounter.observe(this) {
+            binding.tvCounter.text = "$it"
         }
     }
 }

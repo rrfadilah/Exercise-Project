@@ -1,8 +1,6 @@
 package net.mzhasanah.fiveinone.exerciseproject.ui.profile
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,6 +16,7 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
     val shouldShowError: MutableLiveData<String> = MutableLiveData()
     val shouldShowLoading: MutableLiveData<Boolean> = MutableLiveData()
     val shouldShowProfile: MutableLiveData<ProfileModel> = MutableLiveData()
+    var shouldShowCounter: LiveData<Int> = repository.getCounter().asLiveData()
 
     fun onViewLoaded() {
         getProfile()
@@ -53,6 +52,18 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
                     shouldShowProfile.postValue(it)
                 }
             }
+        }
+    }
+
+    fun increment() {
+        viewModelScope.launch {
+            repository.increment()
+        }
+    }
+
+    fun decrement() {
+        viewModelScope.launch {
+            repository.decrement()
         }
     }
 

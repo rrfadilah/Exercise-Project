@@ -63,4 +63,29 @@
         app:layout_constraintTop_toBottomOf="@id/tv_name"
         tools:text="Your job" />
 
+    <TextView
+        android:id="@+id/tv_counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/btn_increment"
+        app:layout_constraintBottom_toBottomOf="@id/btn_increment"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_job"/>
+
+    <Button
+        android:id="@+id/btn_increment"
+        android:text="+"
+        app:layout_constraintTop_toBottomOf="@id/tv_job"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btn_decrement"
+        android:text="-"
+        app:layout_constraintTop_toBottomOf="@id/tv_job"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,9 +9,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import net.mzhasanah.fiveinone.exerciseproject.data.local.UserEntity
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
+import net.mzhasanah.fiveinone.exerciseproject.datastore.CounterDataStoreManager
 import net.mzhasanah.fiveinone.exerciseproject.model.ProfileModel
 
-class ProfileRepository(private val imageAPI: ImageAPI, private val db: MyDoctorDatabase) {
+class ProfileRepository(
+    private val imageAPI: ImageAPI,
+    private val db: MyDoctorDatabase,
+    private val prefDataStore: CounterDataStoreManager,
+) {
     suspend fun uploadImage(image: MultipartBody.Part): Resource<ImageDataResponse> {
         imageAPI.uploadImage(image = image).let {
             if (it.isSuccessful) {
@@ -52,5 +57,21 @@ class ProfileRepository(private val imageAPI: ImageAPI, private val db: MyDoctor
             image = image
         )
         return db.userDAO().insertUser(updatedProfile)
+    }
+
+    suspend fun setCounter(value: Int) {
+        prefDataStore.setCounter(value)
+    }
+
+    fun getCounter(): Flow<Int> {
+        return prefDataStore.getCounter()
+    }
+
+    suspend fun increment() {
+        prefDataStore.incrementCounter()
+    }
+
+    suspend fun decrement() {
+        prefDataStore.decrementCounter()
     }
 }
