@@ -21,6 +21,7 @@ import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.AuthAPI
 import net.mzhasanah.fiveinone.exerciseproject.data.api.home.ConsultationResponse
 import net.mzhasanah.fiveinone.exerciseproject.data.api.home.GoodNewsResponse
 import net.mzhasanah.fiveinone.exerciseproject.data.api.home.TopRatedResponse
+import net.mzhasanah.fiveinone.exerciseproject.data.local.UserDAO
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.databinding.FragmentDoctorBinding
 import net.mzhasanah.fiveinone.exerciseproject.datastore.AuthDataStoreManager
@@ -38,19 +39,28 @@ class DoctorFragment : Fragment() {
 
     private lateinit var binding: FragmentDoctorBinding
     private val progressDialog: ProgressDialog by lazy { ProgressDialog(requireContext()) }
+
+    @Inject
+    lateinit var db: MyDoctorDatabase
+    @Inject
+    lateinit var dataStore: AuthDataStoreManager
     @Inject
     lateinit var authAPI: AuthAPI
+    @Inject
+    lateinit var userDAO: UserDAO
+
     private val viewModel: DoctorViewModel by viewModels {
         DoctorViewModel.Factory(
             ProfileRepository(
                 imageAPI = ImageApiClient.instanceImage,
-                authAPI = MyDoctorApiClient.instanceAuth,
-                db = MyDoctorDatabase.getInstance(requireContext()),
+                authAPI = authAPI,
+                db = db,
                 prefDataStore = CounterDataStoreManager(requireContext())
             ),
             AuthRepository(
-                AuthDataStoreManager(requireContext()),
-                authAPI
+                dataStore,
+                authAPI,
+                userDAO
             )
         )
     }

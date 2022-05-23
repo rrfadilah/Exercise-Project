@@ -4,13 +4,16 @@ import kotlinx.coroutines.flow.firstOrNull
 import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.AuthAPI
 import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.SignInRequest
 import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.SignInResponse
+import net.mzhasanah.fiveinone.exerciseproject.data.local.UserDAO
+import net.mzhasanah.fiveinone.exerciseproject.data.local.UserEntity
 import net.mzhasanah.fiveinone.exerciseproject.datastore.AuthDataStoreManager
 import retrofit2.Response
 import javax.inject.Inject
 
 class AuthRepository @Inject constructor(
     private val authDataStore: AuthDataStoreManager,
-    private val api: AuthAPI
+    private val api: AuthAPI,
+    private val dao: UserDAO
 ) {
     suspend fun clearToken() {
         return updateToken("")
@@ -26,5 +29,9 @@ class AuthRepository @Inject constructor(
 
     suspend fun signIn(request: SignInRequest): Response<SignInResponse> {
         return api.signIn(request)
+    }
+
+    suspend fun insertUser(userEntity: UserEntity): Long {
+        return dao.insertUser(userEntity)
     }
 }
