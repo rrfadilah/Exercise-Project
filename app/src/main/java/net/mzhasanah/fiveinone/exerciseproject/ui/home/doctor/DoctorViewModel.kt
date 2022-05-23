@@ -1,9 +1,7 @@
 package net.mzhasanah.fiveinone.exerciseproject.ui.home.doctor
 
 import android.content.SharedPreferences
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,9 +16,10 @@ import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.model.ProfileModel
 import net.mzhasanah.fiveinone.exerciseproject.network.MockApiClient
 import net.mzhasanah.fiveinone.exerciseproject.network.MyDoctorApiClient
+import net.mzhasanah.fiveinone.exerciseproject.repository.ProfileRepository
 import okhttp3.ResponseBody
 
-class DoctorViewModel : ViewModel() {
+class DoctorViewModel(private val repository: ProfileRepository) : ViewModel() {
     private var db: MyDoctorDatabase? = null
     private var pref: SharedPreferences? = null
 
@@ -63,20 +62,31 @@ class DoctorViewModel : ViewModel() {
         }
     }
 
-    private fun getProfile() {
+//    private fun getProfile() {
+//        CoroutineScope(Dispatchers.Main).launch {
+//            val result = db?.userDAO()?.getUser()
+//            withContext(Dispatchers.Main) {
+//                result?.let {
+//                    val profile = ProfileModel(
+//                        id = it.id,
+//                        name = it.name,
+//                        image = it.image,
+//                        job = it.job
+//                    )
+//                    shouldShowProfile.postValue(profile)
+//                } ?: run {
+//                    showErrorMessage(message = "Data Kosong")
+//                }
+//            }
+//        }
+//    }
+
+    fun getProfile() {
         CoroutineScope(Dispatchers.Main).launch {
-            val result = db?.userDAO()?.getUser()
+            val result = repository.getProfile()
             withContext(Dispatchers.Main) {
-                result?.let {
-                    val profile = ProfileModel(
-                        id = it.id,
-                        name = it.name,
-                        image = it.image,
-                        job = it.job
-                    )
-                    shouldShowProfile.postValue(profile)
-                } ?: run {
-                    showErrorMessage(message = "Data Kosong")
+                result.let {
+                    shouldShowProfile.postValue(it)
                 }
             }
         }
@@ -125,5 +135,16 @@ class DoctorViewModel : ViewModel() {
         val error =
             Gson().fromJson(response?.string() ?: message ?: "", ErrorResponse::class.java)
         shouldShowError.postValue(error.message.orEmpty() + " #${error.code}")
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    class Factory(private val repository: ProfileRepository) :
+        ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(DoctorViewModel::class.java)) {
+                return DoctorViewModel(repository) as T
+            }
+            throw IllegalArgumentException("Unknown class name")
+        }
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
+import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.databinding.ActivityProfileBinding
 import net.mzhasanah.fiveinone.exerciseproject.network.ImageApiClient
 import net.mzhasanah.fiveinone.exerciseproject.repository.ProfileRepository
@@ -18,7 +19,12 @@ import java.io.File
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
     private val viewModel: ProfileViewModel by viewModels {
-        ProfileViewModel.Factory(ProfileRepository(ImageApiClient.instanceImage))
+        ProfileViewModel.Factory(
+            ProfileRepository(
+                ImageApiClient.instanceImage,
+                MyDoctorDatabase.getInstance(this)
+            )
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +34,7 @@ class ProfileActivity : AppCompatActivity() {
 
         bindView()
         bindViewModel()
+        viewModel.getProfile()
     }
 
     private fun bindView() {
@@ -56,12 +63,26 @@ class ProfileActivity : AppCompatActivity() {
         binding.ivProfile.setOnClickListener {
             getContent.launch("image/*")
         }
+
+        binding.ivBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun bindViewModel() {
         viewModel.shouldShowImage.observe(this) {
             Glide.with(this)
                 .load(it)
+                .circleCrop()
+                .into(binding.ivProfile)
+        }
+
+        viewModel.shouldShowProfile.observe(this) {
+            binding.tvName.text = it.name
+            binding.tvJob.text = it.job
+
+            Glide.with(this)
+                .load(it.image)
                 .circleCrop()
                 .into(binding.ivProfile)
         }

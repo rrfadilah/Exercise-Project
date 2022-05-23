@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.mzhasanah.fiveinone.exerciseproject.common.Status
+import net.mzhasanah.fiveinone.exerciseproject.model.ProfileModel
 import net.mzhasanah.fiveinone.exerciseproject.repository.ProfileRepository
 import okhttp3.MultipartBody
 
@@ -15,9 +16,10 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
 
     val shouldShowImage: MutableLiveData<String> = MutableLiveData()
     val shouldShowError: MutableLiveData<String> = MutableLiveData()
+    val shouldShowProfile: MutableLiveData<ProfileModel> = MutableLiveData()
 
     fun onViewLoaded() {
-
+        getProfile()
     }
 
     fun uploadImage(body: MultipartBody.Part) {
@@ -34,6 +36,17 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
                     Status.LOADING -> {
 
                     }
+                }
+            }
+        }
+    }
+
+    fun getProfile() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val result = repository.getProfile()
+            withContext(Dispatchers.Main) {
+                result.let {
+                    shouldShowProfile.postValue(it)
                 }
             }
         }

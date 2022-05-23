@@ -21,13 +21,22 @@ import net.mzhasanah.fiveinone.exerciseproject.data.api.home.GoodNewsResponse
 import net.mzhasanah.fiveinone.exerciseproject.data.api.home.TopRatedResponse
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.databinding.FragmentDoctorBinding
+import net.mzhasanah.fiveinone.exerciseproject.network.ImageApiClient
+import net.mzhasanah.fiveinone.exerciseproject.repository.ProfileRepository
 import net.mzhasanah.fiveinone.exerciseproject.ui.profile.ProfileActivity
 
 class DoctorFragment : Fragment() {
 
     private lateinit var binding: FragmentDoctorBinding
     private val progressDialog: ProgressDialog by lazy { ProgressDialog(requireContext()) }
-    private val viewModel: DoctorViewModel by viewModels()
+    private val viewModel: DoctorViewModel by viewModels {
+        DoctorViewModel.Factory(
+            ProfileRepository(
+                ImageApiClient.instanceImage,
+                MyDoctorDatabase.getInstance(requireContext())
+            )
+        )
+    }
     private lateinit var adapterConsultation: ConsultationAdapter
     private lateinit var adapterTopRatedAdapter: TopRatedAdapter
     private lateinit var adapterGoodNewsAdapter: GoodNewsAdapter
