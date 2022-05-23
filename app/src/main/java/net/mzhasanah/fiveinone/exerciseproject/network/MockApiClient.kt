@@ -1,16 +1,16 @@
 package net.mzhasanah.fiveinone.exerciseproject.network
 
-import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.AuthAPI
 import net.mzhasanah.fiveinone.exerciseproject.data.api.MessageAPI
+import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.AuthAPI
 import net.mzhasanah.fiveinone.exerciseproject.data.api.home.HomeAPI
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object MyDoctorApiClient {
+object MockApiClient {
     // BASE_URL merupakan URL default untuk mengkoneksikan aplikasi dengan endpoint pada API
-    const val BASE_URL = "http://drivingrake.backendless.app/api/"
+    const val BASE_URL = "http://private-82636-mydoctorexample.apiary-mock.com/api/"
 
     private val logging: HttpLoggingInterceptor
         get() {

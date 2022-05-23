@@ -8,12 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import net.mzhasanah.fiveinone.exerciseproject.Constant
+import net.mzhasanah.fiveinone.exerciseproject.data.api.home.ConsultationResponse
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.databinding.FragmentDoctorBinding
 
@@ -22,6 +24,7 @@ class DoctorFragment : Fragment() {
     private lateinit var binding: FragmentDoctorBinding
     private val progressDialog: ProgressDialog by lazy { ProgressDialog(requireContext()) }
     private val viewModel: DoctorViewModel by viewModels()
+    private lateinit var adapterConsultation: ConsultationAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +37,16 @@ class DoctorFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapterConsultation = ConsultationAdapter(
+            listener = object : ConsultationAdapter.EventListener {
+                override fun onClick(item: ConsultationResponse) {
+                    Toast.makeText(requireContext(), item.title, Toast.LENGTH_SHORT).show()
+                }
+            },
+            list = emptyList()
+        )
 
+        binding.rvConsultation.adapter = adapterConsultation
         bindView()
         bindViewModel()
 
@@ -75,6 +87,10 @@ class DoctorFragment : Fragment() {
                 .load(it.image)
                 .circleCrop()
                 .into(binding.ivImg)
+        }
+
+        viewModel.shouldShowConsultation.observe(viewLifecycleOwner) {
+            adapterConsultation.updateList(it)
         }
     }
 }
