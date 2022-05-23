@@ -1,5 +1,6 @@
 package net.mzhasanah.fiveinone.exerciseproject.ui.profile
 
+import android.app.ProgressDialog
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -26,6 +27,8 @@ class ProfileActivity : AppCompatActivity() {
             )
         )
     }
+
+    private val progressDialog: ProgressDialog by lazy { ProgressDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +88,15 @@ class ProfileActivity : AppCompatActivity() {
                 .load(it.image)
                 .circleCrop()
                 .into(binding.ivProfile)
+        }
+
+        viewModel.shouldShowLoading.observe(this) {
+            if (it) {
+                progressDialog.setMessage("Loading...")
+                progressDialog.show()
+            } else {
+                progressDialog.hide()
+            }
         }
     }
 }

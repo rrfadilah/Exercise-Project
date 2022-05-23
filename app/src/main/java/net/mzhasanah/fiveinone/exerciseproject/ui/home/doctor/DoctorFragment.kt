@@ -93,6 +93,11 @@ class DoctorFragment : Fragment() {
         viewModel.onViewLoaded(db = db, preferences = pref)
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getProfile()
+    }
+
     private fun bindView() {
         binding.tvLogout.setOnClickListener {
             viewModel.logout()
