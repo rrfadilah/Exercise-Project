@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import net.mzhasanah.fiveinone.exerciseproject.BuildConfig
 import net.mzhasanah.fiveinone.exerciseproject.Constant
 import net.mzhasanah.fiveinone.exerciseproject.data.api.MessageAPI
 import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.AuthAPI
@@ -22,6 +23,19 @@ class NetworkModule {
     @Provides
     @Named(Constant.Named.BASE_URL_MYDOCTOR)
     fun provideBaseUrlMyDoctor(): String = "http://drivingrake.backendless.app/api/"
+
+    @Singleton
+    @Provides
+    @Named(Constant.Named.BASE_URL_MOCK)
+    fun provideBaseUrlMock(): String = "http://private-82636-mydoctorexample.apiary-mock.com/api/"
+
+    @Singleton
+    @Provides
+    @Named(Constant.Named.BASE_URL_FLAVOR)
+    fun provideBaseUrl(
+        @Named(Constant.Named.BASE_URL_MOCK) baseUrlMock: String,
+        @Named(Constant.Named.BASE_URL_MYDOCTOR) baseUrlMyDoctor: String
+    ): String = if (BuildConfig.FLAVOR == "ayam_panggang") baseUrlMock else baseUrlMyDoctor
 
     @Singleton
     @Provides
@@ -44,7 +58,7 @@ class NetworkModule {
     @Provides
     @Named(Constant.Named.RETROFIT_MYDOCTOR)
     fun provideRetrofitMyDoctor(
-        @Named(Constant.Named.BASE_URL_MYDOCTOR) baseUrl: String,
+        @Named(Constant.Named.BASE_URL_FLAVOR) baseUrl: String,
         client: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
