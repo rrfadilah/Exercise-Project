@@ -24,21 +24,16 @@ class SplashActivity : AppCompatActivity() {
     @Named("TestString2")
     lateinit var stringDI: String
 
-    private val viewModel: SplashViewModel by viewModels {
-        SplashViewModel.Factory(
-            repository = AuthRepository(AuthDataStoreManager(this))
-        )
-    }
+    private val viewModel: SplashViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
+
         val timer = object : CountDownTimer(5000, 1000) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
-//                viewModel.onViewLoaded(pref)
                 viewModel.onViewLoaded()
             }
         }
@@ -69,11 +64,6 @@ class SplashActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-
-//        viewModel.shouldGetToken.observe(this) {
-//            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-//            Log.d("TOKEN", it)
-//        }
     }
 
     private fun bindView() {

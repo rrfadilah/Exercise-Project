@@ -1,8 +1,10 @@
 package net.mzhasanah.fiveinone.exerciseproject.repository
 
+import kotlinx.coroutines.flow.firstOrNull
 import net.mzhasanah.fiveinone.exerciseproject.datastore.AuthDataStoreManager
+import javax.inject.Inject
 
-class AuthRepository(
+class AuthRepository @Inject constructor(
     private val authDataStore: AuthDataStoreManager
 ) {
     suspend fun clearToken() {

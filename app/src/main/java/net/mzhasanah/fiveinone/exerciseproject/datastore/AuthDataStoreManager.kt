@@ -9,8 +9,9 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import net.mzhasanah.fiveinone.exerciseproject.Constant
+import javax.inject.Inject
 
-class AuthDataStoreManager(private val context: Context) {
+class AuthDataStoreManager @Inject constructor(private val context: Context) {
     companion object {
         val Context.dataStoreAuth: DataStore<Preferences> by preferencesDataStore(
             name = Constant.PrefDataStore.PREF_NAME,
