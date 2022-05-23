@@ -19,11 +19,31 @@ android {
     }
 
     buildTypes {
+        combine {
+            debuggable true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "rasa"
+
+    productFlavors {
+        bbq {
+            dimension "rasa"
+            applicationIdSuffix ".bbq"
+            versionNameSuffix " BBQ"
+        }
+
+        ayam_panggang {
+            dimension "rasa"
+            applicationIdSuffix ".ayam_panggang"
+            versionNameSuffix " Ayam Panggang"
+        }
+    }
+    
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
