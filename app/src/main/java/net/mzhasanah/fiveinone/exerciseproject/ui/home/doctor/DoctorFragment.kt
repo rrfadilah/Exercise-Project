@@ -15,7 +15,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import net.mzhasanah.fiveinone.exerciseproject.Constant
+import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.AuthAPI
 import net.mzhasanah.fiveinone.exerciseproject.data.api.home.ConsultationResponse
 import net.mzhasanah.fiveinone.exerciseproject.data.api.home.GoodNewsResponse
 import net.mzhasanah.fiveinone.exerciseproject.data.api.home.TopRatedResponse
@@ -29,11 +31,15 @@ import net.mzhasanah.fiveinone.exerciseproject.repository.AuthRepository
 import net.mzhasanah.fiveinone.exerciseproject.repository.ProfileRepository
 import net.mzhasanah.fiveinone.exerciseproject.ui.onboarding.OnBoardingActivity
 import net.mzhasanah.fiveinone.exerciseproject.ui.profile.ProfileActivity
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class DoctorFragment : Fragment() {
 
     private lateinit var binding: FragmentDoctorBinding
     private val progressDialog: ProgressDialog by lazy { ProgressDialog(requireContext()) }
+    @Inject
+    lateinit var authAPI: AuthAPI
     private val viewModel: DoctorViewModel by viewModels {
         DoctorViewModel.Factory(
             ProfileRepository(
@@ -43,7 +49,8 @@ class DoctorFragment : Fragment() {
                 prefDataStore = CounterDataStoreManager(requireContext())
             ),
             AuthRepository(
-                AuthDataStoreManager(requireContext())
+                AuthDataStoreManager(requireContext()),
+                authAPI
             )
         )
     }

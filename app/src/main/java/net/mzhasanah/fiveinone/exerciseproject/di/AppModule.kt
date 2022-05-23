@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.AuthAPI
 import net.mzhasanah.fiveinone.exerciseproject.datastore.AuthDataStoreManager
 import net.mzhasanah.fiveinone.exerciseproject.repository.AuthRepository
 import javax.inject.Named
@@ -32,8 +33,11 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideAuthRepository(authDataStoreManager: AuthDataStoreManager)
+    fun provideAuthRepository(authDataStoreManager: AuthDataStoreManager, api: AuthAPI)
             : AuthRepository {
-        return AuthRepository(authDataStore = authDataStoreManager)
+        return AuthRepository(
+            authDataStore = authDataStoreManager,
+            api = api
+        )
     }
 }
