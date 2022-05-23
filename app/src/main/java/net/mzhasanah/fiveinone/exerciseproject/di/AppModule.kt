@@ -27,13 +27,6 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideAuthDataStoreManager(@ApplicationContext context: Context)
-            : AuthDataStoreManager {
-        return AuthDataStoreManager(context = context)
-    }
-
-    @Singleton
-    @Provides
     fun provideAuthRepository(
         authDataStoreManager: AuthDataStoreManager,
         api: AuthAPI,

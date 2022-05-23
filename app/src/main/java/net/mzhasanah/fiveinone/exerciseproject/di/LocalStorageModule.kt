@@ -12,6 +12,7 @@ import net.mzhasanah.fiveinone.exerciseproject.Constant
 import net.mzhasanah.fiveinone.exerciseproject.data.local.MessageDAO
 import net.mzhasanah.fiveinone.exerciseproject.data.local.UserDAO
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
+import net.mzhasanah.fiveinone.exerciseproject.datastore.AuthDataStoreManager
 import javax.inject.Singleton
 
 @Module
@@ -43,5 +44,12 @@ class LocalStorageModule {
             Constant.Preferences.PREF_NAME,
             AppCompatActivity.MODE_PRIVATE
         )
+    }
+
+    @Singleton
+    @Provides
+    fun provideAuthDataStoreManager(@ApplicationContext context: Context)
+            : AuthDataStoreManager {
+        return AuthDataStoreManager(context = context)
     }
 }
