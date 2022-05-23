@@ -27,7 +27,7 @@
             android:name="net.mzhasanah.fiveinone.exerciseproject.ui.galleryfragment.GalleryActivity"
             android:exported="true" />
         <activity
-            android:name=".samplefragment.PicturesActivity"
+            android:name="net.mzhasanah.fiveinone.exerciseproject.ui.samplefragment.PicturesActivity"
             android:exported="true" />
         <activity
             android:name=".ui.onboarding.OnBoardingActivity"

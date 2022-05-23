@@ -16,6 +16,8 @@ import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import net.mzhasanah.fiveinone.exerciseproject.Constant
 import net.mzhasanah.fiveinone.exerciseproject.data.api.home.ConsultationResponse
+import net.mzhasanah.fiveinone.exerciseproject.data.api.home.GoodNewsResponse
+import net.mzhasanah.fiveinone.exerciseproject.data.api.home.TopRatedResponse
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.databinding.FragmentDoctorBinding
 
@@ -25,6 +27,8 @@ class DoctorFragment : Fragment() {
     private val progressDialog: ProgressDialog by lazy { ProgressDialog(requireContext()) }
     private val viewModel: DoctorViewModel by viewModels()
     private lateinit var adapterConsultation: ConsultationAdapter
+    private lateinit var adapterTopRatedAdapter: TopRatedAdapter
+    private lateinit var adapterGoodNewsAdapter: GoodNewsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +50,27 @@ class DoctorFragment : Fragment() {
             list = emptyList()
         )
 
+        adapterTopRatedAdapter = TopRatedAdapter(
+            listener = object : TopRatedAdapter.EventListener {
+                override fun onClick(item: TopRatedResponse) {
+                    Toast.makeText(requireContext(), item.name, Toast.LENGTH_SHORT).show()
+                }
+            },
+            list = emptyList()
+        )
+
+        adapterGoodNewsAdapter = GoodNewsAdapter(
+            listener = object : GoodNewsAdapter.EventListener {
+                override fun onClick(item: GoodNewsResponse) {
+                    Toast.makeText(requireContext(), item.title, Toast.LENGTH_SHORT).show()
+                }
+            },
+            list = emptyList()
+        )
+
         binding.rvConsultation.adapter = adapterConsultation
+        binding.rvToprated.adapter = adapterTopRatedAdapter
+        binding.rvGoodnews.adapter = adapterGoodNewsAdapter
         bindView()
         bindViewModel()
 
@@ -91,6 +115,14 @@ class DoctorFragment : Fragment() {
 
         viewModel.shouldShowConsultation.observe(viewLifecycleOwner) {
             adapterConsultation.updateList(it)
+        }
+
+        viewModel.shouldShowTopRated.observe(viewLifecycleOwner) {
+            adapterTopRatedAdapter.updateList(it)
+        }
+
+        viewModel.shouldShowGoodNews.observe(viewLifecycleOwner) {
+            adapterGoodNewsAdapter.updateList(it)
         }
     }
 }

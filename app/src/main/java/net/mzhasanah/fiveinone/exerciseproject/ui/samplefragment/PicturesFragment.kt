@@ -1,4 +1,4 @@
-package net.mzhasanah.fiveinone.exerciseproject.samplefragment
+package net.mzhasanah.fiveinone.exerciseproject.ui.samplefragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
