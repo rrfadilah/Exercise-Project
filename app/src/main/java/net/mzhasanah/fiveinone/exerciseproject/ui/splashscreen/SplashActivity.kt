@@ -6,16 +6,24 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import net.mzhasanah.fiveinone.exerciseproject.Constant
 import net.mzhasanah.fiveinone.exerciseproject.ui.onboarding.OnBoardingActivity
 import net.mzhasanah.fiveinone.exerciseproject.databinding.ActivityMainBinding
 import net.mzhasanah.fiveinone.exerciseproject.datastore.AuthDataStoreManager
 import net.mzhasanah.fiveinone.exerciseproject.repository.AuthRepository
 import net.mzhasanah.fiveinone.exerciseproject.ui.home.HomeActivity
+import javax.inject.Inject
+import javax.inject.Named
 
 @SuppressLint("CustomSplashScreen")
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    @Inject
+    @Named("TestString2")
+    lateinit var stringDI: String
+
     private val viewModel: SplashViewModel by viewModels {
         SplashViewModel.Factory(
             repository = AuthRepository(AuthDataStoreManager(this))
@@ -69,6 +77,6 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun bindView() {
-
+        binding.tvTitle.text = stringDI
     }
 }
