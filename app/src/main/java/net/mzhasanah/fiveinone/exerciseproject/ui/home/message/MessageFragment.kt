@@ -15,6 +15,8 @@ import net.mzhasanah.fiveinone.exerciseproject.databinding.FragmentMessageBindin
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import net.mzhasanah.fiveinone.exerciseproject.network.MyDoctorApiClient
+import net.mzhasanah.fiveinone.exerciseproject.repository.MessageRepository
 
 class MessageFragment : Fragment() {
     private var _binding: FragmentMessageBinding? = null
@@ -22,7 +24,13 @@ class MessageFragment : Fragment() {
 
     private var db: MyDoctorDatabase? = null
     private lateinit var adapter: MessageAdapter
-    private val viewModel: MessageViewModel by viewModels()
+    private val viewModel: MessageViewModel by viewModels {
+        MessageViewModel.Factory(
+            MessageRepository(
+                MyDoctorApiClient.instanceMessage
+            )
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
