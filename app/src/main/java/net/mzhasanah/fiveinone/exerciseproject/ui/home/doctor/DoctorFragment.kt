@@ -1,6 +1,7 @@
 package net.mzhasanah.fiveinone.exerciseproject.ui.home.doctor
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -20,6 +21,7 @@ import net.mzhasanah.fiveinone.exerciseproject.data.api.home.GoodNewsResponse
 import net.mzhasanah.fiveinone.exerciseproject.data.api.home.TopRatedResponse
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.databinding.FragmentDoctorBinding
+import net.mzhasanah.fiveinone.exerciseproject.ui.profile.ProfileActivity
 
 class DoctorFragment : Fragment() {
 
@@ -85,6 +87,10 @@ class DoctorFragment : Fragment() {
     private fun bindView() {
         binding.tvLogout.setOnClickListener {
             viewModel.logout()
+        }
+
+        binding.ivImg.setOnClickListener {
+            startActivity(Intent(requireContext(), ProfileActivity::class.java))
         }
     }
 
