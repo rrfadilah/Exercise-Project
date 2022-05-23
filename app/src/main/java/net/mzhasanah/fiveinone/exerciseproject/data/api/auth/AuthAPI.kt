@@ -12,4 +12,9 @@ interface AuthAPI {
 
     @GET("users/logout")
     suspend fun logout(@HeaderMap headers: Map<String, String>): Response<Unit>
+
+    @PUT("users/{ID}")
+    suspend fun updateProfile(
+        @Path("ID") id: String,
+        @Body request: UpdateProfileRequest): Response<SignInResponse>
 }

@@ -7,6 +7,9 @@ import net.mzhasanah.fiveinone.exerciseproject.data.api.image.ImageDataResponse
 import okhttp3.MultipartBody
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.AuthAPI
+import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.SignInResponse
+import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.UpdateProfileRequest
 import net.mzhasanah.fiveinone.exerciseproject.data.local.UserEntity
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.datastore.CounterDataStoreManager
@@ -14,6 +17,7 @@ import net.mzhasanah.fiveinone.exerciseproject.model.ProfileModel
 
 class ProfileRepository(
     private val imageAPI: ImageAPI,
+    private val authAPI: AuthAPI,
     private val db: MyDoctorDatabase,
     private val prefDataStore: CounterDataStoreManager,
 ) {
@@ -28,6 +32,34 @@ class ProfileRepository(
                 )
             } else {
                 return Resource(
+                    status = Status.ERROR,
+                    data = null,
+                    message = it.errorBody().toString()
+                )
+            }
+        }
+    }
+
+    suspend fun updateProfile(image: String): Resource<SignInResponse> {
+        val profile = getProfile()
+        val request = UpdateProfileRequest(
+            name = profile.name,
+            image = image,
+            job = profile.job
+        )
+
+        return authAPI.updateProfile(
+            id = profile.id,
+            request = request
+        ).let {
+            if (it.isSuccessful) {
+                Resource(
+                    status = Status.SUCCESS,
+                    data = it.body(),
+                    message = null
+                )
+            } else {
+                Resource(
                     status = Status.ERROR,
                     data = null,
                     message = it.errorBody().toString()

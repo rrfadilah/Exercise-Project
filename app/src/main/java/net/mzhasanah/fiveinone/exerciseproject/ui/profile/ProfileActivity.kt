@@ -11,6 +11,7 @@ import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.databinding.ActivityProfileBinding
 import net.mzhasanah.fiveinone.exerciseproject.datastore.CounterDataStoreManager
 import net.mzhasanah.fiveinone.exerciseproject.network.ImageApiClient
+import net.mzhasanah.fiveinone.exerciseproject.network.MyDoctorApiClient
 import net.mzhasanah.fiveinone.exerciseproject.repository.ProfileRepository
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -24,6 +25,7 @@ class ProfileActivity : AppCompatActivity() {
         ProfileViewModel.Factory(
             ProfileRepository(
                 imageAPI = ImageApiClient.instanceImage,
+                authAPI = MyDoctorApiClient.instanceAuth,
                 db = MyDoctorDatabase.getInstance(this),
                 prefDataStore = CounterDataStoreManager(this)
             )

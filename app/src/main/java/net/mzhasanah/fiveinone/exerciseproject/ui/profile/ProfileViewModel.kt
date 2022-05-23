@@ -27,11 +27,29 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
         CoroutineScope(Dispatchers.IO).launch {
             val result = repository.uploadImage(body)
             withContext(Dispatchers.Main) {
-                shouldShowLoading.postValue(false)
                 when(result.status) {
                     Status.SUCCESS -> {
                         shouldShowImage.postValue(result.data?.data?.image?.url)
-                        shouldShowImage.postValue(result.data?.data?.thumb?.url)
+                        updateProfile(result.data?.data?.thumb?.url.orEmpty())
+                    }
+                    Status.ERROR -> {
+                        shouldShowError.postValue(result.message.orEmpty())
+                        shouldShowLoading.postValue(false)
+                    }
+                    Status.LOADING -> {
+
+                    }
+                }
+            }
+        }
+    }
+
+    private fun updateProfile(image: String) {
+        viewModelScope.launch {
+            val result = repository.updateProfile(image)
+            withContext(Dispatchers.Main) {
+                when (result.status) {
+                    Status.SUCCESS -> {
                     }
                     Status.ERROR -> {
                         shouldShowError.postValue(result.message.orEmpty())
@@ -40,6 +58,7 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
 
                     }
                 }
+                shouldShowLoading.postValue(false)
             }
         }
     }

@@ -24,6 +24,7 @@ import net.mzhasanah.fiveinone.exerciseproject.databinding.FragmentDoctorBinding
 import net.mzhasanah.fiveinone.exerciseproject.datastore.AuthDataStoreManager
 import net.mzhasanah.fiveinone.exerciseproject.datastore.CounterDataStoreManager
 import net.mzhasanah.fiveinone.exerciseproject.network.ImageApiClient
+import net.mzhasanah.fiveinone.exerciseproject.network.MyDoctorApiClient
 import net.mzhasanah.fiveinone.exerciseproject.repository.AuthRepository
 import net.mzhasanah.fiveinone.exerciseproject.repository.ProfileRepository
 import net.mzhasanah.fiveinone.exerciseproject.ui.onboarding.OnBoardingActivity
@@ -36,9 +37,10 @@ class DoctorFragment : Fragment() {
     private val viewModel: DoctorViewModel by viewModels {
         DoctorViewModel.Factory(
             ProfileRepository(
-                ImageApiClient.instanceImage,
-                MyDoctorDatabase.getInstance(requireContext()),
-                CounterDataStoreManager(requireContext())
+                imageAPI = ImageApiClient.instanceImage,
+                authAPI = MyDoctorApiClient.instanceAuth,
+                db = MyDoctorDatabase.getInstance(requireContext()),
+                prefDataStore = CounterDataStoreManager(requireContext())
             ),
             AuthRepository(
                 AuthDataStoreManager(requireContext())
