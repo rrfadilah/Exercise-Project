@@ -1,26 +1,27 @@
 package net.mzhasanah.fiveinone.exerciseproject.data.api
 
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface MessageAPI {
 
     @GET("data/message")
-    fun getMessages(): Call<List<MessagesResponse>>
+    suspend fun getMessages(): Response<List<MessagesResponse>>
 
     @POST("data/message")
-    fun postMessages(
+    suspend fun postMessages(
         @Body request: MessagesRequest
-    ): Call<MessagesResponse>
+    ): Response<MessagesResponse>
 
     @DELETE("data/message/{ID}")
-    fun deleteMessages(
+    suspend fun deleteMessages(
         @Path("ID") id: String
-    ): Call<Unit>
+    ): Response<Unit>
 
     @PUT("data/message/{ID}")
-    fun updateMessages(
+    suspend fun updateMessages(
         @Path("ID") id: String,
         @Body request: MessagesRequest,
-    ): Call<MessagesResponse>
+    ): Response<MessagesResponse>
 }
