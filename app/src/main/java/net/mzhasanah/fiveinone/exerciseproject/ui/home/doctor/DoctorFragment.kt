@@ -68,9 +68,11 @@ class DoctorFragment : Fragment() {
             }
         }
 
-        viewModel.shouldShowImageProfile.observe(viewLifecycleOwner) {
+        viewModel.shouldShowProfile.observe(viewLifecycleOwner) {
+            binding.tvName.text = it.name
+            binding.tvJob.text = it.job
             Glide.with(binding.root)
-                .load(it)
+                .load(it.image)
                 .circleCrop()
                 .into(binding.ivImg)
         }

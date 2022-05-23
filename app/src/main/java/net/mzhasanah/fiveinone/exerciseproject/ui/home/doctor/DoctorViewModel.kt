@@ -12,6 +12,7 @@ import kotlinx.coroutines.withContext
 import net.mzhasanah.fiveinone.exerciseproject.Constant
 import net.mzhasanah.fiveinone.exerciseproject.data.api.ErrorResponse
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
+import net.mzhasanah.fiveinone.exerciseproject.model.ProfileModel
 import net.mzhasanah.fiveinone.exerciseproject.network.MyDoctorApiClient
 import okhttp3.ResponseBody
 
@@ -20,7 +21,7 @@ class DoctorViewModel : ViewModel() {
     private var pref: SharedPreferences? = null
 
     val shouldShowError: MutableLiveData<String> = MutableLiveData()
-    val shouldShowImageProfile: MutableLiveData<String> = MutableLiveData()
+    val shouldShowProfile: MutableLiveData<ProfileModel> = MutableLiveData()
     val shouldShowLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     fun onViewLoaded(db: MyDoctorDatabase, preferences: SharedPreferences) {
@@ -56,7 +57,13 @@ class DoctorViewModel : ViewModel() {
             val result = db?.userDAO()?.getUser()
             withContext(Dispatchers.Main) {
                 result?.let {
-                    shouldShowImageProfile.postValue(it.image)
+                    val profile = ProfileModel(
+                        id = it.id,
+                        name = it.name,
+                        image = it.image,
+                        job = it.job
+                    )
+                    shouldShowProfile.postValue(profile)
                 } ?: run {
                     showErrorMessage(message = "Data Kosong")
                 }
