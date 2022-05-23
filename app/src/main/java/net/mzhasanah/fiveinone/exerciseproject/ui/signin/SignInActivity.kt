@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import net.mzhasanah.fiveinone.exerciseproject.Constant
 import net.mzhasanah.fiveinone.exerciseproject.R
 import net.mzhasanah.fiveinone.exerciseproject.customdialog.*
@@ -24,13 +25,10 @@ import net.mzhasanah.fiveinone.exerciseproject.repository.AuthRepository
 import net.mzhasanah.fiveinone.exerciseproject.ui.signup.SignUpActivity
 import net.mzhasanah.fiveinone.exerciseproject.ui.home.HomeActivity
 
+@AndroidEntryPoint
 class SignInActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignInBinding
-    private val viewModel: SignInViewModel by viewModels {
-        SignInViewModel.Factory(
-            AuthRepository(AuthDataStoreManager(this))
-        )
-    }
+    private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

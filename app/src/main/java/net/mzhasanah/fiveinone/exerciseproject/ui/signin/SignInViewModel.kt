@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
+import dagger.hilt.android.lifecycle.HiltViewModel
 import net.mzhasanah.fiveinone.exerciseproject.Constant
 import net.mzhasanah.fiveinone.exerciseproject.data.api.ErrorResponse
 import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.SignInRequest
@@ -19,8 +20,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.mzhasanah.fiveinone.exerciseproject.repository.AuthRepository
+import javax.inject.Inject
 
-class SignInViewModel(
+@HiltViewModel
+class SignInViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
     private var db: MyDoctorDatabase? = null
@@ -106,21 +109,6 @@ class SignInViewModel(
                     shouldShowError.postValue("Maaf, Gagal insert ke dalam database")
                 }
             }
-        }
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    class Factory(
-        private val authRepository: AuthRepository
-    ) :
-        ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(SignInViewModel::class.java)) {
-                return SignInViewModel(
-                    authRepository
-                ) as T
-            }
-            throw IllegalArgumentException("Unknown class name")
         }
     }
 }
