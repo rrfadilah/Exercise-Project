@@ -45,9 +45,14 @@ object Constant {
     }
 
     object Named {
-        const val BASE_URL_MYDOCTOR = "BASE_URL_MYDOCTOR"
         const val RETROFIT_MYDOCTOR = "RETROFIT_MYDOCTOR"
+        const val RETROFIT_IMAGE = "RETROFIT_IMAGE"
+
+        const val BASE_URL_MYDOCTOR = "BASE_URL_MYDOCTOR"
         const val BASE_URL_MOCK = "BASE_URL_MOCK"
         const val BASE_URL_FLAVOR = "BASE_URL_FLAVOR"
+        const val BASE_URL_IMAGE = "BASE_URL_IMAGE"
+
+        const val APIKEY_IMAGE = "APIKEY_IMAGE"
     }
 }

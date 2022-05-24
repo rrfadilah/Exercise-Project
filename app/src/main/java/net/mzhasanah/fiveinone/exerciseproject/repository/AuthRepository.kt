@@ -1,9 +1,7 @@
 package net.mzhasanah.fiveinone.exerciseproject.repository
 
 import kotlinx.coroutines.flow.firstOrNull
-import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.AuthAPI
-import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.SignInRequest
-import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.SignInResponse
+import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.*
 import net.mzhasanah.fiveinone.exerciseproject.data.local.UserDAO
 import net.mzhasanah.fiveinone.exerciseproject.data.local.UserEntity
 import net.mzhasanah.fiveinone.exerciseproject.datastore.AuthDataStoreManager
@@ -29,6 +27,17 @@ class AuthRepository @Inject constructor(
 
     suspend fun signIn(request: SignInRequest): Response<SignInResponse> {
         return api.signIn(request)
+    }
+
+    suspend fun signUp(request: SignUpRequest): Response<SignUpResponse> {
+        return api.signUp(request)
+    }
+
+    suspend fun logout(): Response<Unit> {
+        val headers = mapOf(
+            "user-token" to getToken().orEmpty()
+        )
+        return api.logout(headers)
     }
 
     suspend fun insertUser(userEntity: UserEntity): Long {

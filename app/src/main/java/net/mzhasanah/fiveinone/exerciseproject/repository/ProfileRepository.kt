@@ -7,22 +7,30 @@ import net.mzhasanah.fiveinone.exerciseproject.data.api.image.ImageDataResponse
 import okhttp3.MultipartBody
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import net.mzhasanah.fiveinone.exerciseproject.Constant
 import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.AuthAPI
 import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.SignInResponse
 import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.UpdateProfileRequest
+import net.mzhasanah.fiveinone.exerciseproject.data.local.UserDAO
 import net.mzhasanah.fiveinone.exerciseproject.data.local.UserEntity
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.datastore.CounterDataStoreManager
 import net.mzhasanah.fiveinone.exerciseproject.model.ProfileModel
+import javax.inject.Inject
+import javax.inject.Named
 
-class ProfileRepository(
+class ProfileRepository @Inject constructor(
     private val imageAPI: ImageAPI,
     private val authAPI: AuthAPI,
-    private val db: MyDoctorDatabase,
+    private val dao: UserDAO,
     private val prefDataStore: CounterDataStoreManager,
+    @Named(Constant.Named.APIKEY_IMAGE) private val apiKey: String
 ) {
     suspend fun uploadImage(image: MultipartBody.Part): Resource<ImageDataResponse> {
-        imageAPI.uploadImage(image = image).let {
+        imageAPI.uploadImage(
+            image = image,
+            key = apiKey
+        ).let {
             if (it.isSuccessful) {
                 updateImageProfile(it.body()?.data?.thumb?.url.orEmpty())
                 return Resource(
@@ -69,7 +77,7 @@ class ProfileRepository(
     }
 
     suspend fun getProfile(): ProfileModel {
-        return db.userDAO().getUser().let {
+        return dao.getUser().let {
             ProfileModel(
                 id = it?.id.orEmpty(),
                 name = it?.name.orEmpty(),
@@ -80,7 +88,7 @@ class ProfileRepository(
     }
 
     suspend fun updateImageProfile(image:String): Long {
-        val profile = db.userDAO().getUser()
+        val profile = dao.getUser()
         val updatedProfile = UserEntity(
             id = profile?.id.orEmpty(),
             email = profile?.email.orEmpty(),
@@ -88,11 +96,11 @@ class ProfileRepository(
             job = profile?.job.orEmpty(),
             image = image
         )
-        return db.userDAO().insertUser(updatedProfile)
+        return dao.insertUser(updatedProfile)
     }
 
     suspend fun deleteProfile(): Int {
-        val profile = db.userDAO().getUser()
+        val profile = dao.getUser()
         val deleteProfile = UserEntity(
             id = profile?.id.orEmpty(),
             email = profile?.email.orEmpty(),
@@ -100,7 +108,7 @@ class ProfileRepository(
             job = profile?.job.orEmpty(),
             image = profile?.image.orEmpty()
         )
-        return db.userDAO().deleteUser(deleteProfile)
+        return dao.deleteUser(deleteProfile)
     }
 
     suspend fun setCounter(value: Int) {

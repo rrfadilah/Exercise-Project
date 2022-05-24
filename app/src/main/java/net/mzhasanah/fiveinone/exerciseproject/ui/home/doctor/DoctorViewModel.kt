@@ -3,6 +3,7 @@ package net.mzhasanah.fiveinone.exerciseproject.ui.home.doctor
 import android.content.SharedPreferences
 import androidx.lifecycle.*
 import com.google.gson.Gson
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,8 +20,10 @@ import net.mzhasanah.fiveinone.exerciseproject.network.MyDoctorApiClient
 import net.mzhasanah.fiveinone.exerciseproject.repository.AuthRepository
 import net.mzhasanah.fiveinone.exerciseproject.repository.ProfileRepository
 import okhttp3.ResponseBody
+import javax.inject.Inject
 
-class DoctorViewModel(
+@HiltViewModel
+class DoctorViewModel @Inject constructor(
     private val repository: ProfileRepository,
     private val authRepository: AuthRepository
 ) : ViewModel() {
@@ -48,10 +51,7 @@ class DoctorViewModel(
     fun logout() {
         CoroutineScope(Dispatchers.IO).launch {
             shouldShowLoading.postValue(true)
-            val headers = mapOf(
-                "user-token" to authRepository.getToken().orEmpty()
-            )
-            val result = MyDoctorApiClient.instanceAuth.logout(headers = headers)
+            val result = authRepository.logout()
             withContext(Dispatchers.Main) {
                 if (result.isSuccessful) {
                     // clear data profile dari room
@@ -150,22 +150,5 @@ class DoctorViewModel(
         val error =
             Gson().fromJson(response?.string() ?: message ?: "", ErrorResponse::class.java)
         shouldShowError.postValue(error.message.orEmpty() + " #${error.code}")
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    class Factory(
-        private val repository: ProfileRepository,
-        private val authRepository: AuthRepository
-    ) :
-        ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(DoctorViewModel::class.java)) {
-                return DoctorViewModel(
-                    repository,
-                    authRepository
-                ) as T
-            }
-            throw IllegalArgumentException("Unknown class name")
-        }
     }
 }

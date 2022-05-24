@@ -9,6 +9,7 @@ import net.mzhasanah.fiveinone.exerciseproject.Constant
 import net.mzhasanah.fiveinone.exerciseproject.data.api.MessageAPI
 import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.AuthAPI
 import net.mzhasanah.fiveinone.exerciseproject.data.api.home.HomeAPI
+import net.mzhasanah.fiveinone.exerciseproject.data.api.image.ImageAPI
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -22,12 +23,22 @@ class NetworkModule {
     @Singleton
     @Provides
     @Named(Constant.Named.BASE_URL_MYDOCTOR)
-    fun provideBaseUrlMyDoctor(): String = "http://drivingrake.backendless.app/api/"
+    fun provideBaseUrlMyDoctor(): String = "http://happyplace.backendless.app/api/"
 
     @Singleton
     @Provides
     @Named(Constant.Named.BASE_URL_MOCK)
-    fun provideBaseUrlMock(): String = "http://private-82636-mydoctorexample.apiary-mock.com/api/"
+    fun provideBaseUrlMock(): String = "http://private-82636-mydoctorexample.apiary-mock.com/api"
+
+    @Singleton
+    @Provides
+    @Named(Constant.Named.BASE_URL_IMAGE)
+    fun provideBaseUrlImage(): String = "https://api.imgbb.com/1/"
+
+    @Singleton
+    @Provides
+    @Named(Constant.Named.APIKEY_IMAGE)
+    fun provideApiKeyImage(): String = "56e074fb9f11e246bde93fecb8ba5204"
 
     @Singleton
     @Provides
@@ -58,7 +69,21 @@ class NetworkModule {
     @Provides
     @Named(Constant.Named.RETROFIT_MYDOCTOR)
     fun provideRetrofitMyDoctor(
-        @Named(Constant.Named.BASE_URL_FLAVOR) baseUrl: String,
+        @Named(Constant.Named.BASE_URL_MYDOCTOR) baseUrl: String,
+        client: OkHttpClient
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    @Named(Constant.Named.RETROFIT_IMAGE)
+    fun provideRetrofitImage(
+        @Named(Constant.Named.BASE_URL_IMAGE) baseUrl: String,
         client: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
@@ -90,5 +115,13 @@ class NetworkModule {
         @Named(Constant.Named.RETROFIT_MYDOCTOR) retrofit: Retrofit
     ): MessageAPI {
         return retrofit.create(MessageAPI::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideImageAPI(
+        @Named(Constant.Named.RETROFIT_IMAGE) retrofit: Retrofit
+    ): ImageAPI {
+        return retrofit.create(ImageAPI::class.java)
     }
 }

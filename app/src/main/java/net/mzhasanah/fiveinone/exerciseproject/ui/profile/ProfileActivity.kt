@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.databinding.ActivityProfileBinding
 import net.mzhasanah.fiveinone.exerciseproject.datastore.CounterDataStoreManager
@@ -19,19 +20,10 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
+@AndroidEntryPoint
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
-    private val viewModel: ProfileViewModel by viewModels {
-        ProfileViewModel.Factory(
-            ProfileRepository(
-                imageAPI = ImageApiClient.instanceImage,
-                authAPI = MyDoctorApiClient.instanceAuth,
-                db = MyDoctorDatabase.getInstance(this),
-                prefDataStore = CounterDataStoreManager(this)
-            )
-        )
-    }
-
+    private val viewModel: ProfileViewModel by viewModels()
     private val progressDialog: ProgressDialog by lazy { ProgressDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {

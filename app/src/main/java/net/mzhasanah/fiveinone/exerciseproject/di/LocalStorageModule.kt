@@ -13,6 +13,7 @@ import net.mzhasanah.fiveinone.exerciseproject.data.local.MessageDAO
 import net.mzhasanah.fiveinone.exerciseproject.data.local.UserDAO
 import net.mzhasanah.fiveinone.exerciseproject.database.MyDoctorDatabase
 import net.mzhasanah.fiveinone.exerciseproject.datastore.AuthDataStoreManager
+import net.mzhasanah.fiveinone.exerciseproject.datastore.CounterDataStoreManager
 import javax.inject.Singleton
 
 @Module
@@ -51,5 +52,12 @@ class LocalStorageModule {
     fun provideAuthDataStoreManager(@ApplicationContext context: Context)
             : AuthDataStoreManager {
         return AuthDataStoreManager(context = context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCounterDataStoreManager(@ApplicationContext context: Context):
+            CounterDataStoreManager {
+        return CounterDataStoreManager(context)
     }
 }

@@ -6,10 +6,14 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import net.mzhasanah.fiveinone.exerciseproject.Constant
 import net.mzhasanah.fiveinone.exerciseproject.data.api.auth.AuthAPI
+import net.mzhasanah.fiveinone.exerciseproject.data.api.image.ImageAPI
 import net.mzhasanah.fiveinone.exerciseproject.data.local.UserDAO
 import net.mzhasanah.fiveinone.exerciseproject.datastore.AuthDataStoreManager
+import net.mzhasanah.fiveinone.exerciseproject.datastore.CounterDataStoreManager
 import net.mzhasanah.fiveinone.exerciseproject.repository.AuthRepository
+import net.mzhasanah.fiveinone.exerciseproject.repository.ProfileRepository
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -36,6 +40,24 @@ class AppModule {
             authDataStore = authDataStoreManager,
             api = api,
             dao = dao
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideProfileRepository(
+        imageAPI: ImageAPI,
+        authAPI: AuthAPI,
+        userDAO: UserDAO,
+        @Named(Constant.Named.APIKEY_IMAGE) apikey: String,
+        counterDataStoreManager: CounterDataStoreManager
+    ): ProfileRepository {
+        return ProfileRepository(
+            imageAPI = imageAPI,
+            authAPI = authAPI,
+            dao = userDAO,
+            apiKey = apikey,
+            prefDataStore = counterDataStoreManager
         )
     }
 }

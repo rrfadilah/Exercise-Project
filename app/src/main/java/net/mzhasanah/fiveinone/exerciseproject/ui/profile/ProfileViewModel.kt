@@ -1,6 +1,7 @@
 package net.mzhasanah.fiveinone.exerciseproject.ui.profile
 
 import androidx.lifecycle.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -9,8 +10,10 @@ import net.mzhasanah.fiveinone.exerciseproject.common.Status
 import net.mzhasanah.fiveinone.exerciseproject.model.ProfileModel
 import net.mzhasanah.fiveinone.exerciseproject.repository.ProfileRepository
 import okhttp3.MultipartBody
+import javax.inject.Inject
 
-class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() {
+@HiltViewModel
+class ProfileViewModel @Inject constructor(private val repository: ProfileRepository) : ViewModel() {
 
     val shouldShowImage: MutableLiveData<String> = MutableLiveData()
     val shouldShowError: MutableLiveData<String> = MutableLiveData()
@@ -83,17 +86,6 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
     fun decrement() {
         viewModelScope.launch {
             repository.decrement()
-        }
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    class Factory(private val repository: ProfileRepository) :
-        ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
-                return ProfileViewModel(repository) as T
-            }
-            throw IllegalArgumentException("Unknown class name")
         }
     }
 }

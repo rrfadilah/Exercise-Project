@@ -40,30 +40,7 @@ class DoctorFragment : Fragment() {
     private lateinit var binding: FragmentDoctorBinding
     private val progressDialog: ProgressDialog by lazy { ProgressDialog(requireContext()) }
 
-    @Inject
-    lateinit var db: MyDoctorDatabase
-    @Inject
-    lateinit var dataStore: AuthDataStoreManager
-    @Inject
-    lateinit var authAPI: AuthAPI
-    @Inject
-    lateinit var userDAO: UserDAO
-
-    private val viewModel: DoctorViewModel by viewModels {
-        DoctorViewModel.Factory(
-            ProfileRepository(
-                imageAPI = ImageApiClient.instanceImage,
-                authAPI = authAPI,
-                db = db,
-                prefDataStore = CounterDataStoreManager(requireContext())
-            ),
-            AuthRepository(
-                dataStore,
-                authAPI,
-                userDAO
-            )
-        )
-    }
+    private val viewModel: DoctorViewModel by viewModels()
     private lateinit var adapterConsultation: ConsultationAdapter
     private lateinit var adapterTopRatedAdapter: TopRatedAdapter
     private lateinit var adapterGoodNewsAdapter: GoodNewsAdapter
