@@ -11,5 +11,6 @@
     <string name="title_menu_messages">Messages</string>
     <string name="title_menu_hospitals">Hospitals</string>
     <string name="label_messages">Messages</string>
+    <string name="title_activity_main">MainActivity</string>
 
 </resources>

@@ -1,23 +1,23 @@
 package com.rizky.exercise_project.ui.signup
 
-import android.content.SharedPreferences
 import android.util.Patterns
-import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
-import com.rizky.exercise_project.Constant
 import com.rizky.exercise_project.data.api.ErrorResponse
 import com.rizky.exercise_project.data.api.auth.SignInRequest
 import com.rizky.exercise_project.data.api.auth.SignUpRequest
 import com.rizky.exercise_project.data.local.UserEntity
-import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.network.MyDoctorApiClient
+import com.rizky.exercise_project.repository.AuthRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
+import javax.inject.Inject
 
 /**
  * com.rizky.exercise_project.ui.signup
@@ -27,9 +27,10 @@ import okhttp3.ResponseBody
  *
  */
 
-class SignUpViewModel : ViewModel() {
-    private var db: MyDoctorDatabase? = null
-    private var pref: SharedPreferences? = null
+@HiltViewModel
+class SignUpViewModel @Inject constructor(
+    private val repository: AuthRepository
+) : ViewModel() {
 
     private var name: String = ""
     private var job: String = ""
@@ -39,11 +40,6 @@ class SignUpViewModel : ViewModel() {
     val shouldShowError: MutableLiveData<String> = MutableLiveData()
     val shouldShowLoading: MutableLiveData<Boolean> = MutableLiveData()
     val shouldOpenUpdateProfile: MutableLiveData<Boolean> = MutableLiveData()
-
-    fun onViewLoaded(db: MyDoctorDatabase, preferences: SharedPreferences) {
-        this.db = db
-        this.pref = preferences
-    }
 
     fun onChangeName(name: String) {
         this.name = name
@@ -82,7 +78,7 @@ class SignUpViewModel : ViewModel() {
                 job = job,
                 password = password
             )
-            val result = MyDoctorApiClient.instanceAuth.signUp(request = request)
+            val result = repository.signUp(request = request)
             withContext(Dispatchers.Main) {
                 if (result.isSuccessful) {
                     processToSignIn()
@@ -135,16 +131,15 @@ class SignUpViewModel : ViewModel() {
 
     private fun insertToken(token: String) {
         if (token.isNotEmpty()) {
-            pref?.edit {
-                putString(Constant.Preferences.KEY.TOKEN, token)
-                apply()
+            viewModelScope.launch {
+                repository.updateToken(token)
             }
         }
     }
 
     private fun insertProfile(userEntity: UserEntity) {
         CoroutineScope(Dispatchers.IO).launch {
-            val result = db?.userDAO()?.insertUser(userEntity)
+            val result = repository.insertUser(userEntity)
             withContext(Dispatchers.Main) {
                 if (result != 0L) {
                     shouldOpenUpdateProfile.postValue(true)

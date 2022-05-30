@@ -13,7 +13,9 @@ import com.rizky.exercise_project.Constant
 import com.rizky.exercise_project.database.MyDoctorDatabase
 import com.rizky.exercise_project.databinding.ActivitySignUpBinding
 import com.rizky.exercise_project.ui.home.HomeActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySignUpBinding
@@ -29,9 +31,6 @@ class SignUpActivity : AppCompatActivity() {
         bindView()
         bindViewModel()
 
-        val db = MyDoctorDatabase.getInstance(this.applicationContext)
-        val pref = this.getSharedPreferences(Constant.Preferences.PREF_NAME, MODE_PRIVATE)
-        viewModel.onViewLoaded(db, pref)
     }
 
     private fun bindView() {
