@@ -16,16 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExerciseProject">
         <activity
+            android:name=".ui._sample.jetpackcompose.homepage.HomeActivity"
+            android:exported="true"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.ExerciseProject"/>
+        <activity
             android:name="com.rizky.exercise_project.ui._sample.jetpackcompose.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.ExerciseProject" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.ExerciseProject"/>
         <activity
             android:name=".ui.profile.ProfileActivity"
             android:exported="false" />
@@ -54,11 +53,13 @@
         <activity
             android:name=".ui.splashscreen.SplashActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
