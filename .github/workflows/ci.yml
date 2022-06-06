@@ -21,5 +21,11 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
           cache: gradle
-      - name: Build with Fastlane
-        run: bundle exec fastlane buildDebug
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7.2'
+      - uses: maierj/fastlane-action@v2.2.0
+        with:
+          lane: 'buildDebug'
+
+
