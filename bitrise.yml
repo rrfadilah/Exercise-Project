@@ -1,0 +1,30 @@
+---
+format_version: '11'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: android
+app:
+  envs:
+    - FASTLANE_XCODE_LIST_TIMEOUT: '120'
+    - opts:
+        is_expand: false
+      FASTLANE_WORK_DIR: "."
+    - opts:
+        is_expand: false
+      FASTLANE_LANE: android buildDebug
+workflows:
+  primary:
+    steps:
+      - activate-ssh-key@4:
+          run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+      - git-clone@6: {}
+      - script@1:
+          title: Do anything with Script step
+      - fastlane@3:
+          inputs:
+            - lane: "$FASTLANE_LANE"
+            - work_dir: "$FASTLANE_WORK_DIR"
+      - deploy-to-bitrise-io@2: {}
+meta:
+  bitrise.io:
+    stack: linux-docker-android-20.04
+    machine_type_id: elite
