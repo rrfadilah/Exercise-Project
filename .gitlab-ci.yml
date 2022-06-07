@@ -10,8 +10,11 @@ variables:
 before_script:
   - export GRADLE_USER_HOME=$(pwd)/.gradle
   - chmod +x ./gradlew
+  - apt-get -qq update
+  - apt-get install -qqy --no-install-recommends build-essential ruby-full
   - gem install bundler
   - bundle install
+  - gem install bundler fastlane
 
 cache:
   key: ${CI_PROJECT_ID}
