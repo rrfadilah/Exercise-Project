@@ -1,0 +1,15 @@
+workflows:
+  debug-build:
+    name: Build Debug
+    instance_type: mac_mini
+    scripts:
+      - name: Bundle Installation
+        script: |
+          sudo gem update fastlane
+          bundle install
+          bundle update
+      - name: Preparing the Build
+        script: |
+          bundle exec fastlane buildDebug
+    artifacts:
+      - app/build/outputs/**/**/*.apk
