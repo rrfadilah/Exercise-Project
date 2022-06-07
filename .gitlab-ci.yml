@@ -1,0 +1,27 @@
+image: jangrewe/gitlab-ci-android
+
+stages:
+  - buildDebug
+
+variables:
+  LC_ALL: "en_US.UTF-8"
+  LANG: "en_US.UTF-8"
+
+before_script:
+  - export GRADLE_USER_HOME=$(pwd)/.gradle
+  - chmod +x ./gradlew
+  - gem install bundler
+  - bundle install
+
+cache:
+  key: ${CI_PROJECT_ID}
+  paths:
+    - .gradle/
+
+buildDebug:
+  stage: buildDebug
+  script:
+    - bundle exec fastlane buildDebug
+  artifacts:
+    paths:
+      - app/build/outputs/apk/**/**/*.apk
