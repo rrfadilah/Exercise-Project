@@ -11,6 +11,9 @@ app:
     - opts:
         is_expand: false
       FASTLANE_LANE: android buildDebug
+    - opts:
+        is_expand: false
+      BITRISE_DEPLOY_DIR: app/build/outputs/apk/**/**/*.apk
 workflows:
   primary:
     steps:
