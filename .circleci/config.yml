@@ -2,16 +2,15 @@ version: 2.1
 
 orbs:
   ruby: circleci/ruby@1.2.0
-  android: "1.0.3"
+  android: circleci/android@1.0.3
 
 jobs:
   build:
     executor:
       name: android/android-machine
     environment:
-      FL_OUTPUT_DIR: output
+      FL_OUTPUT_DIR: app/build/outputs/apk/**/**/*.apk
       FASTLANE_LANE: android buildDebug
-    shell: /bin/bash --login -o pipefail
     steps:
       - checkout
       - run: bundle install
@@ -20,5 +19,8 @@ jobs:
           command: bundle exec fastlane $FASTLANE_LANE
       - store_artifacts:
           path: output
-      - store_test_results:
-          path: output/scan
+
+workflows:
+  sample:
+    jobs:
+      - build
